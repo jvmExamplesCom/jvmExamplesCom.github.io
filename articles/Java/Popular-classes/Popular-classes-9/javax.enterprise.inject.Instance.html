@@ -1,0 +1,229 @@
+<!doctype html>
+<html> 
+ <head> 
+  <title>jvmExamples.com - javax.enterprise.inject.Instance</title> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script type="text/javascript" src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.enterprise.inject.Instance"> 
+  <meta name="keywords" content="javax.enterprise.inject.Instance"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.enterprise.inject.Instance"> 
+  <meta property="og:description" content="javax.enterprise.inject.Instance"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.enterprise.inject.Instance"> 
+  <meta name="twitter:description" content="javax.enterprise.inject.Instance"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2022-03-11</small>
+        </div> 
+        <h1>javax.enterprise.inject.Instance</h1> 
+        <p>javax.enterprise.inject.Instance is an interface used by the Java Enterprise Edition (EE) platform to create objects via Dependency Injection (DI). It is part of the CDI API which makes it possible to inject bean references into classes, and supports type checking, re-injecting objects, and provides access to the context information of beans.</p> 
+        <p>This interface contains a variety of methods for accessing and modifying objects. Some of these methods include: </p>
+        <pre>get()</pre>, 
+        <pre>select()</pre>, 
+        <pre>isUnsatisfied()</pre>, and 
+        <pre>isAmbiguous()</pre>. These methods make it easy to retrieve and manipulate objects in an application, as well as determine if any unsatisfied or ambiguous dependencies exist.
+         
+        <h2>Example Usage</h2> 
+        <p>Let's look at some examples of how to use the javax.enterprise.inject.Instance interface. First, let's create a class called Library which will contain a Book instance.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class Library {
+    @Inject
+    private Instance<Book> bookInstance;
+
+    public void printBooks() {
+        while (bookInstance.isUnsatisfied()) {
+            System.out.println(bookInstance.get());
+        }
+    }
+}
+
+          </xmp></code></pre> 
+        <p>In the above example, we inject an instance of the Book class into the Library class via the </p>
+        <pre>@Inject</pre> annotation. We then use the 
+        <pre>Instance</pre> interface to check if any unsatisfied dependencies exist with the 
+        <pre>isUnsatisfied()</pre> method, and if there are no unsatisfied dependencies, we can retrieve the 
+        <pre>Book</pre> instance with the 
+        <pre>get()</pre> method.
+         
+        Now let's look at how we can use the
+        <pre>Instance</pre> interface to select a specific type of 
+        <pre>Book</pre> instance. We can do this by providing a predicate with the 
+        <pre>select()</pre> method:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class Library {
+    @Inject
+    private Instance<Book> bookInstance;
+
+    public void selectBookByName(String name) {
+        Optional<Book> book = bookInstance.select((b) ->
+        b.getName().equals(name)).get();
+ 
+        if (book.isPresent()) {
+            System.out.println(book.get());
+        } else {
+            System.out.println("Book not found.");
+        }
+    }
+}
+
+          </xmp></code></pre> 
+        In this example, we use the
+        <pre>select()</pre> method to provide a predicate which will search for a specific 
+        <pre>Book</pre> instance based on its name. If it finds a matching 
+        <pre>Book</pre> instance, it will be returned, otherwise it will return an empty 
+        <pre>Optional</pre>.
+         
+        <h2>Conclusion</h2> 
+        <p>The javax.enterprise.inject.Instance interface provides an easy way to manage objects in a Java EE application. It provides a wide range of methods for retrieving, manipulating, and verifying objects, making it easy to ensure that all dependencies are satisfied and that the application is performing as expected.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-get-elements-from-Vector-(Vector-get-method).html">How to get elements from Vector (Vector get method)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-check-if-element-exists-in-TreeSet-(TreeSet-contains-element).html">How to check if element exists in TreeSet (TreeSet contains element)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.net.Inet4Address.html">java.net.Inet4Address</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Fibonacci-Series-Java-Example.html">Fibonacci Series Java Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Perform-Binary-Search-on-Java-Vector-Example.html">Perform Binary Search on Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-compare-two-TreeSet-objects-using-the-equals-method.html">How to compare two TreeSet objects using the equals method</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.widget.Adapter.html">android.widget.Adapter</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.junit.ClassRule.html">org.junit.ClassRule</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Iterate-through-the-values-of-Java-HashMap-example.html">Iterate through the values of Java HashMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/List/"> List </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/List/Iterate-List-in-reverse-order.html">Iterate List in reverse order</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-03 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-get-size-example-(LinkedList-length).html">Java LinkedList get size example (LinkedList length)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Simple-Java-TreeMap-example.html">Simple Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-long.html">Convert String long</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Shuffle-elements-of-Java-Vector-example.html">Shuffle elements of Java Vector example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/java.awt.event.HierarchyEvent.html">java.awt.event.HierarchyEvent</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-TreeMap-key-or-TreeMap-value-using-index.html">How to get TreeMap key or TreeMap value using index</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Do-While-Loop/Do-While-loop-Example.html">Do While loop Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.net.JarURLConnection.html">java.net.JarURLConnection</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.awt.event.MouseEvent.html">java.awt.event.MouseEvent</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Java-Double-compare-example.html">Java Double compare example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.poi.ss.usermodel.Sheet.html">org.apache.poi.ss.usermodel.Sheet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Iterate-HashMap.html">Iterate HashMap</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Java-Byte-Example.html">Java Byte Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/JTextField-Show-Hide-Example.html">JTextField Show Hide Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.lwjgl.input.Keyboard.html">org.lwjgl.input.Keyboard</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-character-to-String.html">Convert character to String</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Circle-Area-using-Java-Example.html">Calculate Circle Area using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/System/Determine-operating-system-using-System-class.html">Determine operating system using System class</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/System/Get-file-separator-using-System-class.html">Get file separator using System class</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.objectweb.asm.ClassVisitor.html">org.objectweb.asm.ClassVisitor</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

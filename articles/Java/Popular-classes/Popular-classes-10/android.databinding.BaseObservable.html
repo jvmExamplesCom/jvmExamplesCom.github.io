@@ -1,0 +1,264 @@
+<!doctype html>
+<html> 
+ <head> 
+  <title>jvmExamples.com - android.databinding.BaseObservable</title> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script type="text/javascript" src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="android.databinding.BaseObservable"> 
+  <meta name="keywords" content="android.databinding.BaseObservable"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - android.databinding.BaseObservable"> 
+  <meta property="og:description" content="android.databinding.BaseObservable"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - android.databinding.BaseObservable"> 
+  <meta name="twitter:description" content="android.databinding.BaseObservable"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2022-03-01</small>
+        </div> 
+        <h1>Introduction to android.databinding.BaseObservable</h1> android.databinding.BaseObservable is a class that can be used in Java development to easily create bindings between variables and the corresponding UI elements. This allows developers to quickly and easily create reactive applications that respond to user input. In this article, we will explore how to use BaseObservable in your own applications and provide some examples along the way. 
+        <h2>What is BaseObservable?</h2> BaseObservable is a class that was introduced in the Android Framework version 7. It is part of the data binding library which is used to create bindings between variables and their corresponding UI elements. The BaseObservable class can be extended to create an observable class that keeps track of changes to its variables. This allows developers to update the UI automatically whenever a variable changes, eliminating the need to manually write code to update the UI every time a variable is changed. 
+        <h2>Using BaseObservable in Your App</h2> To use BaseObservable in your app, first you need to extend the class and provide a constructor. The constructor should accept the data that is being observed, as shown below: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyObservable extends BaseObservable {
+    private String name;
+    private String message;
+    
+    public MyObservable(String name, String message) {
+        this.name = name;
+        this.message = message;
+    }
+}
+
+          </xmp></code></pre> Next, you will need to create getter and setter methods for the variables that are being observed. These getter and setter methods should call the "notifyPropertyChanged" method each time a value is changed, which will trigger a UI update. For example, in the code above we would add the following methods: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public String getName() {
+    return name;
+}
+ 
+public void setName(String name) {
+    this.name = name;
+    notifyPropertyChanged(BR.name);
+}
+
+public String getMessage() {
+    return message;
+}
+ 
+public void setMessage(String message) {
+    this.message = message;
+    notifyPropertyChanged(BR.message);
+}
+
+          </xmp></code></pre> Finally, you will need to add the "@Bindable" annotation to the fields that are being observed. This will allow the data binding library to know which fields need to be monitored for changes. For example, in the code above we could add the following annotations: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@Bindable
+private String name;
+
+@Bindable
+private String message;
+
+          </xmp></code></pre> Now you can use the MyObservable class in your app to easily keep track of changes to its data and update the UI accordingly. 
+        <h2>Example Usage</h2> To see how to use the MyObservable class in a real-world application, let's look at an example. In this example, we will create an activity with a text field and a button. Whenever the text field is changed, the button's text will automatically be updated to reflect the new value: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MainActivity extends AppCompatActivity {
+    
+    private MyObservable myObservable;
+ 
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        myObservable = new MyObservable("", "");
+        DataBindingUtil.setContentView(this, R.layout.activity_main);
+    }
+ 
+    public void onUpdateButtonClicked(View view) {
+        myObservable.setName("John");
+        myObservable.setMessage("Hello World!");
+    }
+}
+
+          </xmp></code></pre> In the layout file for the activity, we need to bind the TextView and Button elements to the corresponding variables in the MyObservable class, using the "bind:" syntax: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    bind:text="@{myObservable.name}" />
+ 
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    bind:text="@{myObservable.message}"
+    bind:onClick="@{() -> myObservable.onUpdateButtonClicked(view)}" />
+
+          </xmp></code></pre> Now, when the user clicks the button, the text of the text field will automatically be updated to reflect the new value, without any extra code from the developer. 
+        <h2>Conclusion</h2> In this article, we have learned about android.databinding.BaseObservable and how it can be used to quickly and easily create data bindings between variables and their corresponding UI elements. By extending BaseObservable and creating getter and setter methods for the variables being observed, the UI can be kept automatically up to date whenever a variable changes, eliminating the need for manual updates. Lastly, we saw an example usage of the BaseObservable class in an Android app. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Copy-all-elements-of-Java-HashSet-to-an-Object-Array-Example.html">Copy all elements of Java HashSet to an Object Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.ws.rs.container.ContainerResponseContext.html">j.w.r.c.ContainerResponseContext</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/"> AWT Button </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Disable-Button-Example.html">Disable Button Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Determine-If-The-Checkbox-Is-Visible-Example.html">Determine If The Checkbox Is Visible Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.media.MediaCodec.html">android.media.MediaCodec</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Remove-all-elements-from-Java-LinkedHashSet-example.html">Remove all elements from Java LinkedHashSet example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/"> Long Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-Java-String-to-Long-example.html">Convert Java String to Long example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Math-Class/"> Math Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-square-root-of-a-number-using-Math.sqrt.html">F.sqrt</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-clear-or-remove-all-elements-from-HashSet.html">How to clear or remove all elements from HashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.apache.catalina.connector.Connector.html">o.a.c.c.Connector</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-07 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Martin</h3> <p><a href="#">2022-04-11 11:28</a></p> it was very helpful <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Daniel</h3> <p><a href="#">2022-04-16 21:36</a></p> Can somebody elaborate more? <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-get-size-example-(LinkedList-length).html">Java LinkedList get size example (LinkedList length)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-Map-to-List.html">Convert Map to List</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-CheckboxGroup/Set-Selected-Radio-Button-Example.html">Set Selected Radio Button Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.persistence.PersistenceContext.html">javax.persistence.PersistenceContext</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.security.AccessController.html">java.security.AccessController</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-the-size-of-the-TreeMap.html">How to get the size of the TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Find-the-minimum-or-maximum-value-in-ArrayList.html">Find the minimum or maximum value in ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.springframework.messaging.Message.html">o.s.m.Message</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-octal-number-to-decimal-number-example.html">Convert octal number to decimal number example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Compression-Method-of-Zip-Entry-Example.html">Get Compression Method of Zip Entry Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-hexadecimal-number-to-decimal-number-example.html">Convert hexadecimal number to decimal number example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipFile/Get-All-Entries-From-Zip-File-Example.html">Get All Entries From Zip File Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Remove-specified-element-from-Java-Vector-Example.html">Remove specified element from Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Do-While-Loop/Do-While-loop-Example.html">Do While loop Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.view.KeyCharacterMap.html">android.view.KeyCharacterMap</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Background-Color-Of-an-Applet-Window-Example.html">Get Background Color Of an Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/javax.swing.AbstractListModel.html">javax.swing.AbstractListModel</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-int.html">Convert String to int</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.nio.channels.ReadableByteChannel.html">j.n.c.ReadableByteChannel</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Head-Map-from-Java-TreeMap-example.html">Get Head Map from Java TreeMap example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

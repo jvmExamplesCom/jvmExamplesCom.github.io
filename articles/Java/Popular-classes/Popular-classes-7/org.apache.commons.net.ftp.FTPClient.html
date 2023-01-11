@@ -1,0 +1,252 @@
+<!doctype html>
+<html> 
+ <head> 
+  <title>jvmExamples.com - org.apache.commons.net.ftp.FTPClient</title> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script type="text/javascript" src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.apache.commons.net.ftp.FTPClient"> 
+  <meta name="keywords" content="org.apache.commons.net.ftp.FTPClient"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.apache.commons.net.ftp.FTPClient"> 
+  <meta property="og:description" content="org.apache.commons.net.ftp.FTPClient"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.apache.commons.net.ftp.FTPClient"> 
+  <meta name="twitter:description" content="org.apache.commons.net.ftp.FTPClient"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2022-03-28</small>
+        </div> 
+        <h1>Introduction to org.apache.commons.net.ftp.FTPClient</h1> The FTPClient class from the org.apache.commons.net.ftp package provides an easy-to-use interface for communicating with FTP servers and performing various file transfers. This class supports secure protocols such as FTP/S (SFTP), as well as proxy access and data compression. It is capable of downloading and uploading files, creating and deleting directories, and listing directory contents. In this article, we will explore some basic and advanced uses of the FTPClient class. 
+        <h2>Creating an FTP Client and Establishing a Connection</h2> Before we can begin interacting with a remote FTP server, we must create and configure an instance of the FTPClient class. This can be done as follows: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FTPClient ftp = new FTPClient();
+ftp.configure(new FTPClientConfig());
+ftp.connect(hostname);
+if (!ftp.login(username, password)) {
+    System.err.println("Failed to log in!");
+    return;
+}
+
+          </xmp></code></pre> Once an FTPClient has been created and connected, we can check its connection status by calling the isConnected() method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+boolean connected = ftp.isConnected();
+
+          </xmp></code></pre> We can also set the transfer mode to binary or ASCII using the setFileType() method, depending on the type of file being transferred: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ftp.setFileType(FTP.BINARY_FILE_TYPE);
+
+          </xmp></code></pre> 
+        <h2>Downloading Files from a Remote Server</h2> Once an FTPClient object has been configured and connected to a remote server, downloading files is fairly straightforward. The downloadFile() method of the FTPClient class takes two parameters: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ftp.downloadFile(String remoteFile, OutputStream local);
+
+          </xmp></code></pre> The first parameter is the name of the remote file to be downloaded. The second parameter is a valid OutputStream object where the data will be written. Here is an example of downloading a file from a remote server and writing it to a local file: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+try (OutputStream outputStream = new FileOutputStream("local-file.txt")) {
+    ftp.downloadFile("remote-file.txt", outputStream);
+} catch (IOException e) {
+   System.err.println("Error downloading file: " + e.getMessage());
+}
+
+          </xmp></code></pre> 
+        <h2>Uploading Files to a Remote Server</h2> Similarly, uploading files to a remote server is done using the uploadFile() method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ftp.uploadFile(InputStream local, String remoteFile);
+
+          </xmp></code></pre> This method takes two parameters: a valid InputStream object containing the data to be uploaded, and the name of the remote file to create. Here is an example of uploading a local file to a remote server: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+try (InputStream inputStream = new FileInputStream("local-file.txt")) {
+    ftp.uploadFile(inputStream, "remote-file.txt");
+} catch (IOException e) {
+   System.err.println("Error uploading file: " + e.getMessage());
+}
+
+          </xmp></code></pre> 
+        <h2>Deleting Files and Directories</h2> The FTPClient class also provides methods to delete files and directories. The deleteFile() method takes the name of the remote file to delete and returns a boolean indicating whether the operation was successful. Similarly, the deleteDirectory() method takes the name of the remote directory to delete and returns a boolean indicating success or failure. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+boolean deleted = ftp.deleteFile("remote-file.txt");
+boolean dirDeleted = ftp.deleteDirectory("remote-dir");
+
+          </xmp></code></pre> 
+        <h2>Listing Directory Contents</h2> The listFiles() method of the FTPClient class returns a list of all the files in the specified remote directory. This method takes two parameters: the remote directory to list, and an optional filter that can be used to return only files matching a certain criteria. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FTPFile[] files = ftp.listFiles("/home/user", FileFilter filter);
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> In this article, we explored some of the capabilities of the FTPClient class from the org.apache.commons.net.ftp package. We learned how to create an FTPClient and establish a connection, as well as how to perform various file transfers such as downloading files, uploading files, deleting files, and listing directory contents. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-get-the-size-of-the-LinkedHashSet-in-Java.html">How to get the size of the LinkedHashSet in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/io.realm.annotations.PrimaryKey.html">io.realm.annotations.PrimaryKey</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.google.common.io.ByteArrayDataOutput.html">c.g.c.i.ByteArrayDataOutput</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/System/"> System </a> </p> <a href="/articles/Java/Miscellaneous-Classes/System/Determine-operating-system-using-System-class.html">Determine operating system using System class</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/"> Integer Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-java-int-to-Integer-object-Example.html">Convert java int to Integer object Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/"> Boolean Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Convert-Java-boolean-Primitive-to-Boolean-object.html">Convert Java boolean Primitive to Boolean object</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.codahale.metrics.Slf4jReporter.html">com.codahale.metrics.Slf4jReporter</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-keys-using-Comparator-interface.html">Sort LinkedHashMap by keys using Comparator interface</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Do-While-Loop/"> Do While Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Do-While-Loop/Do-While-loop-Example.html">Do While loop Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JTextField/"> JTextField </a> </p> <a href="/articles/Java/Swing/JTextField/Set-Background-Color-of-JTextField-Example.html">Set Background Color of JTextField Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-08 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Grigorii</h3> <p><a href="#">2022-05-16 14:07</a></p> thanks <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Robert</h3> <p><a href="#">2022-05-22 09:37</a></p> I do not understand details <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.widget.SeekBar.OnSeekBarChangeListener.html">a.w.S.OnSeekBarChangeListener</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Reverse-order-of-all-elements-of-Java-ArrayList-Example.html">Reverse order of all elements of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-String-array-using-Comparator.html">Sort String array using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-an-array-to-TreeSet.html">How to convert an array to TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Set-from-Java-HashSet-example.html">Get Synchronized Set from Java HashSet example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-last-key,-last-value,-or-last-entry-from-the-Java-TreeMap.html">How to get last key, last value, or last entry from the Java TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Remove-specified-element-from-LinkedList-Java-example.html">Remove specified element from LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.util.logging.Handler.html">java.util.logging.Handler</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.text.SpannableStringBuilder.html">android.text.SpannableStringBuilder</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Create-Number-counter-in-an-Applet-using-Thread-Example.html">Create Number counter in an Applet using Thread Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Remove-specified-element-from-Java-HashSet-example.html">Remove specified element from Java HashSet example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-int-Arrays-Example.html">Compare Two Java int Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/javax.ws.rs.container.AsyncResponse.html">javax.ws.rs.container.AsyncResponse</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/CheckedInputStream/Extract-File-With-CRC32-Checksum-Example.html">Extract File With CRC32 Checksum Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Threads/Get-Current-Thread-Example.html">Get Current Thread Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.lang.annotation.Inherited.html">java.lang.annotation.Inherited</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Iterate-Java-HashMap-using-forEach-or-for-loop-example.html">Iterate Java HashMap using forEach or for loop example</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/Calendar/Display-Month-of-year-using-Java-Calendar.html">Display Month of year using Java Calendar</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Select-Item-From-AWT-List-Example.html">Select Item From AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/System/Get-file-separator-using-System-class.html">Get file separator using System class</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

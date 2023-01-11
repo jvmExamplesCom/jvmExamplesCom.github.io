@@ -1,0 +1,209 @@
+<!doctype html>
+<html> 
+ <head> 
+  <title>jvmExamples.com - com.google.common.base.Throwables</title> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script type="text/javascript" src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="com.google.common.base.Throwables"> 
+  <meta name="keywords" content="com.google.common.base.Throwables"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - com.google.common.base.Throwables"> 
+  <meta property="og:description" content="com.google.common.base.Throwables"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - com.google.common.base.Throwables"> 
+  <meta name="twitter:description" content="com.google.common.base.Throwables"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2022-07-01</small>
+        </div> 
+        <h1>Introduction to com.google.common.base.Throwables</h1> The com.google.common.base.Throwables class is a utility class for Java applications that aids developers in handling errors and exceptions that may arise during program execution. It provides methods for detecting and rethrowing errors or exceptions, creating a stack trace from an exception, creating an exception with a given message, and much more. In this article, we'll take a closer look at the capabilities of the com.google.common.base.Throwables class and provide some code examples showcasing how to use it. 
+        <h2>Detecting and Rethrowing Errors and Exceptions</h2> One of the most common actions developers will do when dealing with errors and exceptions is to detect them and then rethrow them. This can be done with the Throwables.propagate method, which takes a Throwable as an argument and throws it if it's not null. For example, let's say we have a function called testFunction that throws an exception on certain conditions. We could use the propagate method like so: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+try {
+    testFunction();
+} catch (Exception e) {
+    Throwables.propagate(e);
+}
+
+          </xmp></code></pre> If the try block succeeds without any exceptions being thrown, the propagate method won't do anything. If an exception is thrown in the try block, it will be caught by the catch block, which will then invoke the propagate method and rethrow the exception. 
+        <h2>Creating a Stack Trace from an Exception</h2> Another important tool developers will use when dealing with errors and exceptions is creating a stack trace from an exception. This can be done with the Throwables.getStackTraceAsString method, which takes an exception as an argument and returns a String containing the stack trace. For example, let's say we have a method called doStuff that throws an exception if certain conditions are met. We could get the stack trace as a String like this: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+try {
+    doStuff();
+} catch (Exception e) {
+    String stackTrace = Throwables.getStackTraceAsString(e);
+}
+
+          </xmp></code></pre> The stackTrace variable will then contain the stack trace of the exception. 
+        <h2>Creating an Exception with a Given Message</h2> The com.google.common.base.Throwables class also provides a method for creating an exception with a given message. This is done with the Throwables.throwIfUnchecked method, which takes a message and a Throwable as arguments. For example, let's say we have a Boolean called shouldThrow and want to throw an exception if it's true. We could do this like so: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+if (shouldThrow){
+    Throwables.throwIfUnchecked("Error occurred", new Error());
+}
+
+          </xmp></code></pre> This will create a new Error exception with the given message and throw it. 
+        <h2>Conclusion</h2> The com.google.common.base.Throwables class is a powerful utility class for Java applications that provides developers with the tools they need to handle errors and exceptions effectively. From detecting and rethrowing errors and exceptions, to creating a stack trace from an exception, to creating an exception with a given message, the Throwables class has many useful methods that make dealing with errors and exceptions easier. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataInputStream/"> DataInputStream </a> </p> <a href="/articles/Java/File-And-IO/DataInputStream/Read-unsigned-byte-from-file-using-DataInputStream.html">Read unsigned byte from file using DataInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/"> Convertion </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-float.html">Convert String to float</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Print-ArrayList-elements-using-Arrays.html">Print ArrayList elements using Arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-comma-separated-String-to-ArrayList-using-Arrays.html">Convert comma separated String to ArrayList using Arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-get-the-first-or-last-element-from-LinkedHashSet.html">How to get the first or last element from LinkedHashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.view.View.OnLongClickListener.html">a.v.V.OnLongClickListener</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/"> Boolean Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Convert-Java-String-Object-to-Boolean-Object.html">Convert Java String Object to Boolean Object</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.net.ssl.SSLSession.html">javax.net.ssl.SSLSession</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-iterate-HashSet-in-Java.html">How to iterate HashSet in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/java.awt.Transparency.html">java.awt.Transparency</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-08 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Martin</h3> <p><a href="#">2022-08-09 11:53</a></p> it was very helpful <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Grigorii</h3> <p><a href="#">2022-08-25 16:38</a></p> Great example! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-String-array-using-Arrays-class.html">Sort String array using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-ArrayList-to-LinkedHashSet.html">Convert ArrayList to LinkedHashSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.app.AlertDialog.html">android.app.AlertDialog</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-int-to-a-file-using-DataOutputStream.html">Write int to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-to-String-array-using-Arrays.html">Convert String to String array using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-hexadecimal-number-to-decimal-number-example.html">Convert hexadecimal number to decimal number example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/java.time.temporal.Temporal.html">java.time.temporal.Temporal</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Remove-AWT-Checkbox-From-Applet-or-Window-Frame-Example.html">Remove AWT Checkbox From Applet or Window Frame Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-all-occurrences-of-specified-element-of-Java-ArrayList-Example.html">Replace all occurrences of specified element of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.yaml.snakeyaml.DumperOptions.html">org.yaml.snakeyaml.DumperOptions</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.support.v7.widget.AppCompatTextView.html">a.s.v.w.AppCompatTextView</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.test.ApplicationTestCase.html">android.test.ApplicationTestCase</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-double-Array-Example.html">Performing Binary Search on Java double Array Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Get-or-Set-Gap-Between-JLabel’s-Icon-and-Text-Example.html">Get or Set Gap Between JLabel’s Icon and Text Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Check-Whether-JLabel-is-Visible-or-Enabled-Example.html">Check Whether JLabel is Visible or Enabled Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.util.Size.html">android.util.Size</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Smiley-In-Applet-Example.html">Draw Smiley In Applet Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Enumeration-over-Java-Vector-Example.html">Get Enumeration over Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-ArrayList-using-ListIterator.html">Iterate through ArrayList using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/Java-int-Example.html">Java int Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

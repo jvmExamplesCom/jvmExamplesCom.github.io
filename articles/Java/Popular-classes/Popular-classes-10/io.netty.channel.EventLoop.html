@@ -1,0 +1,242 @@
+<!doctype html>
+<html> 
+ <head> 
+  <title>jvmExamples.com - io.netty.channel.EventLoop</title> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script type="text/javascript" src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.netty.channel.EventLoop"> 
+  <meta name="keywords" content="io.netty.channel.EventLoop"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.netty.channel.EventLoop"> 
+  <meta property="og:description" content="io.netty.channel.EventLoop"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.netty.channel.EventLoop"> 
+  <meta name="twitter:description" content="io.netty.channel.EventLoop"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2022-03-19</small>
+        </div> 
+        <h1>Introduction to Java EventLoop</h1> The Java EventLoop is a powerful mechanism for handling sequence-oriented events in the Java programming language. It provides an efficient and easy-to-use interface for dealing with event management, such as scheduling tasks, managing threads, and asynchronously executing code. The Java EventLoop is designed to be used with a variety of applications, including web servers, mobile applications, and desktop applications. 
+        <h2>Overview of the Java EventLoop</h2> The Java EventLoop is a specialized thread pool that simplifies the asynchronous execution of tasks. It provides a thread-safe mechanism for organizing and managing events and tasks. The EventLoop divides tasks into small units of work (called "tasks") that can be executed in parallel or sequentially. It provides a set of methods that can be used to schedule, execute, and manage tasks. The EventLoop consists of several components, such as an executor service, a queue, a task scheduler, and a dispatcher. The executor service is responsible for scheduling tasks, while the queue manages the task execution order. The task scheduler is responsible for scheduling tasks for execution, and the dispatch is responsible for dispatching tasks to the actual workers. 
+        <h2>Using the Java EventLoop</h2> The Java EventLoop can be used to create an asynchronous task execution system. To do this, the user must create an instance of the EventLoop, and then configure it with a thread pool and an executor service. Once the EventLoop is configured, tasks can be scheduled for execution using its APIs. To schedule a task, the user must first create a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Runnable
+
+          </xmp></code></pre> object containing the logic for the task. This 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Runnable
+
+          </xmp></code></pre> object must be passed to the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EventLoop.schedule()
+
+          </xmp></code></pre> method. After the task is scheduled, the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EventLoop.execute()
+
+          </xmp></code></pre> method will be called, which will execute the task at the appropriate time. The EventLoop can also be used to manage multiple tasks. In this case, the user must create a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+TaskScheduler
+
+          </xmp></code></pre> instance, and then pass it to the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EventLoop.addTaskScheduler()
+
+          </xmp></code></pre> method. The scheduler will then be responsible for scheduling and executing tasks as needed. 
+        <h2>Example Java EventLoop Code</h2> Here is an example of how to use the Java EventLoop: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EventLoop eventLoop = new EventLoop();
+ 
+// Create a TaskScheduler to manage tasks 
+TaskScheduler taskScheduler = new TaskScheduler(eventLoop);
+ 
+// Add the task scheduler to the EventLoop 
+eventLoop.addTaskScheduler(taskScheduler);
+ 
+// Create a Runnable task 
+Runnable task = new Runnable(){ 
+    public void run(){ 
+        System.out.println("Running task..."); 
+    } 
+}; 
+ 
+// Schedule the task 
+taskScheduler.schedule(task); 
+ 
+// Execute the task 
+eventLoop.execute();
+
+          </xmp></code></pre> In this example, a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Runnable
+
+          </xmp></code></pre> task is created and then scheduled for execution using the task scheduler. Finally, the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+eventLoop.execute()
+
+          </xmp></code></pre> method is called to actually execute the task. 
+        <h2>Conclusion</h2> The Java EventLoop is a powerful mechanism for managing sequence-oriented events and tasks. It provides an efficient and easy-to-use interface for dealing with these events and tasks. By dividing tasks into small units of work and managing their execution order, the EventLoop simplifies asynchronous task execution. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipEntry/"> ZipEntry </a> </p> <a href="/articles/Java/Java-Zip/ZipEntry/Get-CRC-32-Checksum-of-Zip-Entry-Example.html">Get CRC-32 Checksum of Zip Entry Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Replace-an-Element-of-LinkedList-Java-example.html">Replace an Element of LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.springframework.validation.BindException.html">o.s.v.BindException</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataInputStream/"> DataInputStream </a> </p> <a href="/articles/Java/File-And-IO/DataInputStream/Read-unsigned-byte-from-file-using-DataInputStream.html">Read unsigned byte from file using DataInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/"> If Else Statement </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/Determine-If-Year-Is-Leap-Year-Java-Example.html">Determine If Year Is Leap Year Java Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet-Info-Example.html">Get Applet Info Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.hadoop.fs.FSDataOutputStream.html">o.a.h.f.FSDataOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-TreeMap-key,-value-or-entry-greater-than-or-less-than-the-specified-key.html">How to get TreeMap key, value or entry greater than or less than the specified key</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.database.DatabaseUtils.html">android.database.DatabaseUtils</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-create-a-new-TreeMap-object-using-the-Comparator-interface.html">How to create a new TreeMap object using the Comparator interface</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-03 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Remove-Particular-Item-From-AWT-Choice-Or-Combobox-Example.html">Remove Particular Item From AWT Choice Or Combobox Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/com.google.common.util.concurrent.MoreExecutors.html">c.g.c.u.c.MoreExecutors</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-byte-to-Byte-object-Example.html">Convert byte to Byte object Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-short-from-file-using-DataInputStream.html">Read short from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-get-first-and-last-elements-from-the-Vector.html">How to get first and last elements from the Vector</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-font/Create-Italic-Font-Example.html">Create Italic Font Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-String-to-primitive-byte-Example.html">Convert String to primitive byte Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/How-to-keep-only-numbers-in-String.html">How to keep only numbers in String</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.springframework.context.SmartLifecycle.html">o.s.c.SmartLifecycle</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-create-new-objects-of-LinkedHashSet-class-(LinkedHashSet-constructors).html">How to create new objects of LinkedHashSet class (LinkedHashSet constructors)</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-check-if-TreeSet-is-empty-(isEmpty-method).html">How to check if TreeSet is empty (isEmpty method)</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Disable-Button-Example.html">Disable Button Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-LinkedHashMap-to-List.html">Convert LinkedHashMap to List</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Get-or-Set-Gap-Between-JLabel’s-Icon-and-Text-Example.html">Get or Set Gap Between JLabel’s Icon and Text Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/io.restassured.RestAssured.html">io.restassured.RestAssured</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-long.html">Convert String long</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/How-to-check-if-String-starts-with-a-number.html">How to check if String starts with a number</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-print-elements-example.html">Java LinkedList print elements example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/retrofit2.http.DELETE.html">retrofit2.http.DELETE</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-all-values-of-LinkedHashMap-in-Java-(values-method).html">How to get all values of LinkedHashMap in Java (values method)</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

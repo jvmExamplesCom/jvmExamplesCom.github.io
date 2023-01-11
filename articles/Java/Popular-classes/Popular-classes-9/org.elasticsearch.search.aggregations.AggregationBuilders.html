@@ -1,0 +1,230 @@
+<!doctype html>
+<html> 
+ <head> 
+  <title>jvmExamples.com - org.elasticsearch.search.aggregations.AggregationBuilders</title> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script type="text/javascript" src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.elasticsearch.search.aggregations.AggregationBuilders"> 
+  <meta name="keywords" content="org.elasticsearch.search.aggregations.AggregationBuilders"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.elasticsearch.search.aggregations.AggregationBuilders"> 
+  <meta property="og:description" content="org.elasticsearch.search.aggregations.AggregationBuilders"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.elasticsearch.search.aggregations.AggregationBuilders"> 
+  <meta name="twitter:description" content="org.elasticsearch.search.aggregations.AggregationBuilders"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2022-01-15</small>
+        </div> 
+        <h1>Introduction to org.elasticsearch.search.aggregations.AggregationBuilders</h1> 
+        <p>The org.elasticsearch.search.aggregations.AggregationBuilders class is a powerful API designed to provide support for aggregations in the Elasticsearch Query DSL. This API allows developers to easily create, manage, and manipulate aggregation types such as terms, filters, histograms, and spatial coordinates.</p> 
+        <h2>Creating Aggregations with AggregationBuilders</h2> 
+        <p>The simplest way to create an aggregation using the AggregationBuilders class is to instantiate a new aggregation instance and then attach it to a query builder (or another aggregation). For example, the following code snippet creates a simple histogram aggregation:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+AggregationBuilder aggregation = AggregationBuilders.histogram("salesPerHour")
+        .field("sales")
+        .interval(1);
+QueryBuilder queryBuilder = QueryBuilders.boolQuery();
+queryBuilder.addAggregation(aggregation);
+
+          </xmp></code></pre> 
+        <p>The above code example creates an aggregation instance called "salesPerHour" which is then added to the query builder. The histogram aggregation has two parameters: field, which specifies the field to be used in the aggregation, and interval, which specifies the size of each histogram bucket.</p> 
+        <p>It is also possible to create more complex aggregations with the AggregationBuilders class. For example, the following code snippet creates an aggregation that groups documents by a user-defined field, then creates a sub-aggregation which counts the number of documents in each group:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+AggregationBuilder aggregation = AggregationBuilders.terms("countByGroup")
+        .field("group")
+        .subAggregation(AggregationBuilders.count("count"));
+QueryBuilder queryBuilder = QueryBuilders.boolQuery();
+queryBuilder.addAggregation(aggregation);
+
+          </xmp></code></pre> 
+        <h2>Using AggregationBuilders with Queries</h2> 
+        <p>The AggregationBuilders class can also be used to add multiple aggregations to queries at once. For example, the following code snippet creates a query with two aggregations, one for terms and one for count:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+QueryBuilder queryBuilder = QueryBuilders.boolQuery();
+queryBuilder.addAggregation(
+        AggregationBuilders.terms("terms")
+                .field("field"));
+queryBuilder.addAggregation(
+        AggregationBuilders.count("count"));
+
+          </xmp></code></pre> 
+        <p>The AggregationBuilders class also supports nesting of aggregations, meaning that an aggregation can contain one or more nested aggregations. For example, the following code snippet creates an aggregation that first groups documents by a user-defined field, and then creates a sub-aggregation which further groups the documents by another user-defined field:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+AggregationBuilder aggregation = AggregationBuilders.terms("countByGroup")
+        .field("group")
+        .subAggregation(
+                AggregationBuilders.terms("countBySubGroup")
+                        .field("subgroup"));
+QueryBuilder queryBuilder = QueryBuilders.boolQuery();
+queryBuilder.addAggregation(aggregation);
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>The org.elasticsearch.search.aggregations.AggregationBuilders class provides powerful and flexible support for creating and manipulating aggregations in the Elasticsearch Query DSL. With this API, developers can easily create, manage, and manipulate aggregation types such as terms, filters, histograms, and spatial coordinates.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/"> Searching </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-long-Array-Example.html">Performing Binary Search on Java long Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-fix-Java-TreeSet-java.lang.ClassCastExcpetion-exception.html">H.l.ClassCastExcpetion exception</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.xml.stream.XMLStreamException.html">javax.xml.stream.XMLStreamException</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Basic-Java-Applet-Example.html">Basic Java Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-short-to-a-file-using-DataOutputStream.html">Write short to a file using DataOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-check-if-the-value-exists-in-the-TreeMap-(TreeMap-contains-a-value).html">How to check if the value exists in the TreeMap (TreeMap contains a value)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/io.vertx.core.http.HttpServerResponse.html">i.v.c.h.HttpServerResponse</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-an-element-to-specified-index-of-Java-ArrayList-Example.html">Add an element to specified index of Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.dom4j.Attribute.html">org.dom4j.Attribute</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-get-HashMap-size-example.html">How to get HashMap size example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-10 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>JavaFan</h3> <p><a href="#">2022-02-22 08:49</a></p> I do not understand details <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Daniel</h3> <p><a href="#">2022-02-16 20:07</a></p> <p>These Programs Are Very Useful For Java Beginners!... Thanks! ...</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet-Info-Example.html">Get Applet Info Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Create-Multi-Select-AWT-List-Example.html">Create Multi Select AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-get-first-and-last-elements-from-the-Vector.html">How to get first and last elements from the Vector</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-to-String-array-using-Arrays.html">Convert String to String array using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-String-array-using-Arrays-class.html">Sort String array using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/rx.android.schedulers.AndroidSchedulers.html">r.a.s.AndroidSchedulers</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-iterate-LinkedHashSet-elements.html">How to iterate LinkedHashSet elements</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Check-Whether-JLabel-is-Visible-or-Enabled-Example.html">Check Whether JLabel is Visible or Enabled Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.apache.http.auth.Credentials.html">org.apache.http.auth.Credentials</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.view.animation.AccelerateInterpolator.html">a.v.a.AccelerateInterpolator</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.widget.PopupWindow.html">android.widget.PopupWindow</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Remove-first-and-last-elements-of-LinkedList-Java-example.html">Remove first and last elements of LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.io.PrintStream.html">java.io.PrintStream</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Load-New-HTML-File-Using-Applet-Context-Example.html">Load New HTML File Using Applet Context Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/javafx.scene.Cursor.html">javafx.scene.Cursor</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Convert-ArrayList-to-LinkedHashMap-in-Java.html">Convert ArrayList to LinkedHashMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Java-Convert-array-to-TreeSet.html">Java Convert array to TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/JTextField-Horizontal-Alignment-Example.html">JTextField Horizontal Alignment Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-maximum-of-two-numbers-using-Math.max.html">F.max</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Remove-specified-element-from-Java-HashSet-example.html">Remove specified element from Java HashSet example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

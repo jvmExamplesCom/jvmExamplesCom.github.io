@@ -1,0 +1,279 @@
+<!doctype html>
+<html> 
+ <head> 
+  <title>jvmExamples.com - org.quartz.JobExecutionContext</title> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script type="text/javascript" src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.quartz.JobExecutionContext"> 
+  <meta name="keywords" content="org.quartz.JobExecutionContext"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.quartz.JobExecutionContext"> 
+  <meta property="og:description" content="org.quartz.JobExecutionContext"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.quartz.JobExecutionContext"> 
+  <meta name="twitter:description" content="org.quartz.JobExecutionContext"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2022-10-11</small>
+        </div> 
+        <h1>Introduction to org.quartz.JobExecutionContext</h1> The org.quartz.JobExecutionContext is an important part of the Quartz Java library. It provides a convenient way to manage job execution information, such as the parameters that were used to execute the job, the start and end times of the job, and the state of the job when it executed. In this article, we will explore the usage and features of the JobExecutionContext class. We will provide code examples where applicable to illustrate how to work with job execution contexts in Java. 
+        <h2>Constructors of JobExecutionContext</h2> There are two constructors available for instantiating a JobExecutionContext object. The first constructor takes a JobDetail and a Trigger object as parameters: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public JobExecutionContext(JobDetail jobDetail, Trigger trigger);
+
+          </xmp></code></pre> The second constructor takes a Scheduler, JobDetail and a Trigger object as parameters: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public JobExecutionContext(Scheduler scheduler, JobDetail jobDetail, Trigger trigger);
+
+          </xmp></code></pre> The JobDetail parameter is the job detail object associated with the job being executed. The Trigger parameter is the trigger associated with the job being executed. The Scheduler parameter is the scheduler that is executing the job. 
+        <h2>Methods of JobExecutionContext</h2> The JobExecutionContext class comes with various methods that can be used to retrieve job execution information. The following are some of the commonly used methods: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getJobInstance():
+
+          </xmp></code></pre> This method returns the Job instance associated with the job being executed. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getJobDetail():
+
+          </xmp></code></pre> This method returns the JobDetail instance associated with the job being executed. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getTrigger():
+
+          </xmp></code></pre> This method returns the Trigger instance associated with the job being executed. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getFireTime():
+
+          </xmp></code></pre> This method returns the time at which the job was scheduled to execute. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getScheduledFireTime():
+
+          </xmp></code></pre> This method returns the time at which the job was scheduled to execute by the Quartz scheduler. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getPreviousFireTime():
+
+          </xmp></code></pre> This method returns the time at which the job was last successfully executed. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getNextFireTime():
+
+          </xmp></code></pre> This method returns the time at which the job will next be executed. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getJobRunTime():
+
+          </xmp></code></pre> This method returns the amount of time the job took to execute. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getMergedJobDataMap():
+
+          </xmp></code></pre> This method returns the merged data map containing all job data maps associated with the job being executed. 
+        <h2>Examples</h2> Let's look at how to use the JobExecutionContext class in practice with some code examples. 
+        <h3>Example 1: Retrieving Job Details</h3> We can use the getJobDetail() and getJobInstance() methods to retrieve the JobDetail and Job instances associated with the job being executed. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JobExecutionContext context = ...;
+JobDetail jobDetail = context.getJobDetail();
+Object jobInstance = context.getJobInstance();
+
+          </xmp></code></pre> 
+        <h3>Example 2: Retrieving Trigger Details</h3> We can use the getTrigger() method to retrieve the Trigger instance associated with the job being executed. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JobExecutionContext context = ...;
+Trigger trigger = context.getTrigger();
+
+          </xmp></code></pre> 
+        <h3>Example 3: Retrieving Fire Times</h3> We can use the getFireTime(), getScheduledFireTime(), getPreviousFireTime(), and getNextFireTime() methods to retrieve the fire times associated with the job being executed. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JobExecutionContext context = ...;
+Date fireTime = context.getFireTime();
+Date scheduledFireTime = context.getScheduledFireTime();
+Date previousFireTime = context.getPreviousFireTime();
+Date nextFireTime = context.getNextFireTime();
+
+          </xmp></code></pre> 
+        <h3>Example 4: Retrieving Job Run Time</h3> We can use the getJobRunTime() method to retrieve the amount of time the job took to execute. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JobExecutionContext context = ...;
+long jobRunTime = context.getJobRunTime();
+
+          </xmp></code></pre> 
+        <h3>Example 5: Retrieving Merged Job Data Maps</h3> We can use the getMergedJobDataMap() method to retrieve a merged data map containing all job data maps associated with the job being executed. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JobExecutionContext context = ...;
+JobDataMap mergedJobDataMap = context.getMergedJobDataMap();
+
+          </xmp></code></pre> 
+        <h1>Conclusion</h1> The org.quartz.JobExecutionContext is an important part of the Quartz Java library. It provides a convenient way to manage job execution information, such as the parameters that were used to execute the job, the start and end times of the job, and the state of the job when it executed. In this article, we have explored the usage and features of the JobExecutionContext class. We have also provided code examples illustrating how to work with job execution contexts in Java. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Java-HashMap-print-example.html">Java HashMap print example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.animation.TypeEvaluator.html">android.animation.TypeEvaluator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Palindrome-Number-Example.html">Java Palindrome Number Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataInputStream/"> DataInputStream </a> </p> <a href="/articles/Java/File-And-IO/DataInputStream/Read-int-from-file-using-DataInputStream.html">Read int from file using DataInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/"> ListIterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Remove-an-element-from-ArrayList-using-Java-ListIterator-Example.html">Remove an element from ArrayList using Java ListIterator Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Number-Of-Visible-Rows-Of-AWT-List-Example.html">Get Number Of Visible Rows Of AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/"> If Else Statement </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/If-statement-Example.html">If statement Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Read-Number-from-Console-and-Check-if-it-is-a-Palindrome-Number.html">Read Number from Console and Check if it is a Palindrome Number</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/io.netty.channel.epoll.EpollEventLoopGroup.html">i.n.c.e.EpollEventLoopGroup</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.widget.SimpleAdapter.html">android.widget.SimpleAdapter</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-16 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-ceiling-value-of-a-number-using-Math.ceil.html">F.ceil</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.openqa.selenium.OutputType.html">org.openqa.selenium.OutputType</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-add-key-value-pairs-to-LinkedHashMap-in-Java.html">How to add key-value pairs to LinkedHashMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-remove-duplicate-elements-from-the-Vector.html">How to remove duplicate elements from the Vector</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.ws.rs.container.ContainerRequestContext.html">j.w.r.c.ContainerRequestContext</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.beans.PropertyChangeEvent.html">java.beans.PropertyChangeEvent</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-3D-Rectangle-&-Square-in-Applet-Window-Example.html">Draw 3D Rectangle & Square in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet-Directory-URL-or-Code-Base-Example.html">Get Applet Directory URL or Code Base Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Get-Alpha-Component-Of-Color-Example.html">Get Alpha Component Of Color Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-convert-an-array-to-Vector.html">How to convert an array to Vector</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Convert-HashSet-to-array.html">Convert HashSet to array</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Copy-Elements-of-Vector-to-Java-ArrayList-Example.html">Copy Elements of Vector to Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-absolute-value-of-float,-int,-double-and-long-using-Math.abs.html">F.abs</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.baomidou.mybatisplus.core.conditions.query.QueryWrapper.html">c.b.m.c.c.q.QueryWrapper</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-1-Example.html">Java Pyramid 1 Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Determine-Multiple-Selection-Mode-Of-AWT-List-Example.html">Determine Multiple Selection Mode Of AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.cloud.openfeign.EnableFeignClients.html">o.s.c.o.EnableFeignClients</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Compare-two-ArrayList.html">Compare two ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Foreground-Color-Of-an-Applet-Window-Example.html">Get Foreground Color Of an Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.http.impl.cookie.BasicClientCookie.html">o.a.h.i.c.BasicClientCookie</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

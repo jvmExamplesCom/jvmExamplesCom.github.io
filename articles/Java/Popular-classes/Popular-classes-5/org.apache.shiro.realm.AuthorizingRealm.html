@@ -1,0 +1,268 @@
+<!doctype html>
+<html> 
+ <head> 
+  <title>jvmExamples.com - org.apache.shiro.realm.AuthorizingRealm</title> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script type="text/javascript" src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.apache.shiro.realm.AuthorizingRealm"> 
+  <meta name="keywords" content="org.apache.shiro.realm.AuthorizingRealm"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.apache.shiro.realm.AuthorizingRealm"> 
+  <meta property="og:description" content="org.apache.shiro.realm.AuthorizingRealm"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.apache.shiro.realm.AuthorizingRealm"> 
+  <meta name="twitter:description" content="org.apache.shiro.realm.AuthorizingRealm"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2022-04-13</small>
+        </div> 
+        <h1> Introduction To org.apache.shiro.realm.AuthorizingRealm </h1> 
+        <p>org.apache.shiro.realm.AuthorizingRealm is an abstract class which provides a convenient base class for implementing Shiro Realms that support authorization operations. It encapsulates the most common authorization-related behavior and leaves only the actual authorization (access control) logic to subclasses.</p> 
+        <h2> What Is Authorization? </h2> 
+        <p>Authorization is the process of granting access rights to user roles or users. In Shiro, this usually means granting access to certain protected resources/actions associated with a user’s identity. </p> 
+        <h2>Basic Flow </h2> 
+        <p>When a request is made for protected resources, the application must first verify that the current user has the correct permissions to access those resources. This is typically done by obtaining the current Subject’s authority list and comparing it against the privileges required to access the target resource.</p> 
+        <h2>Using AuthorizingRealm </h2> 
+        <p>To implement authorization in a Shiro realm, we can extend from the AuthorizingRealm class and implement the methods defined in the class. The AuthorizingRealm interface defines two methods that have to be implemented:</p> 
+        <ul> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+doGetAuthorizationInfo(PrincipalCollection principals)
+
+            </xmp></code></pre>: This method should return a list of authorization information of the specified principals.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+doGetAuthenticationInfo(AuthenticationToken token)
+
+            </xmp></code></pre>: This method should return authentication information of the specified token. </li> 
+        </ul> 
+        <h2>Authentication And Authorization Example </h2> 
+        <p>Let’s look at an example of how to use org.apache.shiro.realm.AuthorizingRealm to secure a web application. We will create a custom realm that implements doGetAuthenticationInfo() and doGetAuthorizationInfo() methods to authenticate and authorize users. </p> 
+        <h3>Step 1: Create Custom Realm Class </h3> 
+        <p>First, we create a custom realm extending from AuthorizingRealm. This realm will be responsible for authenticating and authorizing users based on the credentials they provide. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class CustomRealm extends AuthorizingRealm {
+  // authentication methods
+  // authorization methods
+}
+
+          </xmp></code></pre> 
+        <h3>Step 2: Override doGetAuthenticationInfo() Method </h3> 
+        <p>We then override the doGetAuthenticationInfo() method to perform authentication. In this method, we get the authentication token, which contains the user’s credentials. We then use these credentials to lookup the user in the database (or other store), and if found, return an AuthenticationInfo object containing the authenticated user’s identity. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@Override
+protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+  // get user credentials from token
+  String username = (String) token.getPrincipal();
+  String password = new String((char[]) token.getCredentials());
+
+  // lookup user in database
+  User user = userDao.findByUsername(username);
+
+  // verify password
+  if (!password.equals(user.getPassword())) {
+    throw new AuthenticationException("Invalid username or password");
+  }
+
+  // return an AuthenticationInfo object
+  return new SimpleAuthenticationInfo(username, password, getName());
+}
+
+          </xmp></code></pre> 
+        <h3>Step 3: Override doGetAuthorizationInfo() Method </h3> 
+        <p>Next, we override the doGetAuthorizationInfo() method to perform authorization. In this method, we obtain the authenticated user’s identity from the PrincipalCollection object, and then use this identity to lookup the user’s roles and/or permissions in the database. We then return a list of AuthorizationInfo objects containing the user’s roles and/or permissions. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@Override
+protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+  // get username from PrincipalCollection
+  String username = (String) principals.getPrimaryPrincipal();
+
+  // lookup roles/permissions in database
+  Set<String> roles = userDao.findRolesByUsername(username);
+  Set<String> permissions = userDao.findPermissionsByUsername(username);
+
+  // return list of AuthorizationInfo objects
+  SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roles);
+  info.setStringPermissions(permissions);
+  return info;
+}
+
+          </xmp></code></pre> 
+        <h3>Step 4: Register Realm With SecurityManager</h3> 
+        <p>Finally, we register our custom realm with the SecurityManager. This allows Shiro to use our custom realm when authenticating and authorizing users. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+DefaultSecurityManager securityManager = new DefaultSecurityManager();
+securityManager.setRealm(new CustomRealm());
+SecurityUtils.setSecurityManager(securityManager);
+
+          </xmp></code></pre> 
+        <h2>Conclusion </h2> 
+        <p>In this article, we discussed the org.apache.shiro.realm.AuthorizingRealm class and how to use it to secure a web application. We saw how to extend AuthorizingRealm to create a custom realm and implement authentication and authorization logic. We also looked at how to register the custom realm with the SecurityManager so that it can be used by Shiro when authenticating and authorizing users. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-remove-elements-from-HashSet.html">How to remove elements from HashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-elements-of-HashSet-in-Java-using-an-iterator.html">Iterate through elements of HashSet in Java using an iterator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.io.InputStreamReader.html">java.io.InputStreamReader</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Convert-array-to-HashSet.html">Convert array to HashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-preserve-insertion-order-of-Java-HashSet-elements.html">How to preserve insertion order of Java HashSet elements</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Get-or-Set-Gap-Between-JLabel’s-Icon-and-Text-Example.html">Get or Set Gap Between JLabel’s Icon and Text Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/java.util.Currency.html">java.util.Currency</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/java.time.DateTimeException.html">java.time.DateTimeException</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Check-if-a-particular-element-exists-in-LinkedList-Java-example.html">Check if a particular element exists in LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-last-key,-last-value,-or-last-entry-from-the-Java-TreeMap.html">How to get last key, last value, or last entry from the Java TreeMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-16 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Abral</h3> <p><a href="#">2022-05-19 06:01</a></p> Appreciate your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Ojas</h3> <p><a href="#">2022-05-31 11:53</a></p> <p>These Programs Are Very Useful For Java Beginners!... Thanks! ...</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-square-root-of-a-number-using-Math.sqrt.html">F.sqrt</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Iterate-through-values-of-Java-Hashtable-example.html">Iterate through values of Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/android.provider.Browser.html">android.provider.Browser</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-the-last-element-from-ArrayList.html">Remove the last element from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Get-Size-of-Java-HashMap-Example.html">Get Size of Java HashMap Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.xml.xpath.XPathExpression.html">javax.xml.xpath.XPathExpression</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/de.robv.android.xposed.callbacks.XC-LoadPackage.html">d.r.a.x.c.XC LoadPackage</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/System/Determine-operating-system-using-System-class.html">Determine operating system using System class</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-remove-an-element-from-LinkedHashSet-in-Java.html">How to remove an element from LinkedHashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Remove-all-elements-from-Java-HashSet-example.html">Remove all elements from Java HashSet example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-print-TreeMap-in-Java.html">How to print TreeMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/javafx.scene.shape.Rectangle.html">javafx.scene.shape.Rectangle</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.os.PowerManager.html">android.os.PowerManager</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.jboss.shrinkwrap.api.spec.WebArchive.html">o.j.s.a.s.WebArchive</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Swap-elements-of-Java-Vector-example.html">Swap elements of Java Vector example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-an-array-to-TreeSet.html">How to convert an array to TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Shuffle-elements-of-ArrayList.html">Shuffle elements of ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Remove-value-from-Java-Hashtable-example.html">Remove value from Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-check-If-HashMap-is-empty-example.html">How to check If HashMap is empty example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-short-to-String.html">Convert short to String</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

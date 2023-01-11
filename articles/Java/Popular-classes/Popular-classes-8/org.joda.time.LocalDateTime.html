@@ -1,0 +1,305 @@
+<!doctype html>
+<html> 
+ <head> 
+  <title>jvmExamples.com - org.joda.time.LocalDateTime</title> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script type="text/javascript" src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.joda.time.LocalDateTime"> 
+  <meta name="keywords" content="org.joda.time.LocalDateTime"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.joda.time.LocalDateTime"> 
+  <meta property="og:description" content="org.joda.time.LocalDateTime"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.joda.time.LocalDateTime"> 
+  <meta name="twitter:description" content="org.joda.time.LocalDateTime"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2022-03-07</small>
+        </div> 
+        <h1>Introduction to org.joda.time.LocalDateTime</h1> 
+        <p>org.joda.time.LocalDateTime is a Java class used to represent a date and time. It stores a combination of year, month, day, hour, minute, second, time zone offset, and daylight saving time offset. LocalDateTime provides numerous methods for getting, setting, and manipulating individual fields from the date and time. This class also provides methods for comparison, formatting, and parsing of ISO 8601 dates. This article will provide an introduction to this class and demonstrate how to use its various methods.</p> 
+        <h2>Creating a LocalDateTime Object</h2> 
+        <p>The most basic way to create a LocalDateTime object is to set it to the current system time:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+LocalDateTime now = new LocalDateTime();
+
+          </xmp></code></pre> 
+        <p>Alternatively, you can pass in a specific date and time when creating the object:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+LocalDateTime dateTime = new LocalDateTime(2018, 7, 3, 12, 45);
+
+          </xmp></code></pre> 
+        <p>The LocalDateTime class also contains several static factory methods that can be used to construct a LocalDateTime object based on different parameters:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create a LocalDateTime from a java.util.Date
+LocalDateTime fromDate = LocalDateTime.fromDateFields(new Date());
+
+// Create a LocalDateTime from the current time in milliseconds
+LocalDateTime fromMillis = LocalDateTime.fromMillis(System.currentTimeMillis());
+
+// Create a LocalDateTime from a text string in ISO8601 format
+LocalDateTime fromText = LocalDateTime.parse("2018-07-03T12:45:00");
+
+          </xmp></code></pre> 
+        <h2>Getting the Date and Time</h2> 
+        <p>The LocalDateTime class provides several methods for getting the individual components of the date and time:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Get the year
+int year = dateTime.getYear();
+
+// Get the month-of-year as an int (1-12)
+int month = dateTime.getMonthOfYear();
+
+// Get the day-of-month as an int (1-31)
+int day = dateTime.getDayOfMonth();
+
+// Get the hour-of-day as an int (0-23)
+int hour = dateTime.getHourOfDay();
+
+// Get the minute-of-hour as an int (0-59)
+int minute = dateTime.getMinuteOfHour();
+
+// Get the second-of-minute as an int (0-59)
+int second = dateTime.getSecondOfMinute();
+
+// Get the time zone offset
+ReadablePartial offset = dateTime.getOffset();
+
+// Get the daylight saving time offset
+ReadableDuration dstOffset = dateTime.getZone().getOffsetFromLocal(dateTime);
+
+          </xmp></code></pre> 
+        <h2>Setting the Date and Time</h2> 
+        <p>The LocalDateTime class also provides several methods for setting the individual components of the date and time:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Set the year
+dateTime.withYear(2020)
+
+// Set the month-of-year (1-12)
+dateTime.withMonthOfYear(5)
+
+// Set the day-of-month (1-31)
+dateTime.withDayOfMonth(15)
+
+// Set the hour-of-day (0-23)
+dateTime.withHourOfDay(12)
+
+// Set the minute-of-hour (0-59)
+dateTime.withMinuteOfHour(45)
+
+// Set the second-of-minute (0-59)
+dateTime.withSecondOfMinute(30)
+
+// Set the time zone offset
+dateTime.withOffset(offset)
+
+// Set the daylight saving time offset
+dateTime.withZoneRetainFields(dstOffset)
+
+          </xmp></code></pre> 
+        <h2>Comparing Dates and Times</h2> 
+        <p>The LocalDateTime class provides several convenient methods for comparing two LocalDateTime objects:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Check if two LocalDateTime objects are equal
+boolean isEqual = dateTime.isEqual(otherDateTime);
+
+// Check if one LocalDateTime is after another
+boolean isAfter = dateTime.isAfter(otherDateTime);
+
+// Check if one LocalDateTime is before another
+boolean isBefore = dateTime.isBefore(otherDateTime);
+
+// Calculate the amount of time between two LocalDateTime objects
+Interval between = Interval.between(dateTime, otherDateTime);
+
+          </xmp></code></pre> 
+        <h2>Formatting a LocalDateTime</h2> 
+        <p>The LocalDateTime class provides several methods for formatting a LocalDateTime object as a string:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Format a LocalDateTime as an ISO8601 string
+String formatted = dateTime.toString();
+
+// Format a LocalDateTime using a specific format string
+String formatted = dateTime.toString("yyyy/MM/dd HH:mm:ss");
+
+// Format a LocalDateTime using a predefined format
+String formatted = dateTime.toString(DateTimeFormat.shortDateTime());
+
+          </xmp></code></pre> 
+        <h2>Parsing a String to a LocalDateTime</h2> 
+        <p>The LocalDateTime class also offers methods to parse a string into a LocalDateTime object:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Parse an ISO8601 string
+LocalDateTime parsed = LocalDateTime.parse("2018-07-03T12:45:00");
+
+// Parse a string using a specific format
+LocalDateTime parsed = LocalDateTime.parse("07/03/2018 12:45", DateTimeFormat.forPattern("MM/dd/yyyy HH:mm"));
+
+// Parse a string using a predefined format
+LocalDateTime parsed = LocalDateTime.parse("07/03/18 12:45 PM", DateTimeFormat.shortDateTime());
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>In this article, we have introduced the org.joda.time.LocalDateTime class, giving an overview of its various methods for getting, setting, and manipulating individual fields from the date and time. We have also demonstrated how to use the class’s methods for formatting, parsing, and comparing LocalDateTime objects. The LocalDateTime class is a powerful tool for working with dates and times in Java.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Tail-Map-from-Java-TreeMap-example.html">Get Tail Map from Java TreeMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Reverse-order-of-all-elements-of-Java-Vector-Example.html">Reverse order of all elements of Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-remove-elements-from-Java-TreeSet-(remove-first,-last,-all-elements).html">How to remove elements from Java TreeSet (remove first, last, all elements)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Set-from-Java-HashSet-example.html">Get Synchronized Set from Java HashSet example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Map-from-Java-TreeMap-example.html">Get Synchronized Map from Java TreeMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Remove-first-and-last-elements-of-LinkedList-Java-example.html">Remove first and last elements of LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.elasticsearch.action.bulk.BulkRequest.html">o.e.a.b.BulkRequest</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/android.arch.persistence.room.Room.html">android.arch.persistence.room.Room</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/"> AWT Button </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Determine-If-The-Button-Is-Visible-Example.html">Determine If The Button Is Visible Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.chad.library.adapter.base.BaseQuickAdapter.html">c.c.l.a.b.BaseQuickAdapter</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-02 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/org.json.JSONObject.html">org.json.JSONObject</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.graphics.Point.html">android.graphics.Point</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-All-Items-From-AWT-List-Example.html">Get All Items From AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Simple-For-loop-Example.html">Simple For loop Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-values-using-Comparable-interface.html">Sort LinkedHashMap by values using Comparable interface</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Mark-file-or-directory-Read-Only.html">Mark file or directory Read Only</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-All-Elements-Of-Java-ArrayList-Example.html">Replace All Elements Of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-String-or-String-array-to-HashMap.html">Convert String or String array to HashMap</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Change-Checkbox-Font-Example.html">Change Checkbox Font Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/io.realm.Realm.html">io.realm.Realm</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-sort-TreeSet-elements-using-Comparable-interface.html">How to sort TreeSet elements using Comparable interface</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.support.v7.widget.Toolbar.html">android.support.v7.widget.Toolbar</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.springframework.web.socket.WebSocketSession.html">o.s.w.s.WebSocketSession</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-array-to-ArrayList.html">Add array to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-an-element-from-specified-index-of-Java-ArrayList-Example.html">Remove an element from specified index of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/com.google.common.collect.ArrayListMultimap.html">c.g.c.c.ArrayListMultimap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-check-if-HashSet-is-emtpy-(isEmpty-method).html">How to check if HashSet is emtpy (isEmpty method)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-elements-of-Java-ArrayList-Example.html">Sort elements of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Generate-Random-Int-Within-Given-Range-Example.html">Generate Random Int Within Given Range Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-get-first-and-last-elements-from-the-Vector.html">How to get first and last elements from the Vector</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

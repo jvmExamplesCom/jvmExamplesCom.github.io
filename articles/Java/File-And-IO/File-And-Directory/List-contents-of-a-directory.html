@@ -1,0 +1,254 @@
+<!doctype html>
+<html> 
+ <head> 
+  <title>jvmExamples.com - List contents of a directory</title> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script type="text/javascript" src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="List contents of a directory"> 
+  <meta name="keywords" content="List contents of a directory"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - List contents of a directory"> 
+  <meta property="og:description" content="List contents of a directory"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - List contents of a directory"> 
+  <meta name="twitter:description" content="List contents of a directory"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2022-10-01</small>
+        </div> 
+        <h1>The Java List Directory File System</h1> 
+        <p>Java offers an easy way to list the contents of a directory, enabling developers to quickly and easily create file systems. In this article, we will explore the code used to list directory contents in Java and provide several examples to demonstrate how it works.</p> 
+        <h2>Listing Directories in Java</h2> 
+        <p>To list the contents of a directory in Java, you can use the Files.list() method from the java.nio.file package. This method takes a Path object for the directory you want to list, and returns a Stream of Path objects for the contents of that directory.</p> 
+        <p>For example, to list the contents of the “/tmp” directory, you could do something like this:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Path dir = Paths.get("/tmp");
+try (Stream<Path> listing = Files.list(dir)) {
+  listing.forEach(System.out::println);
+}
+catch (IOException e) {
+  System.err.println("Error while listing files: " + e.getMessage());
+}
+
+          </xmp></code></pre> 
+        <p>This would print out the names of all the files and subdirectories in the “/tmp” directory to the console. Note that you need to run this code with try-with-resources in order to properly close the Stream afterwards.</p> 
+        <h2>Filtering Directories in Java</h2> 
+        <p>If you only want to list certain types of files or directories, you can use the Files.list() method with a filter. The filter is specified as a Predicate object, and it can be used to match on attributes such as whether the file is a directory, or its size, or any other attribute of the Path object.</p> 
+        <p>For example, you could list all the files in the “/tmp” directory that end with the “.txt” extension, like this:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Path dir = Paths.get("/tmp");
+Predicate<Path> txtFilesOnly = path -> path.toString().endsWith(".txt");
+try (Stream<Path> listing = Files.list(dir).filter(txtFilesOnly)) {
+  listing.forEach(System.out::println);
+}
+catch (IOException e) {
+  System.err.println("Error while listing files: " + e.getMessage());
+}
+
+          </xmp></code></pre> 
+        <p>The stream that’s returned by Files.list() will only contain files that match the filter predicate.</p> 
+        <h2>Listing Subdirectories in Java</h2> 
+        <p>The Files.list() method only lists the contents of a single directory. If you want to recursively list the contents of a directory and its subdirectories, you need to use the Files.walk() method. This method takes a Path object and a depth limit, and returns a Stream of all the Path objects in that directory and its subdirectories, up to the specified depth limit.</p> 
+        <p>For example, to list all the files in the “/tmp” directory, including all its subdirectories, you could do this:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Path dir = Paths.get("/tmp");
+try (Stream<Path> listing = Files.walk(dir, Integer.MAX_VALUE)) {
+  listing.forEach(System.out::println);
+}
+catch (IOException e) {
+  System.err.println("Error while listing files: " + e.getMessage());
+}
+
+          </xmp></code></pre> 
+        <p>The Integer.MAX_VALUE parameter indicates that the walk should traverse all subdirectories.</p> 
+        <h2>Filtering Subdirectories in Java</h2> 
+        <p>You can also use the Files.walk() method with a filter, in order to restrict the files that are listed. This works the same way as with the Files.list() method: you specify a Predicate and the returned Stream will only contain files that match the filter.</p> 
+        <p>For example, to list all the files in the “/tmp” directory and its subdirectories, that are bigger than 100 bytes, you could do something like this:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Path dir = Paths.get("/tmp");
+Predicate<Path> sizeBetterThan100Bytes = 
+  path -> {
+    try {
+      return Files.size(path) > 100;
+    } catch (IOException e) {
+      return false;
+    }
+  };
+
+try (Stream<Path> listing = Files.walk(dir, Integer.MAX_VALUE).filter(sizeBetterThan100Bytes)) {
+  listing.forEach(System.out::println);
+}
+catch (IOException e) {
+  System.err.println("Error while listing files: " + e.getMessage());
+}
+
+          </xmp></code></pre> 
+        <p>Here, the filter calls the Files.size() method to get the size of each file, and if it’s bigger than 100 bytes, the file is included in the returned stream.</p> 
+        <h2>Conclusion</h2> 
+        <p>In this article, we saw how to list the contents of a directory in Java, using the Files.list() and Files.walk() methods. We also looked at how to filter the results, using Predicate objects, and showed several examples of how to do this.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Show-Or-Hide-JLabel-Example.html">Show Or Hide JLabel Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/com.rabbitmq.client.Channel.html">com.rabbitmq.client.Channel</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Wrappers/"> Wrappers </a> </p> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Long-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Long object to byte, short, int, long, float and double</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/"> Integer Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-decimal-integer-to-binary-number-example.html">Convert decimal integer to binary number example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/"> Sorting </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-int-Array-Example.html">Java Sort int Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/"> Boolean Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Convert-Java-boolean-Primitive-to-Boolean-object.html">Convert Java boolean Primitive to Boolean object</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Do-While-Loop/"> Do While Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Do-While-Loop/Do-While-loop-Example.html">Do While loop Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-find-an-element-in-the-Vector-using-indexOf-and-lastIndexOf-methods.html">How to find an element in the Vector using indexOf and lastIndexOf methods</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/javax.swing.text.View.html">javax.swing.text.View</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.logging.log4j.core.config.Configuration.html">o.a.l.l.c.c.Configuration</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-22 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Thomas</h3> <p><a href="#">2022-11-15 03:20</a></p> thanks <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>JavaFan</h3> <p><a href="#">2022-11-04 08:16</a></p> it was very helpful <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.junit.rules.TestName.html">org.junit.rules.TestName</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-elements-to-ArrayList.html">Add elements to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-clear-or-remove-all-elements-from-the-Vector.html">How to clear or remove all elements from the Vector</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-create-HashMap-in-Java-(HashMap-constructors).html">How to create HashMap in Java (HashMap constructors)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.hadoop.hbase.client.Get.html">org.apache.hadoop.hbase.client.Get</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-LinkedList-to-Array.html">Convert LinkedList to Array</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.lang.annotation.ElementType.html">java.lang.annotation.ElementType</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Remove-first-and-last-elements-of-LinkedList-Java-example.html">Remove first and last elements of LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Sub-Map-from-Java-TreeMap-example.html">Get Sub Map from Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Convert-array-to-HashSet.html">Convert array to HashSet</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.nio.file.PathMatcher.html">java.nio.file.PathMatcher</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Determine-If-The-Button-Is-Visible-Example.html">Determine If The Button Is Visible Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-compare-two-TreeSet-objects-using-the-equals-method.html">How to compare two TreeSet objects using the equals method</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.os.PowerManager.html">android.os.PowerManager</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Get-Current-Caret-Position-in-JTextField-Example.html">Get Current Caret Position in JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-java-int-to-Integer-object-Example.html">Convert java int to Integer object Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-replace-a-value-for-the-given-key-in-the-TreeMap-(TreeMap-replace-method).html">How to replace a value for the given key in the TreeMap (TreeMap replace method)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.apache.log4j.AppenderSkeleton.html">org.apache.log4j.AppenderSkeleton</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Remove-range-of-elements-from-LinkedList-Java-example.html">Remove range of elements from LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-add-an-element-at-the-beginning-(at-the-front).html">Java LinkedList add an element at the beginning (at the front)</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

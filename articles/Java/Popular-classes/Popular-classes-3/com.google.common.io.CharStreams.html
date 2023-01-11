@@ -1,0 +1,389 @@
+<!doctype html>
+<html> 
+ <head> 
+  <title>jvmExamples.com - com.google.common.io.CharStreams</title> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script type="text/javascript" src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="com.google.common.io.CharStreams"> 
+  <meta name="keywords" content="com.google.common.io.CharStreams"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - com.google.common.io.CharStreams"> 
+  <meta property="og:description" content="com.google.common.io.CharStreams"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - com.google.common.io.CharStreams"> 
+  <meta name="twitter:description" content="com.google.common.io.CharStreams"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2022-05-25</small>
+        </div> 
+        <h1>Introduction to com.google.common.io.CharStreams in Java</h1> The <strong>com.google.common.io.CharStreams</strong> Java class is part of the Google Guava library and provides a large number of utility methods for working with character streams. This includes methods for reading and writing local files, network files, as well as standard input and output streams. The utility methods are grouped into several categories: 
+        <ul> 
+         <li><strong>Read operations</strong>, which provide access to an array, list, reader, or stream of characters; </li> 
+         <li><strong>Write operations</strong>, which output the characters to an array, list, writer, or stream; and </li> 
+         <li><strong>Copy operations</strong>, which provide a single call to copy one set of characters to another. </li> 
+        </ul> In this article, we will look at some examples of how to use the utility methods provided by CharStreams to read and write character streams. 
+        <h2>Reading Characters from a Source</h2> The CharStreams class provides several methods for reading characters from a source. For example, the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+readLines(InputStream, Charset)
+
+          </xmp></code></pre> method can be used to read characters from an 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+InputStream
+
+          </xmp></code></pre> object and return it as a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+List<String>
+
+          </xmp></code></pre> object. The following example shows how to read a file from a local file system: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+List<String> lines = CharStreams.readLines(
+        new FileInputStream("file.txt"), Charset.defaultCharset());
+
+          </xmp></code></pre> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+readLines()
+
+          </xmp></code></pre> method also has an overloaded version that takes a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Reader
+
+          </xmp></code></pre> object as its first parameter instead of an 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+InputStream
+
+          </xmp></code></pre>. The following example shows how to read from a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+StringReader
+
+          </xmp></code></pre>: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+List<String> lines = CharStreams.readLines(
+        new StringReader("Hello World!"), Charset.defaultCharset());
+
+          </xmp></code></pre> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+readFirstLine(InputStream, Charset)
+
+          </xmp></code></pre> method can be used to read only the first line from a source and return it as a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String
+
+          </xmp></code></pre> object. The following example shows how to use this method to read the first line from a file: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String firstLine = CharStreams.readFirstLine(
+        new FileInputStream("file.txt"), Charset.defaultCharset());
+
+          </xmp></code></pre> Another useful reading method is 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+readLinesAndClose(InputSupplier<Reader>, Charset)
+
+          </xmp></code></pre>, which allows you to read from a source and automatically close the source after reading. The following example shows how to read from a file and automatically close it after reading: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+List<String> lines = CharStreams.readLinesAndClose(
+        Files.newReaderSupplier(new File("file.txt"), Charset.defaultCharset());
+
+          </xmp></code></pre> Finally, the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+skipFully(Reader, long)
+
+          </xmp></code></pre> method can be used to skip a given number of characters from a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Reader
+
+          </xmp></code></pre> object. The following example shows how to skip 10 characters from a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+StringReader
+
+          </xmp></code></pre>: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+long skipped = CharStreams.skipFully(new StringReader("Hello World!"), 10);
+
+          </xmp></code></pre> 
+        <h2>Writing Characters to a Destination</h2> The CharStreams class provides several methods for writing characters to a destination. For example, the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+writeLines(Writer, Iterable, String)
+
+          </xmp></code></pre> method can be used to write a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+List<String>
+
+          </xmp></code></pre> to a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Writer
+
+          </xmp></code></pre> object. The following example shows how to write to a local file: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FileWriter fileWriter = new FileWriter("file.txt");
+CharStreams.writeLines(fileWriter, lines, "\n");
+fileWriter.close();
+
+          </xmp></code></pre> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+writeLinesAndClose(OutputSupplier<Writer>, Iterable, String)
+
+          </xmp></code></pre> method can be used to write to a destination and automatically close the destination after writing. The following example shows how to write to a file and automatically close it after writing: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+CharStreams.writeLinesAndClose(
+        Files.newWriterSupplier(new File("file.txt"), Charset.defaultCharset()),
+        lines, "\n");
+
+          </xmp></code></pre> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+write(Writer, String)
+
+          </xmp></code></pre> method can be used to write a single string to a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Writer
+
+          </xmp></code></pre>. The following example shows how to write "Hello World!" to a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FileWriter
+
+          </xmp></code></pre> object: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FileWriter fileWriter = new FileWriter("file.txt");
+CharStreams.write(fileWriter, "Hello World!");
+fileWriter.close();
+
+          </xmp></code></pre> Finally, the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+copy(Reader, Writer)
+
+          </xmp></code></pre> method can be used to copy all characters from one 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Reader
+
+          </xmp></code></pre> object to another 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Writer
+
+          </xmp></code></pre> object. The following example shows how to copy from a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+StringReader
+
+          </xmp></code></pre> to a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FileWriter
+
+          </xmp></code></pre>: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FileWriter fileWriter = new FileWriter("file.txt");
+CharStreams.copy(new StringReader("Hello World!"), fileWriter);
+fileWriter.close();
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> The CharStreams class in the Google Guava library provides a number of utility methods for reading and writing character streams. The utility methods are grouped into several categories: read operations, write operations, and copy operations. In this article, we looked at several examples of using these utility methods to read and write characters from and to local files, network files, and standard input and output streams. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Get-elements-from-Java-LinkedList.html">Get elements from Java LinkedList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-String-array-using-Arrays-class.html">Sort String array using Arrays class</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Create-Number-counter-in-an-Applet-using-Thread-Example.html">Create Number counter in an Applet using Thread Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.http.message.BasicHttpResponse.html">o.a.h.m.BasicHttpResponse</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/"> Short Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Java-Short-Example.html">Java Short Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Smiley-In-Applet-Example.html">Draw Smiley In Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.web.context.request.RequestAttributes.html">o.s.w.c.r.RequestAttributes</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.lang.reflect.Field.html">java.lang.reflect.Field</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Set-from-Java-TreeSet-example.html">Get Synchronized Set from Java TreeSet example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-keys-using-Comparator-interface.html">Sort LinkedHashMap by keys using Comparator interface</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-27 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.springframework.boot.web.servlet.support.SpringBootServletInitializer.html">SpringBootServletInitializer</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Display-Image-in-an-Applet-Example.html">Display Image in an Applet Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-String-to-character-array,-character-array-to-String.html">Convert String to character array, character array to String</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-short-Arrays-Example.html">Compare Two Java short Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.eclipse.jgit.api.errors.GitAPIException.html">o.e.j.a.e.GitAPIException</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/FileOutputStream/Copy-binary-file-using-Streams.html">Copy binary file using Streams</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Enumeration-over-Java-HashSet-Example.html">Get Enumeration over Java HashSet Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-check-if-file-exists-in-Java.html">How to check if file exists in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.widget.AdapterView.OnItemSelectedListener.html">a.w.A.OnItemSelectedListener</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/System/Determine-operating-system-using-System-class.html">Determine operating system using System class</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-remove-the-last-element.html">Java LinkedList remove the last element</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-maxmimum-element-of-Java-HashSet-Example.html">Find maxmimum element of Java HashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-Minimum-element-of-Java-Vector-Example.html">Find Minimum element of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Circle-Area-using-Java-Example.html">Calculate Circle Area using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Threads/Set-Thread-Name-Example.html">Set Thread Name Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Determine-if-a-file-can-be-written.html">Determine if a file can be written</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/android.content.pm.ShortcutInfo.html">android.content.pm.ShortcutInfo</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Java-String-to-byte-Array-Example.html">Java String to byte Array Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/javafx.scene.layout.Background.html">javafx.scene.layout.Background</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-ceiling-value-of-a-number-using-Math.ceil.html">F.ceil</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

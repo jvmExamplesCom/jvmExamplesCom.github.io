@@ -1,0 +1,250 @@
+<!doctype html>
+<html> 
+ <head> 
+  <title>jvmExamples.com - com.google.common.util.concurrent.MoreExecutors</title> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script type="text/javascript" src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="com.google.common.util.concurrent.MoreExecutors"> 
+  <meta name="keywords" content="com.google.common.util.concurrent.MoreExecutors"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - com.google.common.util.concurrent.MoreExecutors"> 
+  <meta property="og:description" content="com.google.common.util.concurrent.MoreExecutors"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - com.google.common.util.concurrent.MoreExecutors"> 
+  <meta name="twitter:description" content="com.google.common.util.concurrent.MoreExecutors"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2022-06-13</small>
+        </div> 
+        <h1>com.google.common.util.concurrent.MoreExecutors</h1> 
+        <div>
+          Java provides an easy way for concurrent programming with a collection of synchronized classes, called ExecutorServices. The <b>com.google.common.util.concurrent.MoreExecutors</b> class provides additional useful features to Java ExecutorServices, such as being able to understand the order in which tasks in a queue should be executed. With it, we can combine multiple task queues into one queue, and reorder the tasks so that they run faster. 
+        </div> 
+        <div>
+          The class is divided into various methods that allow us to use different approaches to perform computation. Let's take a look at them one by one. 
+        </div> 
+        <h2>createSameThreadExecutorService()</h2> 
+        <div>
+          This method returns an instance of <b>SameThreadExecutorService</b>. An instance of this class will run the tasks added to its queue in the same thread, ensuring they are executed sequentially. This is a useful approach when we want to divide a complex task into smaller pieces and execute them one after another. 
+        </div> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ExecutorService executor = MoreExecutors.createSameThreadExecutorService();
+executor.execute(task1);
+executor.execute(task2);
+executor.execute(task3);
+// task1, task2 and task3 will be executed sequentially
+
+          </xmp></code></pre> 
+        <h2>createSerialExecutorService()</h2> 
+        <div>
+          This method returns a serial executor service based on a <b>ForkJoinPool</b>. This pool will be constructed with the threads available on the system. It implements the <i>work-stealing algorithm</i>, so if two tasks are running simultaneously, one can borrow a thread from the other to finish its execution in a faster manner. 
+        </div> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ExecutorService executor = MoreExecutors.createSerialExecutorService();
+executor.execute(task1);
+executor.execute(task2);
+executor.execute(task3);
+// task1, task2 and task3 will be executed sequentially, but
+// if one of the tasks takes more time than the others, the 
+// other tasks will be able to "steal" threads from the slower 
+// one to finish in a faster manner
+
+          </xmp></code></pre> 
+        <h2>createConcurrentExecutorService() </h2> 
+        <div>
+          This method returns an instance of <b>ConcurrentExecutorService</b>, which is the same as the ForkJoinPool but runs the tasks in parallel. This type of executor service is useful when the tasks submitted to it do not depend on each other and can be run independently. 
+        </div> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ExecutorService executor = MoreExecutors.createConcurrentExecutorService();
+executor.execute(task1);
+executor.execute(task2);
+executor.execute(task3);
+// task1, task2 and task3 will be executed in parallel
+
+          </xmp></code></pre> 
+        <h2>createOrderedExecutorService() </h2> 
+        <div>
+          This method returns an instance of <b>OrderedExecutorService</b>, which is a combination of the same-thread and concurrent executor services. This combination allows us to have tasks that depend on each other running in order and tasks that can be performed in parallel. 
+        </div> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ExecutorService executor = MoreExecutors.createOrderedExecutorService();
+executor.execute(task1);
+executor.execute(task2);
+executor.execute(task3);
+// task1, task2 and task3 will be executed in the specified order, 
+// with task2 and task3 running in parallel
+
+          </xmp></code></pre> 
+        <h2>createCustomExecutorService() </h2> 
+        <div>
+          The last method offered by the MoreExecutors class is the <b>createCustomExecutorService</b> method. This method allows us to create an ExecutorService that is configured according to our needs. For example, we can specify the number of threads to be used in the pool, the size of the queue, or the scheduling policy for tasks. 
+        </div> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ExecutorService executor = MoreExecutors.createCustomExecutorService(4, 10,
+    new ThreadFactoryBuilder().setNameFormat("MyThread-%d").build(),
+    new RejectedExecutionHandler() { 
+        public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) { 
+            // Handle rejected execution here
+        } 
+    });
+
+          </xmp></code></pre> 
+        <div>
+          With all these methods, the MoreExecutors class provides several possibilities for configuring our ExecutorService to run our tasks in the most efficient way. 
+        </div> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/"> Searching </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-long-Array-Example.html">Performing Binary Search on Java long Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-sort-Java-HashSet-elements.html">How to sort Java HashSet elements</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Insert-an-Element-into-LinkedList-Java-example.html">Insert an Element into LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/"> Float Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Convert-Java-Float-Object-to-String-Object-Example.html">Convert Java Float Object to String Object Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Iterate-through-elements-of-Java-LinkedList-using-Iterator-example.html">Iterate through elements of Java LinkedList using Iterator example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/androidx.annotation.ColorRes.html">androidx.annotation.ColorRes</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-All-Elements-Of-Java-Vector-Example.html">Replace All Elements Of Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.awt.geom.AffineTransform.html">java.awt.geom.AffineTransform</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.aspectj.lang.ProceedingJoinPoint.html">org.aspectj.lang.ProceedingJoinPoint</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-all-keys-from-the-TreeMap.html">How to get all keys from the TreeMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-11 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Copy-all-elements-of-Java-ArrayList-to-an-Object-Array-Example.html">Copy all elements of Java ArrayList to an Object Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-short-Arrays-Example.html">Compare Two Java short Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-create-new-HashSet-objects-using-HashSet-constructor.html">How to create new HashSet objects using HashSet constructor</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-an-element-to-specified-index-of-Java-ArrayList-Example.html">Add an element to specified index of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Remove-specified-element-from-Java-HashSet-example.html">Remove specified element from Java HashSet example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-create-LinkedHashMap-in-Java-(LinkedHashMap-constructors).html">How to create LinkedHashMap in Java (LinkedHashMap constructors)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.elasticsearch.search.SearchHits.html">org.elasticsearch.search.SearchHits</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.function.Supplier.html">java.util.function.Supplier</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/List-Odd-Numbers-Java-Example.html">List Odd Numbers Java Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/android.bluetooth.BluetoothGattCallback.html">a.b.BluetoothGattCallback</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.database.Cursor.html">android.database.Cursor</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-convert-Vector-to-an-array.html">How to convert Vector to an array</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-convert-Vector-to-ArrayList-and-ArrayList-to-Vector-in-Java.html">How to convert Vector to ArrayList and ArrayList to Vector in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Java-Convert-TreeSet-to-array.html">Java Convert TreeSet to array</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Vector-to-an-array.html">Convert Vector to an array</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Initialize-ArrayList.html">Initialize ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/com.netflix.zuul.ZuulFilter.html">com.netflix.zuul.ZuulFilter</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.fasterxml.jackson.annotation.JsonGetter.html">c.f.j.a.JsonGetter</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Iterate-List-in-reverse-order.html">Iterate List in reverse order</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-TreeMap-key,-value-or-entry-greater-than-or-less-than-the-specified-key.html">How to get TreeMap key, value or entry greater than or less than the specified key</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

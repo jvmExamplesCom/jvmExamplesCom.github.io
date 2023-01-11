@@ -1,0 +1,257 @@
+<!doctype html>
+<html> 
+ <head> 
+  <title>jvmExamples.com - io.reactivex.Observer</title> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script type="text/javascript" src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.reactivex.Observer"> 
+  <meta name="keywords" content="io.reactivex.Observer"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.reactivex.Observer"> 
+  <meta property="og:description" content="io.reactivex.Observer"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.reactivex.Observer"> 
+  <meta name="twitter:description" content="io.reactivex.Observer"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2022-11-25</small>
+        </div> 
+        <h1> Introduction to io.reactivex.Observer </h1> The io.reactivex.Observer interface is a core component of the ReactiveX library. It is a reactive stream of data or events used to compose asynchronous and event-based programs by using observable sequences. The Observer interface provides a powerful set of methods to manage the flow of data between the components of a composite program. The Observer interface is the base class for implementing an observer pattern. It defines an observer that can subscribe to an object called Observable which sends out notifications when its internal state has changed. The Observer will be notified of these changes and can do something with them as needed. 
+        <h2>Why Use io.reactivex.Observer </h2> The Observer interface allows developers to create robust, composible applications by providing a framework for efficiently managing data and events within a program. This provides a great amount of flexibility when dealing with complex data flows in an asynchronous and event-driven environment. Additionally, the Observer pattern allows developers to create maintainable code by providing the flexibility to create a multitude of observers that can be combined together to provide unique functionality. 
+        <h2> How to Use io.reactivex.Observer </h2> Leveraging io.reactivex.Observer to implement the Observer pattern is relatively easy. Start by creating an instance of the io.reactivex.Observer interface and implementing the onNext(), onError(), and onComplete() methods: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+io.reactivex.Observer observer = new io.reactivex.Observer() {
+    @Override
+    public void onNext(Object item) {
+        // do something with item
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        // handle error
+    }
+
+    @Override
+    public void onComplete() {
+        // do something when complete
+    }
+};
+
+          </xmp></code></pre> Once the observer is created, it can be subscribed to an Observable instance: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+io.reactivex.Observable observable = 
+    io.reactivex.Observable.create(observer -> {
+        // do something with observer
+    });
+
+observable.subscribe(observer);
+
+          </xmp></code></pre> When the Observable instance emits data or events, the observer's onNext(), onError(), and onComplete() methods will be called depending on the state of the Observable. 
+        <h2>Examples of io.reactivex.Observer </h2> The following examples illustrate some common use cases of io.reactivex.Observer in action. Example 1: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+io.reactivex.Observable<string> observable = 
+    io.reactivex.Observable.just("Hello World");
+
+observable.subscribe(data -> {
+    System.out.println(data);
+});
+</string>
+
+          </xmp></code></pre> In this example, the observable emits the string “Hello World”. When the observer subscribes to the observable, it will print the string “Hello World” to the console. Example 2: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+io.reactivex.Observable<integer> observable = 
+    io.reactivex.Observable.range(1, 10);
+
+observable.subscribe(data -> {
+    System.out.println(data);
+});
+</integer>
+
+          </xmp></code></pre> In this example, the observable emits a sequence of integers from 1 to 10. When the observer subscribes to the observable, it will print the numbers from 1 to 10 to the console. Example 3: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+io.reactivex.Observable<integer> observable = 
+    io.reactivex.Observable.range(1, 10);
+
+observable.subscribe(
+    data -> {
+        System.out.println(data);
+    }, 
+    error -> {
+        System.out.println(error);
+    },
+    () -> {
+        System.out.println("Complete!");
+    }
+);
+</integer>
+
+          </xmp></code></pre> In this example, the observable emits a sequence of integers from 1 to 10. When the observer subscribes to the observable, it will print the numbers from 1 to 10 to the console, and also print “Complete!” when the sequence has been exhausted. 
+        <h2>Conclusion</h2> io.reactivex.Observer is a powerful tool for composing asynchronous and event-driven applications. It provides developers with a way to efficiently manage data and events within a program, while providing the flexibility to create a multitude of observers that can be combined together to produce unique results. With the help of the Observer interface, developers can create reliable, maintainable code that can easily be reused. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-array-to-ArrayList.html">Convert array to ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JTextField/"> JTextField </a> </p> <a href="/articles/Java/Swing/JTextField/Change-Font-of-JTextField-Example.html">Change Font of JTextField Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-lowest-and-highest-key-stored-in-Java-TreeMap-example.html">Get lowest and highest key stored in Java TreeMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/"> ListIterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-LinkedHashMap-using-an-Iterator.html">How to iterate LinkedHashMap using an Iterator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/"> AWT Label </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Change-Background-Color-Of-Label-Example.html">Change Background Color Of Label Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.xml.bind.annotation.XmlTransient.html">j.x.b.a.XmlTransient</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.maven.plugins.annotations.ResolutionScope.html">o.a.m.p.a.ResolutionScope</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-new-empty-file.html">Create new empty file</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/Java-String-to-java.sql.Date-Example.html">Java String to java.sql.Date Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/"> Convertion </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-double-to-String.html">Convert double to String</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-14 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Gabriel</h3> <p><a href="#">2023-01-17 15:00</a></p> it was very helpful <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Nahish</h3> <p><a href="#">2023-01-02 11:08</a></p> Thank you guys for your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Rounded-Corner-Rectangle-&-Square-in-Applet-Window-Example.html">Draw Rounded Corner Rectangle & Square in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.io.PrintStream.html">java.io.PrintStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-to-String-array-using-Arrays.html">Convert String to String array using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.cloud.openfeign.EnableFeignClients.html">o.s.c.o.EnableFeignClients</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-copy-HashSet-or-append-HashSet-to-another-HashSet.html">How to copy HashSet or append HashSet to another HashSet</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-fix-java.io.FileNotFoundException-(access-is-denied).html">FileNotFoundException (access is denied)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Array-to-LinkedList.html">Convert Array to LinkedList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/java.awt.event.ComponentAdapter.html">java.awt.event.ComponentAdapter</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-new-empty-file.html">Create new empty file</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/System/Get-file-separator-using-System-class.html">Get file separator using System class</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/java.util.Currency.html">java.util.Currency</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Shuffle-elements-of-Java-ArrayList-example.html">Shuffle elements of Java ArrayList example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-get-the-size-of-the-LinkedHashSet-in-Java.html">How to get the size of the LinkedHashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-remove-duplicate-elements.html">Java LinkedList remove duplicate elements</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-binary-number-to-decimal-number-example.html">Convert binary number to decimal number example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Iterate-through-elements-Java-ArrayList-using-Iterator-Example.html">Iterate through elements Java ArrayList using Iterator Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.apache.http.NameValuePair.html">org.apache.http.NameValuePair</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.text.SpannableStringBuilder.html">android.text.SpannableStringBuilder</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/How-to-sort-LinkedList-in-Java-example.html">How to sort LinkedList in Java example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Item-From-Single-Select-AWT-List-Example.html">Get Selected Item From Single Select AWT List Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

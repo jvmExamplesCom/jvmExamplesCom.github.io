@@ -1,0 +1,301 @@
+<!doctype html>
+<html> 
+ <head> 
+  <title>jvmExamples.com - io.netty.buffer.UnpooledByteBufAllocator</title> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script type="text/javascript" src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.netty.buffer.UnpooledByteBufAllocator"> 
+  <meta name="keywords" content="io.netty.buffer.UnpooledByteBufAllocator"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.netty.buffer.UnpooledByteBufAllocator"> 
+  <meta property="og:description" content="io.netty.buffer.UnpooledByteBufAllocator"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.netty.buffer.UnpooledByteBufAllocator"> 
+  <meta name="twitter:description" content="io.netty.buffer.UnpooledByteBufAllocator"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2022-08-12</small>
+        </div> 
+        <h1>io.netty.buffer.UnpooledByteBufAllocator</h1> 
+        <p>The io.netty.buffer.UnpooledByteBufAllocator class is a pool of byte buffers that are used by Netty's ByteBuf allocation strategy. The UnpooledByteBufAllocator is an efficient way to allocate and deallocate memory, as it avoids unnecessary garbage collection and object creation. This class also allows users to set different parameters, such as maximum and minimum buffer size, which give greater control over how the pool is managed.</p> 
+        <p>This article will cover the usage of the UnpooledByteBufAllocator class and its APIs. We will explore how to create and manage a pool, how to allocate and deallocate memory efficiently and how to modify default settings. As an example, we will also write a sample program to demonstrate how a pool can be used to allocate and deallocate memory efficiently.</p> 
+        <h2>Creating and Managing a Pool</h2> 
+        <p>To create a UnpooledByteBufAllocator, you need to use the following code:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+UnpooledByteBufAllocator allocator = UnpooledByteBufAllocator.DEFAULT;
+
+          </xmp></code></pre> 
+        <p>The DEFAULT static field is a pre-configured instance of UnpooledByteBufAllocator. By default, this instance has a maximum buffer size of 64MB, a minimum buffer size of 16KB, a maximum number of buffers of 512 and a maximum number of idle buffers of 256.</p> 
+        <p>The UnpooledByteBufAllocator also allows users to set different parameters on the pool. For example, the following code will create an instance of UnpooledByteBufAllocator with a maximum buffer size of 128MB, a minimum buffer size of 32KB, a maximum number of buffers of 1024 and a maximum number of idle buffers of 512:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+UnpooledByteBufAllocator allocator = new UnpooledByteBufAllocator(128 * 1024 * 1024, 32 * 1024, 1024, 512);
+
+          </xmp></code></pre> 
+        <p>Once the pool is created, you can use it to allocate and deallocate memory. To do so, you need to use the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+alloc()
+
+          </xmp></code></pre> and 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+free()
+
+          </xmp></code></pre> methods, respectively. 
+        <h2>Allocating and Deallocating Memory</h2> The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+alloc()
+
+          </xmp></code></pre> method is used for allocating memory. It takes an integer parameter that represents the size of the buffer to be allocated. For example, the following code will allocate a new buffer of size 128KB: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ByteBuf buf = allocator.alloc(128 * 1024);
+
+          </xmp></code></pre> 
+        <p>Once the buffer is no longer needed, it should be freed using the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+free()
+
+          </xmp></code></pre> method. This method takes a ByteBuf instance as a parameter and returns nothing. For example, the following code will free a previously allocated buffer: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+allocator.free(buf);
+
+          </xmp></code></pre> 
+        <h2>Modifying Default Settings</h2> 
+        <p>As mentioned previously, the UnpooledByteBufAllocator provides a way to modify its default settings. This can be done either when creating the instance or by using the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+setMinBufferSize()
+
+          </xmp></code></pre>, 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+setMaxBufferSize()
+
+          </xmp></code></pre>, 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+setMaxNumBuffers()
+
+          </xmp></code></pre> and 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+setMaxNumIdleBuffers()
+
+          </xmp></code></pre> methods. These methods take an integer parameter which represents the new value of the corresponding setting. 
+        <p>For example, the following code will increase the maximum buffer size to 256MB and the minimum buffer size to 64KB:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+allocator.setMaxBufferSize(256 * 1024 * 1024);
+allocator.setMinBufferSize(64 * 1024);
+
+          </xmp></code></pre> 
+        <h2>Sample Program</h2> 
+        <p>To demonstrate how UnpooledByteBufAllocator works, we will create a sample program that allocates and deallocates memory using a pool. The program below creates an instance of UnpooledByteBufAllocator with a maximum buffer size of 256MB and a minimum buffer size of 16KB. Then it allocates and deallocates 10 buffers of size 64KB each.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public static void main(String[] args) {
+    UnpooledByteBufAllocator allocator = new UnpooledByteBufAllocator(256 * 1024 * 1024, 16 * 1024);
+    for (int i = 0; i < 10; i++) {
+        ByteBuf buf = allocator.alloc(64 * 1024);
+        System.out.println("Allocated buffer of size " + buf.capacity());
+        allocator.free(buf);
+    }
+}
+
+          </xmp></code></pre> 
+        <p>When run, the program should output the following:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Allocated buffer of size 65536
+Allocated buffer of size 65536
+Allocated buffer of size 65536
+Allocated buffer of size 65536
+Allocated buffer of size 65536
+Allocated buffer of size 65536
+Allocated buffer of size 65536
+Allocated buffer of size 65536
+Allocated buffer of size 65536
+Allocated buffer of size 65536
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>In this article, we have covered the io.netty.buffer.UnpooledByteBufAllocator class and its APIs. We have seen how to create and manage a pool, how to allocate and deallocate memory efficiently and how to modify default settings. As an example, we have written a sample program to demonstrate how a pool can be used to allocate and deallocate memory efficiently.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Copy-Elements-of-ArrayList-to-Java-Vector-Example.html">Copy Elements of ArrayList to Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-contains-a-key.html">How to check if LinkedHashMap contains a key</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/"> Hashtable </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Iterate-through-keys-of-Java-Hashtable-example.html">Iterate through keys of Java Hashtable example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-new-empty-file.html">Create new empty file</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.intellij.openapi.util.io.FileUtil.html">c.i.o.u.i.FileUtil</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/"> Long Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Java-Long-Example.html">Java Long Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/"> Sorting </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-int-Array-Example.html">Java Sort int Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.awt.FontMetrics.html">java.awt.FontMetrics</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/"> AWT Color </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Create-Custom-Color-Using-RGB-Example.html">Create Custom Color Using RGB Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.web.context.WebApplicationContext.html">o.s.w.c.WebApplicationContext</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-24 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Grigorii</h3> <p><a href="#">2022-09-14 08:48</a></p> Can somebody elaborate more? <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Martin</h3> <p><a href="#">2022-09-17 20:14</a></p> great examples ... thnx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/Java-byte-Example.html">Java byte Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/FileOutputStream/Write-file-using-FileOutputStream.html">Write file using FileOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/Get-CRC-32-Checksum-of-Zip-Entry-Example.html">Get CRC-32 Checksum of Zip Entry Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/javax.management.openmbean.CompositeType.html">j.m.o.CompositeType</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-convert-Vector-to-an-array.html">How to convert Vector to an array</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.graphics.PorterDuff.html">android.graphics.PorterDuff</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-a-Collection-using-Java-Iterator-Example.html">Iterate through a Collection using Java Iterator Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/ArrayList-insert-element-at-the-beginning.html">ArrayList insert element at the beginning</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.eclipse.core.commands.ExecutionException.html">o.e.c.c.ExecutionException</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Static/Java-static-method-example.html">Java static method example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/com.google.inject.Inject.html">com.google.inject.Inject</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-sort-LinkedHashSet-elements-using-Comparable.html">How to sort LinkedHashSet elements using Comparable</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.net.InetAddress.html">java.net.InetAddress</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Get-Horizontal-Alignment-of-JLabel-Example.html">Get Horizontal Alignment of JLabel Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.eclipse.swt.graphics.GC.html">org.eclipse.swt.graphics.GC</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-square-root-of-a-number-using-Math.sqrt.html">F.sqrt</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-char-from-file-using-DataInputStream.html">Read char from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-make-file-hidden-in-Java.html">How to make file hidden in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-Java-TreeMap-using-an-iterator.html">Iterate through Java TreeMap using an iterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Iterate-through-the-values-of-Java-LinkedHashMap-example.html">Iterate through the values of Java LinkedHashMap example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

@@ -1,0 +1,289 @@
+<!doctype html>
+<html> 
+ <head> 
+  <title>jvmExamples.com - javax.swing.BoxLayout</title> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script type="text/javascript" src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.swing.BoxLayout"> 
+  <meta name="keywords" content="javax.swing.BoxLayout"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.swing.BoxLayout"> 
+  <meta property="og:description" content="javax.swing.BoxLayout"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.swing.BoxLayout"> 
+  <meta name="twitter:description" content="javax.swing.BoxLayout"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2022-10-31</small>
+        </div> 
+        <h1>javax.swing.BoxLayout</h1> 
+        <p>Java Swing's BoxLayout is a powerful tool to use when creating user interfaces. It allows for an easy way to layout components, by putting them in boxes, with the components all lined up one after another in the same direction. The components can be nested and aligned, making it simple to create complex user interfaces. This article will explain how to use BoxLayout and provide code examples.</p> 
+        <h2>Constructors</h2> 
+        BoxLayout has two constructors available: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public BoxLayout(Container target, int axis) 
+
+public BoxLayout(Container target, int axis, int gap)
+
+          </xmp></code></pre> 
+        The first argument,
+        <pre>target</pre>, is the 
+        <pre>Container</pre> that the BoxLayout will be applied to. The second argument, 
+        <pre>axis</pre>, is an integer constant that specifies in which direction the components will be laid out. The constants are:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+BoxLayout.X_AXIS - Components are laid out horizontally
+BoxLayout.Y_AXIS - Components are laid out vertically
+
+          </xmp></code></pre> 
+        The third argument,
+        <pre>gap</pre>, is an integer that specifies the size of the gap in pixels between each component. This argument is optional and can be omitted if no gap is wanted.
+         
+        <h2>Adding Components</h2> 
+        Components can be added to the
+        <pre>Container</pre> either directly or through the 
+        <pre>BoxLayout</pre> instance. To add components directly to the 
+        <pre>Container</pre>, simply use the 
+        <pre>add(Component)</pre> method. For example:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JFrame frame = new JFrame("My Frame");
+frame.setLayout(new BoxLayout(frame, BoxLayout.X_AXIS));
+frame.add(new JLabel("Label 1"));
+frame.add(new JButton("Button 1"));
+frame.add(new JTextField("Text Field 1"));
+
+          </xmp></code></pre> 
+        To add components through the
+        <pre>BoxLayout</pre> instance, use the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+addLayoutComponent(Component, Object)
+
+          </xmp></code></pre> method. The first argument is the 
+        <pre>Component</pre> to be added, and the second argument is a 
+        <pre>String</pre>, which specifies where in the layout the 
+        <pre>Component</pre> should be added. The possible values are:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+BoxLayout.LINE_START - Adds the Component to the beginning of the line
+BoxLayout.LINE_END - Adds the Component to the end of the line
+BoxLayout.PAGE_START - Adds the Component to the beginning of the page
+BoxLayout.PAGE_END - Adds the Component to the end of the page
+BoxLayout.CENTER - Adds the Component to the center of the layout
+
+          </xmp></code></pre> For example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JFrame frame = new JFrame("My Frame");
+BoxLayout layout = new BoxLayout(frame, BoxLayout.X_AXIS);
+layout.addLayoutComponent(new JLabel("Label 1"), BoxLayout.LINE_START);
+layout.addLayoutComponent(new JButton("Button 1"), BoxLayout.LINE_END);
+layout.addLayoutComponent(new JTextField("Text Field 1"), BoxLayout.PAGE_END);
+frame.setLayout(layout);
+
+          </xmp></code></pre> 
+        <h2>Examples</h2> 
+        <p>Now that we have seen how to construct and add components to a </p>
+        <pre>BoxLayout</pre>, let's look at a few examples of how this can be used. Here is an example of how to create a simple user interface with two columns and two rows:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JFrame frame = new JFrame("My Frame"); 
+frame.setLayout(new BoxLayout(frame, BoxLayout.X_AXIS)); 
+frame.add(new JLabel("Label 1")); 
+frame.add(new JButton("Button 1")); 
+frame.add(Box.createHorizontalStrut(20)); // Add a 20 pixel gap 
+frame.add(new JLabel("Label 2")); 
+frame.add(new JButton("Button 2"));
+
+          </xmp></code></pre> 
+        <p>The above code will create the following user interface:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Label 1 Button 1
+Label 2 Button 2
+
+          </xmp></code></pre> 
+        <p>Here is another example of how to create a more complex user interface with three columns and two rows:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JFrame frame = new JFrame("My Frame"); 
+frame.setLayout(new BoxLayout(frame, BoxLayout.X_AXIS)); 
+frame.add(new JLabel("Label 1")); 
+frame.add(Box.createHorizontalGlue()); // Fills the remaining space 
+frame.add(new JTextField("Text Field 1")); 
+frame.add(Box.createHorizontalStrut(20)); // Add a 20 pixel gap 
+frame.add(new JLabel("Label 2")); 
+frame.add(Box.createHorizontalGlue()); // Fills the remaining space 
+frame.add(new JButton("Button 1"));
+
+          </xmp></code></pre> 
+        <p>The above code will create the following user interface:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Label 1       Text Field 1  Label 2       Button 1
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>As you can see, there are many uses for Java Swing's BoxLayout, and it makes creating user interfaces a breeze. Hopefully this article has provided enough information to get you started using BoxLayout.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/List/"> List </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/List/Iterate-List-in-reverse-order.html">Iterate List in reverse order</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.widget.TimePicker.html">android.widget.TimePicker</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/"> Convertion </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-float-to-String.html">Convert float to String</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Set-Vertical-Alignment-of-JLabel-Example.html">Set Vertical Alignment of JLabel Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-the-last-element-from-ArrayList.html">Remove the last element from ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sorting-custom-objects-using-Comparator.html">Sorting custom objects using Comparator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/"> AWT Color </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Colored-Hello-World-Applet-Example.html">Colored Hello World Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/com.fasterxml.jackson.databind.annotation.JsonDeserialize.html">c.f.j.d.a.JsonDeserialize</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-All-Elements-Of-Java-Vector-Example.html">Replace All Elements Of Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.util.EventListener.html">java.util.EventListener</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-16 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/androidx.drawerlayout.widget.DrawerLayout.html">a.d.w.DrawerLayout</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.stream.Stream.html">java.util.stream.Stream</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Remove-All-Items-From-a-List-Example.html">Remove All Items From a List Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-all-elements-of-an-array-to-ArrayList-using-Arrays.html">Add all elements of an array to ArrayList using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/JTextField-Show-Hide-Example.html">JTextField Show Hide Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-iterate-TreeMap-in-Java.html">How to iterate TreeMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-over-Vector-elements-using-ListIterator.html">Iterate over Vector elements using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-sort-HashSet-elements-using-Comparator.html">How to sort HashSet elements using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-remove-the-last-element.html">Java LinkedList remove the last element</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.beans.IntrospectionException.html">java.beans.IntrospectionException</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/List-contents-of-a-directory.html">List contents of a directory</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-headset,-tailset,-and-subset-from-the-Java-TreeSet.html">How to get headset, tailset, and subset from the Java TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Enumeration-over-Java-HashSet-Example.html">Get Enumeration over Java HashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Convert-RGB-To-HSB-Color-Example.html">Convert RGB To HSB Color Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-the-last-element-from-ArrayList.html">Remove the last element from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.ws.rs.PUT.html">javax.ws.rs.PUT</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-TreeSet-to-List-(ArrayList-or-LinkedList).html">How to convert TreeSet to List (ArrayList or LinkedList)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.media.MediaCodec.html">android.media.MediaCodec</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/javafx.stage.WindowEvent.html">javafx.stage.WindowEvent</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Create-DataOutputStream-from-FileOutputStream.html">Create DataOutputStream from FileOutputStream</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
