@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javax.persistence.Embedded</title> <!--timestamp=2023-01-19T00:12:47.789476369Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.persistence.Embedded"> 
+  <meta name="keywords" content="javax.persistence.Embedded"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.persistence.Embedded"> 
+  <meta property="og:description" content="javax.persistence.Embedded"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.persistence.Embedded"> 
+  <meta name="twitter:description" content="javax.persistence.Embedded"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-01-18</small>
+        </div> 
+        <h1>What is javax.persistence.Embedded?</h1> 
+        <p>javax.persistence.Embedded is an annotation in the Java Persistence API (JPA) that indicates that a particular field should be persisted as an embedded object in a database. Embedded objects are simply fields of a class which are serialized into the database as part of the containing entity, rather than having their own unique identity and table.</p> 
+        <h2>Examples of Embedded Annotation</h2> 
+        <p>The @Embedded annotation can be used to mark a field as an embedded object, like so:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@Entity
+public class Person {
+    ...
+
+    @Embedded
+    private Address address;
+
+    ...
+}
+
+          </xmp></code></pre> 
+        In this example, the
+        <pre>Person</pre> entity has an 
+        <pre>Address</pre> field which is annotated with the 
+        <pre>@Embedded</pre> annotation. This means that the 
+        <pre>Address</pre> object will be embedded within the 
+        <pre>Person</pre> entity when it is stored in the database.
+         
+        <h2>Mapping Embedded Objects</h2> 
+        <p>The fields of an embedded object can be mapped to the database using various annotations, such as the </p>
+        <pre>@Column</pre> annotation:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@Entity
+public class Address {
+
+    @Column(name = "street_address")
+    private String streetAddress;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "state")
+    private String state;
+
+    @Column(name = "zip")
+    private String zipCode;
+
+    ...
+
+}
+
+          </xmp></code></pre> 
+        In this example, each field in the
+        <pre>Address</pre> class is mapped to the database using the JPA 
+        <pre>@Column</pre> annotation. This means that the values of these fields will be stored in the database when the 
+        <pre>Person</pre> entity is persisted.
+         
+        <h2>Using Embedded Objects</h2> 
+        <p>Once an embedded object is mapped to the database, it can be used like any other entity. For example, you can query a database for all </p>
+        <pre>Person</pre> entities with a particular 
+        <pre>Address</pre>:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Query query = em.createQuery("SELECT p FROM Person p WHERE p.address.city = :city");
+query.setParameter("city", "New York");
+List<Person> results = query.getResultList();
+
+          </xmp></code></pre> 
+        In this example, the query is searching for all
+        <pre>Person</pre> entities with an 
+        <pre>Address</pre> field that has a 
+        <pre>city</pre> value of 
+        <pre>New York</pre>. The embedded object can also be updated, like so:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+person.getAddress().setCity("Los Angeles");
+em.merge(person);
+
+          </xmp></code></pre> 
+        In this example, the
+        <pre>city</pre> of the 
+        <pre>Address</pre> field of the 
+        <pre>Person</pre> entity is updated from 
+        <pre>New York</pre> to 
+        <pre>Los Angeles</pre>.
+         
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-clear-or-remove-all-elements-from-HashSet.html">How to clear or remove all elements from HashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Mark-file-or-directory-Read-Only.html">Mark file or directory Read Only</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Set-Vertical-Alignment-of-JLabel-Example.html">Set Vertical Alignment of JLabel Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/"> Sorting </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-char-Array-Example.html">Java Sort char Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Get-Size-of-Java-HashSet-Example.html">Get Size of Java HashSet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/java.util.concurrent.atomic.AtomicIntegerArray.html">j.u.c.a.AtomicIntegerArray</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.widget.AdapterView.html">android.widget.AdapterView</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Disable-Checkbox-Example.html">Disable Checkbox Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/How-to-invert-case-of-String.html">How to invert case of String</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-first-and-last-elements-from-ArrayList.html">Get first and last elements from ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-14 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-last-key,-last-value,-or-last-entry-from-the-Java-TreeMap.html">How to get last key, last value, or last entry from the Java TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Remove-all-values-from-Java-HashMap-example.html">Remove all values from Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipInputStream/Extract-First-File-From-Zip-File-Example.html">Extract First File From Zip File Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/freemarker.template.Configuration.html">freemarker.template.Configuration</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Check-if-a-particular-element-exists-in-Java-HashSet-Example.html">Check if a particular element exists in Java HashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-Minimum-element-of-Java-ArrayList-Example.html">Find Minimum element of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-double-Arrays-Example.html">Compare Two Java double Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Remove-an-element-from-ArrayList-using-Java-ListIterator-Example.html">Remove an element from ArrayList using Java ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.ibatis.plugin.Interceptor.html">org.apache.ibatis.plugin.Interceptor</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/StringBuffer/StringBuffer-Trim-Java-Example.html">StringBuffer Trim Java Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Remove-specified-element-from-Java-HashSet-example.html">Remove specified element from Java HashSet example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/android.view.FocusFinder.html">android.view.FocusFinder</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-all-keys-from-the-TreeMap.html">How to get all keys from the TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Convert-HashSet-to-array.html">Convert HashSet to array</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-double-from-file-using-DataInputStream.html">Read double from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/java.util.function.IntConsumer.html">java.util.function.IntConsumer</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Create-Number-counter-in-an-Applet-using-Thread-Example.html">Create Number counter in an Applet using Thread Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-check-if-HashSet-is-emtpy-(isEmpty-method).html">How to check if HashSet is emtpy (isEmpty method)</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Do-While-Loop/Do-While-loop-Example.html">Do While loop Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/android.arch.persistence.room.Database.html">a.a.p.r.Database</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
