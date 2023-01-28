@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.apache.lucene.document.Field</title> <!--timestamp=2023-01-28T00:12:26.281959598Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.apache.lucene.document.Field"> 
+  <meta name="keywords" content="org.apache.lucene.document.Field"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.apache.lucene.document.Field"> 
+  <meta property="og:description" content="org.apache.lucene.document.Field"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.apache.lucene.document.Field"> 
+  <meta name="twitter:description" content="org.apache.lucene.document.Field"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-01-27</small>
+        </div> 
+        <h1>Introduction to org.apache.lucene.document.Field</h1> 
+        <p>The org.apache.lucene.document.Field class provides a way to represent fields in documents stored in the Lucene search engine. It is used to create, update and delete fields in index documents. This class contains various methods for creating different types of fields such as text, numeric, and binary fields.</p> 
+        <p>Fields in Lucene documents are typically indexed and store values that can be used later to perform searches in the index. In addition to being indexed, fields can also be stored in their original form which can be useful for displaying values from fields in search results. Fields can also be sorted by the values they contain.</p> 
+        <h2>Creating a Field</h2> 
+        <p>Fields can be created using the constructor that takes a field name, value, and field type as parameters. The field type is specified using the FieldType class, which has several constants for representing different types of fields. The following example creates a text field named “title” with a value of “Hello World”:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Field titleField = new Field("title", "Hello World", FieldType.Text);
+
+          </xmp></code></pre> 
+        <p>The FieldType class also provides static factory methods for creating fields of specific types such as text, number, and binary. For example, the following code creates a numeric field called “price” with a value of 10.0:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Field priceField = FieldType.Numeric("price", 10.0);
+
+          </xmp></code></pre> 
+        <h2>Setting Field Properties</h2> 
+        <p>The Field class provides several methods for setting properties of the field. For example, the setBoost() method can be used to increase or decrease the relevance of a field when executing a query. The following example sets the boost of a field to 2.0:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+titleField.setBoost(2.0f);
+
+          </xmp></code></pre> 
+        <p>The setStore() method can be used to specify whether a field should be stored in its original form or not. By default, fields are only indexed and not stored. The following example configures the title field so that it is stored:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+titleField.setStore(true);
+
+          </xmp></code></pre> 
+        <h2>Adding a Field to a Document</h2> 
+        <p>Once a field has been created and configured, it can be added to an index document using the add() method. The first parameter to this method is the instance of the Field class and the second parameter is a boolean indicating whether the field should be indexed or not. The following example adds the title field to a document:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Document doc = new Document();
+doc.add(titleField, true);
+
+          </xmp></code></pre> 
+        <h2>Example</h2> 
+        <p>The following example shows how to create a field, configure it, and then add it to a document:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Field titleField = new Field("title", "Hello World", FieldType.Text);
+titleField.setBoost(2.0f);
+titleField.setStore(true);
+
+Document doc = new Document();
+doc.add(titleField, true);
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>The org.apache.lucene.document.Field class provides a way to represent fields in documents stored in Lucene search engine. Fields can be created using the constructor, configured using various methods, and then added to documents using the add() method. This class can be used to create, update, and delete fields from index documents.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/"> Basic Java Examples </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Circle-Perimeter-using-Java-Example.html">Calculate Circle Perimeter using Java Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Enumeration-over-Java-Vector-Example.html">Get Enumeration over Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/"> ListIterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Remove-an-element-from-ArrayList-using-Java-ListIterator-Example.html">Remove an element from ArrayList using Java ListIterator Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Copy-all-elements-of-Java-HashSet-to-an-Object-Array-Example.html">Copy all elements of Java HashSet to an Object Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-get-HashMap-size-example.html">How to get HashMap size example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Shuffle-elements-of-ArrayList.html">Shuffle elements of ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-clear-or-remove-all-elements-from-the-Vector.html">How to clear or remove all elements from the Vector</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/Java-String-to-java.sql.Date-Example.html">Java String to java.sql.Date Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.springframework.beans.factory.BeanCreationException.html">o.s.b.f.BeanCreationException</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.objectweb.asm.ClassWriter.html">org.objectweb.asm.ClassWriter</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-08 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.cloud.openfeign.FeignClient.html">o.s.c.o.FeignClient</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Print-Java-LinkedHashMap.html">Print Java LinkedHashMap</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.context.annotation.Import.html">o.s.c.a.Import</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Convert-java-Double-to-numeric-primitive-data-types-example.html">Convert java Double to numeric primitive data types example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.springframework.web.client.RestClientException.html">o.s.w.c.RestClientException</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-String-to-primitive-byte-Example.html">Convert String to primitive byte Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Replace-an-Element-of-LinkedList-Java-example.html">Replace an Element of LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Operators/Arithmetic-Assignment-Operators-Example.html">Arithmetic Assignment Operators Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Get-Horizontal-Alignment-of-JLabel-Example.html">Get Horizontal Alignment of JLabel Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Java-Short-Example.html">Java Short Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/net.minecraftforge.common.config.Configuration.html">n.m.c.c.Configuration</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.shiro.authc.UnknownAccountException.html">o.a.s.a.UnknownAccountException</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.http.params.HttpConnectionParams.html">o.a.h.p.HttpConnectionParams</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Convert-RGB-To-HSB-Color-Example.html">Convert RGB To HSB Color Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Check-if-a-particular-element-exists-in-Java-LinkedHashSet-Example.html">Check if a particular element exists in Java LinkedHashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-iterate-LinkedHashMap.html">How to iterate LinkedHashMap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-all-keys-from-the-TreeMap.html">How to get all keys from the TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/System/Get-file-separator-using-System-class.html">Get file separator using System class</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-iterate-TreeMap-in-Java.html">How to iterate TreeMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-values-using-Comparable-interface.html">Sort LinkedHashMap by values using Comparable interface</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
