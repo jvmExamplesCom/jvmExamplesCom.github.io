@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.nio.channels.FileLock</title> <!--timestamp=2023-01-31T00:13:59.335358445Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.nio.channels.FileLock"> 
+  <meta name="keywords" content="java.nio.channels.FileLock"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.nio.channels.FileLock"> 
+  <meta property="og:description" content="java.nio.channels.FileLock"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.nio.channels.FileLock"> 
+  <meta name="twitter:description" content="java.nio.channels.FileLock"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-01-30</small>
+        </div> 
+        <h1>Java NIO Channels FileLock</h1> 
+        <p>The Java NIO API in the Java platform comes with a class called </p>
+        <pre>FileLock</pre>. This class helps to coordinate access between multiple processes that are trying to read and write to the same file.
+         
+        <p>The purpose of the FileLock class is to provide a thread-safe way for two or more threads to communicate about how they will use a certain resource. This can be useful when you want to make sure that, for example, only one thread can access a certain part of a file, or to make sure that no other thread changes part of a file while one thread is still using it.</p> 
+        The FileLock class provides two basic methods:
+        <pre>lock()</pre> and 
+        <pre>unlock()</pre>. The 
+        <pre>lock()</pre> method is used to take a lock on a certain file, while the 
+        <pre>unlock()</pre> method is used to release the lock on that same file.
+         
+        <h2>Example of Running FileLock</h2> 
+        <p>Here is an example of how you can use the FileLock class in your Java code:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create a new File Lock
+FileLock lock = null;
+try {
+    // Create a new File Channel
+    FileChannel channel = new FileInputStream("myFile.txt").getChannel();
+
+    // Obtain a lock on the file
+    lock = channel.lock();
+
+    // Do something with the file here...
+
+} finally {
+    if (lock != null) {
+        // Release the Lock
+        lock.release();
+    }
+}
+
+          </xmp></code></pre> 
+        In this example, we first create a new
+        <pre>FileChannel</pre> for our file. We then call the 
+        <pre>lock()</pre> method of the FileChannel object to obtain a FileLock object. Once we have the lock, we can do some work with the file, such as reading and writing to it.
+         
+        When we are done with the file, we can use the
+        <pre>release()</pre> method of the FileLock object to release the lock. This allows other threads to access the file. It's important to note that the lock must be released, otherwise other threads will not be able to access the file.
+         
+        <h2>Further Reading</h2> 
+        <p>For more information on the Java NIO API, please refer to the official Java documentation: <a href="https://docs.oracle.com/javase/8/docs/api/java/nio/channels/FileLock.html">https://docs.oracle.com/javase/8/docs/api/java/nio/channels/FileLock.html</a></p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Fibonacci-Series-Java-Example.html">Fibonacci Series Java Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Smiley-In-Applet-Example.html">Draw Smiley In Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/"> Integer Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-binary-number-to-decimal-number-example.html">Convert binary number to decimal number example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Determine-If-The-Checkbox-Is-Visible-Example.html">Determine If The Checkbox Is Visible Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/java.util.logging.StreamHandler.html">java.util.logging.StreamHandler</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.time.LocalTime.html">java.time.LocalTime</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Array-to-LinkedList.html">Convert Array to LinkedList</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-create-new-HashSet-objects-using-HashSet-constructor.html">How to create new HashSet objects using HashSet constructor</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-ArrayList-using-ListIterator.html">Iterate through ArrayList using ListIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.html">PropertyPlaceholderConfigurer</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-15 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>JavaFan</h3> <p><a href="#">2023-03-26 03:49</a></p> Thank you very much! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Daniel</h3> <p><a href="#">2023-03-27 01:39</a></p> Can somebody elaborate more? <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-remove-elements-from-the-Vector.html">How to remove elements from the Vector</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.app.Activity.html">android.app.Activity</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.intellij.util.ProcessingContext.html">com.intellij.util.ProcessingContext</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Get-Darker-Version-Of-Current-Color-Example.html">Get Darker Version Of Current Color Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-contains-a-value.html">How to check if LinkedHashMap contains a value</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Java-ArrayList-of-arrays.html">Java ArrayList of arrays</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.glassfish.jersey.media.multipart.MultiPartFeature.html">o.g.j.m.m.MultiPartFeature</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-Minimum-element-of-Java-ArrayList-Example.html">Find Minimum element of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-copy,-merge,-or-clone-the-TreeSet-in-Java.html">How to copy, merge, or clone the TreeSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-ArrayList-in-reverse-direction-using-ListIterator.html">How to iterate ArrayList in reverse direction using ListIterator</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Get-all-keys-of-Java-HashMap-example.html">Get all keys of Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Colored-Hello-World-Applet-Example.html">Colored Hello World Applet Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Determine-number-of-bytes-written-to-DataOutputStream.html">Determine number of bytes written to DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-decimal-integer-to-binary-number-example.html">Convert decimal integer to binary number example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-keys-using-Comparable-interface.html">Sort LinkedHashMap by keys using Comparable interface</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.security.Signature.html">java.security.Signature</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Java-Double-compare-example.html">Java Double compare example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.hibernate.Query.html">org.hibernate.Query</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.animation.ArgbEvaluator.html">android.animation.ArgbEvaluator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Get-Size-of-Java-HashSet-Example.html">Get Size of Java HashSet Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
