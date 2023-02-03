@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.lang.management.ThreadMXBean</title> <!--timestamp=2023-02-03T00:12:57.536769970Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.lang.management.ThreadMXBean"> 
+  <meta name="keywords" content="java.lang.management.ThreadMXBean"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.lang.management.ThreadMXBean"> 
+  <meta property="og:description" content="java.lang.management.ThreadMXBean"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.lang.management.ThreadMXBean"> 
+  <meta name="twitter:description" content="java.lang.management.ThreadMXBean"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-02-02</small>
+        </div> 
+        <h1>Introduction to java.lang.management.ThreadMXBean</h1> 
+        Java's
+        <pre>ThreadMXBean</pre> is an interface that provides a way to manage threads within an application. It can be used to retrieve detailed information about the thread state, as well as to set limits on the number of active threads and the amount of resources allocated to a thread. This interface is part of the Java Management Extensions (JMX) framework, which provides a way to monitor, manage and configure applications in a single, unified way.
+         
+        <h2>Initial Setup</h2> 
+        <p>To use the ThreadMXBean interface in your application, you must first create a </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MBeanServerConnection
+
+          </xmp></code></pre> instance and register the bean by calling the 
+        <pre>registerMBean()</pre> method:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MBeanServerConnection mbsc = ManagementFactory.getPlatformMBeanServer();
+ThreadMXBean threadMXBean = new ThreadMXBeanImpl(mbsc);
+ObjectName objectName = new ObjectName("java.lang.management:type=ThreadMXBean");
+mbsc.registerMBean(threadMXBean, objectName);
+
+          </xmp></code></pre> 
+        <h2>Retrieving Thread Information</h2> 
+        <p>Once the bean is registered, you can start using it to retrieve thread information. You can call </p>
+        <pre>getThreadInfo()</pre> to get the thread name and ID, as well as the thread's current state and stack trace:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+long threadId = 1;
+ThreadInfo threadInfo = threadMXBean.getThreadInfo(threadId);
+String threadName = threadInfo.getThreadName();
+Thread.State threadState = threadInfo.getThreadState();
+StackTraceElement[] stackTraceElements = threadInfo.getStackTrace();
+
+          </xmp></code></pre> 
+        You can also call the
+        <pre>getAllThreadIds()</pre> method to get an array of all the thread IDs, or 
+        <pre>getThreadCount()</pre> to get the total number of threads that have been created in the application:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+long[] threadIds = threadMXBean.getAllThreadIds();
+int threadCount = threadMXBean.getThreadCount();
+
+          </xmp></code></pre> 
+        <h2>Setting Thread Limits</h2> 
+        <p>The ThreadMXBean interface also provides a way to set limits on the number of threads that can be concurrently running in the application. You can set the maximum number of threads using the </p>
+        <pre>setMaxThreads()</pre> method, as well as set the number of blocked threads with the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+setBlockedThreadsLimit()
+
+          </xmp></code></pre> method:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+threadMXBean.setMaxThreads(50);
+threadMXBean.setBlockedThreadsLimit(10);
+
+          </xmp></code></pre> 
+        <p>If the maximum number of threads is reached, any new threads that are spawned will wait for one of the existing threads to finish its execution before it can begin executing. Similarly, if the blocked threads limit is reached, any new threads that attempt to block will also wait until one of the existing blocked threads has finished.</p> 
+        <h2>Monitoring Thread Activity</h2> 
+        <p>In addition to setting limits on the number of threads, you can use the ThreadMXBean to monitor the activity of each thread. For example, you can get the current CPU time and user time of a thread using the </p>
+        <pre>getThreadCpuTime()</pre> and 
+        <pre>getThreadUserTime()</pre> methods:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+long threadId = 1;
+long cpuTime = threadMXBean.getThreadCpuTime(threadId);
+long userTime = threadMXBean.getThreadUserTime(threadId);
+
+          </xmp></code></pre> 
+        <p>You can also get the total CPU time and user time for all threads using the </p>
+        <pre>getTotalCpuTime()</pre> and 
+        <pre>getTotalUserTime()</pre> methods:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+long totalCpuTime = threadMXBean.getTotalCpuTime();
+long totalUserTime = threadMXBean.getTotalUserTime();
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>The ThreadMXBean interface provides a powerful way to retrieve detailed information about the state of threads in an application, as well as set limits on how many threads can be concurrently running. With it, you can easily monitor the activity of each thread and ensure that your application is running efficiently.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/"> AWT Color </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Create-Custom-Color-Using-HSB-Example.html">Create Custom Color Using HSB Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/io.netty.handler.codec.http.websocketx.TextWebSocketFrame.html">i.n.h.c.h.w.TextWebSocketFrame</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Get-Size-of-Java-TreeSet-Example.html">Get Size of Java TreeSet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/System/"> System </a> </p> <a href="/articles/Java/Miscellaneous-Classes/System/Run-the-garbage-collector-using-System-class.html">Run the garbage collector using System class</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.objectweb.asm.ClassVisitor.html">org.objectweb.asm.ClassVisitor</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/ByteArrayInputStream/"> ByteArrayInputStream </a> </p> <a href="/articles/Java/File-And-IO/ByteArrayInputStream/Read-byte-array-using-ByteArrayInputStream-Example.html">Read byte array using ByteArrayInputStream Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-submap,-headmap,-and-tailmap-from-Java-TreeMap.html">How to get submap, headmap, and tailmap from Java TreeMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/javafx.scene.text.Text.html">javafx.scene.text.Text</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/"> AWT Button </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Determine-If-The-Button-Is-Visible-Example.html">Determine If The Button Is Visible Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/"> Data types </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/Java-short-Example.html">Java short Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-27 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Daniel</h3> <p><a href="#">2023-03-05 01:53</a></p> <p>These Programs Are Very Useful For Java Beginners!... Thanks! ...</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Mark</h3> <p><a href="#">2023-03-06 02:21</a></p> great examples ... thnx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-Java-String-to-Integer-object-Example.html">Convert Java String to Integer object Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/Calendar/Add-or-substract-months-to-current-date-using-Java-Calendar.html">Add or substract months to current date using Java Calendar</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-Map-to-List.html">Convert Map to List</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/javafx.scene.control.ProgressBar.html">javafx.scene.control.ProgressBar</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-fix-java.io.FileNotFoundException-(access-is-denied).html">FileNotFoundException (access is denied)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-ArrayList-example.html">Iterate through ArrayList example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.security.auth.callback.NameCallback.html">j.s.a.c.NameCallback</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-value-from-TreeMap-using-the-key-(TreeMap-get-method).html">How to get value from TreeMap using the key (TreeMap get method)</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Find-Largest-and-Smallest-Number-in-an-Array-Example.html">Find Largest and Smallest Number in an Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Iterate-through-elements-Java-Vector-using-Iterator-Example.html">Iterate through elements Java Vector using Iterator Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-Minimum-element-of-Java-Vector-Example.html">Find Minimum element of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-to-String-array-using-Arrays.html">Convert String to String array using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-Java-Vector-using-Comparator.html">Sort Java Vector using Comparator</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Create-DataOutputStream-from-FileOutputStream.html">Create DataOutputStream from FileOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.apache.http.concurrent.FutureCallback.html">o.a.h.c.FutureCallback</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-convert-comma-separated-string-to-Java-HashSet.html">How to convert comma separated string to Java HashSet</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Generate-Bouncing-Lines-Using-Applet-Example.html">Generate Bouncing Lines Using Applet Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.view.accessibility.AccessibilityNodeInfo.html">a.v.a.AccessibilityNodeInfo</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-Map-to-List.html">Convert Map to List</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/How-to-convert-String-to-upper-case-or-lower-case.html">How to convert String to upper case or lower case</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
