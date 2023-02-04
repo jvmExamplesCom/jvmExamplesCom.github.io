@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - android.renderscript.RenderScript</title> <!--timestamp=2023-02-04T00:12:37.756215519Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="android.renderscript.RenderScript"> 
+  <meta name="keywords" content="android.renderscript.RenderScript"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - android.renderscript.RenderScript"> 
+  <meta property="og:description" content="android.renderscript.RenderScript"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - android.renderscript.RenderScript"> 
+  <meta name="twitter:description" content="android.renderscript.RenderScript"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-02-03</small>
+        </div> 
+        <h1>android.renderscript.RenderScript</h1> android.renderscript.RenderScript is a powerful tool for developing high-performance applications on the Android platform. It provides an interface to perform general-purpose computing tasks such as image processing and data manipulation. With RenderScript, developers can write code in C99, C++, and Java that is compiled into native code and then run on the device's processor. This allows for faster and more efficient performance than traditional interpreted code. 
+        <h2>Getting Started With RenderScript</h2> To get started with RenderScript, you need to install the Android SDK and set up an Android project. In the project, you will also need to add the RenderScript library and header file. Once this is done, you can write your code in either Java, C99 or C++. 
+        <h2>Basic RenderScript Concepts</h2> In RenderScript, there are two main concepts: Scripts and Allocations. Scripts are classes that define the calculations that are to be performed by the processor. Each script contains an invoke() method, which is called each time the script needs to execute. Allocations are objects that contain the data to be processed. The code defines the layout of the data in an allocation and how it should be processed. 
+        <h2>Creating a Simple Script</h2> Let's create a simple script to understand how RenderScript works. The script will simply add two numbers together and print the result. The code for the script is as follows: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+#pragma version(1)
+#pragma rs java_package_name(com.example.renderscriptdemo)
+
+int result;
+
+// The script entry point.
+void root(const int *a, const int *b) {
+	result = *a + *b;
+	rsDebug("result", result);
+}
+
+          </xmp></code></pre> The code begins with a pragma statement that tells the compiler which version of RenderScript we are using. We then declare an int variable called result. The next line is the script entry point, which defines the root() function that will be called when the script is invoked. The root() function takes two parameters: two pointers to int values. Inside the root() function, we simply add the two values and store the result in the result variable. Finally, we use the rsDebug() function to print the result of the calculation. 
+        <h2>Invoking the Script</h2> To invoke our script, we must first create an Allocation containing the two integers we want to add together. The Allocation class has several constructors which allow us to create an Allocation from java.nio.ByteBuffer, java.nio.FloatBuffer, an array of primitives, etc. For our example, we'll use the constructor that takes an array of integers. Here is the code to create the Allocation: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+int[] numbers = {10, 20};
+Allocation a = Allocation.createSized(rs, Element.I32(rs), 2);
+a.copyFrom(numbers);
+
+          </xmp></code></pre> Once the Allocation is created, we can invoke the script. To do this, we call the invoke() method on our script. The invoke() method takes two parameters: an Allocation containing the input data, and another Allocation that will contain the output data. Here is the code to invoke the script: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Allocation resultAllocation = Allocation.createSized(rs, Element.I32(rs));
+script.invoke(a, resultAllocation);
+
+          </xmp></code></pre> Finally, we must read the output from the resultAllocation Allocation. To do this, we use the copyTo() method on the Allocation object: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+int [] result = new int[1];
+resultAllocation.copyTo(result);
+
+          </xmp></code></pre> At this point, the result array will contain the result of our calculation. 
+        <h2>Conclusion</h2> This tutorial has shown you how to create a simple RenderScript script to add two numbers together and print the result. RenderScript is a powerful tool for developing high-performance applications on the Android platform and these basics will allow you to start writing your own scripts. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-long-Arrays-Example.html">Compare Two Java long Arrays Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-clear-or-remove-all-mappings-from-LinkedHashMap.html">How to clear or remove all mappings from LinkedHashMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/"> Integer Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-decimal-integer-to-binary-number-example.html">Convert decimal integer to binary number example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/android.support.v4.view.accessibility.AccessibilityNodeInfoCompat.html">AccessibilityNodeInfoCompat</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.cloud.client.loadbalancer.LoadBalanced.html">o.s.c.c.l.LoadBalanced</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.reflections.Reflections.html">org.reflections.Reflections</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-keys-using-Comparable-interface.html">Sort LinkedHashMap by keys using Comparable interface</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Display-Image-in-an-Applet-Example.html">Display Image in an Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Wrappers/"> Wrappers </a> </p> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Long-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Long object to byte, short, int, long, float and double</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Insert-an-Element-into-LinkedList-Java-example.html">Insert an Element into LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-05 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-iterate-Java-TreeMap-in-reverse-order.html">How to iterate Java TreeMap in reverse order</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Vector-to-ArrayList-and-ArrayList-to-Vector.html">Convert Vector to ArrayList and ArrayList to Vector</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-ArrayList-using-Comparator.html">Sort ArrayList using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration.html">DataSourceAutoConfiguration</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-contains-a-key.html">How to check if LinkedHashMap contains a key</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Get-Sub-List-of-Java-Vector-Example.html">Get Sub List of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-sort-LinkedHashSet-elements-using-Comparable.html">How to sort LinkedHashSet elements using Comparable</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.springframework.core.annotation.AnnotationUtils.html">o.s.c.a.AnnotationUtils</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Compression-Method-of-Zip-Entry-Example.html">Get Compression Method of Zip Entry Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.text.style.ForegroundColorSpan.html">a.t.s.ForegroundColorSpan</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-short.html">Convert String to short</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-long-Array-Example.html">Java Sort long Array Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Fibonacci-Series-Java-Example.html">Fibonacci Series Java Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.support.v7.app.ActionBarDrawerToggle.html">a.s.v.a.ActionBarDrawerToggle</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/io.netty.handler.codec.http.HttpRequest.html">i.n.h.c.h.HttpRequest</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-absolute-value-of-float,-int,-double-and-long-using-Math.abs.html">F.abs</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Circle-Perimeter-using-Java-Example.html">Calculate Circle Perimeter using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-insert-an-element-at-the-beginning-of-the-Java-Vector.html">How to insert an element at the beginning of the Java Vector</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-get-the-first-or-last-element-from-LinkedHashSet.html">How to get the first or last element from LinkedHashSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/org.apache.log4j.Logger.html">org.apache.log4j.Logger</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

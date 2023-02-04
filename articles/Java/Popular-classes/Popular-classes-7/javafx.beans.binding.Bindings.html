@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javafx.beans.binding.Bindings</title> <!--timestamp=2023-02-04T00:12:31.032398792Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javafx.beans.binding.Bindings"> 
+  <meta name="keywords" content="javafx.beans.binding.Bindings"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javafx.beans.binding.Bindings"> 
+  <meta property="og:description" content="javafx.beans.binding.Bindings"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javafx.beans.binding.Bindings"> 
+  <meta name="twitter:description" content="javafx.beans.binding.Bindings"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-02-03</small>
+        </div> 
+        <h1> javafx.beans.binding.Bindings </h1> javafx.beans.binding.Bindings is a powerful API that provides easy access to observable elements and allows developers to bind properties and values together, allowing for dynamic updates whenever their values change. This API can be used to create binding between properties, monitor the state of properties, and even react to those changes. In this article, we will discuss how to use the API, what the different functions do, and give code examples. 
+        <h2> How to Use Bindings </h2> Using Bindings is fairly straightforward. The majority of the Bindings API exists in the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+javafx.beans.binding
+
+          </xmp></code></pre> package and the majority of the available methods can be found under the <i> Bindings </i> class. All you need to do is instantiate a new instance of the Bindings object and pass in the properties and values that you want to bind together. You can then use the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+bind()
+
+          </xmp></code></pre> or 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+bindBidirectional()
+
+          </xmp></code></pre> to create a binding between the two. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+//Instantiate the Bindings object
+Bindings bindObj = new Bindings();
+
+//Bind two properties together
+int x = 5;
+int y = 6;
+bindObj.bind(x, y);
+
+//Watch the binding status
+boolean isBound = bindObj.isBound();
+System.out.println(isBound); //True
+
+          </xmp></code></pre> 
+        <h2> Binding Functions </h2> The primary function of the Bindings API is to create bindings between properties. This is done using the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+bind()
+
+          </xmp></code></pre> and the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+bindBidirectional()
+
+          </xmp></code></pre>, which both accept two properties as parameters and generates a binding between them. The difference between the two functions is that with the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+bind()
+
+          </xmp></code></pre> function, any changes made to the source property will be reflected in the target property, whereas with 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+bindBidirectional()
+
+          </xmp></code></pre> any changes made to either property will be reflected in the other. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+//Create new Bindings object
+Bindings bindObj = new Bindings();
+
+int x = 5;
+int y = 6;
+
+//Only changes to x will be reflected in y:
+bindObj.bind(x, y);
+
+//Changes to either x or y will be reflected in the other
+bindObj.bindBidirectional(x, y);
+
+          </xmp></code></pre> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+bind()
+
+          </xmp></code></pre> and 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+bindBidirectional()
+
+          </xmp></code></pre> methods are also capable of accepting a third parameter, which is an expression that can be used to manipulate the value of a property before it is set on the target property. This is useful for performing calculations or conversions on the source property before it is set on the target property. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+//Create new Bindings object
+Bindings bindObj = new Bindings();
+
+int x = 5;
+int y = 6;
+
+//The third parameter is an expression that is applied to x before setting the value on y
+bindObj.bind(x, y, x -> x * 10);
+
+//x is now equal to 50 and y is equal to 500
+System.out.println(x); //50
+System.out.println(y); //500
+
+          </xmp></code></pre> The Bindings API also provides several other functions for monitoring the state of the bindings. The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+isBound()
+
+          </xmp></code></pre> method can be used to check the status of a binding, the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+unbind()
+
+          </xmp></code></pre> method can be used to remove a binding, and the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+removeListener()
+
+          </xmp></code></pre> method can be used to remove a listener that was previously added to a binding. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+//Create new Bindings object
+Bindings bindObj = new Bindings();
+
+int x = 5;
+int y = 6;
+
+//Bind two properties together
+bindObj.bind(x, y);
+
+//Check the state of the binding
+boolean isBound = bindObj.isBound();
+System.out.println(isBound); //True
+
+//Unbind the two properties
+bindObj.unbind();
+
+//Check the state of the binding
+isBound = bindObj.isBound();
+System.out.println(isBound); //False
+
+          </xmp></code></pre> Finally, the Bindings API also supports adding listeners to bindings, allowing developers to react to changes in the properties that are bound together. This is done by passing a <i>ChangeListener</i> instance to the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+addListener()
+
+          </xmp></code></pre> method. This listener will be invoked whenever the value of a property changes and will provide the previous and current values of the property. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+//Create new Bindings object
+Bindings bindObj = new Bindings();
+
+int x = 5;
+int y = 6;
+
+//Bind two properties together
+bindObj.bind(x, y);
+
+//Add a listener to the binding
+bindObj.addListener((observable, oldValue, newValue) -> {
+    //Print the old and new values
+    System.out.println("Old Value: " + oldValue);
+    System.out.println("New Value: " + newValue);
+});
+
+//Change the value of x
+x = 10;
+
+/*
+Prints: 
+Old Value: 5
+New Value: 10
+*/
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> In this article, we discussed how to use the javafx.beans.binding.Bindings API to create bindings between properties and values, monitor the state of bindings, and add listeners to observe changes in properties. We also provided code examples to illustrate how to use the various functions of the API. With the Bindings API, developers can easily create flexible, dynamic applications that respond to changes in data. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-Java-Vector-using-Comparator.html">Sort Java Vector using Comparator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.eclipse.jetty.server.handler.ResourceHandler.html">o.e.j.s.h.ResourceHandler</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Rounded-Corner-Rectangle-&-Square-in-Applet-Window-Example.html">Draw Rounded Corner Rectangle & Square in Applet Window Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/How-to-count-number-of-words-in-String.html">How to count number of words in String</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.app.ListActivity.html">android.app.ListActivity</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Static/"> Static </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Static/Java-static-method-example.html">Java static method example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Copy-all-elements-of-Java-Vector-to-an-Object-Array-Example.html">Copy all elements of Java Vector to an Object Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Sort-LinkedHashMap-by-keys.html">Sort LinkedHashMap by keys</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Iterate-LinkedList-example.html">Iterate LinkedList example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Get-Size-of-Java-TreeSet-Example.html">Get Size of Java TreeSet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-25 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Vartel</h3> <p><a href="#">2023-03-05 22:38</a></p> thanks <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Martin</h3> <p><a href="#">2023-03-07 09:46</a></p> Grt ;-) <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.xmlpull.v1.XmlSerializer.html">org.xmlpull.v1.XmlSerializer</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-unsigned-byte-from-file-using-DataInputStream.html">Read unsigned byte from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.ws.rs.core.SecurityContext.html">javax.ws.rs.core.SecurityContext</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-check-if-the-value-exists-in-the-TreeMap-(TreeMap-contains-a-value).html">How to check if the value exists in the TreeMap (TreeMap contains a value)</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-Java-String-to-Long-example.html">Convert Java String to Long example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Select-Particular-Item-Of-AWT-Choice-Or-Combobox-Example.html">Select Particular Item Of AWT Choice Or Combobox Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-short-from-file-using-DataInputStream.html">Read short from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet’s-Document-URL-or-Directory-Base-Example.html">Get Applet’s Document URL or Directory Base Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.apache.thrift.protocol.TBinaryProtocol.html">o.a.t.p.TBinaryProtocol</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Disable-Button-Example.html">Disable Button Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Zip/Deflater/Compress-Byte-Array-Using-Deflater-Example.html">Compress Byte Array Using Deflater Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.testng.annotations.AfterMethod.html">org.testng.annotations.AfterMethod</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-character-to-String.html">Convert character to String</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.commons.lang.builder.HashCodeBuilder.html">o.a.c.l.b.HashCodeBuilder</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-ArrayList-using-Comparator.html">Sort ArrayList using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Iterate-through-elements-Java-Vector-using-ListIterator-Example.html">Iterate through elements Java Vector using ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/JTextField-Disable-Enable-Example.html">JTextField Disable Enable Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-add-an-element-at-the-beginning-(at-the-front).html">Java LinkedList add an element at the beginning (at the front)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-iterate-through-the-Vector-elements.html">How to iterate through the Vector elements</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.eclipse.swt.widgets.Composite.html">org.eclipse.swt.widgets.Composite</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
