@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - android.support.v4.util.LruCache</title> <!--timestamp=2023-02-06T00:12:37.149422640Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="android.support.v4.util.LruCache"> 
+  <meta name="keywords" content="android.support.v4.util.LruCache"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - android.support.v4.util.LruCache"> 
+  <meta property="og:description" content="android.support.v4.util.LruCache"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - android.support.v4.util.LruCache"> 
+  <meta name="twitter:description" content="android.support.v4.util.LruCache"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-02-05</small>
+        </div> 
+        <h1>android.support.v4.util.LruCache</h1> 
+        <p>android.support.v4.util.LruCache is an Android library module that provides an efficient and optimized cache for retrieving, storing and clearing data. It is a Least Recently Used (LRU) cache, meaning the objects it stores are ordered by the time they were last used and the least recently used objects are evicted first. It is useful for holding on to recently used data when the application needs to manage memory usage carefully. This article will discuss how to use android.support.v4.util.LruCache.</p> 
+        <h2>Using android.support.v4.util.LruCache</h2> 
+        <p>Initializing a android.support.v4.util.LruCache instance with a given maximum size is the first step to using it. The size is determined by the number of entries the cache can hold before it starts evicting the least recently used entry.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+int maxSize = 10;
+LruCache<String, Object> lruCache = new LruCache<>(maxSize);
+
+          </xmp></code></pre> 
+        <p>Once the instance is set up, entries can be added to the cache using the put() method. This will add the entry if it doesn't already exist, or update the existing entry if it does:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+lruCache.put("key", value);
+
+          </xmp></code></pre> 
+        <p>To retrieve and item from the cache, use the get() method. It takes a key as an argument and returns the value associated with it. If the key does not exist in the cache, the method returns null:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Object value = lruCache.get("key");
+
+          </xmp></code></pre> 
+        <p>It's also possible to remove an entry from the cache using the remove() method:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+lruCache.remove("key");
+
+          </xmp></code></pre> 
+        <p>Finally, the clear() method can be used to clear all entries in the cache.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+lruCache.clear();
+
+          </xmp></code></pre> 
+        <h2>When to Use android.support.v4.util.LruCache</h2> 
+        <p>android.support.v4.util.LruCache is most useful when an application needs to manage its memory usage carefully. It can store frequently used data without needing to continually query the database or other data sources. This can improve application performance and reduce memory usage. It is also useful for caching image data, as it can quickly make images available for display without requiring a network call.</p> 
+        <h2>Conclusion</h2> 
+        <p>android.support.v4.util.LruCache is a powerful tool for managing memory usage in an Android application. It can quickly store and retrieve data to improve performance and reduce memory usage. Use it when an application needs to manage memory usage carefully.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.support.v4.content.LocalBroadcastManager.html">a.s.v.c.LocalBroadcastManager</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.nio.channels.Selector.html">java.nio.channels.Selector</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Set-Multiple-Selection-Mode-For-AWT-List-Example.html">Set Multiple Selection Mode For AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Static/"> Static </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Static/Java-static-method-example.html">Java static method example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-int-to-a-file-using-DataOutputStream.html">Write int to a file using DataOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/"> ListIterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Traverse-through-ArrayList-in-reverse-direction-using-Java-ListIterator-Example.html">Traverse through ArrayList in reverse direction using Java ListIterator Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Calculate-Average-value-of-Array-elements-using-Java-Example.html">Calculate Average value of Array elements using Java Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/"> Hashtable </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Check-if-a-particular-value-exists-in-Java-Hashtable-example.html">Check if a particular value exists in Java Hashtable example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/android.preference.Preference.OnPreferenceChangeListener.html">a.p.P.OnPreferenceChangeListener</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-over-Vector-elements.html">Iterate over Vector elements</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-11 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Substring-Example.html">Substring Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Get-Size-of-Java-HashMap-Example.html">Get Size of Java HashMap Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-short.html">Convert String to short</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Disable-Checkbox-Example.html">Disable Checkbox Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-add-elements-to-LinkedHashSet-object.html">How to add elements to LinkedHashSet object</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-character-to-String.html">Convert character to String</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.io.FilenameFilter.html">java.io.FilenameFilter</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.http.impl.client.DefaultHttpRequestRetryHandler.html">DefaultHttpRequestRetryHandler</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Shuffle-elements-of-Java-Vector-example.html">Shuffle elements of Java Vector example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-array-to-ArrayList.html">Convert array to ArrayList</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-fix-Java-TreeSet-java.lang.ClassCastExcpetion-exception.html">H.l.ClassCastExcpetion exception</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-add-array-example.html">Java LinkedList add array example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Change-Button-Foreground-Color-Example.html">Change Button Foreground Color Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.management.MBeanException.html">javax.management.MBeanException</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Change-Font-of-JTextField-Example.html">Change Font of JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Do-While-Loop/Do-While-loop-Example.html">Do While loop Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.beans.factory.support.DefaultListableBeanFactory.html">o.s.b.f.s.DefaultListableBeanFactory</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Get-Sub-List-of-Java-Vector-Example.html">Get Sub List of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.elasticsearch.action.get.GetResponse.html">o.e.a.g.GetResponse</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-LinkedHashMap-size.html">How to check LinkedHashMap size</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
