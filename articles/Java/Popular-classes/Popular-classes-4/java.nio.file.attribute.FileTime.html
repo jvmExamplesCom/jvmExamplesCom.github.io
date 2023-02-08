@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.nio.file.attribute.FileTime</title> <!--timestamp=2023-02-08T00:12:35.734486702Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.nio.file.attribute.FileTime"> 
+  <meta name="keywords" content="java.nio.file.attribute.FileTime"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.nio.file.attribute.FileTime"> 
+  <meta property="og:description" content="java.nio.file.attribute.FileTime"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.nio.file.attribute.FileTime"> 
+  <meta name="twitter:description" content="java.nio.file.attribute.FileTime"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-02-07</small>
+        </div> 
+        <h1>Java nio.file.attribute.FileTime</h1> 
+        <p>Java nio.file.attribute.FileTime provides an immutable object that represents the time of a file or directory in a file system. Its primary use is to provide the input of lastModifiedTime, lastAccessTime and createTime method of java.nio.file.Files class. The FileTime class allows you to convert a long value, representing the time in milliseconds since the epoch, into a FileTime instance, and vice versa. </p> 
+        <h2>Create FileTime Instance</h2> 
+        <p>You can create an instance of FileTime using one of its two constructors. The first constructor takes a millisecond-based long value as argument, which should represent the number of milliseconds since the epoch (e.g. 1584501372862L):</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+long currentTime = System.currentTimeMillis();
+FileTime fileTime = new FileTime(currentTime);
+
+          </xmp></code></pre> 
+        <p>The second constructor takes two arguments, an integer representing the whole part of the time, and a long representing the fractional part:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+long currentTime = System.currentTimeMillis();
+int currentTimeWhole = (int) (currentTime / 1000);
+long currentTimeFraction = (currentTime - (currentTimeWhole * 1000));
+FileTime fileTime = new FileTime(currentTimeWhole, currentTimeFraction);
+
+          </xmp></code></pre> 
+        <h2>Manipulating FileTime</h2> 
+        <p>FileTime provides static methods to manipulate the time of a FileTime object. You can use the plus() method to add a given number of seconds to a FileTime object: </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FileTime newTime = fileTime.plus(30, ChronoUnit.SECONDS);
+
+          </xmp></code></pre> 
+        <p>You can also use the truncatedTo() method to round a FileTime object to a given unit, for example to a minute:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FileTime newTime = fileTime.truncatedTo(ChronoUnit.MINUTES);
+
+          </xmp></code></pre> 
+        <h2>Converting FileTime</h2> 
+        <p>There are several ways to convert a FileTime to another type. You can convert it to a long value representing the number of milliseconds since the epoch, using the toMillis() method:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+long currentTime = fileTime.toMillis();
+
+          </xmp></code></pre> 
+        <p>You can also convert it to an Instant object using the toInstant() method:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Instant instant = fileTime.toInstant();
+
+          </xmp></code></pre> 
+        <p>Finally, you can use the toString() method to print the FileTime as a string in the ISO-8601 format:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String stringTime = fileTime.toString();
+
+          </xmp></code></pre> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-preserve-insertion-order-of-Java-HashSet-elements.html">How to preserve insertion order of Java HashSet elements</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/StringBuffer/"> StringBuffer </a> </p> <a href="/articles/Java/Popular-Java-Classes/StringBuffer/Java-StringBuffer-delete-remove-character-or-clear-content-Example.html">Java StringBuffer delete remove character or clear content Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/com.fasterxml.jackson.databind.ObjectMapper.html">c.f.j.d.ObjectMapper</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-elements-of-Java-ArrayList-Example.html">Sort elements of Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.xmlpull.v1.XmlSerializer.html">org.xmlpull.v1.XmlSerializer</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-convert-Vector-to-ArrayList-and-ArrayList-to-Vector-in-Java.html">How to convert Vector to ArrayList and ArrayList to Vector in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Search-an-element-of-Java-Vector-Example.html">Search an element of Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Map-from-Java-TreeMap-example.html">Get Synchronized Map from Java TreeMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-over-Vector-elements.html">Iterate over Vector elements</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Perform-Binary-Search-on-Java-Vector-Example.html">Perform Binary Search on Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-31 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.os.BatteryManager.html">android.os.BatteryManager</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-remove-duplicate-elements-from-the-Vector.html">How to remove duplicate elements from the Vector</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-long-Array-Example.html">Java Sort long Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Get-elements-by-index-from-Java-TreeSet.html">Get elements by index from Java TreeSet</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Create-DataOutputStream-from-FileOutputStream.html">Create DataOutputStream from FileOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.openqa.selenium.remote.DesiredCapabilities.html">o.o.s.r.DesiredCapabilities</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-ArrayList-elements-using-Comparator.html">Sort ArrayList elements using Comparator</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-make-file-read-only-in-Java.html">How to make file read only in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-remove-elements-from-Java-TreeSet-(remove-first,-last,-all-elements).html">How to remove elements from Java TreeSet (remove first, last, all elements)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/org.junit.AfterClass.html">org.junit.AfterClass</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-values-using-Comparable-interface.html">Sort LinkedHashMap by values using Comparable interface</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-get-the-size-of-the-LinkedHashSet-in-Java.html">How to get the size of the LinkedHashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-all-occurrences-of-specified-element-of-Java-Vector-Example.html">Replace all occurrences of specified element of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/android.util.ArrayMap.html">android.util.ArrayMap</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Mark-file-or-directory-Read-Only.html">Mark file or directory Read Only</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.http.HttpRequestInterceptor.html">o.a.h.HttpRequestInterceptor</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-all-elements-of-an-array-to-ArrayList-using-Arrays.html">Add all elements of an array to ArrayList using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.http.conn.HttpClientConnectionManager.html">o.a.h.c.HttpClientConnectionManager</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet’s-Document-URL-or-Directory-Base-Example.html">Get Applet’s Document URL or Directory Base Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-lowest-and-highest-key-stored-in-Java-TreeMap-example.html">Get lowest and highest key stored in Java TreeMap example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
