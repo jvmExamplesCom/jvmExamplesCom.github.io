@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - Iterate ArrayList elements using ListIterator</title> <!--timestamp=2023-02-10T00:14:22.056734218Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="Iterate ArrayList elements using ListIterator"> 
+  <meta name="keywords" content="Iterate ArrayList elements using ListIterator"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - Iterate ArrayList elements using ListIterator"> 
+  <meta property="og:description" content="Iterate ArrayList elements using ListIterator"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - Iterate ArrayList elements using ListIterator"> 
+  <meta name="twitter:description" content="Iterate ArrayList elements using ListIterator"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-02-09</small>
+        </div> 
+        <h1>Iterate ArrayList Elements Using ListIterator</h1> 
+        <p>Java provides many different ways to iterate elements in an ArrayList, one of which is using the ListIterator interface. By using ListIterator, you can traverse the list in both directions using its methods such as <strong>hasNext()</strong>, <strong>next()</strong>, <strong>hasPrevious()</strong>, and <strong>previous()</strong>. In this article, we'll discuss how to traverse an ArrayList with ListIterator, and provide some code examples for doing so.</p> 
+        <h2>Creating a ListIterator Object</h2> 
+        <p>In order to use ListIterator, you first need to create an object of type <strong>ListIterator</strong>. This can be done through the <strong>listIterator()</strong> method of the ArrayList class, which returns a ListIterator object that traverses the list from the start.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ListIterator<String> listIterator = list.listIterator();
+
+          </xmp></code></pre> 
+        <p>Alternatively, you can also create a ListIterator object that begins at a specified index by using the <strong>listIterator(int index)</strong> method. For example:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ListIterator<String> listIterator = list.listIterator(3);
+
+          </xmp></code></pre> 
+        <p>This creates a ListIterator object that begins at the third element in the list.</p> 
+        <h2>Navigating the List with ListIterator</h2> 
+        <p>Once you have created the ListIterator object, you can use it to navigate the list. The <strong>hasNext()</strong> method returns true if there is an element after the current element, and false otherwise. Similarly, the <strong>hasPrevious()</strong> method returns true if there is an element before the current element, and false otherwise.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+while (listIterator.hasNext()) {
+    // do something
+}
+
+while (listIterator.hasPrevious()) {
+    // do something
+}
+
+          </xmp></code></pre> 
+        <p>The <strong>next()</strong> method returns the next element in the list and advances the iterator in the forward direction, while <strong>previous()</strong> returns the previous element in the list and advances the iterator in the backward direction.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+while (listIterator.hasNext()) {
+    String element = listIterator.next();
+    // do something
+}
+
+while (listIterator.hasPrevious()) {
+    String element = listIterator.previous();
+    // do something
+}
+
+          </xmp></code></pre> 
+        <p>It is important to note that these methods throw a <strong>NoSuchElementException</strong> if called when there is no such element. To avoid this, make sure to check that the iterator <strong>hasNext()</strong> or <strong>hasPrevious()</strong> prior to calling <strong>next()</strong> or <strong>previous()</strong>.</p> 
+        <h2>Adding and Removing Elements with ListIterator</h2> 
+        <p>The ListIterator also provides two methods for adding and removing elements from the list: <strong>add()</strong> and <strong>remove()</strong>. The <strong>add()</strong> method adds an element after the current element, while the <strong>remove()</strong> method removes the last element returned by either <strong>next()</strong> or <strong>previous()</strong>. For example:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+listIterator.add("newElement");
+listIterator.remove(); // remove the last element returned by `next()` or `previous()`
+
+          </xmp></code></pre> 
+        <p>It is important to note that <strong>add()</strong> and <strong>remove()</strong> are mutually exclusive, meaning that calling <strong>add()</strong> will invalidate any subsequent calls to <strong>remove()</strong> and vice versa.</p> 
+        <h2>Iterating an ArrayList with ListIterator</h2> 
+        <p>Now, let's take a look at an example of using ListIterator to iterate the elements of an ArrayList. We'll go through each of the steps outlined above: creating a ListIterator object, navigating the list, and adding and removing elements.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create an ArrayList and add some elements
+ArrayList<String> list = new ArrayList<String>();
+list.add("Element 1");
+list.add("Element 2");
+list.add("Element 3");
+list.add("Element 4");
+list.add("Element 5");
+
+// Create a ListIterator object
+ListIterator<String> listIterator = list.listIterator();
+
+// Navigate the list using hasNext() and next()
+while (listIterator.hasNext()) {
+    String element = listIterator.next();
+    System.out.println(element);
+}
+
+// Add an element 
+listIterator.add("Element 6");
+
+// Remove the last element returned by next()
+listIterator.remove();
+
+          </xmp></code></pre> 
+        The output of this code is as follows: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Element 1
+Element 2
+Element 3
+Element 4
+Element 5
+Element 6
+
+          </xmp></code></pre> 
+        <p>As you can see, in this example we have used ListIterator to iterate the elements of an ArrayList and add and remove elements using its <strong>add()</strong> and <strong>remove()</strong> methods.</p> 
+        <h2>Conclusion</h2> 
+        <p>In this article, we discussed how to iterate the elements of an ArrayList using the ListIterator interface. We looked at how to create a ListIterator object, how to navigate the list using its <strong>hasNext()</strong>, <strong>next()</strong>, <strong>hasPrevious()</strong>, and <strong>previous()</strong> methods, and how to add and remove elements from the list with its <strong>add()</strong> and <strong>remove()</strong> methods. Finally, we saw an example of using ListIterator to iterate the elements of an ArrayList and add and remove elements.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/"> Sorting </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-char-Array-Example.html">Java Sort char Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-LinkedHashMap-value-by-index.html">How to get LinkedHashMap value by index</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.http.client.methods.HttpPatch.html">o.a.h.c.m.HttpPatch</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-contains-a-value.html">How to check if LinkedHashMap contains a value</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.bukkit.inventory.meta.ItemMeta.html">org.bukkit.inventory.meta.ItemMeta</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.HashSet.html">java.util.HashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/"> Runtime </a> </p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Suggest-JVM-to-Run-Garbage-Collector-Example.html">Suggest JVM to Run Garbage Collector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-all-keys-of-LinkedHashMap-in-Java.html">How to get all keys of LinkedHashMap in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/"> Byte Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-byte-to-Byte-object-Example.html">Convert byte to Byte object Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-shuffle-Vector-elements-in-Java.html">How to shuffle Vector elements in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-15 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Get-Set-view-of-Keys-from-Java-HashMap-example.html">Get Set view of Keys from Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Determine-Multiple-Selection-Mode-Of-AWT-List-Example.html">Determine Multiple Selection Mode Of AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.tools.JavaFileObject.html">javax.tools.JavaFileObject</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/org.springframework.test.context.junit4.SpringJUnit4ClassRunner.html">o.s.t.c.j.SpringJUnit4ClassRunner</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-Java-Vector-in-descending-order-using-comparator-example.html">Sort Java Vector in descending order using comparator example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Java-Byte-Example.html">Java Byte Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-check-if-file-exists-in-Java.html">How to check if file exists in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Shuffle-elements-of-Java-ArrayList-example.html">Shuffle elements of Java ArrayList example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.hibernate.boot.registry.StandardServiceRegistryBuilder.html">StandardServiceRegistryBuilder</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-iterate-Java-TreeMap-in-reverse-order.html">How to iterate Java TreeMap in reverse order</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Java-String-to-byte-Array-Example.html">Java String to byte Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Create-an-object-array-from-elements-of-LinkedList-Java-example.html">Create an object array from elements of LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Iterate-LinkedList-example.html">Iterate LinkedList example</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Get-Java-Runtime-Example.html">Get Java Runtime Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/Calendar/Add-or-substract-months-to-current-date-using-Java-Calendar.html">Add or substract months to current date using Java Calendar</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Integer-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Integer object to byte, short, int, long, float and double</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Iterate-through-elements-of-Java-HashSet-example.html">Iterate through elements of Java HashSet example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-remove-an-element-from-LinkedHashSet-in-Java.html">How to remove an element from LinkedHashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/How-to-count-number-of-words-in-String.html">How to count number of words in String</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Determine-If-The-Button-Is-Visible-Example.html">Determine If The Button Is Visible Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

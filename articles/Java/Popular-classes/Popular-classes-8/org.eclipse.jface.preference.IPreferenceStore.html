@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.eclipse.jface.preference.IPreferenceStore</title> <!--timestamp=2023-02-10T00:13:46.939126711Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.eclipse.jface.preference.IPreferenceStore"> 
+  <meta name="keywords" content="org.eclipse.jface.preference.IPreferenceStore"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.eclipse.jface.preference.IPreferenceStore"> 
+  <meta property="og:description" content="org.eclipse.jface.preference.IPreferenceStore"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.eclipse.jface.preference.IPreferenceStore"> 
+  <meta name="twitter:description" content="org.eclipse.jface.preference.IPreferenceStore"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-02-09</small>
+        </div> 
+        <h1>Introduction to org.eclipse.jface.preference.IPreferenceStore</h1> The org.eclipse.jface.preference.IPreferenceStore is a class that provides an interface for reading and writing preferences. This class is used in many Eclipse plug-ins, allowing developers to easily manage various user preferences. It supports both persistent storage and backing up of data, allowing users to restore their preference values after making changes. In this article, we'll look at how to use IPreferenceStore for working with preferences in Eclipse applications. 
+        <h2>Getting Started with IPreferenceStore</h2> To begin working with the IPreferenceStore class, you first need to create an instance of the class. This can be done like so: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+IPreferenceStore prefs = new IPreferenceStore();
+
+          </xmp></code></pre> You can then call various methods on this instance to set, get and store preference values. To set a value, use the setValue() method, which takes two parameters: a string representing the preference name and a string or an integer representing the value. For example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+prefs.setValue("myPreference", "myValue");
+
+          </xmp></code></pre> To retrieve a value, use the getString() or getInt() methods, depending on the type of the value previously stored. The following code will retrieve the string value stored in the "myPreference" preference: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String myValue = prefs.getString("myPreference");
+
+          </xmp></code></pre> Finally, in order to ensure that the preference values are persisted and backed up, you can call the save() method on the IPreferenceStore instance. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+prefs.save();
+
+          </xmp></code></pre> 
+        <h2>Example Code for IPreferenceStore</h2> Let's look at an example of using the IPreferenceStore class to store and retrieve a preference value. In this example, we'll create an instance of the IPreferenceStore and then set a preference value for "backgroundColor". We'll then retrieve the value and print it to the console: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+IPreferenceStore prefs = new IPreferenceStore();
+prefs.setValue("backgroundColor", "#000000");
+String color = prefs.getString("backgroundColor");
+System.out.println(color); // prints #000000
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> In this article, we looked at the IPreferenceStore class and explored how it can be used to store and retrieve preference values in Eclipse applications. With this powerful functionality, developers can easily manage user preferences and ensure that they are persisted and backed up, allowing users to restore their preferences if needed. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/"> Float Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Java-Float-isNaN-Method-Example.html">Java Float isNaN Method Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/javax.swing.event.TreeModelListener.html">javax.swing.event.TreeModelListener</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Simple-Java-TreeMap-example.html">Simple Java TreeMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-array-to-String-using-Arrays.html">Convert String array to String using Arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Check-if-a-particular-element-exists-in-Java-HashSet-Example.html">Check if a particular element exists in Java HashSet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.google.firebase.messaging.FirebaseMessagingService.html">c.g.f.m.FirebaseMessagingService</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-iterate-LinkedHashMap.html">How to iterate LinkedHashMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Enumeration-over-Java-Vector-Example.html">Get Enumeration over Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-find-the-minimum-or-maximum-element-from-the-Vector.html">How to find the minimum or maximum element from the Vector</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/com.android.volley.toolbox.Volley.html">com.android.volley.toolbox.Volley</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-18 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.swing.JFrame.html">javax.swing.JFrame</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-All-Elements-Of-Java-Vector-Example.html">Replace All Elements Of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Determine-If-The-Checkbox-Is-Visible-Example.html">Determine If The Checkbox Is Visible Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Static/Java-static-member-variable-example.html">Java static member variable example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Create-AWT-Label-With-Text-Alignment-Example.html">Create AWT Label With Text Alignment Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-remove-duplicate-elements.html">Java LinkedList remove duplicate elements</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/com.google.common.collect.LinkedHashMultimap.html">c.g.c.c.LinkedHashMultimap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Iterate-ArrayList-using-Iterator.html">Iterate ArrayList using Iterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-ArrayList-example.html">Iterate through ArrayList example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.fasterxml.jackson.core.JsonGenerationException.html">c.f.j.c.JsonGenerationException</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.nio.MappedByteBuffer.html">java.nio.MappedByteBuffer</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-remove-the-first-entry-or-last-entry-from-the-Java-TreeMap.html">How to remove the first entry or last entry from the Java TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Static/Java-static-member-variable-example.html">Java static member variable example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-HashMap-to-TreeMap.html">Convert HashMap to TreeMap</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/InputStream/Read-character-from-console-using-InputStream.html">Read character from console using InputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.content.pm.ActivityInfo.html">android.content.pm.ActivityInfo</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-String-or-String-array-to-HashMap.html">Convert String or String array to HashMap</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/List-Odd-Numbers-Java-Example.html">List Odd Numbers Java Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/java.security.PrivilegedActionException.html">j.s.PrivilegedActionException</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/JLabel-Set-Font-Example.html">JLabel Set Font Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
