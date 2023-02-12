@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.lang.ref.SoftReference</title> <!--timestamp=2023-02-12T00:14:33.278034805Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.lang.ref.SoftReference"> 
+  <meta name="keywords" content="java.lang.ref.SoftReference"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.lang.ref.SoftReference"> 
+  <meta property="og:description" content="java.lang.ref.SoftReference"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.lang.ref.SoftReference"> 
+  <meta name="twitter:description" content="java.lang.ref.SoftReference"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-02-11</small>
+        </div> 
+        <h1>Java.lang.ref.SoftReference</h1> 
+        <p>Java.lang.ref.SoftReference is a class that helps the JVM manage memory efficiently. It is part of the java.lang package and is used to refer to an object that can be discarded when the JVM needs to free up memory. This allows the JVM to optimize memory use while still giving the application access to data.</p> 
+        <p>SoftReferences are typically used to hold objects that are expensive to create and not needed in every code path. They are often used to hold onto large collections of data that need to be accessed by several different methods, but don't need to be kept in memory at all times.</p> 
+        <p>The main characteristic of SoftReferences is that they are weakly referenced. This means that if the JVM needs to free up memory for another task, the SoftReference will be the first thing to go. This makes them useful for caching objects, as the cache can be easily cleared when needed.</p> 
+        <p>SoftReferences are also useful for garbage collection, as they can be used to point to objects that should be eligible for garbage collection. By keeping track of references to objects, the JVM can easily determine when an object can no longer be used and free up the associated memory.</p> 
+        <p>The following is an example of how to create a SoftReference:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+SoftReference<MyObject> ref = new SoftReference<MyObject>(new MyObject());
+
+          </xmp></code></pre> 
+        <p>The following is an example of how to check if a SoftReference has been cleared (i.e. the associated object is eligible for garbage collection):</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+boolean isCleared = ref.isEnqueued();
+
+          </xmp></code></pre> 
+        <p>The following is an example of how to retrieve the object associated with a SoftReference:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MyObject myObject = ref.get();
+
+          </xmp></code></pre> 
+        <p>The following is an example of how to clear a SoftReference:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ref.clear();
+
+          </xmp></code></pre> 
+        <p>SoftReferences are a powerful tool for managing memory in Java applications. By using them wisely, developers can make sure that their applications use only the memory they need, while still having access to the data they need.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-create-HashMap-in-Java-(HashMap-constructors).html">How to create HashMap in Java (HashMap constructors)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/"> Searching </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-short-Array-Example.html">Performing Binary Search on Java short Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.google.common.annotations.Beta.html">com.google.common.annotations.Beta</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/"> Searching </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-char-Array-Example.html">Performing Binary Search on Java char Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet-Directory-URL-or-Code-Base-Example.html">Get Applet Directory URL or Code Base Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/"> Convertion </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-double.html">Convert String to double</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.graphics.Bitmap.CompressFormat.html">a.g.B.CompressFormat</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.springframework.util.ReflectionUtils.html">o.s.u.ReflectionUtils</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Iterate-through-elements-of-Java-HashSet-example.html">Iterate through elements of Java HashSet example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Java-ArrayList-capacity.html">Java ArrayList capacity</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-16 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Gabriel</h3> <p><a href="#">2023-03-19 15:40</a></p> it was very helpful <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Adam</h3> <p><a href="#">2023-04-06 04:25</a></p> <p>These Programs Are Very Useful For Java Beginners!... Thanks! ...</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Binary-search-ArrayList-elements-using-Comparator.html">Binary search ArrayList elements using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Get-JLabel’s-Text-Example.html">Get JLabel’s Text Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-octal-number-to-decimal-number-example.html">Convert octal number to decimal number example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Traverse-through-ArrayList-in-forward-direction-using-Java-ListIterator-Example.html">Traverse through ArrayList in forward direction using Java ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Iterate-through-keys-of-Java-Hashtable-example.html">Iterate through keys of Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/android.nfc.Tag.html">android.nfc.Tag</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-LinkedHashMap-size.html">How to check LinkedHashMap size</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.shiro.realm.AuthorizingRealm.html">o.a.s.r.AuthorizingRealm</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.poi.hssf.usermodel.HSSFSheet.html">o.a.p.h.u.HSSFSheet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-copy,-merge,-or-clone-the-TreeSet-in-Java.html">How to copy, merge, or clone the TreeSet in Java</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.support.annotation.AttrRes.html">android.support.annotation.AttrRes</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-primitive-to-wrapper-objects.html">Convert primitive to wrapper objects</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Basic-Java-Applet-Example.html">Basic Java Applet Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-font/Get-Available-Font-Family-Names-Example.html">Get Available Font Family Names Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-headset,-tailset,-and-subset-from-the-Java-TreeSet.html">How to get headset, tailset, and subset from the Java TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-All-Elements-Of-Java-Vector-Example.html">Replace All Elements Of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-convert-LinkedHashMap-to-List-in-Java.html">How to convert LinkedHashMap to List in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-array-to-LinkedHashSet-using-Arrays-class.html">Convert array to LinkedHashSet using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.hadoop.hdfs.MiniDFSCluster.html">o.a.h.h.MiniDFSCluster</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.app.AlertDialog.Builder.html">android.app.AlertDialog.Builder</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
