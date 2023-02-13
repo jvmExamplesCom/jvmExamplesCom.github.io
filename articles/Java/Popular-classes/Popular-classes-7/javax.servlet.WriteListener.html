@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javax.servlet.WriteListener</title> <!--timestamp=2023-02-13T00:13:25.574655707Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.servlet.WriteListener"> 
+  <meta name="keywords" content="javax.servlet.WriteListener"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.servlet.WriteListener"> 
+  <meta property="og:description" content="javax.servlet.WriteListener"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.servlet.WriteListener"> 
+  <meta name="twitter:description" content="javax.servlet.WriteListener"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-02-12</small>
+        </div> 
+        <h1>Introduction to javax.servlet.WriteListener</h1> 
+        <p>The javax.servlet.WriteListener interface is an important part of the Java Servlet API and provides a way for developers to write asynchronous code that is compatible with the web container. This interface can be used to improve the performance and scalability of web applications since it allows for asynchronous content streaming directly from the server to the client.</p> 
+        <p>In this article, we will explore the javax.servlet.WriteListener interface and its related classes, describe its methods and how to use them, and provide some examples of how to implement it in real-world applications. </p> 
+        <h2>Overview of the javax.servlet.WriteListener Interface</h2> 
+        <p>The javax.servlet.WriteListener interface provides a way to write data asynchronously, while still maintaining compatibility with the web container. It was introduced in Java EE 7 and has been supported ever since. The interface is defined as follows:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public interface WriteListener {
+    void onWritePossible() throws IOException;
+    void onError(Throwable t)
+}
+
+          </xmp></code></pre> 
+        <p>The onWritePossible() method is called whenever the web container determines that writing data is possible. The onError() method is called when an error occurs during writing. </p> 
+        <p>In order to use the javax.servlet.WriteListener interface, the developer needs to implement it by providing an implementation of the two methods defined above. Once the implementation is ready, the web container needs to be aware of it so that it can call the methods when needed. This is achieved by registering the WriteListener with the web container, after which it can be used for asynchronous writing. </p> 
+        <h2>Usage of the javax.servlet.WriteListener Interface</h2> 
+        <p>The javax.servlet.WriteListener interface can be used to improve the performance of web applications by allowing asynchronous writing. This can be especially useful in applications that have large amounts of data that need to be streamed to the client. </p> 
+        <p>In order to use the javax.servlet.WriteListener interface, the developer must first create an implementation of the two methods described above. Once the implementation is ready, it must be registered with the web container. This can be done by calling the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ServletRelease.register(WriteListener listener)
+
+          </xmp></code></pre> method. After the WriteListener has been registered, it can be used for asynchronous writing. 
+        <p>The following example shows how the javax.servlet.WriteListener interface can be used to write data asynchronously. In this example, a WriteListener is registered with the web container and used to write data to the response object.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Register the WriteListener
+ServletRelease.register(new MyWriteListener());
+
+// Write data to the response object 
+private class MyWriteListener implements WriteListener {
+    public void onWritePossible() throws IOException {
+        response.getWriter().write("Hello World!");
+    }
+
+    public void onError(Throwable t) {
+        // Handle error
+    }
+}
+
+          </xmp></code></pre> 
+        <p>Once the WriteListener is registered with the web container, it will be called when the web container determines that writing data is possible. In this way, the data is written asynchronously. </p> 
+        <h2>Conclusion</h2> 
+        <p>The javax.servlet.WriteListener interface is an important part of the Java Servlet API and provides a way for developers to write asynchronous code that is compatible with the web container. This interface can be used to improve the performance and scalability of web applications since it allows for asynchronous content streaming directly from the server to the client.</p> 
+        <p>In this article, we explored the javax.servlet.WriteListener interface and its related classes, described its methods and how to use them, and provided some examples of how to implement it in real-world applications. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataInputStream/"> DataInputStream </a> </p> <a href="/articles/Java/File-And-IO/DataInputStream/Read-int-from-file-using-DataInputStream.html">Read int from file using DataInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/retrofit2.http.Headers.html">retrofit2.http.Headers</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-reverse-order-of-the-TreeSet-elements-(iterate-TreeSet-in-reverse-order).html">How to reverse order of the TreeSet elements (iterate TreeSet in reverse order)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/androidx.annotation.ColorRes.html">androidx.annotation.ColorRes</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/java.io.StreamTokenizer.html">java.io.StreamTokenizer</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Align-Icon-in-JLabel-Example.html">Align Icon in JLabel Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-create-new-objects-of-LinkedHashSet-class-(LinkedHashSet-constructors).html">How to create new objects of LinkedHashSet class (LinkedHashSet constructors)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Oval-&-Circle-in-Applet-Window-Example.html">Draw Oval & Circle in Applet Window Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-add-elements-to-LinkedHashSet-object.html">How to add elements to LinkedHashSet object</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/"> Searching </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-byte-Array-Example.html">Performing Binary Search on Java byte Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-24 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Adam</h3> <p><a href="#">2023-03-30 21:32</a></p> <p>thanks. This is the first sample project I checked so far</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Ojas</h3> <p><a href="#">2023-03-26 12:32</a></p> its very helpful programs to all Thanks...... <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javafx.scene.control.Alert.html">javafx.scene.control.Alert</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Enumeration-over-Java-Vector-Example.html">Get Enumeration over Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-keys-using-Comparable-interface.html">Sort LinkedHashMap by keys using Comparable interface</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Create-AWT-List-Example.html">Create AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Determine-Multiple-Selection-Mode-Of-AWT-List-Example.html">Determine Multiple Selection Mode Of AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.media.MediaFormat.html">android.media.MediaFormat</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-hexadecimal-number-to-decimal-number-example.html">Convert hexadecimal number to decimal number example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/Deflater/Compress-Byte-Array-Using-Deflater-Example.html">Compress Byte Array Using Deflater Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.provider.Settings.html">android.provider.Settings</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Get-all-keys-of-Java-HashMap-example.html">Get all keys of Java HashMap example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.zip.GZIPOutputStream.html">java.util.zip.GZIPOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-iterate-Java-TreeMap-in-reverse-order.html">How to iterate Java TreeMap in reverse order</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.apache.logging.log4j.Level.html">org.apache.logging.log4j.Level</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-All-Items-From-AWT-List-Example.html">Get All Items From AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-the-last-element-from-ArrayList.html">Remove the last element from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-directory-along-with-required-nonexistent-parent-directories.html">Create directory along with required nonexistent parent directories</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.ws.rs.container.ContainerRequestFilter.html">j.w.r.c.ContainerRequestFilter</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-check-if-LinkedHashSet-is-empty-in-Java.html">How to check if LinkedHashSet is empty in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-clear-or-remove-all-mappings-from-LinkedHashMap.html">How to clear or remove all mappings from LinkedHashMap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-short-Array-Example.html">Java Sort short Array Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
