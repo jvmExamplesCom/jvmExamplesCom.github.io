@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javax.net.ssl.SSLSocketFactory</title> <!--timestamp=2023-02-24T00:13:04.738248435Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.net.ssl.SSLSocketFactory"> 
+  <meta name="keywords" content="javax.net.ssl.SSLSocketFactory"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.net.ssl.SSLSocketFactory"> 
+  <meta property="og:description" content="javax.net.ssl.SSLSocketFactory"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.net.ssl.SSLSocketFactory"> 
+  <meta name="twitter:description" content="javax.net.ssl.SSLSocketFactory"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-02-23</small>
+        </div> 
+        <h1>javax.net.ssl.SSLSocketFactory</h1> 
+        <p>The javax.net.ssl.SSLSocketFactory class provides a secure socket factory class that enables secure communication between a client and a server. The primary purpose of the class is to enable secure communication over SSL (Secure Socket Layer) or TLS (Transport Layer Security) protocols. It implements the javax.net.SocketFactory interface, and allows secure communication using the SSLSocket protocol.</p> 
+        <p>The class is used mainly in applications where secure communication is required, such as in web browsers, email programs, etc. The class provides an API for creating sockets with SSLSocket instances. It also provides methods to configure the socket's secure session parameters, such as cipher suites, key size, truststore, etc.</p> 
+        <h2>Creating a Secure Socket Connection</h2> 
+        <p>Creating a secure socket connection involves creating an instance of the SSLSocketFactory class, setting the parameters for the secure connection, and then calling its createSocket() method.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+SSLSocketFactory socketFactory = SSLSocketFactory.getDefault();
+socketFactory.setEnabledCipherSuites(new String[]{"TLS_RSA_WITH_AES_128_CBC_SHA"});
+socketFactory.setTruststore(truststore);
+
+// create a secure socket
+SSLSocket socket = (SSLSocket) socketFactory.createSocket(host, port);
+
+          </xmp></code></pre> 
+        <p>In the above example, we create a secure socket using the SSLSocketFactory class. The setEnabledCipherSuites() method sets the cipher suites for the secure connection. This is followed by setting the truststore for the secure connection. Finally, the createSocket() method is called to create the secure socket.</p> 
+        <h2>Configuring Socket Parameters</h2> 
+        <p>The SSLSocket class provides several methods which can be used to configure the socket parameters. These include:</p> 
+        <ul> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+setEnabledProtocols(String[] protocols)
+
+            </xmp></code></pre> – sets the protocols which will be used for the secure connection.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+setNeedClientAuth(boolean needClientAuth)
+
+            </xmp></code></pre> – sets whether client authentication is required for the secure connection.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+setWantClientAuth(boolean wantClientAuth)
+
+            </xmp></code></pre> – sets whether client authentication is wanted for the secure connection.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+setEnabledCipherSuites(String[] ciphers)
+
+            </xmp></code></pre> – sets the cipher suites for the secure connection.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+setTruststore(String trustStore)
+
+            </xmp></code></pre> – sets the truststore for the secure connection.</li> 
+        </ul> 
+        <h2>Example</h2> 
+        <p>The following example shows how to create a secure socket connection and configure the socket parameters:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+SSLSocketFactory socketFactory = SSLSocketFactory.getDefault();
+socketFactory.setEnabledCipherSuites(new String[]{"TLS_RSA_WITH_AES_128_CBC_SHA"});
+socketFactory.setNeedClientAuth(true);
+socketFactory.setEnabledProtocols(new String[]{"TLSv1.2"});
+socketFactory.setTruststore(truststore);
+
+// create a secure socket
+SSLSocket socket = (SSLSocket) socketFactory.createSocket(host, port);
+
+          </xmp></code></pre> 
+        <p>In this example, we create a secure socket using the SSLSocketFactory class, and configure the parameters of the socket. We set the enabled cipher suites, the need for client authentication, the enabled protocols, and the truststore. Finally, we call the createSocket() method to create the secure socket.</p> 
+        <h2>Conclusion</h2> 
+        <p>In this blog post, we have discussed the javax.net.ssl.SSLSocketFactory class, and how it can be used to create secure socket connections. We have seen how to configure the socket parameters, and how to create a secure socket connection. We have also seen an example of how to use the SSLSocketFactory class to create a secure socket.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-contains-a-key.html">How to check if LinkedHashMap contains a key</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Wrappers/"> Wrappers </a> </p> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-primitive-to-wrapper-objects.html">Convert primitive to wrapper objects</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-fix-java.io.FileNotFoundException-(access-is-denied).html">FileNotFoundException (access is denied)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.apache.log4j.AppenderSkeleton.html">org.apache.log4j.AppenderSkeleton</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-convert-an-array-to-Vector.html">How to convert an array to Vector</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/java.util.function.ToDoubleFunction.html">java.util.function.ToDoubleFunction</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/"> Sorting </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-double-Array-Example.html">Java Sort double Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Math-Class/"> Math Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-exponential-value-of-a-number-using-Math.exp.html">F.exp</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-remove-elements.html">Java LinkedList remove elements</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.datastax.driver.core.Row.html">com.datastax.driver.core.Row</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-06 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Number-Of-Visible-Rows-Of-AWT-List-Example.html">Get Number Of Visible Rows Of AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Compression-Method-of-Zip-Entry-Example.html">Get Compression Method of Zip Entry Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.baomidou.mybatisplus.annotation.TableName.html">c.b.m.a.TableName</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Remove-first-and-last-elements-of-LinkedList-Java-example.html">Remove first and last elements of LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-sort-Java-HashSet-elements.html">How to sort Java HashSet elements</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.apache.poi.ss.usermodel.WorkbookFactory.html">o.a.p.s.u.WorkbookFactory</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/ArrayList-insert-element-at-the-beginning.html">ArrayList insert element at the beginning</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Insert-an-Element-into-LinkedList-Java-example.html">Insert an Element into LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Disable-Label-Example.html">Disable Label Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.springframework.beans.factory.BeanCreationException.html">o.s.b.f.BeanCreationException</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Swing/JLabel/Get-Horizontal-Alignment-of-JLabel-Example.html">Get Horizontal Alignment of JLabel Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.thoughtworks.xstream.io.HierarchicalStreamWriter.html">c.t.x.i.HierarchicalStreamWriter</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/lombok.experimental.UtilityClass.html">lombok.experimental.UtilityClass</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-float-to-String.html">Convert float to String</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Print-Java-LinkedHashMap.html">Print Java LinkedHashMap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-LinkedHashMap-using-an-Iterator.html">How to iterate LinkedHashMap using an Iterator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/io.netty.channel.epoll.EpollEventLoopGroup.html">i.n.c.e.EpollEventLoopGroup</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-String-as-characters-to-a-file-using-DataOutputStream.html">Write String as characters to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Enumeration-over-Java-ArrayList-Example.html">Get Enumeration over Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-long-to-a-file-using-DataOutputStream.html">Write long to a file using DataOutputStream</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
