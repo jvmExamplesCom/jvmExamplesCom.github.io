@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.apache.http.message.BasicStatusLine</title> <!--timestamp=2023-02-28T00:13:46.809820171Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.apache.http.message.BasicStatusLine"> 
+  <meta name="keywords" content="org.apache.http.message.BasicStatusLine"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.apache.http.message.BasicStatusLine"> 
+  <meta property="og:description" content="org.apache.http.message.BasicStatusLine"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.apache.http.message.BasicStatusLine"> 
+  <meta name="twitter:description" content="org.apache.http.message.BasicStatusLine"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-02-27</small>
+        </div> 
+        <h1>Introduction to org.apache.http.message.BasicStatusLine</h1> 
+        <p> org.apache.http.message.BasicStatusLine is a class in the Apache Http Components library that defines an HTTP Status Line. HTTP Status Lines are messages sent by a server in response to a client request, and contain status codes that indicate the outcome of the request. The BasicStatusLine class is used to create instances of these status lines, and provides useful methods for manipulating them. In this article, we'll explore the features of BasicStatusLine and provide several code examples illustrating how to use it. </p> 
+        <h2>Creating Instances of BasicStatusLine</h2> 
+        <p> BasicStatusLine objects can be created in several ways. The most common way is to use the constructor that takes three parameters: a protocol version (e.g. HTTP/1.1), a status code (e.g. 200), and a reason phrase (e.g. “OK”). </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+BasicStatusLine statusLine = new BasicStatusLine(
+    new ProtocolVersion("HTTP", 1, 1), 200, "OK"
+);
+
+          </xmp></code></pre> 
+        <p> In the example above we create a new BasicStatusLine object with a protocol of “HTTP/1.1”, a status code of “200”, and a reason phrase of “OK”. </p> 
+        <p> Alternatively, if we don't need to specify a reason phrase, we can use the constructor that takes only two parameters: a protocol version and a status code. The reason phrase will be set to an empty string. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+BasicStatusLine statusLine = new BasicStatusLine(
+    new ProtocolVersion("HTTP", 1, 1), 
+    200
+);
+
+          </xmp></code></pre> 
+        <p> We can also construct BasicStatusLine objects from existing StatusLine objects. This is useful if we need to make a copy of a StatusLine object and modify it. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+StatusLine existingLine = ...;
+BasicStatusLine statusLine = new BasicStatusLine(existingLine);
+
+          </xmp></code></pre> 
+        <h2>Accessing StatusLine Properties</h2> 
+        <p> Once we have a BasicStatusLine object, we can retrieve its individual properties. To get the protocol version, we can use the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getProtocolVersion()
+
+          </xmp></code></pre> method. This method returns a ProtocolVersion object. We can retrieve the version number as follows: 
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ProtocolVersion version = statusLine.getProtocolVersion();
+int majorVersion = version.getMajoVersion();
+int minorVersion = version.getMinorVersion();
+
+          </xmp></code></pre> 
+        To get the status code, we can use the
+        <pre>getStatusCode()</pre> method. This returns an integer value representing the status code. For example: 
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+int statusCode = statusLine.getStatusCode();
+
+          </xmp></code></pre> 
+        And to get the reason phrase, we can use the
+        <pre>getReasonPhrase()</pre> method. This returns a String containing the reason phrase associated with the status line. For example: 
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String reasonPhrase = statusLine.getReasonPhrase();
+
+          </xmp></code></pre> 
+        <h2>Updating StatusLine Properties</h2> 
+        <p> BasicStatusLine provides several mutator methods for updating its properties. To change the protocol version, we can use the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+setProtocolVersion(ProtocolVersion)
+
+          </xmp></code></pre> method. For example: 
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+statusLine.setProtocolVersion(new ProtocolVersion("HTTP", 1, 0));
+//statusLine's protocol version is now HTTP/1.0
+
+          </xmp></code></pre> 
+        To change the status code, we can use the
+        <pre>setStatusCode(int)</pre> method. For example: 
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+statusLine.setStatusCode(404); //statusLine's status code is now 404
+
+          </xmp></code></pre> 
+        And to change the reason phrase, we can use the
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+setReasonPhrase(String)
+
+          </xmp></code></pre> method. For example: 
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+statusLine.setReasonPhrase("Not Found"); //statusLine's reason phrase is now "Not Found"
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p> In this article, we explored the features of org.apache.http.message.BasicStatusLine. We saw how to create instances of BasicStatusLine, and how to access and update its properties. With this knowledge, we can now use the BasicStatusLine class to create and manipulate HTTP status lines. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/"> Long Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Java-Long-Example.html">Java Long Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Get-JLabel’s-Text-Example.html">Get JLabel’s Text Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-HashSet-to-ArrayList-in-Java.html">Convert HashSet to ArrayList in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-remove-an-element-from-LinkedHashSet-in-Java.html">How to remove an element from LinkedHashSet in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-find-an-element-in-the-Vector-using-indexOf-and-lastIndexOf-methods.html">How to find an element in the Vector using indexOf and lastIndexOf methods</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/androidx.core.app.NotificationCompat.html">androidx.core.app.NotificationCompat</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.google.zxing.MultiFormatReader.html">com.google.zxing.MultiFormatReader</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/List/"> List </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-Map-to-List.html">Convert Map to List</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.antlr.v4.runtime.tree.TerminalNode.html">o.a.v.r.t.TerminalNode</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Sub-Map-from-Java-TreeMap-example.html">Get Sub Map from Java TreeMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-02 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Victor</h3> <p><a href="#">2023-04-04 17:52</a></p> I do not understand details <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Ojas</h3> <p><a href="#">2023-03-30 01:00</a></p> Interesting, thx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-print-elements-example.html">Java LinkedList print elements example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Check-if-a-particular-element-exists-in-Java-HashSet-Example.html">Check if a particular element exists in Java HashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-create-a-new-TreeMap-object-using-the-Comparator-interface.html">How to create a new TreeMap object using the Comparator interface</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Set-from-Java-TreeSet-example.html">Get Synchronized Set from Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/com.amazonaws.services.s3.AmazonS3.html">com.amazonaws.services.s3.AmazonS3</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.elasticsearch.action.get.GetResponse.html">o.e.a.g.GetResponse</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Insert-all-elements-of-other-Collection-to-Specified-Index-of-Java-Vector-Example.html">Insert all elements of other Collection to Specified Index of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-Minimum-element-of-Java-Vector-Example.html">Find Minimum element of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-double.html">Convert String to double</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/com.sun.management.OperatingSystemMXBean.html">c.s.m.OperatingSystemMXBean</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer.html">EnableAuthorizationServer</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.ws.rs.core.SecurityContext.html">javax.ws.rs.core.SecurityContext</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/CheckedInputStream/Extract-File-With-CRC32-Checksum-Example.html">Extract File With CRC32 Checksum Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Rename-file-or-directory.html">Rename file or directory</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.graphics.drawable.GradientDrawable.html">a.g.d.GradientDrawable</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Get-parent-directory-as-a-File-object.html">Get parent directory as a File object</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-Minimum-element-of-Java-Vector-Example.html">Find Minimum element of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-LinkedHashMap-using-an-Iterator.html">Iterate through LinkedHashMap using an Iterator</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Threads/Set-Thread-Name-Example.html">Set Thread Name Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-iterate-through-the-Vector-elements.html">How to iterate through the Vector elements</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
