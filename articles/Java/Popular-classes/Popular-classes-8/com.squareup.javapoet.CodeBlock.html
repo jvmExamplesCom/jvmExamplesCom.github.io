@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - com.squareup.javapoet.CodeBlock</title> <!--timestamp=2023-03-03T01:52:51.452285350Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="com.squareup.javapoet.CodeBlock"> 
+  <meta name="keywords" content="com.squareup.javapoet.CodeBlock"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - com.squareup.javapoet.CodeBlock"> 
+  <meta property="og:description" content="com.squareup.javapoet.CodeBlock"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - com.squareup.javapoet.CodeBlock"> 
+  <meta name="twitter:description" content="com.squareup.javapoet.CodeBlock"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-03-02</small>
+        </div> 
+        <h1>Introduction to com.squareup.javapoet.CodeBlock</h1> 
+        <p>JavaPoet is a Java API for generating Java source code in a declarative way. The com.squareup.javapoet.CodeBlock class provides a way to represent a Java source code snippet that can be generated as part of a larger program. This article will explore the features of com.squareup.javapoet.CodeBlock and provide some sample code examples.</p> 
+        <h2>Creating a CodeBlock</h2> 
+        <p>A CodeBlock can be created in one of two ways: with a single string literal, or with a series of Statements. In the first case, a code block is created with a single statement, which can be a method call, a variable assignment, or a literal value. For example:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+CodeBlock cb = CodeBlock.of("System.out.println(\"Hello World\");");
+
+          </xmp></code></pre> 
+        <p>In the second case, a CodeBlock is created by providing a list of Statements, which can be combined together using the and() and or() methods. Statements are formed from MethodInvocation objects which represent calls to a specific method and are configured with a list of Arguments representing parameters for that method. For example:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MethodInvocation printMethod = 
+    MethodInvocation.builder()
+        .type(String.class)
+        .methodName("println")
+        .addArgument("Hello World")
+        .build();
+
+CodeBlock cb2 = CodeBlock.builder()
+        .addStatement(printMethod)
+        .build();
+
+          </xmp></code></pre> 
+        <h2>Formatting and Generating Output</h2> 
+        <p>Once a CodeBlock is created, it can be formatted using the format() method. This method applies indentation, line breaks and other formatting rules to the code, resulting in a nicely formatted output. For example:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String formatted = cb.format();
+// prints "System.out.println("Hello World");"
+
+          </xmp></code></pre> 
+        <p>The generated code can then be printed to an output stream, saved to a file, or used in further processing for generating a complete Java program. For example:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+PrintWriter out = new PrintWriter(System.out);
+cb.generate(out);
+out.flush();
+// prints "System.out.println("Hello World");"
+
+FileOutputStream fos = new FileOutputStream("hello.java");
+cb2.generate(fos);
+fos.close();
+// creates a file called hello.java containing
+// "System.out.println("Hello World");"
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>com.squareup.javapoet.CodeBlock provides a convenient and flexible way to generate Java source code snippets that can be used in conjunction with other Java APIs to create complete Java programs. It is easy to use, well documented, and has a number of useful features such as formatting and generating output.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Display-Image-in-an-Applet-Example.html">Display Image in an Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/"> AWT Button </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Determine-If-The-Button-Is-Enabled-Example.html">Determine If The Button Is Enabled Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.apache.hadoop.hbase.client.HBaseAdmin.html">o.a.h.h.c.HBaseAdmin</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.openjdk.jmh.annotations.Measurement.html">o.o.j.a.Measurement</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Vector-to-ArrayList-and-ArrayList-to-Vector.html">Convert Vector to ArrayList and ArrayList to Vector</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-Set-to-array-(Convert-HashSet-to-Array).html">Convert Set to array (Convert HashSet to Array)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JTextField/"> JTextField </a> </p> <a href="/articles/Java/Swing/JTextField/JTextField-Disable-Enable-Example.html">JTextField Disable Enable Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-Minimum-element-of-Java-Vector-Example.html">Find Minimum element of Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Static/"> Static </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Static/Java-static-method-example.html">Java static method example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.springframework.transaction.PlatformTransactionManager.html">o.s.t.PlatformTransactionManager</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-26 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Mark</h3> <p><a href="#">2023-04-16 00:34</a></p> I do not understand details <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Nahish</h3> <p><a href="#">2023-04-21 13:18</a></p> its very helpful programs to all Thanks...... <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-an-element-from-specified-index-of-Java-ArrayList-Example.html">Remove an element from specified index of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-check-HashSet-size-(size-method).html">How to check HashSet size (size method)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.springframework.security.core.userdetails.User.html">o.s.s.c.u.User</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Sort-LinkedHashMap-by-keys.html">Sort LinkedHashMap by keys</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.bukkit.configuration.file.FileConfiguration.html">o.b.c.f.FileConfiguration</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.poi.ss.usermodel.Sheet.html">org.apache.poi.ss.usermodel.Sheet</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet-Info-Example.html">Get Applet Info Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-TreeSet-to-List-(ArrayList-or-LinkedList).html">How to convert TreeSet to List (ArrayList or LinkedList)</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Remove-All-Items-From-a-List-Example.html">Remove All Items From a List Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Foreground-Color-Of-an-Applet-Window-Example.html">Get Foreground Color Of an Applet Window Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.os.StatFs.html">android.os.StatFs</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Item-From-Single-Select-AWT-List-Example.html">Get Selected Item From Single Select AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.springframework.boot.web.client.RestTemplateBuilder.html">o.s.b.w.c.RestTemplateBuilder</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-compare-two-TreeSet-objects-using-the-equals-method.html">How to compare two TreeSet objects using the equals method</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-remove-duplicate-elements.html">Java LinkedList remove duplicate elements</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/How-to-sort-LinkedList-in-Java-example.html">How to sort LinkedList in Java example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-HashMap-to-TreeMap.html">Convert HashMap to TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Resize-Applet-Window-Example.html">Resize Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-float.html">Convert String to float</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.eclipse.ui.IEditorPart.html">org.eclipse.ui.IEditorPart</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

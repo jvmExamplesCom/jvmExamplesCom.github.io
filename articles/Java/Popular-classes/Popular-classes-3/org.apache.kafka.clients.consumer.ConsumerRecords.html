@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.apache.kafka.clients.consumer.ConsumerRecords</title> <!--timestamp=2023-03-03T01:52:45.527468152Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.apache.kafka.clients.consumer.ConsumerRecords"> 
+  <meta name="keywords" content="org.apache.kafka.clients.consumer.ConsumerRecords"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.apache.kafka.clients.consumer.ConsumerRecords"> 
+  <meta property="og:description" content="org.apache.kafka.clients.consumer.ConsumerRecords"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.apache.kafka.clients.consumer.ConsumerRecords"> 
+  <meta name="twitter:description" content="org.apache.kafka.clients.consumer.ConsumerRecords"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-03-02</small>
+        </div> 
+        <h1>Introduction to org.apache.kafka.clients.consumer.ConsumerRecords</h1> 
+        <p>org.apache.kafka.clients.consumer.ConsumerRecords is an interface used for consuming records from a Kafka topic. It contains the records fetched from a single partition of a single topic. It also provides methods for getting records by offset, topics and partitions. It is part of the Apache Kafka Java Client Library.</p> 
+        <h2>Creating a ConsumerRecord Object</h2> 
+        <p>To create a ConsumerRecord object, you will need to instantiate it using the following syntax:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ConsumerRecords<K, V> consumerRecords = new ConsumerRecords<>(records);
+
+          </xmp></code></pre> 
+        Where
+        <pre>K</pre> and 
+        <pre>V</pre> are the types of the keys and values of the records respectively.
+         
+        <h2>Getting Records By Offset</h2> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ConsumerRecord#offset()
+
+          </xmp></code></pre> method returns the offset of a record within a partition. This can be used to retrieve records from a particular offset in a partition.
+         
+        The syntax for this method is as follows: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+long offset = consumerRecord.offset();
+
+          </xmp></code></pre> 
+        <h2>Getting Records By Topic</h2> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ConsumerRecords#byTopic(String topic)
+
+          </xmp></code></pre> method returns all records for the specified topic. The syntax for this method is as follows:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ConsumerRecords<K, V> topicRecords = consumerRecords.byTopic(topic);
+
+          </xmp></code></pre> 
+        <h2>Getting Records By Partition</h2> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ConsumerRecords#byPartition(TopicPartition partition)
+
+          </xmp></code></pre> method returns all records for the specified partition. The syntax for this method is as follows:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ConsumerRecords<K, V> partitionRecords = consumerRecords.byPartition(partition);
+
+          </xmp></code></pre> 
+        <h2>Iterating Through ConsumerRecords</h2> 
+        <p>You can iterate through consumer records using the forEach method as follows:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+consumerRecords.forEach(record -> {
+    // your code here
+});
+
+          </xmp></code></pre> 
+        <p>This will call the lambda you pass it for each record in the consumer records.</p> 
+        <h2>Conclusion</h2> 
+        <p>In this article we discussed org.apache.kafka.clients.consumer.ConsumerRecords, how to create a consumer record object, how to get records by offset, topic, and partition, and how to iterate through consumer records.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/"> Hashtable </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Remove-value-from-Java-Hashtable-example.html">Remove value from Java Hashtable example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.swing.JCheckBoxMenuItem.html">javax.swing.JCheckBoxMenuItem</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Iterate-through-elements-Java-Vector-using-Iterator-Example.html">Iterate through elements Java Vector using Iterator Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-make-file-hidden-in-Java.html">How to make file hidden in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipEntry/"> ZipEntry </a> </p> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Uncompressed-Size-of-Zip-Entry-Example.html">Get Uncompressed Size of Zip Entry Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/com.google.common.util.concurrent.ListenableFuture.html">c.g.c.u.c.ListenableFuture</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-Java-TreeMap-using-an-iterator.html">Iterate through Java TreeMap using an iterator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/"> Float Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Java-Float-isInfinite-Method-Example.html">Java Float isInfinite Method Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.intellij.psi.PsiDirectory.html">com.intellij.psi.PsiDirectory</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Sort-LinkedHashMap-by-keys.html">Sort LinkedHashMap by keys</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-25 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Victor</h3> <p><a href="#">2023-04-30 12:33</a></p> <p>These Programs Are Very Useful For Java Beginners!... Thanks! ...</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>JavaFan</h3> <p><a href="#">2023-04-04 08:08</a></p> Great example! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.fasterxml.jackson.annotation.JsonGetter.html">c.f.j.a.JsonGetter</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-compare-two-TreeSet-objects-using-the-equals-method.html">How to compare two TreeSet objects using the equals method</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/BufferedOutputStream/Write-byte-array-to-file-using-BufferedOutputStream.html">Write byte array to file using BufferedOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/Java-short-Example.html">Java short Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-check-If-HashMap-is-empty-example.html">How to check If HashMap is empty example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-all-occurrences-of-specified-element-of-Java-ArrayList-Example.html">Replace all occurrences of specified element of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/com.google.common.collect.Iterators.html">com.google.common.collect.Iterators</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Check-if-element-exists-in-Java-LinkedList-(LinkedList-contains-element).html">Check if element exists in Java LinkedList (LinkedList contains element)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/com.netflix.zuul.context.RequestContext.html">c.n.z.c.RequestContext</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-create-new-empty-file-in-Java.html">How to create new empty file in Java</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-LinkedHashMap-in-reverse-order-using-ListIterator.html">Iterate through LinkedHashMap in reverse order using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Iterate-through-the-values-of-Java-HashMap-example.html">Iterate through the values of Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-LinkedHashMap-to-List.html">Convert LinkedHashMap to List</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Get-name-of-specified-file-or-directory.html">Get name of specified file or directory</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.util.TypedValue.html">android.util.TypedValue</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Remove-An-Item-From-a-List-Example.html">Remove An Item From a List Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Smiley-In-Applet-Example.html">Draw Smiley In Applet Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Sorting-Algorithms/Java-Bubble-Sort-Descending-Order-Example.html">Java Bubble Sort Descending Order Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/Calendar/Add-or-substract-years-to-current-date-using-Java-Calendar.html">Add or substract years to current date using Java Calendar</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.script.Invocable.html">javax.script.Invocable</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
