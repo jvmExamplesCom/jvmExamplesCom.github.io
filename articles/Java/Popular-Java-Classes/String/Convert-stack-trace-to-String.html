@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - Convert stack trace to String</title> <!--timestamp=2023-03-06T00:13:18.008099662Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="Convert stack trace to String"> 
+  <meta name="keywords" content="Convert stack trace to String"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - Convert stack trace to String"> 
+  <meta property="og:description" content="Convert stack trace to String"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - Convert stack trace to String"> 
+  <meta name="twitter:description" content="Convert stack trace to String"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-03-05</small>
+        </div> 
+        <h1>Converting a Stack Trace to a String in Java</h1> The Java programming language offers a convenient way for developers to convert a stack trace to a String. This is often useful when debugging or when displaying an exception has occurred to the user. In this article, we will discuss how to convert a stack trace to a String in Java. 
+        <h2>Using the printStackTrace() Method</h2> The most straight-forward way to convert a stack trace to a String is to use the printStackTrace() method of the Throwable class. Below is an example of using the printStackTrace() method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+try {
+    // do something which might throw an exception
+} catch (Exception e) {
+    e.printStackTrace();
+}
+
+          </xmp></code></pre> The output of the above code will look something like this: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+java.lang.NullPointerException
+        at TestClass.main(TestClass.java:5)
+
+          </xmp></code></pre> 
+        <h2>Using the getStackTrace() and toString() Methods</h2> Another way to convert a stack trace to a String is by using the getStackTrace() and toString() methods. The getStackTrace() method returns an array of StackTrace elements, representing the stack trace which is associated with this Throwable. The toString() method converts the array of StackTrace elements into a String. Below is an example of using the getStackTrace() and toString() methods: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+try {
+    // do something which might throw an exception
+} catch (Exception e) {
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter(sw);
+    e.printStackTrace(pw);
+    String stackTrace = sw.toString();
+    StringBuilder sb = new StringBuilder();
+    sb.append(e.getClass().getName())
+      .append(": ")
+      .append(e.getMessage())
+      .append(System.lineSeparator())
+      .append(stackTrace);
+    String stackTraceString = sb.toString();
+    System.out.println(stackTraceString);
+}
+
+          </xmp></code></pre> The output of the above code will look something like this: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+java.lang.NullPointerException: 
+        at TestClass.main(TestClass.java:5)
+
+          </xmp></code></pre> 
+        <h2>Using the StackWalker API</h2> The StackWalker API was introduced in Java 9 and can be used to access the current stack trace, as well as any arbitrary stack trace. It offers several methods, such as forEach(), that allow you to iterate over the elements of the stack trace. Below is an example of using the StackWalker API to convert a stack trace to a String: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+try {
+    // do something which might throw an exception
+} catch (Exception e) {
+    String stackTraceString = StackWalker.getInstance().walk(stream -> stream
+            .skip(1) // skip the first element (current frame)
+            .map(StackWalker.StackFrame::toString)
+            .collect(Collectors.joining("\n")));
+    System.out.println(stackTraceString);
+}
+
+          </xmp></code></pre> The output of the above code will look something like this: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+at TestClass.main(TestClass.java:5)
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> In this article, we discussed how to convert a stack trace to a String in Java. We looked at three different ways to do this: using the printStackTrace() method, using the getStackTrace() and toString() methods, and using the StackWalker API. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/"> Integer Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-binary-number-to-decimal-number-example.html">Convert binary number to decimal number example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.apache.log4j.BasicConfigurator.html">org.apache.log4j.BasicConfigurator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Get-Set-view-of-Keys-from-Java-HashMap-example.html">Get Set view of Keys from Java HashMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-get-the-first-or-last-element-from-LinkedHashSet.html">How to get the first or last element from LinkedHashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-replace-a-value-for-the-given-key-in-the-TreeMap-(TreeMap-replace-method).html">How to replace a value for the given key in the TreeMap (TreeMap replace method)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-element-from-ArrayList.html">Remove element from ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/"> Short Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Java-Short-Example.html">Java Short Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Remove-all-elements-from-Java-HashSet-example.html">Remove all elements from Java HashSet example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/com.google.common.collect.ComparisonChain.html">c.g.c.c.ComparisonChain</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.mail.internet.MimeBodyPart.html">javax.mail.internet.MimeBodyPart</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-16 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Zip/Deflater/Compress-Byte-Array-Using-Deflater-Example.html">Compress Byte Array Using Deflater Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Change-Text-Font-Of-Label-Example.html">Change Text Font Of Label Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/java.awt.PopupMenu.html">java.awt.PopupMenu</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Write-HashMap-to-a-text-file-in-Java.html">Write HashMap to a text file in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Iterate-ArrayList-using-Iterator.html">Iterate ArrayList using Iterator</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Item-Count-Of-AWT-List-Example.html">Get Item Count Of AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.lucene.document.Document.html">org.apache.lucene.document.Document</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-print-Java-HashSet-elements.html">How to print Java HashSet elements</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-comma-separated-String-to-ArrayList.html">Convert comma separated String to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.util.Spliterators.html">java.util.Spliterators</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-convert-HashMap-to-TreeMap-in-Java.html">How to convert HashMap to TreeMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Simple-Java-HashMap-example.html">Simple Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-iterate-TreeMap-in-Java.html">How to iterate TreeMap in Java</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-int-to-a-file-using-DataOutputStream.html">Write int to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.google.inject.name.Named.html">com.google.inject.name.Named</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.apache.maven.plugin.AbstractMojo.html">org.apache.maven.plugin.AbstractMojo</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Item-Count-Of-AWT-List-Example.html">Get Item Count Of AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Find-the-minimum-or-maximum-element-of-Vector-using-Comparator.html">Find the minimum or maximum element of Vector using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.hadoop.fs.FSDataInputStream.html">o.a.h.f.FSDataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-ArrayList-example.html">Iterate through ArrayList example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
