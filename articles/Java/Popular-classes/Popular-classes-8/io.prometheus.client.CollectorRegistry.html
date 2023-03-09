@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - io.prometheus.client.CollectorRegistry</title> <!--timestamp=2023-03-09T00:13:28.901130721Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.prometheus.client.CollectorRegistry"> 
+  <meta name="keywords" content="io.prometheus.client.CollectorRegistry"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.prometheus.client.CollectorRegistry"> 
+  <meta property="og:description" content="io.prometheus.client.CollectorRegistry"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.prometheus.client.CollectorRegistry"> 
+  <meta name="twitter:description" content="io.prometheus.client.CollectorRegistry"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-03-08</small>
+        </div> 
+        <h1>Introduction to io.prometheus.client.CollectorRegistry</h1> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+io.prometheus.client.CollectorRegistry
+
+          </xmp></code></pre> class is a Prometheus client library for Java, specifically designed to help developers measure the performance and health of their applications. It allows developers to easily instrument their code with Prometheus metrics, register and collect them, and then expose them on an HTTP endpoint. This enables users to query the metrics and gain insights into how their application is performing. In this article, we will take a closer look at CollectorRegistry and explore how it works.
+         
+        <h2>Creating a CollectorRegistry Instance</h2> 
+        <p>A CollectorRegistry instance can be created in one of two ways: by creating a new instance or by using an existing one. To create a new instance, use the following code:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+CollectorRegistry registry = new CollectorRegistry();
+
+          </xmp></code></pre> 
+        <p>Alternatively, you can use an existing CollectorRegistry instance with the following code:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+CollectorRegistry registry = CollectorRegistry.defaultRegistry;
+
+          </xmp></code></pre> 
+        <h2>Adding Metrics to the CollectorRegistry</h2> 
+        <p>Once you have created a CollectorRegistry instance, you can begin adding metrics to it. To do this, use the </p>
+        <pre>register()</pre> method. This method takes a metric as an argument, and adds it to the registry. For example, to add a Counter metric to the registry, use the following code:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Counter counter = Counter.build()
+    .name("some_counter")
+    .help("some help text")
+    .register(registry);
+
+          </xmp></code></pre> 
+        <h2>Collecting Metrics from the CollectorRegistry</h2> 
+        <p>Once you have added metrics to the CollectorRegistry, you can collect them using the </p>
+        <pre>collect()</pre> method. This method takes two arguments: a list of metrics to collect, and a CollectorRegistry instance. For example, to collect all metrics from the registry, use the following code:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+List<MetricFamilySamples> metrics = CollectorRegistry.defaultRegistry.collect();
+
+          </xmp></code></pre> 
+        <h2>Exposing Metrics from the CollectorRegistry</h2> 
+        <p>Once you have collected your metrics from the CollectorRegistry, you can then expose them on an HTTP endpoint. To do this, you will need to create an HTTP server that will listen for requests and respond with the metrics. For example, to create a simple HTTP server, use the following code:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+HttpServer server = HttpServer.create(8080);
+server.createContext("/metrics", exchange -> {
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    TextFormat.write004(outputStream, CollectorRegistry.defaultRegistry.metricFamilySamples());
+    exchange.sendResponseHeaders(200, outputStream.size());
+    exchange.getResponseBody().write(outputStream.toByteArray());
+});
+server.start();
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+io.prometheus.client.CollectorRegistry
+
+          </xmp></code></pre> class is a powerful tool for measuring the performance and health of applications in Java. By instrumenting your code with Prometheus metrics, collecting them in a CollectorRegistry instance, and exposing them on an HTTP endpoint, you can gain valuable insights into how your application is performing. 
+         
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/"> Byte Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-String-to-primitive-byte-Example.html">Convert String to primitive byte Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-TreeSet-to-List-(ArrayList-or-LinkedList).html">How to convert TreeSet to List (ArrayList or LinkedList)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-reverse-order-of-the-TreeSet-elements-(iterate-TreeSet-in-reverse-order).html">How to reverse order of the TreeSet elements (iterate TreeSet in reverse order)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Math-Class/"> Math Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Math-Class/Generate-Random-Int-Within-Given-Range-Example.html">Generate Random Int Within Given Range Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.squareup.picasso.Transformation.html">com.squareup.picasso.Transformation</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-Set-to-array-(Convert-HashSet-to-Array).html">Convert Set to array (Convert HashSet to Array)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.swing.Action.html">javax.swing.Action</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Compare-two-ArrayList.html">Compare two ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Get-lowest-and-highest-value-stored-in-Java-TreeSet-example.html">Get lowest and highest value stored in Java TreeSet example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.xml.transform.TransformerException.html">j.x.t.TransformerException</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-18 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Grigorii</h3> <p><a href="#">2023-04-29 10:34</a></p> <p>thanks. This is the first sample project I checked so far</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Nahish</h3> <p><a href="#">2023-04-08 10:20</a></p> Great example! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-int-to-a-file-using-DataOutputStream.html">Write int to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.jms.Destination.html">javax.jms.Destination</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-byte-Arrays-Example.html">Compare Two Java byte Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Map-from-Java-TreeMap-example.html">Get Synchronized Map from Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/Calendar/Get-time-in-milliseconds-using-Java-Calendar.html">Get time in milliseconds using Java Calendar</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/java.beans.ConstructorProperties.html">java.beans.ConstructorProperties</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-remove-duplicate-elements-from-the-Vector.html">How to remove duplicate elements from the Vector</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-remove-elements-from-Java-TreeSet-(remove-first,-last,-all-elements).html">How to remove elements from Java TreeSet (remove first, last, all elements)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Java-Convert-TreeSet-to-array.html">Java Convert TreeSet to array</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-octal-number-to-decimal-number-example.html">Convert octal number to decimal number example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-Java-LinkedList-to-Array.html">Convert Java LinkedList to Array</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/javax.enterprise.inject.Instance.html">javax.enterprise.inject.Instance</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-font/Get-Available-Font-Family-Names-Example.html">Get Available Font Family Names Example</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Get-Total-Memory-of-Java-Virtual-Machine(JVM)-Example.html">Get Total Memory of Java Virtual Machine(JVM) Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-remove-duplicate-elements-from-the-Vector.html">How to remove duplicate elements from the Vector</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet’s-Document-URL-or-Directory-Base-Example.html">Get Applet’s Document URL or Directory Base Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.http.client.protocol.HttpClientContext.html">o.a.h.c.p.HttpClientContext</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Calculate-Average-value-of-Array-elements-using-Java-Example.html">Calculate Average value of Array elements using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-long-to-String.html">Convert long to String</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/javax.management.DynamicMBean.html">javax.management.DynamicMBean</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
