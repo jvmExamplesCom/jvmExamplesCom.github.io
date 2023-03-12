@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.elasticsearch.index.query.QueryBuilders</title> <!--timestamp=2023-03-12T00:13:59.274745555Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.elasticsearch.index.query.QueryBuilders"> 
+  <meta name="keywords" content="org.elasticsearch.index.query.QueryBuilders"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.elasticsearch.index.query.QueryBuilders"> 
+  <meta property="og:description" content="org.elasticsearch.index.query.QueryBuilders"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.elasticsearch.index.query.QueryBuilders"> 
+  <meta name="twitter:description" content="org.elasticsearch.index.query.QueryBuilders"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-03-11</small>
+        </div> 
+        <h1>Introduction to org.elasticsearch.index.query.QueryBuilders</h1> 
+        <p>org.elasticsearch.index.query.QueryBuilders is a class used in the ElasticSearch Java API for building queries. It provides methods for constructing different types of queries, such as term, match, multi-match, fuzzy, range, and more. The following sections will provide an overview of the various query types and their uses, with examples showing how each type of query can be constructed using QueryBuilders.</p> 
+        <h2>Term Query</h2> 
+        <p>The term query is used to search for an exact match to a provided field and keyword. This type of query is useful for exact matches, such as searching a user database by email address or searching product information by SKU. The following example shows how to construct a term query using QueryBuilders:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+QueryBuilder qb = QueryBuilders.termQuery("field", "keyword");
+
+          </xmp></code></pre> 
+        <p>This query can be further refined by providing additional parameters, such as the search operator (e.g. AND, OR, NOT) and boosting factor. For example, to boost certain search results:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+QueryBuilder qb = QueryBuilders.termQuery("field", "keyword").boost(2.0f);
+
+          </xmp></code></pre> 
+        <h2>Match Query</h2> 
+        <p>The match query is used to perform a full-text search on a particular field. This type of query is useful for natural language searches, as it allows for searching for words, phrases, and/or even sentence fragments. The following example shows how to construct a match query using QueryBuilders:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+QueryBuilder qb = QueryBuilders.matchQuery("field", "query");
+
+          </xmp></code></pre> 
+        <p>As with the term query, the match query can be further refined by providing additional parameters, such as a minimum and maximum number of characters in the search query and the search operator (e.g. AND, OR, NOT). Furthermore, the match query also supports the use of wildcards and fuzzy searches. For example:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+QueryBuilder qb = QueryBuilders.matchQuery("field", "query*").fuzziness(Fuzziness.TWO);
+
+          </xmp></code></pre> 
+        <h2>Multi-Match Query</h2> 
+        <p>The multi-match query is similar to the match query, except that it allows for searching multiple fields with the same search query. This type of query is useful for searches that span multiple fields, such as searching product information by name, description and SKU. The following example shows how to construct a multi-match query using QueryBuilders:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+QueryBuilder qb = QueryBuilders.multiMatchQuery("query", "field1", "field2", "field3");
+
+          </xmp></code></pre> 
+        <p>As with the match query, the multi-match query can also be further refined by providing additional parameters, such as a minimum and maximum number of characters in the search query and the search operator (e.g. AND, OR, NOT). Furthermore, the multi-match query also supports the use of wildcards and fuzzy searches. For example:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+QueryBuilder qb = QueryBuilders.multiMatchQuery("query*", "field1", "field2", "field3").fuzziness(Fuzziness.TWO);
+
+          </xmp></code></pre> 
+        <h2>Fuzzy Query</h2> 
+        <p>The fuzzy query is used to find documents with similar words, even if the words are not spelt exactly the same. This type of query is useful for finding documents that contain certain words, even though the typing may have been sloppy or have spelling mistakes. The following example shows how to construct a fuzzy query using QueryBuilders:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+QueryBuilder qb = QueryBuilders.fuzzyQuery("field", "keyword");
+
+          </xmp></code></pre> 
+        <p>Similar to the other queries, the fuzzy query can also be further refined by providing additional parameters, such as the maximum edit distance and the search operator. For example:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+QueryBuilder qb = QueryBuilders.fuzzyQuery("field", "keyword").maxEdits(2).operator(Operator.AND);
+
+          </xmp></code></pre> 
+        <h2>Range Query</h2> 
+        <p>The range query is used to search for documents within a particular range of values. This type of query is useful for searches that require documents within a specific range, such as documents containing dates within a specified period. The following example shows how to construct a range query using QueryBuilders:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+QueryBuilder qb = QueryBuilders.rangeQuery("field").gte("lowerBound").lte("upperBound");
+
+          </xmp></code></pre> 
+        <p>As with the other queries, the range query can also be further refined by providing additional parameters, such as the search operator (e.g. AND, OR, NOT) and excluding documents outside the specified range. For example:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+QueryBuilder qb = QueryBuilders.rangeQuery("field").gte("lowerBound").lte("upperBound").operator(Operator.AND).excludeLimit(true);
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>org.elasticsearch.index.query.QueryBuilders provides a powerful set of tools to build queries in ElasticSearch. This class provides methods to construct the various types of queries, including the term, match, multi-match, fuzzy, and range queries. Each type of query can be further refined by providing additional parameters, allowing for custom searches. With this class, users can quickly and easily build powerful search queries in ElasticSearch.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.io.StringWriter.html">java.io.StringWriter</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.eclipse.swt.events.SelectionAdapter.html">o.e.s.e.SelectionAdapter</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Iterate-through-elements-Java-ArrayList-using-Iterator-Example.html">Iterate through elements Java ArrayList using Iterator Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/"> AWT Choice </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Remove-Particular-Item-From-AWT-Choice-Or-Combobox-Example.html">Remove Particular Item From AWT Choice Or Combobox Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Replace-an-element-at-specified-index-of-Java-ArrayList-Example.html">Replace an element at specified index of Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-String-to-character-array,-character-array-to-String.html">Convert String to character array, character array to String</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-temporary-file.html">Create temporary file</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Array-to-LinkedList.html">Convert Array to LinkedList</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.eclipse.jface.preference.IPreferenceStore.html">o.e.j.p.IPreferenceStore</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-sort-TreeSet-elements-using-Comparable-interface.html">How to sort TreeSet elements using Comparable interface</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-21 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Thomas</h3> <p><a href="#">2023-04-13 12:58</a></p> Can somebody elaborate more? <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Uberel</h3> <p><a href="#">2023-04-28 16:38</a></p> Great example! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Continue-Statement/Java-continue-statement-example.html">Java continue statement example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Change-Checkbox-Font-Example.html">Change Checkbox Font Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.junit.rules.ExternalResource.html">org.junit.rules.ExternalResource</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/How-to-remove-duplicate-values-from-String-array.html">How to remove duplicate values from String array</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-minimum-of-two-numbers-using-Math.min.html">F.min</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Insert-all-elements-of-other-Collection-to-Specified-Index-of-Java-Vector-Example.html">Insert all elements of other Collection to Specified Index of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Java-ArrayList-capacity.html">Java ArrayList capacity</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Align-Icon-in-JLabel-Example.html">Align Icon in JLabel Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-All-Items-From-AWT-List-Example.html">Get All Items From AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.context.annotation.ImportResource.html">o.s.c.a.ImportResource</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.graphics.Paint.Style.html">android.graphics.Paint.Style</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Copy-all-elements-of-Java-ArrayList-to-an-Object-Array-Example.html">Copy all elements of Java ArrayList to an Object Array Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Change-Button-Foreground-Color-Example.html">Change Button Foreground Color Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/JTextField-Horizontal-Alignment-Example.html">JTextField Horizontal Alignment Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-maximum-of-two-numbers-using-Math.max.html">F.max</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Show-Or-Hide-JLabel-Example.html">Show Or Hide JLabel Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.squareup.picasso.Callback.html">com.squareup.picasso.Callback</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-remove-elements-from-HashSet.html">How to remove elements from HashSet</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Operators/Modulus-Operator-Example.html">Modulus Operator Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/net.minecraft.entity.player.EntityPlayer.html">n.m.e.p.EntityPlayer</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
