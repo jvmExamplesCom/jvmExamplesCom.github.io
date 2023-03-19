@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - rx.observers.TestSubscriber</title> <!--timestamp=2023-03-19T00:13:57.512134223Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="rx.observers.TestSubscriber"> 
+  <meta name="keywords" content="rx.observers.TestSubscriber"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - rx.observers.TestSubscriber"> 
+  <meta property="og:description" content="rx.observers.TestSubscriber"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - rx.observers.TestSubscriber"> 
+  <meta name="twitter:description" content="rx.observers.TestSubscriber"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-03-18</small>
+        </div> 
+        <h1>Introduction to Java Rx.observers.TestSubscriber</h1> 
+        <p>The Java Rx.observers.TestSubscriber is a reactive type that allows for creating and testing Observables. This object is useful for writing tests for reactive system behavior. It allows for subscribing, unsubscribing and verifying emitted values.</p> 
+        <h2>Creating a TestSubscriber</h2> 
+        <p>A new instance of Rx.observers.TestSubscriber can be created by passing an Observer to the constructor.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+TestSubscriber<Integer> testSubscriber = new TestSubscriber<>(r Observer::onNext);
+
+          </xmp></code></pre> 
+        <h2>Subscribing and Unsubscribing</h2> 
+        <p>Once a TestSubscriber has been created, it can subscribe and unsubscribe from an Observable:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Observable<Integer> observable = Observable.just(1, 2, 3);
+observable.subscribe(testSubscriber);
+// Do some stuff ...
+testSubscriber.unsubscribe();
+
+          </xmp></code></pre> 
+        <h2>Asserting Emitted Values</h2> 
+        <p>The TestSubscriber provides several asserts to verify emitted values.</p> 
+        <ul> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+assertValue(<value>): verifies that the observable emitted <value>
+
+            </xmp></code></pre></li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+assertValues(<values>): verifies that the observable emitted [<values>]</values>
+
+            </xmp></code></pre></li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+assertValueCount(<number>): verifies that the observable emitted <number> values
+
+            </xmp></code></pre></li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+assertComplete(): verifies that the observable completed successfully
+
+            </xmp></code></pre></li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+assertError(Throwable): verifies that the observable threw an error
+
+            </xmp></code></pre></li> 
+        </ul> For example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Observable<Integer> observable = Observable.just(1, 2, 3);
+observable.subscribe(testSubscriber);
+
+testSubscriber.assertValue(1);
+testSubscriber.assertValues(1, 2, 3);
+testSubscriber.assertValueCount(3);
+testSubscriber.assertComplete();
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>The Rx.observers.TestSubscriber is a powerful object for testing reactive systems. It allows for subscribing and unsubscribing from observables, as well as asserting emitted values. With this object, it is easy to write robust tests for reactive systems.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-iterate-HashSet-in-Java.html">How to iterate HashSet in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Java-HashMap-put-method-example.html">Java HashMap put method example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.chad.library.adapter.base.BaseViewHolder.html">c.c.l.a.b.BaseViewHolder</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/io.netty.buffer.Unpooled.html">io.netty.buffer.Unpooled</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Insert-all-elements-of-other-Collection-to-Specified-Index-of-Java-ArrayList-Example.html">Insert all elements of other Collection to Specified Index of Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-List-in-reverse-order-using-ListIterator.html">Iterate List in reverse order using ListIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-TreeSet-to-List-(ArrayList-or-LinkedList).html">How to convert TreeSet to List (ArrayList or LinkedList)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.swing.filechooser.FileNameExtensionFilter.html">j.s.f.FileNameExtensionFilter</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Operators/"> Operators </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Operators/Modulus-Operator-Example.html">Modulus Operator Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-submap,-headmap,-and-tailmap-from-Java-TreeMap.html">How to get submap, headmap, and tailmap from Java TreeMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-09 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Continue-Statement/Java-continue-statement-with-label-example.html">Java continue statement with label example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Determine-File-or-Directory.html">Determine File or Directory</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Set-from-Java-HashSet-example.html">Get Synchronized Set from Java HashSet example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.springframework.boot.autoconfigure.condition.ConditionalOnExpression.html">o.s.b.a.c.ConditionalOnExpression</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-short.html">Convert String to short</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.eclipse.paho.client.mqttv3.persist.MemoryPersistence.html">o.e.p.c.m.p.MemoryPersistence</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.junit.runners.model.Statement.html">org.junit.runners.model.Statement</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-iterate-LinkedHashSet-elements.html">How to iterate LinkedHashSet elements</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Shuffle-elements-of-ArrayList.html">Shuffle elements of ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Do-While-Loop/Do-While-loop-Example.html">Do While loop Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Iterate-through-the-values-of-Java-HashMap-example.html">Iterate through the values of Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-check-if-element-exists-in-Vector-in-Java.html">How to check if element exists in Vector in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-shuffle-Vector-elements-in-Java.html">How to shuffle Vector elements in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-Map-to-List.html">Convert Map to List</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.bukkit.GameMode.html">org.bukkit.GameMode</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.commons.lang3.math.NumberUtils.html">o.a.c.l.m.NumberUtils</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.google.zxing.LuminanceSource.html">com.google.zxing.LuminanceSource</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-directory-along-with-required-nonexistent-parent-directories.html">Create directory along with required nonexistent parent directories</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Iterate-through-elements-of-Java-TreeSet-example.html">Iterate through elements of Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-octal-number-to-decimal-number-example.html">Convert octal number to decimal number example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
