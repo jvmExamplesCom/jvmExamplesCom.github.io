@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.util.EnumMap</title> <!--timestamp=2023-03-23T00:13:36.105132126Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.util.EnumMap"> 
+  <meta name="keywords" content="java.util.EnumMap"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.util.EnumMap"> 
+  <meta property="og:description" content="java.util.EnumMap"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.util.EnumMap"> 
+  <meta name="twitter:description" content="java.util.EnumMap"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-03-22</small>
+        </div> 
+        <h1> Introduction to Java.util.EnumMap </h1> Java.util.EnumMap is a specialized Map implementation designed to store and retrieve key-value pairs associated with an enumerated type, or enum. It allows for efficient retrieval of the underlying enum values and provides better performance than the standard HashMap when used with enum keys. This article will provide an overview of how to use EnumMap, along with code examples and usage scenarios. 
+        <h2> Creating an EnumMap </h2> Creating an EnumMap is done by passing in the class of the Enumeration you're mapping to as a parameter: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EnumMap<Fruit, Integer> enumMap = new EnumMap<>(Fruit.class);
+
+          </xmp></code></pre> In this case, Fruit is a user-defined enum class with associated values. 
+        <h2> Adding Entries to an EnumMap </h2> Adding entries to an EnumMap is done using the put() method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+enumMap.put(Fruit.APPLE, 2);
+enumMap.put(Fruit.ORANGE, 1);
+enumMap.put(Fruit.BANANA, 3);
+
+          </xmp></code></pre> The keys in an EnumMap must be enum constants, and the values can be any type. 
+        <h2> Retrieving Values from an EnumMap </h2> Values can be retrieved from an EnumMap using the get() method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+int appleValue = enumMap.get(Fruit.APPLE); // returns 2
+
+          </xmp></code></pre> If the requested key does not exist in the EnumMap, get() returns null. 
+        <h2> Iterating Over an EnumMap </h2> Using the entrySet() method, the contents of an EnumMap can be iterated over using the for-each loop construct: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+for (Map.Entry<Fruit, Integer> entry : enumMap.entrySet()) {
+   System.out.println(entry.getKey() + ": " + entry.getValue());
+}
+
+          </xmp></code></pre> The output of this code would be: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Apple: 2
+Orange: 1
+Banana: 3
+
+          </xmp></code></pre> 
+        <h2> Merging Two EnumMaps </h2> It's possible to merge two EnumMaps using the putAll() method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EnumMap<Fruit, Integer> secondEnumMap = new EnumMap<>(Fruit.class);
+secondEnumMap.put(Fruit.PEACH, 4);
+secondEnumMap.put(Fruit.STRAWBERRY, 5);
+
+enumMap.putAll(secondEnumMap);
+
+          </xmp></code></pre> After merging, the contents of enumMap will be as follows: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Apple: 2
+Orange: 1
+Banana: 3
+Peach: 4
+Strawberry: 5
+
+          </xmp></code></pre> 
+        <h2> Removing Entries from an EnumMap </h2> Entries can be removed from an EnumMap using the remove() method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+enumMap.remove(Fruit.ORANGE);
+
+          </xmp></code></pre> This will remove the Orange key-value pair from the map. 
+        <h2> Conclusion </h2> In conclusion, EnumMap is a useful Map implementation for storing key-value pairs associated with an enum. It provides better performance than the standard HashMap and its use is recommended in cases where the keys are enum constants. This article has provided an overview of how to use EnumMap, along with code examples and usage scenarios. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.view.ContextMenu.ContextMenuInfo.html">a.v.C.ContextMenuInfo</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-ArrayList-to-LinkedHashSet.html">Convert ArrayList to LinkedHashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.xml.datatype.DatatypeConfigurationException.html">j.x.d.DatatypeConfigurationException</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/WhileLoop/"> WhileLoop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/WhileLoop/While-Loop-Example.html">While Loop Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-size-of-the-TreeSet-object-(TreeSet-length).html">How to get size of the TreeSet object (TreeSet length)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/List/"> List </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/List/Iterate-List-in-reverse-order.html">Iterate List in reverse order</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-create-LinkedHashMap-in-Java-(LinkedHashMap-constructors).html">How to create LinkedHashMap in Java (LinkedHashMap constructors)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/net.minecraft.entity.player.EntityPlayer.html">n.m.e.p.EntityPlayer</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Reverse-array-using-Arrays-class.html">Reverse array using Arrays class</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Copy-all-elements-of-Java-ArrayList-to-an-Object-Array-Example.html">Copy all elements of Java ArrayList to an Object Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-22 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Ojas</h3> <p><a href="#">2023-05-07 10:43</a></p> Thank you guys for your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Thomas</h3> <p><a href="#">2023-05-06 18:27</a></p> great examples ... thnx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-value-from-TreeMap-using-the-key-(TreeMap-get-method).html">How to get value from TreeMap using the key (TreeMap get method)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-ArrayList-using-ListIterator.html">Iterate through ArrayList using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.context.annotation.Import.html">o.s.c.a.Import</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.websocket.Session.html">javax.websocket.Session</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Convert-HashSet-to-array.html">Convert HashSet to array</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-check-if-element-exists-in-Vector-in-Java.html">How to check if element exists in Vector in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Simple-Java-TreeMap-example.html">Simple Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Replace-Item-Of-AWT-List-Example.html">Replace Item Of AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/io.netty.bootstrap.Bootstrap.html">io.netty.bootstrap.Bootstrap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-check-if-the-value-exists-in-the-TreeMap-(TreeMap-contains-a-value).html">How to check if the value exists in the TreeMap (TreeMap contains a value)</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Create-an-object-array-from-elements-of-LinkedList-Java-example.html">Create an object array from elements of LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Convert-Java-boolean-Primitive-to-Boolean-object.html">Convert Java boolean Primitive to Boolean object</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-maintain-insertion-order-of-elements-of-HashMap-using-LinkedHashMap.html">How to maintain insertion order of elements of HashMap using LinkedHashMap</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Get-JLabel’s-Text-Example.html">Get JLabel’s Text Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.servlet.ServletContext.html">javax.servlet.ServletContext</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-convert-LinkedHashSet-to-ArrayList-in-Java.html">How to convert LinkedHashSet to ArrayList in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/How-to-check-if-String-starts-with-a-number.html">How to check if String starts with a number</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.squareup.picasso.Target.html">com.squareup.picasso.Target</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-HashMap-to-TreeMap.html">Convert HashMap to TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-Byte-to-numeric-primitive-data-types-example.html">Convert Byte to numeric primitive data types example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
