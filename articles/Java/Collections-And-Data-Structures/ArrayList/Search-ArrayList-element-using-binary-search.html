@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - Search ArrayList element using binary search</title> <!--timestamp=2023-03-24T00:13:05.910457963Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="Search ArrayList element using binary search"> 
+  <meta name="keywords" content="Search ArrayList element using binary search"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - Search ArrayList element using binary search"> 
+  <meta property="og:description" content="Search ArrayList element using binary search"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - Search ArrayList element using binary search"> 
+  <meta name="twitter:description" content="Search ArrayList element using binary search"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-03-23</small>
+        </div> 
+        <h1>Searching ArrayList Element Using Binary Search</h1> Java's 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ArrayList
+
+          </xmp></code></pre> includes a powerful utility method for searching for elements by using a binary search algorithm. Binary search performs a comparison between each element in the list and the sought-after element and checks for a logical match in order to determine its search result. This tutorial will discuss how to use binary search for searching for an element in Java's 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ArrayList
+
+          </xmp></code></pre>. 
+        <h2>Create a Comparator</h2> Before you can use the binary search utility in ArrayList, you'll need to create a Comparator object. This object is used to compare two elements in the list. The following code example shows how to do this: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Comparator<Integer> cmp = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer a, Integer b) {
+                return a - b;
+            }
+        };
+
+          </xmp></code></pre> The Comparator object defined above compares two 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Integer
+
+          </xmp></code></pre> objects. If a is greater than b, it returns a positive value. If a is less than b, it returns a negative value. If a is equal to b, it returns 0. 
+        <h2>Search for Element in an ArrayList</h2> Once you have created the Comparator object, you can use the binary search utility to search for a specific element in an 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ArrayList
+
+          </xmp></code></pre>. The following code example illustrates this: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+int index = Collections.binarySearch(list, 5, cmp);
+
+          </xmp></code></pre> In this code example, 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+list
+
+          </xmp></code></pre> is an 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ArrayList
+
+          </xmp></code></pre> of integers, and 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+5
+
+          </xmp></code></pre> is the element that you are searching for. The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+cmp
+
+          </xmp></code></pre> variable is the Comparator object that you created earlier. This method returns the index of the element if it is found, or a negative value if it is not found. 
+        <h2>Example Usage</h2> Now let’s look at an example of binary search being used to find the index of an element in an 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ArrayList
+
+          </xmp></code></pre>. The following code example creates an 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ArrayList
+
+          </xmp></code></pre> of integers and uses binary search to find the index of a specific element: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class BinarySearchExample {
+
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+
+        Comparator<Integer> cmp = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer a, Integer b) {
+                return a - b;
+            }
+        };
+
+        int index = Collections.binarySearch(list, 4, cmp);
+        System.out.println("Index of 4: " + index);
+    }
+}
+
+          </xmp></code></pre> The output of this code is: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Index of 4: 3
+
+          </xmp></code></pre> As you can see, the binary search utility was able to find the index of the element 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+4
+
+          </xmp></code></pre> in the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ArrayList
+
+          </xmp></code></pre>. 
+        <h2>Conclusion</h2> In this tutorial, we discussed how to use the binary search utility to search for an element in an 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ArrayList
+
+          </xmp></code></pre>. We also looked at an example of how to use binary search to find an element in an 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ArrayList
+
+          </xmp></code></pre>. Using binary search is a great way to optimize your code and make it more efficient. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-String-array-using-Comparator.html">Sort String array using Comparator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Get-parent-directory-as-a-File-object.html">Get parent directory as a File object</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Generate-Pyramid-For-a-Given-Number-Example.html">Generate Pyramid For a Given Number Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/JLabel-Get-Tooltip-Example.html">JLabel Get Tooltip Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.reactivestreams.Subscriber.html">org.reactivestreams.Subscriber</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.xml.bind.annotation.XmlRootElement.html">j.x.b.a.XmlRootElement</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-String-to-character-array,-character-array-to-String.html">Convert String to character array, character array to String</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.util.function.BinaryOperator.html">java.util.function.BinaryOperator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/System/"> System </a> </p> <a href="/articles/Java/Miscellaneous-Classes/System/Run-the-garbage-collector-using-System-class.html">Run the garbage collector using System class</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JTextField/"> JTextField </a> </p> <a href="/articles/Java/Swing/JTextField/Set-Background-Color-of-JTextField-Example.html">Set Background Color of JTextField Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-08 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Uberel</h3> <p><a href="#">2023-05-15 16:22</a></p> Grt ;-) <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Robert</h3> <p><a href="#">2023-05-20 15:07</a></p> Thank you guys for your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-Java-TreeMap-in-reverse-direction-using-an-iterator.html">Iterate Java TreeMap in reverse direction using an iterator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.lang.reflect.Field.html">java.lang.reflect.Field</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.google.api.client.http.HttpResponse.html">c.g.a.c.h.HttpResponse</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Java-HashMap-put-method-example.html">Java HashMap put method example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Java-HashMap-get-key-using-value-example.html">Java HashMap get key using value example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-remove-an-element-from-LinkedHashSet-in-Java.html">How to remove an element from LinkedHashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-any-primitive.html">Convert String to any primitive</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-remove-the-last-element.html">Java LinkedList remove the last element</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.xml.transform.dom.DOMResult.html">javax.xml.transform.dom.DOMResult</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-LinkedHashMap-using-an-Iterator.html">How to iterate LinkedHashMap using an Iterator</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-print-TreeMap-in-Java.html">How to print TreeMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-remove-elements-from-the-Vector.html">How to remove elements from the Vector</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-delete-a-file-or-delete-a-directory-in-Java.html">How to delete a file or delete a directory in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.sun.jna.Pointer.html">com.sun.jna.Pointer</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Disable-Label-Example.html">Disable Label Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-ArrayList-example.html">Iterate through ArrayList example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.w3c.dom.Attr.html">org.w3c.dom.Attr</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-preserve-insertion-order-of-Java-HashSet-elements.html">How to preserve insertion order of Java HashSet elements</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.osgi.framework.Constants.html">org.osgi.framework.Constants</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipFile/Get-All-Entries-From-Zip-File-Example.html">Get All Entries From Zip File Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
