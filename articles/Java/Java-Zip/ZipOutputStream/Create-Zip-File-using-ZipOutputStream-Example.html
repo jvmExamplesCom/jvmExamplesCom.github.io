@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - Create Zip File using ZipOutputStream Example</title> <!--timestamp=2023-03-28T00:13:25.087725016Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="Create Zip File using ZipOutputStream Example"> 
+  <meta name="keywords" content="Create Zip File using ZipOutputStream Example"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - Create Zip File using ZipOutputStream Example"> 
+  <meta property="og:description" content="Create Zip File using ZipOutputStream Example"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - Create Zip File using ZipOutputStream Example"> 
+  <meta name="twitter:description" content="Create Zip File using ZipOutputStream Example"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-03-27</small>
+        </div> 
+        <h1>Creating Zip Files using ZipOutputStream Example</h1> 
+        <p>Java provides support for creating .zip filesusing the </p>
+        <pre>ZipOutputStream</pre> class. This class allows user to create a .zip file and write byte data entries to it. It also supports the creation of new folders, adding files from local storage or remote servers, and compressing the data.
+         
+        <h2>Using ZipOutputStream</h2> 
+        The following is an example of how to use the
+        <pre>ZipOutputStream</pre> class to create a .zip file on the local file system:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FileOutputStream fos = new FileOutputStream("myzip.zip");
+ZipOutputStream zos = new ZipOutputStream(fos);
+zos.putNextEntry(new ZipEntry("myfile.txt"));
+byte[] contents = "Example zip file contents".getBytes();
+zos.write(contents, 0, contents.length);
+zos.closeEntry();
+zos.close();
+fos.close();
+
+          </xmp></code></pre> 
+        <p>The code above creates a .zip file named "myzip.zip" on the local filesystem and then writes the contents of the string "Example zip file contents" to a new entry in the .zip file named "myfile.txt". The </p>
+        <pre>putNextEntry()</pre> method is used to create the entry in the .zip file and the 
+        <pre>write()</pre> method to write the contents to the entry.
+         
+        <h2>Creating Folders</h2> 
+        The
+        <pre>ZipOutputStream</pre> class can also be used to create new folders in the .zip file. This is done by using the 
+        <pre>setComment()</pre> method to set the comment of the entry to indicate that the entry is a folder. The following is an example of how this can be done:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FileOutputStream fos = new FileOutputStream("myzip.zip");
+ZipOutputStream zos = new ZipOutputStream(fos);
+
+// Create a new folder
+ZipEntry entry = new ZipEntry("myfolder/");
+entry.setComment("This is a folder");
+zos.putNextEntry(entry);
+zos.closeEntry();
+
+zos.close();
+fos.close();
+
+          </xmp></code></pre> 
+        <p>The code above creates a .zip file named "myzip.zip" on the local filesystem and then creates a new folder in the .zip file called "myfolder" by setting the comment of the </p>
+        <pre>ZipEntry</pre> to indicate that the entry is a folder.
+         
+        <h2>Adding Files</h2> 
+        The
+        <pre>ZipOutputStream</pre> class can also be used to add files to the .zip file. This is done by using the 
+        <pre>setComment()</pre> method to set the comment of the entry to indicate that the entry is a file and then writing the contents of the file to the entry. The following is an example of how this can be done:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FileOutputStream fos = new FileOutputStream("myzip.zip");
+ZipOutputStream zos = new ZipOutputStream(fos);
+
+// Add a file
+ZipEntry entry = new ZipEntry("myfile.txt");
+entry.setComment("This is a file");
+zos.putNextEntry(entry);
+
+FileInputStream fis = new FileInputStream("myfile.txt");
+byte[] contents = new byte[1024];
+int read = 0;
+while((read = fis.read(contents)) != -1){
+    zos.write(contents, 0, read);
+}
+
+zos.closeEntry();
+zos.close();
+fos.close();
+
+          </xmp></code></pre> 
+        <p>The code above creates a .zip file named "myzip.zip" on the local filesystem and then adds a file called "myfile.txt" from the local filesystem to the .zip file by setting the comment of the </p>
+        <pre>ZipEntry</pre> to indicate that the entry is a file and then writing the contents of the file to the entry.
+         
+        <h2>Compressing Data</h2> 
+        The
+        <pre>ZipOutputStream</pre> class can also be used to compress the data in a .zip file. This is done by using the 
+        <pre>setMethod()</pre> method to set the compression method of the entry. The following is an example of how this can be done:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FileOutputStream fos = new FileOutputStream("myzip.zip");
+ZipOutputStream zos = new ZipOutputStream(fos);
+
+// Compress the data
+ZipEntry entry = new ZipEntry("mydata.txt");
+entry.setMethod(ZipEntry.DEFLATED);
+zos.putNextEntry(entry);
+
+byte[] contents = "Example compressed data".getBytes();
+zos.write(contents, 0, contents.length);
+
+zos.closeEntry();
+zos.close();
+fos.close();
+
+          </xmp></code></pre> 
+        <p>The code above creates a .zip file named "myzip.zip" on the local filesystem and then compresses the data in a file called "mydata.txt" by setting the compression method of the </p>
+        <pre>ZipEntry</pre> to 
+        <pre>DEFLATED</pre> and then writing the contents to the entry.
+         
+        <h2>Conclusion</h2> 
+        The
+        <pre>ZipOutputStream</pre> class provides a convenient way to create .zip files and write byte data entries to it. It also supports the creation of new folders, adding files from local storage or remote servers, and compressing the data.
+         
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/"> Boolean Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Convert-Java-boolean-Primitive-to-Boolean-object.html">Convert Java boolean Primitive to Boolean object</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-an-element-to-specified-index-of-Java-ArrayList-Example.html">Add an element to specified index of Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.fasterxml.jackson.databind.SerializationConfig.html">c.f.j.d.SerializationConfig</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-comma-separated-String-to-ArrayList.html">Convert comma separated String to ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/"> AWT Label </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Create-AWT-Label-With-Text-Alignment-Example.html">Create AWT Label With Text Alignment Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Java-ArrayList-of-arrays.html">Java ArrayList of arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/"> Long Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-long-primitive-to-Long-object-Example.html">Convert long primitive to Long object Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.eclipse.core.resources.IFolder.html">org.eclipse.core.resources.IFolder</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-add-elements-to-TreeSet.html">How to add elements to TreeSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/freemarker.template.Configuration.html">freemarker.template.Configuration</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-05 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.text.style.StrikethroughSpan.html">android.text.style.StrikethroughSpan</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Traverse-through-ArrayList-in-reverse-direction-using-Java-ListIterator-Example.html">Traverse through ArrayList in reverse direction using Java ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Remove-value-from-Java-TreeMap-example.html">Remove value from Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-TreeMap-key,-value-or-entry-greater-than-or-less-than-the-specified-key.html">How to get TreeMap key, value or entry greater than or less than the specified key</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-fix-Java-TreeSet-java.lang.ClassCastExcpetion-exception.html">H.l.ClassCastExcpetion exception</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-all-values-from-the-TreeMap.html">How to get all values from the TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/java.awt.Robot.html">java.awt.Robot</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.naming.NamingException.html">javax.naming.NamingException</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-convert-an-array-to-Vector.html">How to convert an array to Vector</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Suggest-JVM-to-Run-Garbage-Collector-Example.html">Suggest JVM to Run Garbage Collector Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Simple-Java-Vector-Example.html">Simple Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.facebook.drawee.view.SimpleDraweeView.html">c.f.d.v.SimpleDraweeView</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-insert-an-element-at-the-beginning-of-the-Java-Vector.html">How to insert an element at the beginning of the Java Vector</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Swap-Numbers-Java-Example.html">Swap Numbers Java Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/BufferedOutputStream/Write-byte-array-to-file-using-BufferedOutputStream.html">Write byte array to file using BufferedOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.io.PrintStream.html">java.io.PrintStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.jsoup.nodes.Document.html">org.jsoup.nodes.Document</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-long-Arrays-Example.html">Compare Two Java long Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Select-Item-From-AWT-List-Example.html">Select Item From AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-octal-number-to-decimal-number-example.html">Convert octal number to decimal number example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
