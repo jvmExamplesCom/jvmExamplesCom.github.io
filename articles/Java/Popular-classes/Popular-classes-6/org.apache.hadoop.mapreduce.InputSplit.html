@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.apache.hadoop.mapreduce.InputSplit</title> <!--timestamp=2023-04-05T00:11:38.568236451Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.apache.hadoop.mapreduce.InputSplit"> 
+  <meta name="keywords" content="org.apache.hadoop.mapreduce.InputSplit"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.apache.hadoop.mapreduce.InputSplit"> 
+  <meta property="og:description" content="org.apache.hadoop.mapreduce.InputSplit"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.apache.hadoop.mapreduce.InputSplit"> 
+  <meta name="twitter:description" content="org.apache.hadoop.mapreduce.InputSplit"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-04-04</small>
+        </div> 
+        <h1>Introduction to org.apache.hadoop.mapreduce.InputSplit</h1> The org.apache.hadoop.mapreduce.InputSplit interface is a fundamental part of the Apache Hadoop MapReduce framework. It provides an abstraction layer for developers to handle data in MapReduce jobs. This article explains the purpose of InputSplit and its usage in the Hadoop MapReduce framework. 
+        <h2>What Is org.apache.hadoop.mapreduce.InputSplit?</h2> In Hadoop MapReduce, the InputSplit interface is responsible for breaking down the job's input into manageable pieces of work called "splits". These splits are used to control how the MapReduce jobs will process the data. A split of data can be defined as the partitioning of the input data into subsets that can be processed independently by a single mapper. By splitting the input data into these manageable pieces of work, the MapReduce framework is able to process large amounts of data more efficiently. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+InputSplit inputSplit = new InputSplit();
+
+          </xmp></code></pre> 
+        <h2>How Does InputSplit Work?</h2> The InputSplit interface defines methods which must be implemented by the concrete classes that are to provide a particular type of InputSplit. The most important method is the getSplit() method. This method returns the actual InputSplit for the given job. The getSplit() method takes two parameters: an InputFormat instance and a JobContext instance. The InputFormat is responsible for declaring the data source and the format of the data, while the JobContext is used to read job configuration and other metadata. Once the getSplit() method is executed, it will return an array of InputSplit instances which contain the data information. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+InputSplit[] splits = inputSplit.getSplit(inputFormat, jobContext);
+
+          </xmp></code></pre> The InputSplit instances returned by this method can then be used to create tasks that will process the data in parallel. Each task reads the data relating to a single InputSplit and processes it. 
+        <h2>Examples of org.apache.hadoop.mapreduce.InputSplit</h2> Below are a few examples of how to use the InputSplit interface with Apache Hadoop MapReduce. 
+        <h3>Example 1: TextInputFormat</h3> TextInputFormat is an implementation of InputFormat that is used to read plain text files. To create an InputSplit using TextInputFormat, you first need to define an instance of TextInputFormat: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+TextInputFormat textInputFormat = new TextInputFormat();
+
+          </xmp></code></pre> You can then use this instance to create an InputSplit, by passing the TextInputFormat instance and a JobContext instance to the getSplit() method of your InputSplit class: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+InputSplit[] splits = inputSplit.getSplit(textInputFormat, jobContext);
+
+          </xmp></code></pre> 
+        <h3>Example 2: SequenceFileInputFormat</h3> SequenceFileInputFormat is an implementation of InputFormat used to read Hadoop sequence files. To create an InputSplit using SequenceFileInputFormat, you first need to define an instance of SequenceFileInputFormat: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+SequenceFileInputFormat seqInputFormat = new SequenceFileInputFormat();
+
+          </xmp></code></pre> You can then use this instance to create an InputSplit, by passing the SequenceFileInputFormat instance and a JobContext instance to the getSplit() method of your InputSplit class: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+InputSplit[] splits = inputSplit.getSplit(seqInputFormat, jobContext);
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> In conclusion, the org.apache.hadoop.mapreduce.InputSplit interface is an important part of the Apache Hadoop MapReduce framework. It provides an abstraction layer for developers to handle data in their MapReduce jobs. By providing an easy-to-use interface for creating InputSplit objects, it allows developers to easily partition the data for processing. The InputSplit instances returned by the getSplit() method can then be used to create tasks that will process the data in parallel. Overall, the InputSplit interface is an invaluable component of the Apache Hadoop MapReduce framework and can be used to create efficient, distributed applications. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Java-Zip/CheckedOutputStream/"> CheckedOutputStream </a> </p> <a href="/articles/Java/Java-Zip/CheckedOutputStream/Create-Zip-File-With-CRC32-Checksum-Example.html">Create Zip File With CRC32 Checksum Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.apache.http.client.config.RequestConfig.html">o.a.h.c.c.RequestConfig</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Rounded-Corner-Rectangle-&-Square-in-Applet-Window-Example.html">Draw Rounded Corner Rectangle & Square in Applet Window Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/io.netty.bootstrap.Bootstrap.html">io.netty.bootstrap.Bootstrap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/com.google.gson.JsonObject.html">com.google.gson.JsonObject</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Mark-file-or-directory-Read-Only.html">Mark file or directory Read Only</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-short-to-a-file-using-DataOutputStream.html">Write short to a file using DataOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Set-Foreground-Color-Of-an-Applet-Window-Example.html">Set Foreground Color Of an Applet Window Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/"> Sorting </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-int-Array-Example.html">Java Sort int Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Delete-file-or-directory.html">Delete file or directory</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-27 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-print-Java-HashSet-elements.html">How to print Java HashSet elements</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-ArrayList-using-Comparator.html">Sort ArrayList using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Java-Long-Example.html">Java Long Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/io.netty.channel.ChannelHandler.Sharable.html">i.n.c.C.Sharable</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-int-Arrays-Example.html">Compare Two Java int Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/android.view.animation.AnticipateInterpolator.html">a.v.a.AnticipateInterpolator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-convert-comma-separated-string-to-Java-HashSet.html">How to convert comma separated string to Java HashSet</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Fill-Rectangle-&-Square-in-Applet-Window-Example.html">Fill Rectangle & Square in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Simple-Java-HashSet-example.html">Simple Java HashSet example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.bumptech.glide.load.resource.drawable.GlideDrawable.html">c.b.g.l.r.d.GlideDrawable</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-byte-from-file-using-DataInputStream.html">Read byte from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Circle-Area-using-Java-Example.html">Calculate Circle Area using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/java.util.concurrent.Exchanger.html">java.util.concurrent.Exchanger</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Foreground-Color-Of-an-Applet-Window-Example.html">Get Foreground Color Of an Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Calculate-Average-value-of-Array-elements-using-Java-Example.html">Calculate Average value of Array elements using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.squareup.okhttp.Request.html">com.squareup.okhttp.Request</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Remove-all-elements-from-Java-LinkedHashSet-example.html">Remove all elements from Java LinkedHashSet example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Change-Text-Font-Of-Label-Example.html">Change Text Font Of Label Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.hibernate.Query.html">org.hibernate.Query</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-long-to-String.html">Convert long to String</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
