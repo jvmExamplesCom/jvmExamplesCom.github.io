@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.apache.commons.collections.MapUtils</title> <!--timestamp=2023-04-18T00:11:58.929147718Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.apache.commons.collections.MapUtils"> 
+  <meta name="keywords" content="org.apache.commons.collections.MapUtils"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.apache.commons.collections.MapUtils"> 
+  <meta property="og:description" content="org.apache.commons.collections.MapUtils"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.apache.commons.collections.MapUtils"> 
+  <meta name="twitter:description" content="org.apache.commons.collections.MapUtils"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-04-17</small>
+        </div> 
+        <h1>org.apache.commons.collections.MapUtils</h1> 
+        <p>The org.apache.commons.collections.MapUtils class provides several utility methods for manipulating maps and their contents. It provides methods to create, modify, sort, filter, search and compare maps. MapUtils also provides methods to convert Maps to and from arrays.</p> 
+        <h2>Creating a Map</h2> 
+        <p>The create() method allows us to easily create a Map. It takes two arguments, the first being the type of the map and the second being a key-value array. For example, we can create a HashMap as follows:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Map<String, Integer> map = MapUtils.create(HashMap::new, 
+    new String[]{"key1", "key2"},
+    new Integer[]{1, 2});
+
+          </xmp></code></pre> 
+        <h2>Modifying a Map</h2> 
+        <p>The addAll() method is used to add all of the entries from one map to another. It takes two Map arguments, the first being the source map and the second being the destination map. For example, we can add all entries from one map to another as follows:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Map<String, Integer> sourceMap = ...;
+Map<String, Integer> destMap = ...;
+MapUtils.addAll(sourceMap, destMap);
+
+          </xmp></code></pre> 
+        <p>The putAll() method is used to put all of the entries from one map into another. It takes two Map arguments, the first being the source map and the second being the destination map. For example, we can put all entries from one map into another as follows:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Map<String, Integer> sourceMap = ...;
+Map<String, Integer> destMap = ...;
+MapUtils.putAll(sourceMap, destMap);
+
+          </xmp></code></pre> 
+        <h2>Sorting a Map</h2> 
+        <p>The sort() method is used to sort a map by its keys or values. It takes three arguments, the first being the Map to be sorted, the second being a Comparator for the keys, and the third being a Comparator for the values. For example, we can sort a map by its keys as follows:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Map<String, Integer> map = ...;
+Comparator<String> comparator = (s1, s2) -> s1.compareToIgnoreCase(s2);
+MapUtils.sort(map, comparator, null);
+
+          </xmp></code></pre> 
+        <h2>Filtering a Map</h2> 
+        <p>The filterByValue() method is used to filter a map by its values. It takes two arguments, the first being the Map to be filtered and the second being a Predicate to do the filtering. For example, we can filter a map by its values as follows:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Map<String, Integer> map = ...;
+Predicate<Integer> predicate = i -> i >= 0;
+MapUtils.filterByValue(map, predicate);
+
+          </xmp></code></pre> 
+        <h2>Searching a Map</h2> 
+        <p>The search() method is used to search a map for a specific entry. It takes two arguments, the first being the Map to be searched and the second being a Predicate. For example, we can search a map for a specific entry as follows:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Map<String, Integer> map = ...;
+Predicate<String> predicate = s -> s.equals("key1");
+MapUtils.search(map, predicate);
+
+          </xmp></code></pre> 
+        <h2>Comparing Maps</h2> 
+        <p>The containsAllEntries() method is used to check if one Map contains all the entries of another Map. It takes two arguments, the first being the source Map and the second being the target Map. For example, we can check if one map contains all the entries of another map as follows:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Map<String, Integer> sourceMap = ...;
+Map<String, Integer> targetMap = ...;
+MapUtils.containsAllEntries(sourceMap, targetMap);
+
+          </xmp></code></pre> 
+        <h2>Converting Maps to and from Arrays</h2> 
+        <p>The toArray() method is used to convert a Map to an array. It takes three arguments, the first being the Map to be converted, the second being the type of the elements in the array, and the third being a Function to convert the entries in the map to elements in the array. For example, we can convert a map to an array as follows:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Map<String, Integer> map = ...;
+Integer[] array = MapUtils.toArray(map, Integer.class, e -> e.getValue());
+
+          </xmp></code></pre> 
+        <p>The fromArray() method is used to convert an array to a Map. It takes three arguments, the first being the array to be converted, the second being the type of the keys in the map, and the third being a function to convert elements in the array to entries in the map. For example, we can convert an array to a map as follows:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Integer[] array = ...;
+Map<String, Integer> map = MapUtils.fromArray(array, String.class, e -> {
+    return new AbstractMap.SimpleEntry<String, Integer>("key" + e, e);
+});
+
+          </xmp></code></pre> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/"> Long Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Java-Long-Example.html">Java Long Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-find-element-index-in-LinkedHashSet.html">How to find element index in LinkedHashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Create-Multi-Select-AWT-List-Example.html">Create Multi Select AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/"> AWT Label </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Disable-Label-Example.html">Disable Label Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Wrappers/"> Wrappers </a> </p> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Long-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Long object to byte, short, int, long, float and double</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.awt.HeadlessException.html">java.awt.HeadlessException</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-String-array-using-Comparator.html">Sort String array using Comparator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-elements-of-Java-ArrayList-Example.html">Sort elements of Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.google.common.collect.ImmutableSortedMap.html">c.g.c.c.ImmutableSortedMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.hadoop.hdfs.MiniDFSCluster.html">o.a.h.h.MiniDFSCluster</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-02 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Adam</h3> <p><a href="#">2023-06-15 12:58</a></p> <p>These Programs Are Very Useful For Java Beginners!... Thanks! ...</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Uberel</h3> <p><a href="#">2023-05-27 17:54</a></p> Appreciate your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/retrofit.http.Query.html">retrofit.http.Query</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.text.style.StrikethroughSpan.html">android.text.style.StrikethroughSpan</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/android.content.pm.ServiceInfo.html">android.content.pm.ServiceInfo</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Convert-HashSet-to-array.html">Convert HashSet to array</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Tail-Map-from-Java-TreeMap-example.html">Get Tail Map from Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Get-all-keys-of-Java-HashMap-example.html">Get all keys of Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-maximum-of-two-numbers-using-Math.max.html">F.max</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-font/Get-Available-Font-Family-Names-Example.html">Get Available Font Family Names Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-String-array-using-Arrays-class.html">Sort String array using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/ArrayList-insert-element-at-the-beginning.html">ArrayList insert element at the beginning</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-java-int-to-Integer-object-Example.html">Convert java int to Integer object Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.swing.event.ListSelectionEvent.html">javax.swing.event.ListSelectionEvent</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Size-of-Java-TreeMap-Example.html">Get Size of Java TreeMap Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/java.util.function.LongSupplier.html">java.util.function.LongSupplier</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-4-Example.html">Java Pyramid 4 Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/Deflater/Compress-Byte-Array-Using-Deflater-Example.html">Compress Byte Array Using Deflater Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/List-Filesystem-roots.html">List Filesystem roots</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Circle-Perimeter-using-Java-Example.html">Calculate Circle Perimeter using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-elements-from-ArrayList.html">Get elements from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.hibernate.criterion.Restrictions.html">org.hibernate.criterion.Restrictions</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
