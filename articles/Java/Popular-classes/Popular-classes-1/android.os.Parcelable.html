@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - android.os.Parcelable</title> <!--timestamp=2023-04-27T00:12:50.258511792Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="android.os.Parcelable"> 
+  <meta name="keywords" content="android.os.Parcelable"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - android.os.Parcelable"> 
+  <meta property="og:description" content="android.os.Parcelable"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - android.os.Parcelable"> 
+  <meta name="twitter:description" content="android.os.Parcelable"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-04-26</small>
+        </div> 
+        <h1>android.os.Parcelable</h1> 
+        <p>Android Parcelable is a Java interface that allows developers to easily serialize and deserialize objects into a specific Android parcel format. This process enables the instantiation of an object from a byte array that was produced when it was previously serialized. In Android, parcelable objects are special because they are similar to the Serializable objects, except that they are much more efficient. This allows for faster creation, transport, and storage of parcels, since only portions of the data are moved through the system at any given time.</p> 
+        <h2>Serialization of Objects with Parcelables</h2> 
+        <p>Serialization is the process of converting an object into a stream of bytes so that it can be stored or transferred over a network. To serialize an object using the Parcelable interface, the object first needs to implement the Parcelable interface in the code. Once that is done, the following code should be used:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyObject implements Parcelable {
+  //...
+  
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+     //Write the data to the parcel
+     dest.writeString(data);
+  }
+
+  //...
+}
+
+          </xmp></code></pre> 
+        <p>In this example, the ‘data’ string was written to the Parcel. This is done with the ‘dest’ object as the destination and the 'flags' as the security parameters. This is what is used to convert the object of type ‘MyObject’ into a byte stream. It is important that all the data associated with the object is written to the Parcel correctly, otherwise the object will not be properly reconstructed upon deserialization.</p> 
+        <h2>Deserialization of Objects with Parcelables</h2> 
+        <p>Deserialization is the reverse process of serialization, where the data stored as a byte stream is converted back into an object with the same state as when it was serialized. To deserialize an object from the Parcelable interface, the same code from the serialization section should be used, but with the readFromParcel function instead:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyObject implements Parcelable {
+  //...
+  
+  @Override
+  public void readFromParcel(Parcel source) {
+     //Read the data from the parcel
+     data = source.readString();
+  }
+
+  //...
+}
+
+          </xmp></code></pre> 
+        <p>In this example, the ‘data’ string was read from the Parcel. This is done with the ‘source’ object as the origin and the 'flags' as the security parameters. By using this method, we can ensure that the object is restored to its original state.</p> 
+        <h2>Conclusion</h2> 
+        <p>Android Parcelable is a very useful interface that allows the serialization and deserialization of objects in an efficient manner. As long as all the necessary data is written to and read from the Parcel, the objects can be easily converted from bytes to objects and vice versa.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Mark-file-or-directory-Read-Only.html">Mark file or directory Read Only</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.commons.lang.SystemUtils.html">org.apache.commons.lang.SystemUtils</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/"> Double Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Java-Double-compare-example.html">Java Double compare example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-all-occurrences-of-specified-element-of-Java-ArrayList-Example.html">Replace all occurrences of specified element of Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/FileInputStream/"> FileInputStream </a> </p> <a href="/articles/Java/File-And-IO/FileInputStream/Skip-n-bytes-while-reading-the-file-using-FileInputStream.html">Skip n bytes while reading the file using FileInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/java.nio.channels.FileChannel.MapMode.html">j.n.c.F.MapMode</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/net.minecraft.server.MinecraftServer.html">net.minecraft.server.MinecraftServer</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Get-all-keys-of-Java-HashMap-example.html">Get all keys of Java HashMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Vector-to-an-array.html">Convert Vector to an array</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-add-array-example.html">Java LinkedList add array example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-15 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Abral</h3> <p><a href="#">2023-06-22 06:41</a></p> I do not understand details <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Gabriel</h3> <p><a href="#">2023-06-17 16:21</a></p> its very helpful programs to all Thanks...... <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Insert-an-Element-into-LinkedList-Java-example.html">Insert an Element into LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.commons.lang.builder.HashCodeBuilder.html">o.a.c.l.b.HashCodeBuilder</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-sort-LinkedHashSet-elements-using-Comparable.html">How to sort LinkedHashSet elements using Comparable</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Convert-String-object-to-boolean-primitive-type.html">Convert String object to boolean primitive type</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.awt.Color.html">java.awt.Color</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/List-Odd-Numbers-Java-Example.html">List Odd Numbers Java Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Remove-first-and-last-elements-of-LinkedList-Java-example.html">Remove first and last elements of LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-Minimum-element-of-Java-ArrayList-Example.html">Find Minimum element of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Write-HashMap-to-a-text-file-in-Java.html">Write HashMap to a text file in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Copy-Elements-of-Vector-to-Java-ArrayList-Example.html">Copy Elements of Vector to Java ArrayList Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-long-to-String.html">Convert long to String</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-check-If-HashMap-is-empty-example.html">How to check If HashMap is empty example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Replace-an-Element-of-LinkedList-Java-example.html">Replace an Element of LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Convert-java-Double-to-numeric-primitive-data-types-example.html">Convert java Double to numeric primitive data types example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.util.concurrent.ScheduledThreadPoolExecutor.html">j.u.c.ScheduledThreadPoolExecutor</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.widget.GridView.html">android.widget.GridView</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Calculate-Average-value-of-Array-elements-using-Java-Example.html">Calculate Average value of Array elements using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.content.ContentProvider.html">android.content.ContentProvider</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-iterate-Java-TreeMap-in-reverse-order.html">How to iterate Java TreeMap in reverse order</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Create-Custom-Color-Using-HSB-Example.html">Create Custom Color Using HSB Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
