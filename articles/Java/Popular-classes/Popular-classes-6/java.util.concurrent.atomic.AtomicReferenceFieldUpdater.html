@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.util.concurrent.atomic.AtomicReferenceFieldUpdater</title> <!--timestamp=2023-04-29T00:12:18.379977263Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.util.concurrent.atomic.AtomicReferenceFieldUpdater"> 
+  <meta name="keywords" content="java.util.concurrent.atomic.AtomicReferenceFieldUpdater"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.util.concurrent.atomic.AtomicReferenceFieldUpdater"> 
+  <meta property="og:description" content="java.util.concurrent.atomic.AtomicReferenceFieldUpdater"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.util.concurrent.atomic.AtomicReferenceFieldUpdater"> 
+  <meta name="twitter:description" content="java.util.concurrent.atomic.AtomicReferenceFieldUpdater"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-04-28</small>
+        </div> 
+        <h1>An Overview of Java.util.concurrent.atomic.AtomicReferenceFieldUpdater</h1> 
+        <p>Java.util.concurrent.atomic.AtomicReferenceFieldUpdater is a class within the package java.util.concurrent.atomic used to simplify and enhance the concurrent access to one or more fields of a class. It can be used in place of synchronized blocks for declaring and manipulating shared, atomic reference fields of a class. It was first introduced in Java 1.5 and since then has become an increasingly popular choice for dealing with concurrent programming problems.</p> 
+        <h2>Using AtomicReferenceFieldUpdater</h2> 
+        <p>The best way to understand how to use the AtomicReferenceFieldUpdater class is to look at some examples. The basic usage is to define an AtomicReferenceFieldUpdater object with the type of object the reference field should point to, along with the name of the reference field. This is done using the static method AtomicReferenceFieldUpdater.newUpdater(class, type, fieldName). Then the object can be used to set, get, or compare and swap values of the reference field at any given time.</p> 
+        <p>Let's look at an example of how to use AtomicReferenceFieldUpdater:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+class MyClass {
+    private String test;
+    private final static AtomicReferenceFieldUpdater<MyClass, String> updater =
+        AtomicReferenceFieldUpdater.newUpdater(MyClass.class, String.class, "test");
+}
+
+          </xmp></code></pre> 
+        <p>This example creates an AtomicReferenceFieldUpdater object that can be used to atomically manipulate the </p>
+        <pre>test</pre> field of MyClass. The next step is to actually use the AtomicReferenceFieldUpdater to manipulate the reference field. This can be done using the updater’s get, set, and compare and set methods:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Get the value of the "test" field
+String currentValue = updater.get(this);
+
+// Set the "test" field to a new value
+updater.set(this, "newValue");
+
+// Atomically change the "test" field to a new value
+boolean success = updater.compareAndSet(this, currentValue, "newValue");
+
+          </xmp></code></pre> 
+        <p>These methods allow for the thread-safe manipulation of the </p>
+        <pre>test</pre> field, making concurrent programming much more streamlined. It should be noted that the compare and set method is especially useful as it allows for atomic state transitions that can occur even in the presence of multiple threads trying to access the same field at the same time.
+         
+        <h2>Advantages of AtomicReferenceFieldUpdater</h2> 
+        <p>As mentioned previously, the AtomicReferenceFieldUpdater class provides several advantages over using synchronized blocks for manipulating shared, atomic fields. These advantages include:</p> 
+        <ul> 
+         <li>Atomicity – The comparison and swap operations are atomic, which means that even in the presence of multiple threads trying to access the same field at the same time, the operations will succeed without data corruption.</li> 
+         <li>Simplicity – The API is fairly simple, making it easy to use and maintain.</li> 
+         <li>Speed – Using the AtomicReferenceFieldUpdater class is much faster than using a synchronized block, as there is no need to acquire and release locks.</li> 
+        </ul> 
+        <h2>Conclusion</h2> 
+        <p>The AtomicReferenceFieldUpdater class is an effective tool for dealing with concurrency when manipulating shared, atomic fields. It is simple to use and provides several advantages over using synchronized blocks. For these reasons, it is becoming increasingly popular in concurrent programming.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Replace-an-Element-of-LinkedList-Java-example.html">Replace an Element of LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.intellij.openapi.options.Configurable.html">c.i.o.o.Configurable</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/"> Runtime </a> </p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Get-Java-Runtime-Example.html">Get Java Runtime Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/"> Data types </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/Java-int-Example.html">Java int Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-String-as-bytes-to-a-file-using-DataOutputStream.html">Write String as bytes to a file using DataOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-replace-a-value-for-the-given-key-in-the-TreeMap-(TreeMap-replace-method).html">How to replace a value for the given key in the TreeMap (TreeMap replace method)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Applet-Life-Cycle-Example.html">Applet Life Cycle Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JTextField/"> JTextField </a> </p> <a href="/articles/Java/Swing/JTextField/Create-Read-Only-JTextField-Example.html">Create Read Only JTextField Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/javax.annotation.concurrent.GuardedBy.html">j.a.c.GuardedBy</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/de.robv.android.xposed.callbacks.XC-LoadPackage.html">d.r.a.x.c.XC LoadPackage</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-04 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.security.cert.X509Certificate.html">java.security.cert.X509Certificate</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Remove-all-values-from-Java-Hashtable-example.html">Remove all values from Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-Map-to-List.html">Convert Map to List</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-convert-an-array-to-Vector.html">How to convert an array to Vector</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/How-to-remove-duplicate-values-from-String-array.html">How to remove duplicate values from String array</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-Java-Vector-using-Comparator.html">Sort Java Vector using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Check-if-a-particular-value-exists-in-Java-HashMap-example.html">Check if a particular value exists in Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-add-an-element-at-the-beginning-(at-the-front).html">Java LinkedList add an element at the beginning (at the front)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-get-HashMap-size-example.html">How to get HashMap size example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/java.util.OptionalInt.html">java.util.OptionalInt</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.widget.SeekBar.html">android.widget.SeekBar</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Get-Current-Caret-Position-in-JTextField-Example.html">Get Current Caret Position in JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/ByteArrayInputStream/Read-byte-array-using-ByteArrayInputStream-Example.html">Read byte array using ByteArrayInputStream Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.util.logging.Handler.html">java.util.logging.Handler</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-get-HashMap-size-example.html">How to get HashMap size example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-short-Arrays-Example.html">Compare Two Java short Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/io.opentracing.SpanContext.html">io.opentracing.SpanContext</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-find-element-index-in-LinkedHashSet.html">How to find element index in LinkedHashSet</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-byte-from-file-using-DataInputStream.html">Read byte from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-long.html">Convert String long</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
