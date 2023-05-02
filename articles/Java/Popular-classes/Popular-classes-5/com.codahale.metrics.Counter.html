@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - com.codahale.metrics.Counter</title> <!--timestamp=2023-05-02T00:11:58.440194812Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="com.codahale.metrics.Counter"> 
+  <meta name="keywords" content="com.codahale.metrics.Counter"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - com.codahale.metrics.Counter"> 
+  <meta property="og:description" content="com.codahale.metrics.Counter"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - com.codahale.metrics.Counter"> 
+  <meta name="twitter:description" content="com.codahale.metrics.Counter"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-05-01</small>
+        </div> 
+        <h1>The com.codahale.metrics.Counter Class</h1> The com.codahale.metrics package provides a powerful set of classes to help developers monitor the performance of various components in their application. This article will focus on one particular class in the package, the Counter class. This class is used for counting the number of times an event has happened and is trivially simple to use. 
+        <h2>Creating Counters</h2> Counters can be created by simply instantiating them. There are a few different types available such as LongAdder, AtomicInteger and AtomicLong: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Counter counter = new Counter();
+Counter longAdderCounter = new LongAdderCounter();
+Counter atomicIntegerCounter = new AtomicIntegerCounter();
+Counter atomicLongCounter = new AtomicLongCounter();
+
+          </xmp></code></pre> By default, the counters start with a value of 0. However, it is possible to provide a custom starting value when they are created: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Counter counterWithStartValue = new Counter(100);
+
+          </xmp></code></pre> 
+        <h2>Incrementing Counters</h2> To increment a counter, simply call the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+inc()
+
+          </xmp></code></pre> method. This will increase the value of the counter by one. It is also possible to increment the counter with a value other than one. This can be done by calling the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+add(long amt)
+
+          </xmp></code></pre> method and providing the desired amount. For example, the following code will result in the counter value being incremented by ten: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+counter.add(10);
+
+          </xmp></code></pre> 
+        <h2>Decrementing Counters</h2> To decrease the value of the counter, the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+dec()
+
+          </xmp></code></pre> method can be used. This will decrease the value of the counter by one. As with the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+add()
+
+          </xmp></code></pre> method, it is possible to decrement the counter using a custom value. The following code will decrement the counter by 5: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+counter.dec(5);
+
+          </xmp></code></pre> 
+        <h2>Retrieving the Value of Counters</h2> It is also possible to retrieve the current value of the counter by using the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getCount()
+
+          </xmp></code></pre> method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+long count = counter.getCount();
+
+          </xmp></code></pre> 
+        <h2>Example Usage</h2> Here is an example of how a counter can be used to track the number of requests that have been made to an API endpoint: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Counter requestCounter = new Counter();
+
+public void makeRequest() {
+    // Make the request...
+
+    // Increment the counter
+    requestCounter.inc();
+}
+
+public long getRequestCount() {
+    return requestCounter.getCount();
+}
+
+          </xmp></code></pre> As you can see, the Counter class provides a simple but effective way of tracking the number of times an event has occurred. It is trivially simple to use and can be used for a wide variety of use cases. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Remove-specified-element-from-LinkedList-Java-example.html">Remove specified element from LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Enumeration-over-Java-Vector-Example.html">Get Enumeration over Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.graphics.Path.html">android.graphics.Path</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/"> Convertion </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-short-to-String.html">Convert short to String</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.content.pm.PackageManager.NameNotFoundException.html">a.c.p.P.NameNotFoundException</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Create-DataOutputStream-from-FileOutputStream.html">Create DataOutputStream from FileOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-get-random-elements-from-LinkedHashSet.html">How to get random elements from LinkedHashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-LinkedHashMap-to-List.html">Convert LinkedHashMap to List</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.eclipse.jetty.server.SslConnectionFactory.html">o.e.j.s.SslConnectionFactory</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-replace-elements.html">Java LinkedList replace elements</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-22 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Uberel</h3> <p><a href="#">2023-06-07 09:57</a></p> Grt ;-) <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>JavaFan</h3> <p><a href="#">2023-06-09 03:13</a></p> Great example! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-maintain-insertion-order-of-elements-of-HashMap-using-LinkedHashMap.html">How to maintain insertion order of elements of HashMap using LinkedHashMap</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/java.lang.instrument.ClassFileTransformer.html">j.l.i.ClassFileTransformer</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/scala.collection.JavaConversions.html">scala.collection.JavaConversions</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.util.SparseArray.html">android.util.SparseArray</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Item-From-Single-Select-AWT-List-Example.html">Get Selected Item From Single Select AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Frame/Mouse-Event-Handling-in-a-Frame-Window-Example.html">Mouse Event Handling in a Frame Window Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-create-new-HashSet-objects-using-HashSet-constructor.html">How to create new HashSet objects using HashSet constructor</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-String-array-using-Arrays-class.html">Sort String array using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-an-array-to-TreeSet.html">How to convert an array to TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-All-Elements-Of-Java-ArrayList-Example.html">Replace All Elements Of Java ArrayList Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.bukkit.command.CommandSender.html">org.bukkit.command.CommandSender</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-char-Array-Example.html">Java Sort char Array Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Simple-For-loop-Example.html">Simple For loop Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.codehaus.jettison.json.JSONException.html">o.c.j.j.JSONException</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Iterate-through-keys-of-Java-Hashtable-example.html">Iterate through keys of Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-fix-java.io.FileNotFoundException-(access-is-denied).html">FileNotFoundException (access is denied)</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/CheckedOutputStream/Create-Zip-File-With-Adler32-Checksum-Example.html">Create Zip File With Adler32 Checksum Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-duplicate-elements-from-String-array-using-Arrays-class.html">Remove duplicate elements from String array using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.google.firebase.messaging.RemoteMessage.html">c.g.f.m.RemoteMessage</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-Set-to-array-(Convert-HashSet-to-Array).html">Convert Set to array (Convert HashSet to Array)</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
