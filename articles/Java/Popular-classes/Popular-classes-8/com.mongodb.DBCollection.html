@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - com.mongodb.DBCollection</title> <!--timestamp=2023-05-07T00:12:11.417246528Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="com.mongodb.DBCollection"> 
+  <meta name="keywords" content="com.mongodb.DBCollection"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - com.mongodb.DBCollection"> 
+  <meta property="og:description" content="com.mongodb.DBCollection"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - com.mongodb.DBCollection"> 
+  <meta name="twitter:description" content="com.mongodb.DBCollection"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-05-06</small>
+        </div> 
+        <h1> Overview of com.mongodb.DBCollection </h1> 
+        <h2> Introduction </h2> The com.mongodb.DBCollection class is part of the MongoDB Java Driver version 3.0 and is a basic object-oriented programming interface for interacting with MongoDB, an open-source document-oriented NoSQL database. DBCollection objects represent a collection in a MongoDB database and allow for operations such as inserting, updating, querying, and deleting documents. Additionally, these objects can be used to create indexes, authenticate users, manage access control lists, and more. In this article we will cover the basics of the com.mongodb.DBCollection class and provide example code demonstrating each supported operation. 
+        <h2> Creating a DBCollection </h2> Before a DBCollection object can be used, it must first be created. To initiate a new collection, you may use either the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MongoClient#getDatabase()
+
+          </xmp></code></pre> or 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MongoClient#getCollection()
+
+          </xmp></code></pre> methods. The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getDatabase()
+
+          </xmp></code></pre> method returns a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+com.mongodb.client.MongoDatabase
+
+          </xmp></code></pre>, which provides access to the collections via its 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MongoDatabase#getCollection()
+
+          </xmp></code></pre> method. The following example shows how to create a DBCollection from a MongoClient: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MongoClient mongoClient = new MongoClient();
+DBCollection collection = mongoClient.getDatabase("test").getCollection("myCollection");
+
+          </xmp></code></pre> Alternatively, you may also create a DBCollection directly from the MongoClient by passing the collection's name as an argument to the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MongoClient#getCollection()
+
+          </xmp></code></pre> method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MongoClient mongoClient = new MongoClient();
+DBCollection collection = mongoClient.getCollection("myCollection");
+
+          </xmp></code></pre> 
+        <h2> Inserting Documents </h2> Once a DBCollection object is created, you may insert one or more documents into the collection. To do this, you may use the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+DBCollection#insert()
+
+          </xmp></code></pre> method. This method can accept either a single 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+com.mongodb.BasicDBObject
+
+          </xmp></code></pre> containing the document data or an array of 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+com.mongodb.BasicDBObjects
+
+          </xmp></code></pre> containing multiple documents. The following example shows how to insert a single document into a collection: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+BasicDBObject doc = new BasicDBObject("name", "John")
+                            .append("age", 30)
+                            .append("address", new BasicDBObject("street", "123 Main St.")
+                                                       .append("city", "Boston")
+                                                       .append("state", "MA"));
+collection.insert(doc);
+
+          </xmp></code></pre> To insert multiple documents into a collection, you may pass an array of BasicDBObjects to the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+DBCollection#insert()
+
+          </xmp></code></pre> method as in the following example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create an array of two BasicDBObjects representing two documents
+BasicDBObject[] docs = new BasicDBObject[2];
+docs[0] = new BasicDBObject("name", "John")
+                   .append("age", 30)
+                   .append("address", new BasicDBObject("street", "123 Main St.")
+                                              .append("city", "Boston")
+                                              .append("state", "MA"));
+docs[1] = new BasicDBObject("name", "Jane")
+                   .append("age", 25)
+                   .append("address", new BasicDBObject("street", "456 Broadway")
+                                              .append("city", "New York")
+                                              .append("state", "NY"));
+// Insert the documents
+collection.insert(docs);
+
+          </xmp></code></pre> 
+        <h2> Querying Documents </h2> To query the documents in a DBCollection, you may use the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+DBCollection#find()
+
+          </xmp></code></pre> method. This method accepts a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+com.mongodb.BasicDBObject
+
+          </xmp></code></pre> containing the query parameters and returns a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+com.mongodb.DBCursor
+
+          </xmp></code></pre> which provides an iterator over all of the documents matching the query. The following example shows how to query the documents in a collection and iterate over the results: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create a query
+BasicDBObject query = new BasicDBObject("name", "John");
+// Execute the query
+DBCursor cursor = collection.find(query);
+// Iterate over the results
+while (cursor.hasNext()) {
+    System.out.println(cursor.next());
+}
+
+          </xmp></code></pre> 
+        <h2> Updating Documents </h2> You may also update documents in a collection using the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+DBCollection#update()
+
+          </xmp></code></pre> method. This method accepts two arguments: a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+com.mongodb.BasicDBObject
+
+          </xmp></code></pre> containing the query parameters used to identify the target documents, and a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+com.mongodb.BasicDBObject
+
+          </xmp></code></pre> containing the document data to be updated. The following example shows how to update a single document in a collection: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create a query
+BasicDBObject query = new BasicDBObject("name", "John");
+// Create the document data to be updated
+BasicDBObject updateDoc = new BasicDBObject("$set", new BasicDBObject("age", 31));
+// Execute the update operation
+collection.update(query, updateDoc);
+
+          </xmp></code></pre> 
+        <h2> Deleting Documents </h2> Finally, you may delete documents from a collection using the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+DBCollection#remove()
+
+          </xmp></code></pre> method. This method accepts a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+com.mongodb.BasicDBObject
+
+          </xmp></code></pre> containing the query parameters used to identify the documents to be deleted. The following example shows how to delete a single document from a collection: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create a query
+BasicDBObject query = new BasicDBObject("name", "John");
+// Execute the delete operation
+collection.remove(query);
+
+          </xmp></code></pre> 
+        <h2> Conclusion </h2> In this article we have covered the basics of the com.mongodb.DBCollection class and demonstrated how to use it for common operations such as inserting, querying, updating, and deleting documents. For more information on how to use DBCollection objects, please refer to the official MongoDB Java Driver documentation at 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+https://mongodb.github.io/mongo-java-driver/3.9/
+
+          </xmp></code></pre>. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Find-the-minimum-or-maximum-element-of-Vector-using-Comparator.html">Find the minimum or maximum element of Vector using Comparator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-replace-elements.html">Java LinkedList replace elements</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-clear-or-remove-all-elements-from-HashSet.html">How to clear or remove all elements from HashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.glassfish.jersey.servlet.ServletContainer.html">o.g.j.s.ServletContainer</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.apache.hadoop.hbase.client.HBaseAdmin.html">o.a.h.h.c.HBaseAdmin</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-values-using-Comparable-interface.html">Sort LinkedHashMap by values using Comparable interface</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-get-the-first-or-last-element-from-LinkedHashSet.html">How to get the first or last element from LinkedHashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/"> Short Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Convert-String-to-short-primitive-Example.html">Convert String to short primitive Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-elements-to-ArrayList.html">Add elements to ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.util.concurrent.ConcurrentSkipListSet.html">j.u.c.ConcurrentSkipListSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-05 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-Java-String-to-Long-example.html">Convert Java String to Long example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-the-first-and-last-elements-of-the-TreeSet.html">How to get the first and last elements of the TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.intellij.openapi.vfs.LocalFileSystem.html">c.i.o.v.LocalFileSystem</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/System/Get-classpath-using-System-class.html">Get classpath using System class</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-shuffle-Vector-elements-in-Java.html">How to shuffle Vector elements in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/com.fasterxml.jackson.annotation.JsonSubTypes.html">c.f.j.a.JsonSubTypes</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.google.android.gms.common.api.ResultCallback.html">c.g.a.g.c.a.ResultCallback</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-Byte-to-numeric-primitive-data-types-example.html">Convert Byte to numeric primitive data types example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Copy-ArrayList-elements-to-other-ArrayList.html">Copy ArrayList elements to other ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-Java-Vector-using-Comparator.html">Sort Java Vector using Comparator</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-elements-to-ArrayList.html">Add elements to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.intellij.notification.Notification.html">c.i.n.Notification</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.core.ParameterizedTypeReference.html">o.s.c.ParameterizedTypeReference</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Disable-Checkbox-Example.html">Disable Checkbox Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.joda.time.DateTime.html">org.joda.time.DateTime</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Remove-All-Items-From-AWT-Choice-Or-Combobox-Example.html">Remove All Items From AWT Choice Or Combobox Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-boolean-Arrays-Example.html">Compare Two Java boolean Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Select-Item-From-AWT-List-Example.html">Select Item From AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Iterate-Java-HashMap-using-forEach-or-for-loop-example.html">Iterate Java HashMap using forEach or for loop example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-CheckboxGroup/Set-Selected-Radio-Button-Example.html">Set Selected Radio Button Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
