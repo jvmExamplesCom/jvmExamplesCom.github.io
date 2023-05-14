@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - android.widget.Spinner</title> <!--timestamp=2023-05-14T00:13:20.987984713Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="android.widget.Spinner"> 
+  <meta name="keywords" content="android.widget.Spinner"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - android.widget.Spinner"> 
+  <meta property="og:description" content="android.widget.Spinner"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - android.widget.Spinner"> 
+  <meta name="twitter:description" content="android.widget.Spinner"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-05-13</small>
+        </div> 
+        <h1> android.widget.Spinner </h1> Android’s Spinner widget is a dropdown menu that allows users to make a single selection from a list of choices. It is similar to the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+<select>
+
+          </xmp></code></pre> tag in HTML and behaves differently based on its settings. This article outlines how to use Spinner, as well as how to customize its design and behavior. 
+        <h2>Creating a Spinner Using XML</h2> The simplest way to create a Spinner is to use XML layout definitions. To create a Spinner, first you must define an array of possible values. This array should be stored in the resources file, and the array’s resource ID should be passed to the Spinner constructor. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Store possible values in the res/values/strings.xml file 
+<string-array name="spinnerValues">
+    <item>Value 1</item>
+    <item>Value 2</item>
+    <item>Value 3</item>
+</string-array>
+
+// Reference the string array in the layout file
+<Spinner
+    android:id="@+id/my_spinner"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:entries="@array/spinnerValues"/>
+
+          </xmp></code></pre> 
+        <h2>Creating a Spinner Using Java Code</h2> Using the same array of possible values, it is also possible to create a Spinner using Java code. First, the array of possible values should be created as a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String
+
+          </xmp></code></pre> array. This array should be passed to the Spinner constructor. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String[] myValues = {"Value 1", "Value 2", "Value 3"};
+
+Spinner mySpinner = new Spinner(this);
+mySpinner.setEntries(myValues);
+
+          </xmp></code></pre> 
+        <h2>Customizing the Spinner</h2> Spinners can be customized with styling and attributes. For example, the prompt attribute can be used to specify a message to show as the initial value of the Spinner. The dropdown list can also be customized with a custom list adapter or layout. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Set the prompt attribute 
+<Spinner
+    android:id="@+id/my_spinner"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:entries="@array/spinnerValues"
+    android:prompt="@string/my_prompt"/>
+
+// Customize the dropdown list 
+mySpinner.setAdapter(myCustomAdapter);
+mySpinner.setLayout(myCustomLayout);
+
+          </xmp></code></pre> 
+        <h2>Handling Events</h2> The Spinner class provides methods for listening to user events such as selection changes. To listen for events, a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Spinner.OnItemSelectedListener
+
+          </xmp></code></pre> should be set on the Spinner. This listener has three callback methods: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+onItemSelected()
+
+          </xmp></code></pre>, 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+onNothingSelected()
+
+          </xmp></code></pre>, and 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+onDropdownShown()
+
+          </xmp></code></pre>. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Set the listener 
+mySpinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // Handle selection change event 
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Handle no selection event 
+    }
+
+    @Override
+    public void onDropdownShown(boolean shown) {
+        // Handle dropdown click event 
+    }
+});
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> The Android Spinner widget is a convenient way to allow users to select an item from a list of choices. Using XML and Java code, Spinners can be created and customized. Additionally, events can be handled by adding a listener to the Spinner. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-print-Java-HashSet-elements.html">How to print Java HashSet elements</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/Convert-ArrayList-to-comma-separated-String.html">Convert ArrayList to comma separated String</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/"> AWT Color </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Colored-Hello-World-Applet-Example.html">Colored Hello World Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Swap-elements-of-Java-Vector-example.html">Swap elements of Java Vector example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-check-if-element-exists-in-TreeSet-(TreeSet-contains-element).html">How to check if element exists in TreeSet (TreeSet contains element)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/InputStream/"> InputStream </a> </p> <a href="/articles/Java/File-And-IO/InputStream/Read-character-from-console-using-InputStream.html">Read character from console using InputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JTextField/"> JTextField </a> </p> <a href="/articles/Java/Swing/JTextField/Change-Font-of-JTextField-Example.html">Change Font of JTextField Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/androidx.core.content.FileProvider.html">androidx.core.content.FileProvider</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.widget.TimePicker.html">android.widget.TimePicker</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/"> Convertion </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-long-to-String.html">Convert long to String</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-05 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Thomas</h3> <p><a href="#">2023-07-08 13:29</a></p> Thank you guys for your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Martin</h3> <p><a href="#">2023-07-05 14:29</a></p> Interesting, thx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Change-Text-Font-Of-Label-Example.html">Change Text Font Of Label Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.imageio.stream.ImageOutputStream.html">j.i.s.ImageOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Print-Java-LinkedHashMap.html">Print Java LinkedHashMap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Get-Size-of-Java-LinkedHashSet-Example.html">Get Size of Java LinkedHashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.eclipse.core.commands.ExecutionEvent.html">o.e.c.c.ExecutionEvent</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.hadoop.hbase.client.ConnectionFactory.html">o.a.h.h.c.ConnectionFactory</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/Determine-If-Year-Is-Leap-Year-Java-Example.html">Determine If Year Is Leap Year Java Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-unsigned-byte-from-file-using-DataInputStream.html">Read unsigned byte from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-ArrayList-to-HashMap-Java-example.html">Convert ArrayList to HashMap Java example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Reverse-Number-using-Java.html">Reverse Number using Java</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Find-element-in-ArrayList-using-indexOf-and-lastIndexOf-methods.html">Find element in ArrayList using indexOf and lastIndexOf methods</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-int-Array-Example.html">Performing Binary Search on Java int Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-HashSet-to-ArrayList-in-Java.html">Convert HashSet to ArrayList in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-List-in-reverse-order-using-ListIterator.html">Iterate List in reverse order using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-exponential-value-of-a-number-using-Math.exp.html">F.exp</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-ArrayList-using-ListIterator.html">Iterate through ArrayList using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.concurrent.atomic.AtomicBoolean.html">j.u.c.a.AtomicBoolean</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.bukkit.potion.PotionEffectType.html">org.bukkit.potion.PotionEffectType</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-maximum-of-two-numbers-using-Math.max.html">F.max</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.springframework.util.ObjectUtils.html">org.springframework.util.ObjectUtils</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
