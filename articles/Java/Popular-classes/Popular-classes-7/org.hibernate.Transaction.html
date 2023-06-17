@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.hibernate.Transaction</title> <!--timestamp=2023-06-17T00:12:55.499115327Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.hibernate.Transaction"> 
+  <meta name="keywords" content="org.hibernate.Transaction"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.hibernate.Transaction"> 
+  <meta property="og:description" content="org.hibernate.Transaction"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.hibernate.Transaction"> 
+  <meta name="twitter:description" content="org.hibernate.Transaction"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-06-16</small>
+        </div> 
+        <h1>Introduction to org.hibernate.Transaction</h1> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+org.hibernate.Transaction
+
+          </xmp></code></pre> class is part of the Hibernate framework and is a Java object used for managing transactions in a database. It is responsible for controlling the behavior of a transaction, such as committing and rolling back the changes made. The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+org.hibernate.Transaction
+
+          </xmp></code></pre> class may be configured differently depending on the type of database being used and how the transaction is implemented.
+         
+        <h2>Creating a Transaction Object</h2> 
+        A
+        <pre>Session</pre> object must be created before a 
+        <pre>Transaction</pre> object can be instantiated. The 
+        <pre>Session</pre> object uses the Database Connection object to create the 
+        <pre>Transaction</pre>. The code below creates a 
+        <pre>Session</pre> object and a 
+        <pre>Transaction</pre> object:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Session session = SessionFactoryUtils.getSession();
+    Transaction tx = session.beginTransaction();
+
+          </xmp></code></pre> 
+        <h2>Committing a Transaction</h2> 
+        Once a
+        <pre>Transaction</pre> has been instantiated, it can be committed using the 
+        <pre>commit()</pre> method. This method signals the database to save all changes that have been made since the 
+        <pre>Transaction</pre> was started. It is important to note that the 
+        <pre>commit()</pre> method can only be called once per 
+        <pre>Transaction</pre>, otherwise an exception will be thrown. The code below demonstrates how to commit a 
+        <pre>Transaction</pre>:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+tx.commit();
+
+          </xmp></code></pre> 
+        <h2>Rolling Back a Transaction</h2> 
+        <p>In the event that something goes wrong during the course of a </p>
+        <pre>Transaction</pre>, it can be rolled back using the 
+        <pre>rollback()</pre> method. This will undo any changes that have been made since the transaction began. The code below demonstrates how to roll back a 
+        <pre>Transaction</pre>:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+tx.rollback();
+
+          </xmp></code></pre> 
+        <h2>Closing a Transaction</h2> 
+        Once a
+        <pre>Transaction</pre> has been committed or rolled back, it should be closed by calling the 
+        <pre>close()</pre> method. This method tells the database that the 
+        <pre>Transaction</pre> is complete, and any pending changes will no longer be applied. The code below demonstrates how to close a 
+        <pre>Transaction</pre>:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+tx.close();
+
+          </xmp></code></pre> 
+        <h2>Example of a Full Transaction</h2> 
+        <p>The following example demonstrates a full transaction cycle using the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+org.hibernate.Transaction
+
+          </xmp></code></pre> class. This example creates a 
+        <pre>Session</pre>, begins a 
+        <pre>Transaction</pre>, executes some SQL statements, commits the changes, closes the 
+        <pre>Transaction</pre> and finally closes the 
+        <pre>Session</pre>:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create a Session
+    Session session = SessionFactoryUtils.getSession();
+    
+    // Begin a Transaction
+    Transaction tx = session.beginTransaction();
+    
+    // Execute some SQL statements
+    session.executeQuery("UPDATE table SET column = 'value'");
+    
+    // Commit the changes
+    tx.commit();
+    
+    // Close the Transaction
+    tx.close();
+    
+    // Close the Session
+    session.close();
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+org.hibernate.Transaction
+
+          </xmp></code></pre> class provides a powerful way to manage transactions in a database. It allows developers to begin, commit, rollback and close transactions with ease. This makes it ideal for use in applications where data integrity is critical, such as financial services or medical systems.
+         
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.bson.conversions.Bson.html">org.bson.conversions.Bson</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/"> Integer Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-octal-number-to-decimal-number-example.html">Convert octal number to decimal number example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Swap-elements-of-Java-ArrayList-example.html">Swap elements of Java ArrayList example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-Java-TreeMap-in-reverse-direction-using-an-iterator.html">Iterate Java TreeMap in reverse direction using an iterator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-add-elements-to-LinkedHashSet-object.html">How to add elements to LinkedHashSet object</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/io.netty.channel.Channel.html">io.netty.channel.Channel</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/com.google.common.base.CaseFormat.html">com.google.common.base.CaseFormat</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Iterate-HashMap.html">Iterate HashMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Select-Item-From-AWT-List-Example.html">Select Item From AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-reverse-order-of-the-TreeSet-elements-(iterate-TreeSet-in-reverse-order).html">How to reverse order of the TreeSet elements (iterate TreeSet in reverse order)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-21 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-6-Example.html">Java Pyramid 6 Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-create-new-Vector-objects-in-Java.html">How to create new Vector objects in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-convert-HashMap-to-TreeMap-in-Java.html">How to convert HashMap to TreeMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.net.wifi.WifiInfo.html">android.net.wifi.WifiInfo</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Get-Size-of-Java-Vector-and-loop-through-the-elements-Example.html">Get Size of Java Vector and loop through the elements Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-List-(ArrayList,-LinkedList)-to-Array.html">Convert List (ArrayList, LinkedList) to Array</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-String-to-primitive-byte-Example.html">Convert String to primitive byte Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.eclipse.swt.widgets.TableColumn.html">org.eclipse.swt.widgets.TableColumn</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/com.facebook.react.uimanager.ViewManager.html">c.f.r.u.ViewManager</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/BufferedOutputStream/Write-byte-array-to-file-using-BufferedOutputStream.html">Write byte array to file using BufferedOutputStream</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/net.sf.json.JSONArray.html">net.sf.json.JSONArray</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Threads/Set-Thread-Name-Example.html">Set Thread Name Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.google.common.collect.Queues.html">com.google.common.collect.Queues</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-convert-Vector-to-an-array.html">How to convert Vector to an array</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-float-Array-Example.html">Performing Binary Search on Java float Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-sort-TreeSet-elements-using-Comparator-interface.html">How to sort TreeSet elements using Comparator interface</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-array-to-String-using-Arrays.html">Convert String array to String using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Map-from-Java-HashMap-example.html">Get Synchronized Map from Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/com.google.gson.JsonDeserializationContext.html">c.g.g.JsonDeserializationContext</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Get-Size-of-Java-Hashtable-Example.html">Get Size of Java Hashtable Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

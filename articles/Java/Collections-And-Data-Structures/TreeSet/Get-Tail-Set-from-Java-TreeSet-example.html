@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - Get Tail Set from Java TreeSet example</title> <!--timestamp=2023-06-17T00:12:07.166319206Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="Get Tail Set from Java TreeSet example"> 
+  <meta name="keywords" content="Get Tail Set from Java TreeSet example"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - Get Tail Set from Java TreeSet example"> 
+  <meta property="og:description" content="Get Tail Set from Java TreeSet example"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - Get Tail Set from Java TreeSet example"> 
+  <meta name="twitter:description" content="Get Tail Set from Java TreeSet example"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-06-16</small>
+        </div> 
+        <h1>Getting Tail Set from Java TreeSet Example</h1> 
+        <p>The tailSet() is a method of the TreeSet class in Java that returns a view of the portion of this set whose elements are greater than or equal to a given element. This method can be used to obtain elements from a specified index, or to perform a sub-range retrieval operation on a sorted set or a navigable set. This article demonstrates how the </p>
+        <pre>tailSet()</pre> method works with a code example.
+         
+        <h2>Java TreeSet tailSet() Method Syntax</h2> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public SortedSet<E> tailSet(E fromElement)
+//Returns a view of the portion of this set whose elements are greater than or equal to fromElement.
+
+          </xmp></code></pre> 
+        <h2>Java TreeSet tailSet() Method Example</h2> 
+        To better understand how the
+        <pre>tailSet()</pre> method works, let’s look at a code example below:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+import java.util.TreeSet;
+
+public class TreeSetTailSet {
+   public static void main(String[] args) {
+      // Create a TreeSet and add some elements
+      TreeSet<String> ts1 = new TreeSet<String>();
+      ts1.add("A");
+      ts1.add("B");
+      ts1.add("C");
+      ts1.add("D");
+      ts1.add("E");
+
+      // Print out the TreeSet
+      System.out.println("TreeSet values: " + ts1);
+
+      // Get the TailSet using tailSet() method
+      System.out.println("The TailSet: " + ts1.tailSet("C"));
+   }
+}
+
+          </xmp></code></pre> 
+        The output of the program is: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+TreeSet values: [A, B, C, D, E]
+The TailSet: [C, D, E]
+
+          </xmp></code></pre> 
+        <p>In the above example, the TreeSet class is used to create a sorted set of Strings. The </p>
+        <pre>tailSet()</pre> method is used to obtain a view of the portion of the set whose elements are greater than or equal to the argument passed in. In this case, it is “C”, so all elements from “C” onward (including “C”) are returned as a TreeSet.
+         
+        <h2>Conclusion</h2> 
+        This article illustrated the use of the
+        <pre>tailSet()</pre> method in Java with a code example. The 
+        <pre>tailSet()</pre> method returns a view of the portion of this set whose elements are greater than or equal to a given element. This can be used to obtain elements from a specified index, or to perform a sub-range retrieval operation on a sorted set or a navigable set.
+         
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.util.zip.Deflater.html">java.util.zip.Deflater</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Remove-all-elements-from-Java-HashSet-example.html">Remove all elements from Java HashSet example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Replace-an-Element-of-LinkedList-Java-example.html">Replace an Element of LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-String-or-String-array-to-HashMap-(String-to-Map).html">Convert String or String array to HashMap (String to Map)</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipFile/"> ZipFile </a> </p> <a href="/articles/Java/Java-Zip/ZipFile/Get-All-Entries-From-Zip-File-Example.html">Get All Entries From Zip File Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.aspectj.lang.reflect.MethodSignature.html">o.a.l.r.MethodSignature</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-add-elements-to-Java-HashSet-(add,-addAll-method).html">How to add elements to Java HashSet (add, addAll method)</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipEntry/"> ZipEntry </a> </p> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Compressed-Size-of-Zip-Entry-Example.html">Get Compressed Size of Zip Entry Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer.html">AbstractPreferenceInitializer</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/FileOutputStream/"> FileOutputStream </a> </p> <a href="/articles/Java/File-And-IO/FileOutputStream/Copy-binary-file-using-Streams.html">Copy binary file using Streams</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-31 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.commons.beanutils.PropertyUtils.html">o.a.c.b.PropertyUtils</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-convert-LinkedHashMap-to-List-in-Java.html">How to convert LinkedHashMap to List in Java</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipOutputStream/Create-Zip-File-From-Multiple-Files-using-ZipOutputStream-Example.html">Create Zip File From Multiple Files using ZipOutputStream Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-convert-comma-separated-string-to-Java-HashSet.html">How to convert comma separated string to Java HashSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-ArrayList-elements-using-ListIterator.html">Iterate ArrayList elements using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.commons.compress.archivers.tar.TarArchiveEntry.html">o.a.c.c.a.t.TarArchiveEntry</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.eclipse.paho.client.mqttv3.MqttMessage.html">o.e.p.c.m.MqttMessage</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-String-array-containing-numbers-using-Arrays.html">Sort String array containing numbers using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-the-last-element-from-ArrayList.html">Remove the last element from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Insert-an-Element-into-LinkedList-Java-example.html">Insert an Element into LinkedList Java example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Map-from-Java-HashMap-example.html">Get Synchronized Map from Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-double-to-String.html">Convert double to String</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.mail.internet.MimeBodyPart.html">javax.mail.internet.MimeBodyPart</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Get-Size-of-Java-LinkedHashSet-Example.html">Get Size of Java LinkedHashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Change-Foreground-Color-Of-Label-Example.html">Change Foreground Color Of Label Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Shuffle-elements-of-Java-Vector-example.html">Shuffle elements of Java Vector example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Iterate-LinkedList-example.html">Iterate LinkedList example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.springframework.core.env.StandardEnvironment.html">o.s.c.e.StandardEnvironment</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer.html">ClientDetailsServiceConfigurer</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Remove-All-Items-From-AWT-Choice-Or-Combobox-Example.html">Remove All Items From AWT Choice Or Combobox Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
