@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.objectweb.asm.tree.ClassNode</title> <!--timestamp=2023-06-21T00:13:31.322554787Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.objectweb.asm.tree.ClassNode"> 
+  <meta name="keywords" content="org.objectweb.asm.tree.ClassNode"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.objectweb.asm.tree.ClassNode"> 
+  <meta property="og:description" content="org.objectweb.asm.tree.ClassNode"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.objectweb.asm.tree.ClassNode"> 
+  <meta name="twitter:description" content="org.objectweb.asm.tree.ClassNode"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-06-20</small>
+        </div> 
+        <h1>Introduction to org.objectweb.asm.tree.ClassNode</h1> 
+        <p>org.objectweb.asm.tree.ClassNode is a class in the Java programming language used for representing the structure of an entire class or interface. It contains all necessary information, such as the qualified name of the class, its superclass, the interfaces it implements, and the fields, methods and constructors it declares. ClassNode can also be used to create, modify and analyze the structure of a class or interface.</p> 
+        <h2>Creating a ClassNode</h2> 
+        <p>The simplest way to create a ClassNode is by instantiating it with the fully qualified name of the class:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ClassNode cn = new ClassNode("Foo.Bar");
+
+          </xmp></code></pre> 
+        <p>This will create a ClassNode with the fully qualified name of "Foo.Bar".</p> 
+        <h2>Adding Fields and Methods to a ClassNode</h2> 
+        <p>Once a ClassNode has been created, fields and methods can be added to it using the addField() and addMethod() methods respectively:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+cn.addField(new FieldNode(ACC_PUBLIC, "foo", "I", null, null));
+cn.addMethod(new MethodNode(ACC_PUBLIC, "bar", "()V", null, null));
+
+          </xmp></code></pre> 
+        <p>This will create a public field named "foo" of type int and a public method named "bar" that takes no parameters and has a void return type.</p> 
+        <h2>Modifying a ClassNode</h2> 
+        <p>ClassNode provides several methods that can be used to modify its contents. For example, the setSuperclass() method can be used to change the superclass of a ClassNode:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+cn.setSuperclass("Foo.OtherClass");
+
+          </xmp></code></pre> 
+        <p>This will change the superclass of the ClassNode to "Foo.OtherClass".</p> 
+        <h2>Analyzing a ClassNode</h2> 
+        <p>ClassNode also provides several methods for analyzing its contents. For example, the getMethods() method returns a list of all the methods declared by the ClassNode:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+List<MethodNode> methods = cn.getMethods();
+
+          </xmp></code></pre> 
+        <p>This will return a List of all the methods declared by the ClassNode.</p> 
+        <h2>Conclusion</h2> 
+        <p>In conclusion, org.objectweb.asm.tree.ClassNode is a powerful class in the Java programming language for creating, modifying and analyzing the structure of a class or interface. It provides methods for adding fields and methods, modifying properties such as the superclass, and analyzing the structure of the class. It is a useful tool for any programmer working with Java classes and interfaces.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-all-keys-of-LinkedHashMap-in-Java.html">How to get all keys of LinkedHashMap in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/Convert-primitive-boolean-to-String-object.html">Convert primitive boolean to String object</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Reverse-array-using-Arrays-class.html">Reverse array using Arrays class</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Determine-number-of-bytes-written-to-DataOutputStream.html">Determine number of bytes written to DataOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet’s-Document-URL-or-Directory-Base-Example.html">Get Applet’s Document URL or Directory Base Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/"> ListIterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Remove-an-element-from-ArrayList-using-Java-ListIterator-Example.html">Remove an element from ArrayList using Java ListIterator Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-over-Vector-elements-using-ListIterator.html">Iterate over Vector elements using ListIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.hibernate.validator.constraints.Email.html">o.h.v.c.Email</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-All-Items-From-AWT-List-Example.html">Get All Items From AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.eclipse.swt.graphics.Color.html">org.eclipse.swt.graphics.Color</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-19 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Nahish</h3> <p><a href="#">2023-07-22 10:58</a></p> Thank you guys for your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Grigorii</h3> <p><a href="#">2023-08-06 16:05</a></p> Interesting, thx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Get-Transparency-Mode-Of-Color-Example.html">Get Transparency Mode Of Color Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.support.v4.content.CursorLoader.html">a.s.v.c.CursorLoader</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/com.google.gson.JsonDeserializationContext.html">c.g.g.JsonDeserializationContext</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-delete-a-file-or-delete-a-directory-in-Java.html">How to delete a file or delete a directory in Java</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet-Directory-URL-or-Code-Base-Example.html">Get Applet Directory URL or Code Base Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-Java-Vector-using-Comparable.html">Sort Java Vector using Comparable</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/net.md-5.bungee.api.chat.TextComponent.html">n.m.b.a.c.TextComponent</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-copy,-merge,-or-clone-the-TreeSet-in-Java.html">How to copy, merge, or clone the TreeSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-the-size-of-the-TreeMap.html">How to get the size of the TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Threads/Get-Current-Thread-Example.html">Get Current Thread Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.apache.kafka.clients.consumer.ConsumerRecord.html">o.a.k.c.c.ConsumerRecord</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/java.rmi.registry.LocateRegistry.html">java.rmi.registry.LocateRegistry</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-Java-LinkedList-to-Array.html">Convert Java LinkedList to Array</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.swing.table.TableModel.html">javax.swing.table.TableModel</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Iterate-through-values-of-Java-Hashtable-example.html">Iterate through values of Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Traverse-through-ArrayList-in-reverse-direction-using-Java-ListIterator-Example.html">Traverse through ArrayList in reverse direction using Java ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Hide-Button-Example.html">Hide Button Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Set-JTextField-Border-Example.html">Set JTextField Border Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Sub-Map-from-Java-TreeMap-example.html">Get Sub Map from Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-fix-java.io.FileNotFoundException-(access-is-denied).html">FileNotFoundException (access is denied)</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.springframework.util.FileCopyUtils</title> <!--timestamp=2023-06-21T00:12:41.982970263Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.springframework.util.FileCopyUtils"> 
+  <meta name="keywords" content="org.springframework.util.FileCopyUtils"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.springframework.util.FileCopyUtils"> 
+  <meta property="og:description" content="org.springframework.util.FileCopyUtils"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.springframework.util.FileCopyUtils"> 
+  <meta name="twitter:description" content="org.springframework.util.FileCopyUtils"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-06-20</small>
+        </div> 
+        <h1>Org.springframework.util.FileCopyUtils</h1> 
+        <p>The org.springframework.util.FileCopyUtils is a utility class that allows for the copying of files from one location to another. It supports various source types, such as file descriptors, Input Streams, Paths, and Readers. It also supports various target types, such as file descriptors, Output Streams, Paths, and Writers. </p> 
+        <p>It can be used in many scenarios, such as copying a file from a local directory to an HDFS directory, or copying the contents of an InputStream to a File. This class serves as a convenient alternative to using the appropriate Reader/Writer implementations and performing the copy manually.</p> 
+        <h2>Usage</h2> 
+        <p>To use this utility class, simply create an instance of it with the source and target types as parameters. The copy() method can then be called, passing in the source and target objects. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FileCopyUtils fcu = new FileCopyUtils(InputStream.class, Path.class);
+fcu.copy(inputStream, path);
+
+          </xmp></code></pre> 
+        <p>The following example shows how to use FileCopyUtils to copy a file from one folder to another:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Path source = Paths.get("/my/source/folder");
+Path target = Paths.get("/my/target/folder");
+
+FileCopyUtils fcu = new FileCopyUtils(Path.class, Path.class);
+fcu.copy(source, target);
+
+          </xmp></code></pre> 
+        <p>The following example shows how to use FileCopyUtils to copy the contents of an InputStream to a File:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+InputStream source = new FileInputStream("/my/source/file.txt");
+File target = new File("/my/target/file.txt");
+
+FileCopyUtils fcu = new FileCopyUtils(InputStream.class, File.class);
+fcu.copy(source, target);
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>The FileCopyUtils class provides a convenient way to copy files or streams in a variety of formats. It can be used to easily copy a file from one location to another, or copy the contents of an InputStream to a File, without having to manually perform the copy. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-find-an-element-in-the-Vector-using-indexOf-and-lastIndexOf-methods.html">How to find an element in the Vector using indexOf and lastIndexOf methods</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.curator.retry.RetryNTimes.html">org.apache.curator.retry.RetryNTimes</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-iterate-over-elements-of-TreeSet-in-Java.html">How to iterate over elements of TreeSet in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-String-as-characters-to-a-file-using-DataOutputStream.html">Write String as characters to a file using DataOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/"> Float Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Convert-Java-Float-to-Numeric-Primitive-Data-Types-Example.html">Convert Java Float to Numeric Primitive Data Types Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Compare-two-ArrayList.html">Compare two ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/java.awt.event.ComponentAdapter.html">java.awt.event.ComponentAdapter</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Remove-first-and-last-elements-of-LinkedList-Java-example.html">Remove first and last elements of LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/android.speech.RecognizerIntent.html">android.speech.RecognizerIntent</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/"> Boolean Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Convert-Java-boolean-Primitive-to-Boolean-object.html">Convert Java boolean Primitive to Boolean object</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-13 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Robert</h3> <p><a href="#">2023-08-08 13:28</a></p> Can somebody elaborate more? <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Ojas</h3> <p><a href="#">2023-08-08 11:13</a></p> Nice <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Swing/JLabel/JLabel-Set-Tooltip-Example.html">JLabel Set Tooltip Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/CRC32/Generate-CRC32-Checksum-For-Byte-Array-Example.html">Generate CRC32 Checksum For Byte Array Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.elasticsearch.action.bulk.BulkRequest.html">o.e.a.b.BulkRequest</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.springframework.beans.factory.BeanCreationException.html">o.s.b.f.BeanCreationException</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Remove-value-from-Java-Hashtable-example.html">Remove value from Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Java-Byte-Example.html">Java Byte Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Shuffle-elements-of-Java-ArrayList-example.html">Shuffle elements of Java ArrayList example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.os.Process.html">android.os.Process</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Set-Foreground-Color-of-JLabel-Example.html">Set Foreground Color of JLabel Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-TreeSet-to-List-(ArrayList-or-LinkedList).html">How to convert TreeSet to List (ArrayList or LinkedList)</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-compare-two-TreeSet-objects-using-the-equals-method.html">How to compare two TreeSet objects using the equals method</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.html">LocalContainerEntityManagerFactoryBea</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Simple-Java-HashSet-example.html">Simple Java HashSet example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Tail-Map-from-Java-TreeMap-example.html">Get Tail Map from Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-ArrayList-elements-using-Comparator.html">Sort ArrayList elements using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.junit.runner.Description.html">org.junit.runner.Description</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.aspectj.lang.reflect.MethodSignature.html">o.a.l.r.MethodSignature</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-array-to-LinkedHashSet-using-Arrays-class.html">Convert array to LinkedHashSet using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-HashMap-to-TreeMap.html">Convert HashMap to TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Create-Custom-Color-Using-RGB-Example.html">Create Custom Color Using RGB Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
