@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - io.netty.util.concurrent.GlobalEventExecutor</title> <!--timestamp=2023-06-23T00:15:47.476217053Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.netty.util.concurrent.GlobalEventExecutor"> 
+  <meta name="keywords" content="io.netty.util.concurrent.GlobalEventExecutor"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.netty.util.concurrent.GlobalEventExecutor"> 
+  <meta property="og:description" content="io.netty.util.concurrent.GlobalEventExecutor"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.netty.util.concurrent.GlobalEventExecutor"> 
+  <meta name="twitter:description" content="io.netty.util.concurrent.GlobalEventExecutor"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-06-22</small>
+        </div> 
+        <h1>What is GlobalEventExecutor?</h1> 
+        <p>The io.netty.util.concurrent.GlobalEventExecutor class is part of the Netty framework, which provides a high-performance NIO client/server application framework. It is an implementation of a single-threaded event executor for global event execution that allows for efficient event processing by enabling multiple tasks to be run concurrently. It is designed to provide a consistent way to handle event processing across multiple threads and is useful for applications where performance is critical.</p> 
+        <h1>Code Examples</h1> 
+        <p>To use the GlobalEventExecutor, you can create an instance of it within your application code:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+GlobalEventExecutor globalEventExecutor = new GlobalEventExecutor();
+
+          </xmp></code></pre> 
+        <p>Then, you can use the globalEventExecutor to execute any number of tasks, such as scheduling a background task, or executing a blocking task:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+globalEventExecutor.execute(() -> {
+    // Do some task
+});
+
+          </xmp></code></pre> 
+        <p>You can also combine tasks using the combine() method, which takes two tasks as parameters and returns a future that results from their execution:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+CompletableFuture<String> future = globalEventExecutor.combine(
+    () -> "Task 1",
+    () -> "Task 2"
+);
+
+// Get the result of the combined task
+String result = future.join();
+
+          </xmp></code></pre> 
+        <p>Additionally, you can use theshutdownNow() method to shut down the GlobalEventExecutor and stop all tasks that are currently running on it:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+globalEventExecutor.shutdownNow();
+
+          </xmp></code></pre> 
+        <h1>Conclusion</h1> 
+        <p>The io.netty.util.concurrent.GlobalEventExecutor class provides a powerful and efficient way to handle events in a concurrent and efficient manner. By using the methods provided by this class, you can easily schedule tasks, combine tasks, and even shut down the executor when it is no longer needed.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Shuffle-elements-of-Java-Vector-example.html">Shuffle elements of Java Vector example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipInputStream/"> ZipInputStream </a> </p> <a href="/articles/Java/Java-Zip/ZipInputStream/Extract-First-File-From-Zip-File-Example.html">Extract First File From Zip File Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.reflections.util.ConfigurationBuilder.html">o.r.u.ConfigurationBuilder</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Swap-elements-of-Java-ArrayList-example.html">Swap elements of Java ArrayList example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/com.fasterxml.jackson.databind.ObjectMapper.html">c.f.j.d.ObjectMapper</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/System/"> System </a> </p> <a href="/articles/Java/Miscellaneous-Classes/System/Run-the-garbage-collector-using-System-class.html">Run the garbage collector using System class</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-duplicate-elements-from-ArrayList.html">Remove duplicate elements from ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.eclipse.swt.graphics.Color.html">org.eclipse.swt.graphics.Color</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-All-Elements-Of-Java-ArrayList-Example.html">Replace All Elements Of Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Number-Of-Visible-Rows-Of-AWT-List-Example.html">Get Number Of Visible Rows Of AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-05 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Thomas</h3> <p><a href="#">2023-07-22 07:30</a></p> great examples ... thnx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Uberel</h3> <p><a href="#">2023-07-30 17:43</a></p> Great example! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.function.BiFunction.html">java.util.function.BiFunction</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-get-elements-from-Vector-(Vector-get-method).html">How to get elements from Vector (Vector get method)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-duplicate-elements-from-String-array-using-Arrays-class.html">Remove duplicate elements from String array using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-array-to-ArrayList-using-Arrays.html">Convert String array to ArrayList using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Static/Java-static-method-example.html">Java static method example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Create-List-containing-n-Copies-of-Specified-Object-Example.html">Create List containing n Copies of Specified Object Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.hadoop.fs.PathFilter.html">org.apache.hadoop.fs.PathFilter</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/java.awt.Label.html">java.awt.Label</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Java-LinkedHashMap-forEach-example.html">Java LinkedHashMap forEach example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Static/Java-static-member-variable-example.html">Java static member variable example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Frame/Mouse-Event-Handling-in-a-Frame-Window-Example.html">Mouse Event Handling in a Frame Window Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-Java-String-to-Byte-example.html">Convert Java String to Byte example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-float-to-String.html">Convert float to String</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-all-occurrences-of-specified-element-of-Java-ArrayList-Example.html">Replace all occurrences of specified element of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/StringTokenizer/Java-StringTokenizer-–-Specify-Delimiter-example.html">Java StringTokenizer – Specify Delimiter example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-sort-Java-HashSet-elements.html">How to sort Java HashSet elements</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.support.annotation.CallSuper.html">android.support.annotation.CallSuper</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Enumeration-over-Java-HashSet-Example.html">Get Enumeration over Java HashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/androidx.appcompat.widget.AppCompatTextView.html">a.a.w.AppCompatTextView</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-get-elements-from-Vector-(Vector-get-method).html">How to get elements from Vector (Vector get method)</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

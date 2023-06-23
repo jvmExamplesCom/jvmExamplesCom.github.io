@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.eclipse.ui.IWorkbenchPage</title> <!--timestamp=2023-06-23T00:15:48.053960346Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.eclipse.ui.IWorkbenchPage"> 
+  <meta name="keywords" content="org.eclipse.ui.IWorkbenchPage"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.eclipse.ui.IWorkbenchPage"> 
+  <meta property="og:description" content="org.eclipse.ui.IWorkbenchPage"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.eclipse.ui.IWorkbenchPage"> 
+  <meta name="twitter:description" content="org.eclipse.ui.IWorkbenchPage"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-06-22</small>
+        </div> 
+        <h1>org.eclipse.ui.IWorkbenchPage</h1> 
+        <p>The <strong>org.eclipse.ui.IWorkbenchPage</strong> interface provides access to individual workbench pages. A workbench page contains a hierarchy of views and an optional editor area for editing files. Each page also has its own set of actions to enable basic navigation and manipulation of the workbench components within the page. </p> 
+        <h2>Overview</h2> 
+        <p>This interface is not intended to be implemented or extended by clients. An instance of this is obtained via the </p>
+        <pre>getActivePage()</pre> method from the workbench. 
+         
+        <h2>Basic Operations</h2> 
+        The most common operations on the interface are: 
+        <ul> 
+         <li>Creating and managing views</li> 
+         <li>Creating and managing editors</li> 
+         <li>Navigating between view and editor areas </li> 
+         <li>Accessing contributions such as action sets, perspectives and more</li> 
+        </ul> 
+        <h2>Creating and Managing Views</h2> 
+        To create a new view, you can use the
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+showView(String viewId)
+
+          </xmp></code></pre> method. The viewId is the id of the view extension as specified in the corresponding plugin.xml file. This method returns an 
+        <pre>IViewPart</pre> instance representing the newly created view. 
+         
+        You can also open an existing view with the
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+findView(String viewId)
+
+          </xmp></code></pre> method, which returns an 
+        <pre>IViewPart</pre> instance if the view already exists, or 
+        <pre>null</pre> if it does not exist. 
+         
+        <p>Both of these methods support the concept of multiple instances of a view. In this case, you must pass an additional parameter of type </p>
+        <pre>String secondaryId</pre> to each method. This id specifies the unique identifier for the particular view instance. It can be used later to find the view with the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+findView(String viewId, String secondaryId)
+
+          </xmp></code></pre> method. 
+         
+        You can also close a view with the
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+hideView(IViewPart part)
+
+          </xmp></code></pre> method. This method takes the 
+        <pre>IViewPart</pre> instance of the view to be closed as a parameter. 
+         
+        <h2>Creating and Managing Editors</h2> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+openEditor(IEditorInput input, String editorId, boolean activate)
+
+          </xmp></code></pre> method is used to create and open an editor. The 
+        <pre>input</pre> parameter specifies the editor's input (e.g. a file or a document), and the 
+        <pre>editorId</pre> specifies the editor extension as specified in the corresponding plugin.xml file. 
+         
+        The
+        <pre>activate</pre> parameter specifies whether the editor should be activated or not. If this parameter is set to 
+        <pre>true</pre>, then the editor will be given focus. 
+         
+        This method returns an
+        <pre>IEditorPart</pre> instance representing the newly opened editor. 
+         
+        You can also open an existing editor using the
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+findEditor(IEditorInput input)
+
+          </xmp></code></pre> method, which returns an 
+        <pre>IEditorPart</pre> instance if the editor already exists, or 
+        <pre>null</pre> if it does not exist. 
+         
+        You can close an editor using the
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+closeEditor(IEditorPart editor, boolean save)
+
+          </xmp></code></pre> method. The 
+        <pre>editor</pre> parameter is the 
+        <pre>IEditorPart</pre> instance of the editor being closed, and the 
+        <pre>save</pre> parameter specifies whether the changes in the editor should be saved or not. 
+         
+        <h2>Navigating Between View and Editor Areas</h2> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+activate(IWorkbenchPart part)
+
+          </xmp></code></pre> method is used to activate either a view or an editor. This method takes an 
+        <pre>IWorkbenchPart</pre> instance as a parameter and gives it focus. 
+         
+        The
+        <pre>getActiveEditor()</pre> and 
+        <pre>getActiveView()</pre> methods are used to return the active editor and view, respectively. These methods return an 
+        <pre>IEditorPart</pre> and 
+        <pre>IViewPart</pre> instance, respectively. 
+         
+        The
+        <pre>getEditors()</pre> and 
+        <pre>getViews()</pre> methods are used to return all of the editors and views in the page. These methods return arrays of 
+        <pre>IEditorPart</pre> and 
+        <pre>IViewPart</pre> instances, respectively. 
+         
+        <h2>Accessing Contributions</h2> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getActiveActionBars()
+
+          </xmp></code></pre> method is used to get an array of active action bars in the page. Action bars provide access to contributions such as menus, toolbars and more.
+         
+        The
+        <pre>getPerspective()</pre> method is used to get the active perspective in the page. Perspectives are used to define the layout and initial content of a workbench page. Each perspective can contain its own set of views, editors and actions.
+         
+        Finally, the
+        <pre>getActionSets()</pre> method is used to get an array of active action sets in the page. Action sets are used to contribute toolbar and menu actions to a workbench page. 
+         
+        <h2>Example Usage</h2> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+
+// Create a new view
+IViewPart view = page.showView("org.eclipse.sample.view");
+
+// Find an existing view
+IViewPart existingView = page.findView("org.eclipse.sample.view");
+
+// Close a view
+page.hideView(view);
+
+// Open an editor
+IEditorPart editor = page.openEditor(new FileEditorInput("myfile.txt"), "org.eclipse.sample.editor", true);
+
+// Find an existing editor
+IEditorPart existingEditor = page.findEditor(new FileEditorInput("myfile.txt"));
+
+// Close an editor
+page.closeEditor(editor, true);
+
+// Get active editor and view
+IEditorPart activeEditor = page.getActiveEditor();
+IViewPart activeView = page.getActiveView();
+
+// Get all editors and views
+IEditorPart[] editors = page.getEditors();
+IViewPart[] views = page.getViews();
+
+// Activate a view or editor
+page.activate(activeEditor);
+page.activate(activeView);
+
+// Get active action sets
+IActionSetDescriptor[] actionSets = page.getActionSets();
+
+// Get active perspective
+IPerspectiveDescriptor perspective = page.getPerspective();
+
+// Get active action bars
+IActionBarDescriptor[] actionBars = page.getActiveActionBars();
+
+          </xmp></code></pre> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.widget.SeekBar.html">android.widget.SeekBar</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.mortbay.jetty.Server.html">org.mortbay.jetty.Server</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Math-Class/"> Math Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-minimum-of-two-numbers-using-Math.min.html">F.min</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Wrappers/"> Wrappers </a> </p> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-primitive-to-wrapper-objects.html">Convert primitive to wrapper objects</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/"> Runtime </a> </p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Get-Free-Memory-of-Java-Virtual-Machine(JVM)-Example.html">Get Free Memory of Java Virtual Machine(JVM) Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Index-From-Single-Select-AWT-List-Example.html">Get Selected Index From Single Select AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Get-Size-of-Java-HashSet-Example.html">Get Size of Java HashSet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-check-if-element-exists-in-Vector-in-Java.html">How to check if element exists in Vector in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/ByteArrayInputStream/"> ByteArrayInputStream </a> </p> <a href="/articles/Java/File-And-IO/ByteArrayInputStream/Read-byte-array-using-ByteArrayInputStream-Example.html">Read byte array using ByteArrayInputStream Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.joda.time.DateTime.html">org.joda.time.DateTime</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-02 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.boot.autoconfigure.condition.ConditionalOnClass.html">o.s.b.a.c.ConditionalOnClass</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-check-if-the-TreeMap-is-empty.html">How to check if the TreeMap is empty</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.time.Period.html">java.time.Period</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-short-to-a-file-using-DataOutputStream.html">Write short to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-LinkedHashMap-size.html">How to check LinkedHashMap size</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/InputStream/Read-character-from-console-using-InputStream.html">Read character from console using InputStream</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Operators/Arithmetic-Operators-Example.html">Arithmetic Operators Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.graphics.Bitmap.html">android.graphics.Bitmap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-iterate-LinkedHashSet-elements.html">How to iterate LinkedHashSet elements</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Generate-Bouncing-Lines-Using-Applet-Example.html">Generate Bouncing Lines Using Applet Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Short-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Short object to byte, short, int, long, float and double</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Determine-If-The-Index-Is-Selected-AWT-List-Example.html">Determine If The Index Is Selected AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-ArrayList-using-Comparator.html">Sort ArrayList using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Convert-int-array-to-String.html">Convert int array to String</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Get-Size-of-Java-LinkedHashSet-Example.html">Get Size of Java LinkedHashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/javax.swing.event.ListDataListener.html">javax.swing.event.ListDataListener</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Select-Item-From-AWT-List-Example.html">Select Item From AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Get-Java-Runtime-Example.html">Get Java Runtime Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Convert-Java-boolean-Primitive-to-Boolean-object.html">Convert Java boolean Primitive to Boolean object</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/android.util.ArrayMap.html">android.util.ArrayMap</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
