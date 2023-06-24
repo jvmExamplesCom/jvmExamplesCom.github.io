@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.apache.hadoop.fs.FileStatus</title> <!--timestamp=2023-06-24T00:15:26.247173960Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.apache.hadoop.fs.FileStatus"> 
+  <meta name="keywords" content="org.apache.hadoop.fs.FileStatus"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.apache.hadoop.fs.FileStatus"> 
+  <meta property="og:description" content="org.apache.hadoop.fs.FileStatus"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.apache.hadoop.fs.FileStatus"> 
+  <meta name="twitter:description" content="org.apache.hadoop.fs.FileStatus"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-06-23</small>
+        </div> 
+        <h1>Introduction to org.apache.hadoop.fs.FileStatus</h1> Java 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+org.apache.hadoop.fs.FileStatus
+
+          </xmp></code></pre> class is an abstract base class for representing the basic attributes of a file. It is used by Hadoop FileSystem to provide File System related information such as file modification time, file owner, group-owner, block size etc. It contains the information about files and directories in distributed file systems and supports access control based on user/group permissions. In this article, we will be discussing the features and functionalities of org.apache.hadoop.fs.FileStatus. 
+        <h2>Features of org.apache.hadoop.fs.FileStatus</h2> The following are some of the key features of org.apache.hadoop.fs.FileStatus: 
+        <ul> 
+         <li><strong>Efficient Way for Storing Information:</strong> FileStatus provides an efficient way for storing the information about the file system. It stores the information about the file/directory in memory, so it can be accessed quickly.</li> 
+         <li><strong>Support for User/Group Access Control:</strong> It supports access control based on user/group permissions. Every file or directory has a set of Access Control Entries (ACEs) associated with it, which defines who can access that particular entity, and what kind of operations they can perform on it.</li> 
+         <li><strong>Support for Link Target Lookup:</strong> FileStatus provides a method to lookup the target of a symbolic link. This is useful when attempting to open a symbolic link and reaching its target file or directory.</li> 
+         <li><strong>Simplifies File or Directory Operations:</strong> FileStatus provides a simpler way to perform file or directory operations such as rename, copy, delete, create, etc. Using the FileStatus instance, these operations can be performed more easily.</li> 
+        </ul> 
+        <h2>Methods of org.apache.hadoop.fs.FileStatus</h2> The following are some of the methods of 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+org.apache.hadoop.fs.FileStatus
+
+          </xmp></code></pre> class: 
+        <ul> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+public abstract long getAccessTime()
+
+            </xmp></code></pre>: This method returns the time of last access of the file.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+public abstract short getBlockSize()
+
+            </xmp></code></pre>: This method returns the length of block size of the file.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+public abstract boolean isDirectory()
+
+            </xmp></code></pre>: This method returns true if the file is a directory, false otherwise.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+public abstract boolean isLink()
+
+            </xmp></code></pre>: This method returns true if the file is a symbolic link, false otherwise.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+public abstract long getLen()
+
+            </xmp></code></pre>: This method returns the length of the file in bytes.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+public abstract String getOwner()
+
+            </xmp></code></pre>: This method returns the owner of the file.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+public abstract String getGroup()
+
+            </xmp></code></pre>: This method returns the group of the file.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+public abstract short getReplication()
+
+            </xmp></code></pre>: This method returns the replication factor of the file.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+public abstract long getModificationTime()
+
+            </xmp></code></pre>: This method returns the time of last modification of the file.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+public abstract Path getSymlink()
+
+            </xmp></code></pre>: This method returns the target path of the symbolic link.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+public abstract FsPermission getPermission()
+
+            </xmp></code></pre>: This method returns the permission associated with the file or directory.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+public abstract boolean isFile()
+
+            </xmp></code></pre>: This method returns true if the file is a file, false otherwise.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+public abstract int compareTo(Path other)
+
+            </xmp></code></pre>: This method compares the paths of two objects of type Path.</li> 
+        </ul> 
+        <h2>Example</h2> The following example demonstrates how to use 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+org.apache.hadoop.fs.FileStatus
+
+          </xmp></code></pre> class for getting the file status: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public static void main(String[] args) {
+  Configuration conf = new Configuration();
+  FileSystem fs = FileSystem.get(conf);
+  Path path = new Path("/tmp/hadoop_file");
+  try {
+    FileStatus status = fs.getFileStatus(path);
+    // Get the file size
+    long size = status.getLen();
+    // Get the owner
+    String owner = status.getOwner();
+    // Get the group
+    String group = status.getGroup();
+    // Get the modification time
+    long mtime = status.getModificationTime();
+    // Get the access time
+    long atime = status.getAccessTime();
+    // Get the replication factor
+    short replication = status.getReplication();
+    // Get the block size
+    long blocksize = status.getBlockSize();
+    // Check if the path is a directory
+    boolean isDir = status.isDirectory();
+    // Check if the path is a file
+    boolean isFile = status.isFile();
+    // Check if the path is a symbolic link
+    boolean isLink = status.isLink();
+    // Get the target path of the symbolic link
+    Path symlink = status.getSymlink();
+    // Get the permission
+    FsPermission perm = status.getPermission();
+  } catch (IOException e) {
+    e.printStackTrace();
+  }
+}
+
+          </xmp></code></pre> In this example, we first create a Configuration object and a FileSystem object. Then, we create a Path object using the path of the file. Finally, we get the FileStatus object for the specified file using the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getFileStatus()
+
+          </xmp></code></pre> method. After that, we can use the methods of FileStatus class to get the various properties of the file. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/Java-Reverse-String-Array-Example.html">Java Reverse String Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.swing.JLabel.html">javax.swing.JLabel</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Display-Image-in-an-Applet-Example.html">Display Image in an Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Search-elements-of-LinkedList-Java-example.html">Search elements of LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipInputStream/"> ZipInputStream </a> </p> <a href="/articles/Java/Java-Zip/ZipInputStream/Extract-Zip-File-With-Subdirectories-Using-Command-Line-Argument-Example.html">Extract Zip File With Subdirectories Using Command Line Argument Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/FileOutputStream/"> FileOutputStream </a> </p> <a href="/articles/Java/File-And-IO/FileOutputStream/Create-FileOutputStream-object-from-String-file-path.html">Create FileOutputStream object from String file path</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-convert-HashMap-to-TreeMap-in-Java.html">How to convert HashMap to TreeMap in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Remove-An-Item-From-a-List-Example.html">Remove An Item From a List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.apache.spark.api.java.JavaRDD.html">org.apache.spark.api.java.JavaRDD</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/"> AWT Choice </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Get-Selected-Item-Of-AWT-Choice-Or-Combobox-Example.html">Get Selected Item Of AWT Choice Or Combobox Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-03 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Java-Float-Wrapper-Class-Example.html">Java Float Wrapper Class Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Sort-HashMap-by-values.html">Sort HashMap by values</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.openqa.selenium.remote.CapabilityType.html">o.o.s.r.CapabilityType</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.telephony.PhoneStateListener.html">android.telephony.PhoneStateListener</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/How-to-iterate-LinkedList-in-reverse-direction-(backward)-in-Java.html">How to iterate LinkedList in reverse direction (backward) in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-String-array-containing-numbers-using-Arrays.html">Sort String array containing numbers using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Set-Status-Message-in-Applet-Window-Example.html">Set Status Message in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet-Directory-URL-or-Code-Base-Example.html">Get Applet Directory URL or Code Base Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/StringBuffer/Java-StringBuffer-to-InputStream-Example.html">Java StringBuffer to InputStream Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-ceiling-value-of-a-number-using-Math.ceil.html">F.ceil</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/javafx.scene.Cursor.html">javafx.scene.Cursor</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Set-Background-Color-of-JTextField-Example.html">Set Background Color of JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-3D-Rectangle-&-Square-in-Applet-Window-Example.html">Draw 3D Rectangle & Square in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/javax.naming.NameNotFoundException.html">javax.naming.NameNotFoundException</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-all-occurrences-of-specified-element-of-Java-Vector-Example.html">Replace all occurrences of specified element of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet’s-Document-URL-or-Directory-Base-Example.html">Get Applet’s Document URL or Directory Base Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-first-and-last-elements-from-ArrayList.html">Get first and last elements from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Terminate-Java-Virtual-Machine-(JVM)-Example.html">Terminate Java Virtual Machine (JVM) Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Get-or-Set-Gap-Between-JLabel’s-Icon-and-Text-Example.html">Get or Set Gap Between JLabel’s Icon and Text Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.antlr.v4.runtime.tree.ParseTree.html">org.antlr.v4.runtime.tree.ParseTree</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
