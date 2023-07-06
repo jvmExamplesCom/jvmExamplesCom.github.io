@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javax.xml.parsers.SAXParser</title> <!--timestamp=2023-07-06T00:16:10.216826679Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.xml.parsers.SAXParser"> 
+  <meta name="keywords" content="javax.xml.parsers.SAXParser"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.xml.parsers.SAXParser"> 
+  <meta property="og:description" content="javax.xml.parsers.SAXParser"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.xml.parsers.SAXParser"> 
+  <meta name="twitter:description" content="javax.xml.parsers.SAXParser"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-07-04</small>
+        </div> 
+        <h1>Overview of javax.xml.parsers.SAXParser</h1> javax.xml.parsers.SAXParser is an API used to parse XML documents following the SAX (Simple API for XML) pipeline. It is based on the event-driven processing model, which involves a "call-back" style of programming. This means that it passes events from the document to the application as the document is being parsed. These events include "start element", "end element", and "attribute" notifications. The SAXParser can be used to validate documents as well as to parse them. It includes features to control how documents are validated and parsed, such as setting features to ignore white space, or to require namespace processing. 
+        <h2>Creating a SAXParser Object</h2> In order to use the SAXParser in a program, you must first create an instance of it. This is done using the SAXParserFactory class: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+SAXParserFactory factory = SAXParserFactory.newInstance();
+
+          </xmp></code></pre> This creates a new instance of the SAXParserFactory, which is used to create a new SAXParser object. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+SAXParser saxParser = factory.newSAXParser();
+
+          </xmp></code></pre> This code creates an instance of the SAXParser, which can then be used to parse XML documents. 
+        <h2>Parsing an XML Document</h2> Once a SAXParser has been created, it can be used to parse an XML document. This is done by calling the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+parse()
+
+          </xmp></code></pre> method, passing in the URL of the XML document to parse. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+saxParser.parse(url);
+
+          </xmp></code></pre> The parser will then parse the document, raising events for each element that it encounters. It is up to the application to handle these events. 
+        <h2>Handling Events</h2> The application must handle the events raised by the SAXParser. To do this, the application must create a new implementation of the org.xml.sax.helpers.DefaultHandler class. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MySAXHandler extends DefaultHandler {
+
+    // Handlers for start/end element events
+    @Override
+    public void startElement(String namespaceURI, String localName, 
+        String qName, Attributes atts) throws SAXException {
+
+        // code to handle start element
+    }
+
+    @Override
+    public void endElement(String namespaceURI, String localName, 
+    String qName) throws SAXException {
+
+        // code to handle end element
+    }
+
+    // Handlers for characters
+    @Override
+    public void characters(char ch[], int start, int length)
+    throws SAXException {
+
+        // code to handle character data
+    }
+
+}
+
+          </xmp></code></pre> This class must implement the methods for handling the start element, end element and character events. The application can then pass an instance of this class to the SAXParser when it calls the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+parse()
+
+          </xmp></code></pre> method. The SAXParser will then call the appropriate handlers as it parses the document. 
+        <h2>Conclusion</h2> The javax.xml.parsers.SAXParser is an API for parsing XML documents following the SAX pipeline. It is based on an event-driven programming model, which requires the application to register handlers for various types of events. Once the SAXParser has been created, it can be used to parse an XML document, raising events as it encounters elements. The application must then handle these events in order to process the document. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.util.FileCopyUtils.html">o.s.u.FileCopyUtils</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/retrofit2.http.Path.html">retrofit2.http.Path</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Determine-if-a-file-can-be-written.html">Determine if a file can be written</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-keys-using-Comparable-interface.html">Sort LinkedHashMap by keys using Comparable interface</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Basic-Java-Applet-Example.html">Basic Java Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Get-Size-of-Java-Vector-and-loop-through-the-elements-Example.html">Get Size of Java Vector and loop through the elements Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-iterate-LinkedHashMap-in-reverse-order.html">How to iterate LinkedHashMap in reverse order</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-float-Arrays-Example.html">Compare Two Java float Arrays Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-array-to-ArrayList.html">Add array to ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.security.core.authority.SimpleGrantedAuthority.html">o.s.s.c.a.SimpleGrantedAuthority</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-20 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Grigorii</h3> <p><a href="#">2023-08-08 12:34</a></p> Thank you very much! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>JavaFan</h3> <p><a href="#">2023-08-19 06:54</a></p> great examples ... thnx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.lang.management.ManagementFactory.html">j.l.m.ManagementFactory</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-1-Example.html">Java Pyramid 1 Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Circle-Perimeter-using-Java-Example.html">Calculate Circle Perimeter using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Create-Java-Hashtable-from-HashMap-example.html">Create Java Hashtable from HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Find-the-minimum-or-maximum-value-in-ArrayList.html">Find the minimum or maximum value in ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javafx.scene.layout.AnchorPane.html">javafx.scene.layout.AnchorPane</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Hide-Checkbox-Example.html">Hide Checkbox Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Do-While-Loop/Do-While-loop-Example.html">Do While loop Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.bouncycastle.asn1.ASN1ObjectIdentifier.html">o.b.a.ASN1ObjectIdentifier</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-convert-LinkedHashMap-to-List-in-Java.html">How to convert LinkedHashMap to List in Java</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-long-Arrays-Example.html">Compare Two Java long Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/android.support.v4.util.SparseArrayCompat.html">a.s.v.u.SparseArrayCompat</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-make-file-read-only-in-Java.html">How to make file read only in Java</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-int.html">Convert String to int</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Generate-Pyramid-For-a-Given-Number-Example.html">Generate Pyramid For a Given Number Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-decimal-integer-to-hexadecimal-number-example.html">Convert decimal integer to hexadecimal number example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Java-ArrayList-replace-element.html">Java ArrayList replace element</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.script.Invocable.html">javax.script.Invocable</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.app.AlertDialog.html">android.app.AlertDialog</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Replace-an-Element-of-LinkedList-Java-example.html">Replace an Element of LinkedList Java example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
