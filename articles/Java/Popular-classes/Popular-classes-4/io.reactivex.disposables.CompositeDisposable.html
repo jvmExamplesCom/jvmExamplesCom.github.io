@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - io.reactivex.disposables.CompositeDisposable</title> <!--timestamp=2023-07-16T00:16:21.569923127Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.reactivex.disposables.CompositeDisposable"> 
+  <meta name="keywords" content="io.reactivex.disposables.CompositeDisposable"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.reactivex.disposables.CompositeDisposable"> 
+  <meta property="og:description" content="io.reactivex.disposables.CompositeDisposable"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.reactivex.disposables.CompositeDisposable"> 
+  <meta name="twitter:description" content="io.reactivex.disposables.CompositeDisposable"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-07-15</small>
+        </div> 
+        <h1>io.reactivex.disposables.CompositeDisposable</h1> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+io.reactivex.disposables.CompositeDisposable
+
+          </xmp></code></pre> is an object that allows multiple Disposables to be managed together. It is particularly useful when you have multiple Disposables within a method and want to dispose them all with just a single call. This can make code more efficient and organized.
+         
+        <p>A CompositeDisposable is a container that can hold multiple Disposables. The Disposables can be added, removed, and disposed all in one go. The CompositeDisposable is the main class used in RxJava for managing the lifecycle of multiple Disposables.</p> 
+        <h2>Creating a CompositeDisposable</h2> 
+        To create a CompositeDisposable, use the
+        <pre>create()</pre> method:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+          </xmp></code></pre> 
+        <h2>Adding Disposables To A CompositeDisposable</h2> 
+        <p>Once you've created a CompositeDisposable, you can add Disposables to it using the </p>
+        <pre>add()</pre> methods:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+compositeDisposable.add(
+    Disposable.fromRunnable( () -> {
+        System.out.println("Running first disposable");
+    });
+);
+
+compositeDisposable.add(
+    Disposable.fromAction( () -> {
+        System.out.println("Running second disposable");
+    });
+);
+
+          </xmp></code></pre> 
+        <h2>Disposing Of Disposables</h2> 
+        <p>Once you are finished with the Disposables, you can dispose of them in one go using the </p>
+        <pre>dispose()</pre> method:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+compositeDisposable.dispose();
+
+          </xmp></code></pre> 
+        <h2>Disposing Of Individual Disposables</h2> 
+        <p>You can also remove individual Disposables from the CompositeDisposable using the </p>
+        <pre>remove()</pre> method:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+compositeDisposable.remove(disposable1);
+
+          </xmp></code></pre> 
+        <h2>Checking The Status Of A Disposable</h2> 
+        <p>You can check if a Disposable has been disposed using the </p>
+        <pre>isDisposed()</pre> method. This will return 
+        <pre>true</pre> if the Disposable is disposed and 
+        <pre>false</pre> if it is not:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+boolean isDisposed = disposable1.isDisposed();
+
+          </xmp></code></pre> 
+        <h2>Clearing A CompositeDisposable</h2> 
+        <p>You can also clear a CompositeDisposable using the </p>
+        <pre>clear()</pre> method. This will remove all the Disposables from the CompositeDisposable:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+compositeDisposable.clear();
+
+          </xmp></code></pre> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-Size-of-Java-ArrayList-and-loop-through-elements-Example.html">Get Size of Java ArrayList and loop through elements Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-check-if-element-exists-in-Vector-in-Java.html">How to check if element exists in Vector in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-elements-to-ArrayList.html">Add elements to ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/junit.framework.TestSuite.html">junit.framework.TestSuite</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.web.bind.annotation.ControllerAdvice.html">o.s.w.b.a.ControllerAdvice</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/"> Integer Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-Java-String-to-Integer-object-Example.html">Convert Java String to Integer object Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/"> ListIterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/ArrayList-ListIterator-example.html">ArrayList ListIterator example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/io.vertx.core.http.HttpServerOptions.html">io.vertx.core.http.HttpServerOptions</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-make-file-hidden-in-Java.html">How to make file hidden in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Get-Size-of-Java-HashSet-Example.html">Get Size of Java HashSet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-12 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/java.util.concurrent.Exchanger.html">java.util.concurrent.Exchanger</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-convert-comma-separated-string-to-Java-HashSet.html">How to convert comma separated string to Java HashSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Remove-all-values-from-Java-LinkedHashMap-example.html">Remove all values from Java LinkedHashMap example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-any-primitive-type-to-String.html">Convert any primitive type to String</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-List-to-Set.html">Convert List to Set</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/JTextField-Disable-Enable-Example.html">JTextField Disable Enable Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.xmlpull.v1.XmlPullParserFactory.html">org.xmlpull.v1.XmlPullParserFactory</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.intellij.psi.PsiDocumentManager.html">com.intellij.psi.PsiDocumentManager</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-double-Array-Example.html">Java Sort double Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Traverse-through-ArrayList-in-reverse-direction-using-Java-ListIterator-Example.html">Traverse through ArrayList in reverse direction using Java ListIterator Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-double-Array-Example.html">Performing Binary Search on Java double Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Get-Set-view-of-Keys-from-Java-LinkedHashMap-example.html">Get Set view of Keys from Java LinkedHashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Simple-Java-Vector-Example.html">Simple Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-Sub-List-of-Java-ArrayList-Example.html">Get Sub List of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/FileInputStream/Read-file-in-byte-array-using-FileInputStream.html">Read file in byte array using FileInputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-add-elements-to-Java-HashSet-(add,-addAll-method).html">How to add elements to Java HashSet (add, addAll method)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.zip.GZIPOutputStream.html">java.util.zip.GZIPOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.graphics.Bitmap.Config.html">android.graphics.Bitmap.Config</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Convert-Java-Float-Object-to-String-Object-Example.html">Convert Java Float Object to String Object Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.Arrays.html">java.util.Arrays</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
