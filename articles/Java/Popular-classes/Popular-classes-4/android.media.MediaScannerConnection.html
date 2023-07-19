@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - android.media.MediaScannerConnection</title> <!--timestamp=2023-07-19T00:19:59.556389371Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="android.media.MediaScannerConnection"> 
+  <meta name="keywords" content="android.media.MediaScannerConnection"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - android.media.MediaScannerConnection"> 
+  <meta property="og:description" content="android.media.MediaScannerConnection"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - android.media.MediaScannerConnection"> 
+  <meta name="twitter:description" content="android.media.MediaScannerConnection"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-07-18</small>
+        </div> 
+        <h1>android.media.MediaScannerConnection</h1> 
+        <p>The android.media.MediaScannerConnection class is used to provide an interface for the UI to interact with the media scanner service. It is designed to allow applications to easily connect to the media scanner and have files scanned, indexed, and made available in the system's media content provider.</p> 
+        <h2>Overview</h2> 
+        <p>The MediaScannerConnection class provides a simple way for the application to initiate a scan of the specified file or directory. It does this by creating a background thread that communicates with the media scanner service and waits for the scan to complete. The result is a list of MediaScanResult objects, which can then be used to access information about the scanned files.</p> 
+        <h2>Implementation</h2> 
+        <p>To use the MediaScannerConnection class, an application needs to implement a MediaScannerConnection.OnScanCompletedListener object that will receive notification that the scan is complete. An instance of this listener will be passed to the MediaScannerConnection.connect() method, along with a set of ScanRequest objects that specify the files or directories to be scanned.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MediaScannerConnection.OnScanCompletedListener listener = new MediaScannerConnection.OnScanCompletedListener() {
+    @Override
+    public void onScanCompleted(String path, Uri uri) {
+        // Handle scan result here
+    }
+};
+
+List<ScanRequest> scanRequests = new ArrayList<>();
+scanRequests.add(new ScanRequest("/path/to/file", false));
+
+MediaScannerConnection.connect(this, listener, scanRequests);
+
+          </xmp></code></pre> 
+        <p>Once the scan request has been made, the application can check the status of the scan by calling the MediaScannerConnection.isConnected() method. This will return true if the scan is still in progress and false if it is complete. The application can also call the MediaScannerConnection.getResults() method to get a list of MediaScanResult objects containing information about the scanned files.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+if (connection.isConnected()) { 
+    List<MediaScanResult> results = connection.getResults();
+    // Process scan results here
+}
+
+          </xmp></code></pre> 
+        <p>When the scan is complete, the OnScanCompletedListener object will be called with the path and URI of the scanned item. If the scan was successful, the URI will contain the content:// URI of the media item. This can then be used to access the item in the media store.</p> 
+        <h2>Conclusion</h2> 
+        <p>The android.media.MediaScannerConnection class provides an easy way for applications to interact with the media scanner service and make their content available in the system's media content provider. By implementing the MediaScannerConnection.OnScanCompletedListener interface and passing a set of ScanRequest objects to the MediaScannerConnection.connect() method, an application can initiate a scan and receive notification when it is complete.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.lang.management.ThreadMXBean.html">java.lang.management.ThreadMXBean</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.springframework.cloud.stream.annotation.EnableBinding.html">o.s.c.s.a.EnableBinding</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.text.format.Formatter.html">android.text.format.Formatter</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Sort-HashMap-by-values.html">Sort HashMap by values</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-sort-TreeSet-elements-using-Comparator-interface.html">How to sort TreeSet elements using Comparator interface</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Copy-Elements-of-ArrayList-to-Java-Vector-Example.html">Copy Elements of ArrayList to Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Rounded-Corner-Rectangle-&-Square-in-Applet-Window-Example.html">Draw Rounded Corner Rectangle & Square in Applet Window Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataInputStream/"> DataInputStream </a> </p> <a href="/articles/Java/File-And-IO/DataInputStream/Read-unsigned-byte-from-file-using-DataInputStream.html">Read unsigned byte from file using DataInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-double-Arrays-Example.html">Compare Two Java double Arrays Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Sort-LinkedHashMap-by-keys.html">Sort LinkedHashMap by keys</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-25 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Uberel</h3> <p><a href="#">2023-09-06 07:49</a></p> great examples ... thnx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Daniel</h3> <p><a href="#">2023-09-13 21:12</a></p> Interesting, thx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.xml.transform.dom.DOMSource.html">javax.xml.transform.dom.DOMSource</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.io.File.html">java.io.File</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-short-to-String.html">Convert short to String</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Convert-Java-LinkedList-to-Array.html">Convert Java LinkedList to Array</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-iterate-through-the-Vector-elements.html">How to iterate through the Vector elements</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-LinkedHashMap-in-reverse-order-using-ListIterator.html">Iterate through LinkedHashMap in reverse order using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.media.MediaFormat.html">android.media.MediaFormat</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Reverse-order-of-all-elements-of-Java-ArrayList-Example.html">Reverse order of all elements of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-remove-duplicate-elements.html">Java LinkedList remove duplicate elements</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipFile/Open-Zip-File-Using-ZipFile-Class-Example.html">Open Zip File Using ZipFile Class Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Reverse-order-of-all-elements-of-Java-Vector-Example.html">Reverse order of all elements of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.poi.openxml4j.exceptions.InvalidFormatException.html">o.a.p.o.e.InvalidFormatException</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.google.common.io.ByteArrayDataOutput.html">c.g.c.i.ByteArrayDataOutput</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Continue-Statement/Java-continue-statement-example.html">Java continue statement example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.intellij.openapi.editor.Document.html">com.intellij.openapi.editor.Document</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Iterate-through-the-values-of-Java-TreeMap-example.html">Iterate through the values of Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-fix-Java-TreeSet-java.lang.ClassCastExcpetion-exception.html">H.l.ClassCastExcpetion exception</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Iterate-ArrayList-using-for-loop-or-for-each-loop.html">Iterate ArrayList using for loop or for each loop</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipFile/Open-Zip-File-Using-ZipFile-Class-Example.html">Open Zip File Using ZipFile Class Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Remove-value-from-Java-Hashtable-example.html">Remove value from Java Hashtable example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
