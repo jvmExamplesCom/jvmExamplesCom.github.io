@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - com.jayway.jsonpath.JsonPath</title> <!--timestamp=2023-07-23T00:14:54.286938873Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="com.jayway.jsonpath.JsonPath"> 
+  <meta name="keywords" content="com.jayway.jsonpath.JsonPath"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - com.jayway.jsonpath.JsonPath"> 
+  <meta property="og:description" content="com.jayway.jsonpath.JsonPath"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - com.jayway.jsonpath.JsonPath"> 
+  <meta name="twitter:description" content="com.jayway.jsonpath.JsonPath"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-07-22</small>
+        </div> 
+        <h1>Introduction to com.jayway.jsonpath.JsonPath</h1> JSON (JavaScript Object Notation) is a popular data interchange format used for transmitting data from server to client and vice-versa. In many cases, JSON is used to represent structured data in a hierarchal manner. JSONPath is a library for Java applications which allows users to access data stored in a JSON structure. com.jayway.jsonpath.JsonPath is a Java library for parsing and manipulating JSON documents in an easy and intuitive way. It provides a powerful mechanism for selecting and traversing disparate pieces of data from within the JSON document. In this article, we will take a comprehensive look at com.jayway.jsonpath.JsonPath, including syntax, concepts, features, and code examples. 
+        <h2>Syntax Overview</h2> The basic syntax of com.jayway.jsonpath.JsonPath follows the dot-notation of object property access in JavaScript. A JSON document is a tree-like structure of objects and values. The objects and values can be accessed using a path expression. A path expression is composed of keywords such as: root, parent, child, or descendant. For example, the following JSON document: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+{ 
+    "store": { 
+        "book": [ 
+            { "category": "reference",
+              "author": "Nigel Rees" 
+            }, 
+            { "category": "fiction",
+              "author": "Evelyn Waugh" 
+            } 
+        ] 
+    }
+}
+
+          </xmp></code></pre> Would have the following JSON Path expression to access the author of the first book: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+$.store.book[0].author
+
+          </xmp></code></pre> 
+        <h2>Features</h2> com.jayway.jsonpath.JsonPath provides several features that make it an ideal choice for working with JSON documents: 
+        <ul> 
+         <li>Supports both absolute and relative path expressions.</li> 
+         <li>Can traverse any depth of the JSON tree.</li> 
+         <li>Supports wildcards for matching multiple elements in an array.</li> 
+         <li>Uses familiar dot-notation for accessing object properties.</li> 
+         <li>Provides methods for transforming data for further manipulation.</li> 
+         <li>Supports filtering based on arbitrary criteria.</li> 
+         <li>Supports easy reduction of arrays into single values.</li> 
+        </ul> 
+        <h2>Code Examples</h2> Now let's walk through some code examples to see how com.jayway.jsonpath.JsonPath can be used in practice. 
+        <h3>Accessing Properties</h3> The JsonPath class provides convenience methods for accessing properties of a JSON document. These methods can be used to easily access specific properties without having to manually traverse the tree structure. For example, consider the following JSON document: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+{ 
+    "store": { 
+        "name": "My Store",
+        "location": {
+            "city": "London",
+            "country": "UK"
+        }
+    }
+}
+
+          </xmp></code></pre> We can use the JsonPath.read() method to quickly access the name of the store: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String storeName = JsonPath.read(json, "$.store.name");
+
+          </xmp></code></pre> 
+        <h3>Traversing the Tree</h3> In addition to accessing individual properties, com.jayway.jsonpath.JsonPath also provides methods for traversing the entire tree structure. This allows us to easily traverse multiple levels of nesting within the JSON document. For example, the following code snippet shows how to traverse two levels of the JSON document hierarchy: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JsonPath.traverse(json, (obj, path) -> {
+    if (path.contains("store")) {
+        System.out.println(obj);
+    }
+});
+
+          </xmp></code></pre> This code will output the contents of the store object: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+{ 
+    "name": "My Store",
+    "location": {
+        "city": "London",
+        "country": "UK"
+    }
+}
+
+          </xmp></code></pre> 
+        <h3>Filtering and Reducing</h3> The JsonPath.filter() method allows us to filter an array of JSON objects based on arbitrary criteria. The filter() method accepts a Predicate, which is a functional interface that defines a single method, test(). This method is used to evaluate each element of the array and determine whether it should be included in the result set. For example, consider the following array of objects: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+[
+    { "name": "John", "age": 25 },
+    { "name": "Jane", "age": 27 },
+    { "name": "Bob", "age": 23 }
+]
+
+          </xmp></code></pre> We could use the JsonPath.filter() method to select only those elements whose age is greater than or equal to 25: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JsonPath.filter(array, obj -> obj.get("age") >= 25);
+
+          </xmp></code></pre> This would return the following result set: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+[
+    { "name": "John", "age": 25 },
+    { "name": "Jane", "age": 27 }
+]
+
+          </xmp></code></pre> The JsonPath class also provides the reduce() method for reducing a JSON array into a single value. This method works similarly to the filter() method, except instead of returning an array of matching elements, it returns a single value. For example, we could use the reduce() method to calculate the average age from our array of objects: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+double averageAge = JsonPath.reduce(array, 0.0, 
+    (sum, obj) -> sum + obj.get("age")
+);
+
+          </xmp></code></pre> This would return the value 25.0. 
+        <h2>Conclusion</h2> In this article, we explored com.jayway.jsonpath.JsonPath, a powerful library for parsing and manipulating JSON documents in Java. We looked at syntax overview and features, and then walked through several code examples using features such as accessing properties, traversing the tree, filtering, and reducing. Using com.jayway.jsonpath.JsonPath we can easily access and manipulate data stored in JSON format. Its intuitive syntax and powerful functionality make it an ideal choice for working with JSON documents in Java. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Wrappers/"> Wrappers </a> </p> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Byte-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Byte object to byte, short, int, long, float and double</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.springframework.context.SmartLifecycle.html">o.s.c.SmartLifecycle</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/"> Double Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Convert-java-double-to-Double-object-Example.html">Convert java double to Double object Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.elasticsearch.common.xcontent.XContentBuilder.html">o.e.c.x.XContentBuilder</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Determine-if-a-file-can-be-written.html">Determine if a file can be written</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/"> Searching </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-short-Array-Example.html">Performing Binary Search on Java short Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.bukkit.command.CommandSender.html">org.bukkit.command.CommandSender</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Enumeration-over-Java-ArrayList-Example.html">Get Enumeration over Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Basic-Java-Applet-Example.html">Basic Java Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-duplicate-elements-from-String-array-using-Arrays-class.html">Remove duplicate elements from String array using Arrays class</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-26 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Load-New-HTML-File-Using-Applet-Context-Example.html">Load New HTML File Using Applet Context Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-all-values-from-the-TreeMap.html">How to get all values from the TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-LinkedList-in-reverse-direction-using-ListIterator.html">Iterate LinkedList in reverse direction using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Print-ArrayList-elements-using-Arrays.html">Print ArrayList elements using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sorting-custom-objects-using-Comparator.html">Sorting custom objects using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/androidx.appcompat.widget.AppCompatTextView.html">a.a.w.AppCompatTextView</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Java-HashMap-print-example.html">Java HashMap print example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.eclipse.jetty.servlet.ServletHolder.html">o.e.j.s.ServletHolder</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.app.SearchManager.html">android.app.SearchManager</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Change-Background-Color-Of-Label-Example.html">Change Background Color Of Label Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Construct-file-path.html">Construct file path</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-4-Example.html">Java Pyramid 4 Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/javafx.beans.binding.Bindings.html">javafx.beans.binding.Bindings</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.persistence.Column.html">javax.persistence.Column</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.support.v7.app.AlertDialog.html">android.support.v7.app.AlertDialog</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-array-to-ArrayList-using-Arrays.html">Convert String array to ArrayList using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/If-statement-Example.html">If statement Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Continue-Statement/Java-continue-statement-example.html">Java continue statement example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Set-Horizontal-Alignment-of-JLabel-Example.html">Set Horizontal Alignment of JLabel Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-all-elements-of-an-array-to-ArrayList-using-Arrays.html">Add all elements of an array to ArrayList using Arrays</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
