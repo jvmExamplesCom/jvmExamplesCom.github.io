@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - io.vertx.core.Future</title> <!--timestamp=2023-07-29T00:13:25.947383338Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.vertx.core.Future"> 
+  <meta name="keywords" content="io.vertx.core.Future"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.vertx.core.Future"> 
+  <meta property="og:description" content="io.vertx.core.Future"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.vertx.core.Future"> 
+  <meta name="twitter:description" content="io.vertx.core.Future"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-07-28</small>
+        </div> 
+        <h1>The io.vertx.core.Future Class</h1> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+io.vertx.core.Future
+
+          </xmp></code></pre> class is a utility in the Vert.x framework that provides a way to handle asynchronous operations and execute various tasks in an asynchronously non-blocking manner. It is an important component of the Vert.x platform and can be used to create highly efficient and scalable applications.
+         
+        A
+        <pre>Future</pre> instance can either hold a result of a completed operation, or it can be in one of several pending states. The 
+        <pre>Future</pre> instance provides methods for setting a result, failing with an exception, checking the result's status, registering a callback to be called when the operation is completed, and canceling the operation.
+         
+        <h2>Basic Usage</h2> 
+        <p>The following example demonstrates basic usage of the </p>
+        <pre>Future</pre> class:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Future<String> future = Future.future();
+
+// Do some asynchronous stuff...
+
+// Set the result of the future.
+future.complete("the result of the operation");
+
+// Or fail the future with an exception.
+future.fail(new Exception("something went wrong"));
+
+// Check if the operation has completed.
+if (future.isComplete()) {
+  // Get the result of the operation.
+  String result = future.result();
+}
+
+          </xmp></code></pre> 
+        The
+        <pre>Future</pre> class also provides several convenience methods for performing specific operations, such as creating a future with a pre-defined result and creating a failed future with an exception:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create a future with an already defined result.
+Future<String> futureWithResult = Future.succeededFuture("pre-defined result");
+
+// Create a failed future with an exception.
+Future<String> failedFuture = Future.failedFuture(new Exception("something went wrong"));
+
+          </xmp></code></pre> 
+        <h2>Callbacks</h2> 
+        The
+        <pre>Future</pre> class provides several methods that can be used to register callbacks to be executed when the future is completed or failed. For example, the following code registers a consumer that will be called with the result of the future when it is successfully completed:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+future.setHandler(ar -> {
+  if (ar.succeeded()) {
+    String result = ar.result();
+    // Handle the result of the operation.
+  } else {
+    Throwable cause = ar.cause();
+    // Handle failure.
+  }
+});
+
+          </xmp></code></pre> 
+        The
+        <pre>Future</pre> class also provides methods for registering callbacks for success and failure separately:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Register a consumer that will be called with the result of the operation when it succeeds.
+future.onSuccess(result -> {
+  // Handle the result of the operation.
+});
+
+// Register a consumer that will be called with the failure of the operation when it fails.
+future.onFailure(cause -> {
+  // Handle failure.
+});
+
+          </xmp></code></pre> 
+        <h2>Mapping</h2> 
+        The
+        <pre>Future</pre> class also provides some convenience methods for converting the result of a successful 
+        <pre>Future</pre> instance into another type. For example, the following code transforms the result of a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Future<String>
+
+          </xmp></code></pre> instance into a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Future<Integer>
+
+          </xmp></code></pre> instance by using the 
+        <pre>map</pre> method:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Future<String> future = Future.future();
+
+// Do some asynchronous stuff and set the result of the future.
+
+// Map the result of the future from a String to an Integer.
+Future<Integer> transformedFuture = future.map(ar -> {
+  return Integer.parseInt(ar.result());
+});
+
+          </xmp></code></pre> 
+        The
+        <pre>Future</pre> class also provides other mapping methods, such as 
+        <pre>mapEmpty</pre> and 
+        <pre>mapVoid</pre>, which can be used to map the result of a future to different types without any processing.
+         
+        <h2>Composition</h2> 
+        The
+        <pre>Future</pre> class provides several convenience methods for composing multiple 
+        <pre>Future</pre> instances and combining them into a single 
+        <pre>Future</pre> instance. For example, the following code creates a 
+        <pre>Future</pre> instance that will succeed only when all provided futures succeed:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+List<Future<String>> futures = Arrays.asList(
+  Future.future(),
+  Future.future()
+);
+
+// Create a future that will succeed only when all provided futures succeed.
+CompositeFuture.all(futures).setHandler(ar -> {
+  if (ar.succeeded()) {
+    List<String> results = ar.result().list();
+    // Handle the list of results.
+  } else {
+    Throwable cause = ar.cause();
+    // Handle failure.
+  }
+});
+
+          </xmp></code></pre> 
+        The
+        <pre>Future</pre> class also provides some other methods for combining multiple 
+        <pre>Future</pre> instances, such as 
+        <pre>any</pre>, 
+        <pre>join</pre>, and 
+        <pre>combine</pre>.
+         
+        <h2>Cancellation</h2> 
+        The
+        <pre>Future</pre> class provides a <em>cancel</em> method for cancelling an ongoing operation. The following code demonstrates how to use the 
+        <pre>cancel</pre> method to cancel an operation:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Future<String> future = Future.future();
+
+// Do some asynchronous stuff...
+
+// Cancel the operation.
+future.cancel();
+
+          </xmp></code></pre> 
+        <p>If an operation is canceled, any registered callbacks will not be invoked. However, it is possible to register a callback to be called in case of cancellation:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Register a consumer that will be called when the operation is canceled.
+future.onCancellation(cause -> {
+  // Handle cancellation.
+});
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+io.vertx.core.Future
+
+          </xmp></code></pre> class is a powerful and convenient utility in the Vert.x framework for handling asynchronous operations and executing tasks in an asynchronously non-blocking manner. It provides methods for creating, setting, and failing futures, registering callbacks, mapping results, combining multiple futures, and cancelling operations. By utilizing these methods, developers can create robust, scalable, and efficient applications.
+         
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.text.style.ClickableSpan.html">android.text.style.ClickableSpan</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Get-first-and-last-elements-from-LinkedList-Java-example.html">Get first and last elements from LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-comma-separated-string-to-HashSet-in-Java.html">Convert comma separated string to HashSet in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.ws.rs.WebApplicationException.html">javax.ws.rs.WebApplicationException</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/"> Runtime </a> </p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Get-Free-Memory-of-Java-Virtual-Machine(JVM)-Example.html">Get Free Memory of Java Virtual Machine(JVM) Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Append-all-elements-of-other-Collection-to-Java-ArrayList-Example.html">Append all elements of other Collection to Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Hashset-to-comma-separated-string-in-Java.html">Convert Hashset to comma separated string in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.hadoop.fs.RemoteIterator.html">org.apache.hadoop.fs.RemoteIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Java-Convert-array-to-TreeSet.html">Java Convert array to TreeSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet-Info-Example.html">Get Applet Info Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-25 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Adam</h3> <p><a href="#">2023-09-02 10:58</a></p> its very helpful programs to all Thanks...... <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Gabriel</h3> <p><a href="#">2023-09-13 15:58</a></p> Thank you very much! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Create-AWT-Label-With-Text-Alignment-Example.html">Create AWT Label With Text Alignment Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-Map-to-List.html">Convert Map to List</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.apache.maven.plugins.annotations.LifecyclePhase.html">o.a.m.p.a.LifecyclePhase</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-String-to-character-array,-character-array-to-String.html">Convert String to character array, character array to String</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-char-Array-Example.html">Performing Binary Search on Java char Array Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/com.fasterxml.jackson.databind.ObjectMapper.html">c.f.j.d.ObjectMapper</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-contains-a-value.html">How to check if LinkedHashMap contains a value</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-long-Array-Example.html">Performing Binary Search on Java long Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Read-text-file-to-Java-HashMap-example.html">Read text file to Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/javax.naming.ldap.Rdn.html">javax.naming.ldap.Rdn</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-Java-Vector-using-Comparator.html">Sort Java Vector using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-ArrayList-using-ListIterator.html">Iterate through ArrayList using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Replace-Item-Of-AWT-List-Example.html">Replace Item Of AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Remove-all-elements-from-Java-TreeSet-example.html">Remove all elements from Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-check-if-the-key-exists-in-the-TreeMap-(TreeMap-contains-a-key).html">How to check if the key exists in the TreeMap (TreeMap contains a key)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.os.Build.VERSION.html">android.os.Build.VERSION</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.servlet.http.HttpServlet.html">javax.servlet.http.HttpServlet</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Get-Particular-Item-Of-AWT-Choice-Or-Combobox-Example.html">Get Particular Item Of AWT Choice Or Combobox Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.bukkit.GameMode.html">org.bukkit.GameMode</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Iterate-through-the-values-of-Java-TreeMap-example.html">Iterate through the values of Java TreeMap example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
