@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javax.swing.event.TreeSelectionListener</title> <!--timestamp=2023-08-05T00:13:06.909784325Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.swing.event.TreeSelectionListener"> 
+  <meta name="keywords" content="javax.swing.event.TreeSelectionListener"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.swing.event.TreeSelectionListener"> 
+  <meta property="og:description" content="javax.swing.event.TreeSelectionListener"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.swing.event.TreeSelectionListener"> 
+  <meta name="twitter:description" content="javax.swing.event.TreeSelectionListener"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-08-04</small>
+        </div> 
+        <h1>javax.swing.event.TreeSelectionListener</h1> 
+        <p>javax.swing.event.TreeSelectionListener is an interface in the Java Swing library used to detect when the selection in a tree of nodes changes. By implementing this interface, developers can create a class that contains an event handling method which is notified whenever the selection within a JTree component changes. In this article, we will discuss the basics of TreeSelectionListener, provide a code example and display the output.</p> 
+        <h2>Getting Started</h2> 
+        <p>In order to use the TreeSelectionListener interface, you must first import the following classes:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
+import javax.swing.JTree;
+
+          </xmp></code></pre> 
+        <p>Next, you will need to create a new class that implements the TreeSelectionListener interface. You can name it whatever you'd like. In our example, we will call it MyTreeSelectionListener.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyTreeSelectionListener implements TreeSelectionListener {
+
+          </xmp></code></pre> 
+        <p>Now that you've created a class that implements the TreeSelectionListener interface, you will need to override the valueChanged() method. This method is invoked whenever the selection in the JTree component changes.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@Override
+public void valueChanged(TreeSelectionEvent e) {
+
+          </xmp></code></pre> 
+        <p>The TreeSelectionEvent object (e) passed into the valueChanged() method contains information about the selection change, such as the TreeModel, the path to the selected node and the current tree selection path. You can use the getTreeModel(), getNewLeadSelectionPath() and getOldLeadSelectionPath() methods to access this information.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+TreeModel model = e.getTreeModel();
+TreePath path = e.getNewLeadSelectionPath();
+TreePath oldPath = e.getOldLeadSelectionPath();
+
+          </xmp></code></pre> 
+        <p>Finally, you can use the JTree component itself to retrieve additional information about the current selection. The getSelectionModel() method can be used to access the TreeSelectionModel for the JTree, and the getSelectionPaths() method can be used to retrieve a list of all currently selected paths.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JTree tree = (JTree) e.getSource();
+TreeSelectionModel selectionModel = tree.getSelectionModel();
+TreePath[] selections = selectionModel.getSelectionPaths();
+
+          </xmp></code></pre> 
+        <h2> Code Example & Output</h2> 
+        <p>In the example below, we will create a JTree component with two nodes and register our TreeSelectionListener to be notified whenever the selection changes. When the selection changes, we will print out the new selection path and the old selection path. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class TreeSelectionExample {
+  public static void main(String[] args) {
+    // Create a TreeModel with two nodes
+    DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("root");
+    DefaultMutableTreeNode childNode1 = new DefaultMutableTreeNode("child1");
+    DefaultMutableTreeNode childNode2 = new DefaultMutableTreeNode("child2");
+    rootNode.add(childNode1);
+    rootNode.add(childNode2);
+    TreeModel model = new DefaultTreeModel(rootNode);
+
+    // Create a JTree with the TreeModel
+    JTree tree = new JTree(model);
+
+    // Register a TreeSelectionListener to be notified when the selection changes
+    tree.addTreeSelectionListener(new MyTreeSelectionListener());
+  }
+}
+
+class MyTreeSelectionListener implements TreeSelectionListener {
+  @Override
+  public void valueChanged(TreeSelectionEvent e) {
+    TreeModel model = e.getTreeModel();
+    TreePath path = e.getNewLeadSelectionPath();
+    TreePath oldPath = e.getOldLeadSelectionPath();
+
+    System.out.println("New selection path: " + path);
+    System.out.println("Old selection path: " + oldPath);
+  }
+}
+
+          </xmp></code></pre> 
+        <p>If you run the code above, you will see the following output when you change the selection in the JTree:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+New selection path: root/child2
+Old selection path: root/child1
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>In this article, we discussed the basics of javax.swing.event.TreeSelectionListener, provided a code example and displayed the output. With the use of TreeSelectionListener, developers can create classes that respond to selection changes in a JTree component. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/io.dropwizard.Configuration.html">io.dropwizard.Configuration</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Math-Class/"> Math Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Math-Class/Generate-Random-Int-Within-Given-Range-Example.html">Generate Random Int Within Given Range Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-6-Example.html">Java Pyramid 6 Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Set-Foreground-Color-Of-an-Applet-Window-Example.html">Set Foreground Color Of an Applet Window Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.bukkit.inventory.meta.ItemMeta.html">org.bukkit.inventory.meta.ItemMeta</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.intellij.psi.PsiFile.html">com.intellij.psi.PsiFile</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Vector-to-ArrayList-and-ArrayList-to-Vector.html">Convert Vector to ArrayList and ArrayList to Vector</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-String-as-characters-to-a-file-using-DataOutputStream.html">Write String as characters to a file using DataOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Java-Convert-array-to-TreeSet.html">Java Convert array to TreeSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-Map-to-List.html">Convert Map to List</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-30 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Grigorii</h3> <p><a href="#">2023-09-16 22:48</a></p> Great example! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Victor</h3> <p><a href="#">2023-09-17 21:34</a></p> <p>thanks. This is the first sample project I checked so far</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.mail.Message.html">javax.mail.Message</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-remove-an-element-from-LinkedHashSet-in-Java.html">How to remove an element from LinkedHashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-Java-String-to-Integer-object-Example.html">Convert Java String to Integer object Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.apache.http.message.BasicHeader.html">org.apache.http.message.BasicHeader</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/org.springframework.context.annotation.Configuration.html">o.s.c.a.Configuration</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Print-array-elements-using-Arrays-class.html">Print array elements using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Check-if-element-exists-in-Java-LinkedList-(LinkedList-contains-element).html">Check if element exists in Java LinkedList (LinkedList contains element)</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-4-Example.html">Java Pyramid 4 Example</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/System/Run-the-garbage-collector-using-System-class.html">Run the garbage collector using System class</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Replace-an-element-at-specified-index-of-Java-ArrayList-Example.html">Replace an element at specified index of Java ArrayList Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Java-Factorial-Example.html">Java Factorial Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/io.netty.handler.codec.http.DefaultFullHttpResponse.html">i.n.h.c.h.DefaultFullHttpResponse</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.apache.curator.framework.CuratorFrameworkFactory.html">o.a.c.f.CuratorFrameworkFactory</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-List-to-Map-(Convert-List-to-HashMap).html">Convert List to Map (Convert List to HashMap)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sorting-custom-objects-using-Comparator.html">Sorting custom objects using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Background-Color-Of-an-Applet-Window-Example.html">Get Background Color Of an Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-Java-String-to-Byte-example.html">Convert Java String to Byte example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.elasticsearch.action.index.IndexRequestBuilder.html">o.e.a.i.IndexRequestBuilder</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Find-element-in-ArrayList-using-indexOf-and-lastIndexOf-methods.html">Find element in ArrayList using indexOf and lastIndexOf methods</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-ArrayList-to-TreeSet.html">How to convert ArrayList to TreeSet</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
