@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.util.concurrent.RecursiveTask</title> <!--timestamp=2023-08-11T00:11:11.528232953Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.util.concurrent.RecursiveTask"> 
+  <meta name="keywords" content="java.util.concurrent.RecursiveTask"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.util.concurrent.RecursiveTask"> 
+  <meta property="og:description" content="java.util.concurrent.RecursiveTask"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.util.concurrent.RecursiveTask"> 
+  <meta name="twitter:description" content="java.util.concurrent.RecursiveTask"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-08-10</small>
+        </div> 
+        <h1>java.util.concurrent.RecursiveTask</h1> 
+        <p>Java.util.concurrent.RecursiveTask is an abstract class that provides a framework for the common pool executor framework. It is used for tasks that are to be split into multiple subtasks, which can then be executed in parallel. The framework handles the task scheduling and ensures that each subtask can be resumed from its previous state. The class provides methods for splitting the task into subtasks, for waiting for their completion, for signaling their success or failure, for getting result, for dealing with exception and for reporting progress.</p> 
+        <p>The RecursiveTask class extends the ForkJoinTask class, which is the base class for all tasks processed within the Fork-Join Framework. This class provides a method called compute() that will be used to execute the task. The compute method is called when the task is submitted to the Fork-Join Pool.</p> 
+        <h2>Creating a RecursiveTask task</h2> 
+        <p>To create a recursive task, you have to create a subclass of the RecursiveTask class, which will be responsible for defining the splitting of the task into subtasks, and for executing the subtasks. The following example creates a simple RecursiveTask that sums up the numbers from 1 to 10.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class SumTask extends RecursiveTask<Integer> {
+    private int start;
+    private int end;
+
+    public SumTask(int start, int end) {
+        this.start = start;
+        this.end = end;
+    }
+
+    protected Integer compute() {
+        if (start < end) {
+            int mid = start + (end - start) / 2;
+            SumTask leftSubtask = new SumTask(start, mid);
+            SumTask rightSubtask = new SumTask(mid + 1, end);
+            invokeAll(leftSubtask, rightSubtask);
+            return leftSubtask.join() + rightSubtask.join();
+        } else {
+            return start;
+        }
+    }
+}
+
+          </xmp></code></pre> 
+        <p>You can then submit the task to the Fork-Join Pool with the following code:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ForkJoinPool pool = new ForkJoinPool();
+SumTask task = new SumTask(1, 10);
+int sum = pool.invoke(task);
+System.out.println("The sum is: " + sum); // outputs 55
+
+          </xmp></code></pre> 
+        <h2>Handling Exception</h2> 
+        <p>If any of the subtasks throw an exception, it will be propagated to the parent task. The parent task has to override the handle method in order to catch the exceptions thrown by the subtasks. The handle method takes a Throwable object, so it can be used for catching all kinds of exceptions. The following example illustrates how to override the handle method to catch checked exceptions:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class SumTask extends RecursiveTask<Integer> {
+    // ...
+    @Override
+    protected void handle(Throwable t) {
+        if (t instanceof MyException) {
+            System.out.println("MyException thrown"); 
+        } else {
+            super.handle(t);
+        }
+    }
+}
+
+          </xmp></code></pre> 
+        <h2>Getting Result</h2> 
+        <p>The RecursiveTask class provides several methods for getting the result of the task. The most commonly used methods are join and get. The join method waits for the task to complete and returns the result. The get method returns the result, but does not wait for the task to complete if it is still running. Both methods will throw an ExecutionException if the task throws an exception.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class SumTask extends RecursiveTask<Integer> {
+    // ...
+    public int getResult() {
+        try {
+            return join();
+        } catch (ExecutionException e) {
+            System.out.println("Exception thrown");
+            return 0;
+        }
+    }
+}
+
+          </xmp></code></pre> 
+        <h2>Reporting Progress</h2> 
+        <p>The RecursiveTask class also provides several methods for reporting the progress of the task. The commonly used methods are setProgress and reportProgress. The setProgress method sets the progress of the task for the recursive subtasks. The reportProgress method sends a notification to the parent task about the progress of the task. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class SumTask extends RecursiveTask<Integer> {
+    // ...
+    @Override
+    protected void compute() {
+        // ...
+        setProgress(50);
+        reportProgress();
+        // ...
+    }
+}
+
+          </xmp></code></pre> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-maxmimum-element-of-Java-ArrayList-Example.html">Find maxmimum element of Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Convert-HashSet-to-array.html">Convert HashSet to array</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-long-to-a-file-using-DataOutputStream.html">Write long to a file using DataOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-iterate-HashSet-in-Java.html">How to iterate HashSet in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Get-name-of-specified-file-or-directory.html">Get name of specified file or directory</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/FileOutputStream/"> FileOutputStream </a> </p> <a href="/articles/Java/File-And-IO/FileOutputStream/Create-FileOutputStream-object-from-File-object.html">Create FileOutputStream object from File object</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.util.IdentityHashMap.html">java.util.IdentityHashMap</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/javax.transaction.UserTransaction.html">javax.transaction.UserTransaction</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.glassfish.jersey.servlet.ServletContainer.html">o.g.j.s.ServletContainer</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-contains-a-value.html">How to check if LinkedHashMap contains a value</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-30 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Thomas</h3> <p><a href="#">2023-09-27 08:31</a></p> great examples ... thnx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Gabriel</h3> <p><a href="#">2023-09-17 06:38</a></p> Grt ;-) <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Determine-If-The-Label-Is-Visible-Example.html">Determine If The Label Is Visible Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.google.common.collect.Queues.html">com.google.common.collect.Queues</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Prime-Numbers-Java-Example.html">Prime Numbers Java Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Set-Multiple-Selection-Mode-For-AWT-List-Example.html">Set Multiple Selection Mode For AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.shiro.subject.Subject.html">org.apache.shiro.subject.Subject</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-ArrayList-to-LinkedHashSet.html">Convert ArrayList to LinkedHashSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.android.volley.toolbox.JsonObjectRequest.html">c.a.v.t.JsonObjectRequest</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-create-new-HashSet-objects-using-HashSet-constructor.html">How to create new HashSet objects using HashSet constructor</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-List-to-String.html">Convert List to String</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Map-from-Java-HashMap-example.html">Get Synchronized Map from Java HashMap example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.intellij.openapi.actionSystem.PlatformDataKeys.html">c.i.o.a.PlatformDataKeys</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.graphics.DashPathEffect.html">android.graphics.DashPathEffect</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Mark-file-or-directory-Read-Only.html">Mark file or directory Read Only</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Java-Class-Example.html">Java Class Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/Determine-if-the-Zip-Entry-Is-Directory-Example.html">Determine if the Zip Entry Is Directory Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/FileOutputStream/Copy-binary-file-using-Streams.html">Copy binary file using Streams</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-byte-Array-Example.html">Java Sort byte Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-ArrayList-length.html">Get ArrayList length</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Search-an-element-of-Java-Vector-Example.html">Search an element of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.google.common.collect.Table.html">com.google.common.collect.Table</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
