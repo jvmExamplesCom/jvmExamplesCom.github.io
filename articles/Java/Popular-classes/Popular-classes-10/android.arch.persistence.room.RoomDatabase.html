@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - android.arch.persistence.room.RoomDatabase</title> <!--timestamp=2023-08-13T00:12:29.038000328Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="android.arch.persistence.room.RoomDatabase"> 
+  <meta name="keywords" content="android.arch.persistence.room.RoomDatabase"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - android.arch.persistence.room.RoomDatabase"> 
+  <meta property="og:description" content="android.arch.persistence.room.RoomDatabase"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - android.arch.persistence.room.RoomDatabase"> 
+  <meta name="twitter:description" content="android.arch.persistence.room.RoomDatabase"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-08-12</small>
+        </div> 
+        <h1>Introduction to android.arch.persistence.room.RoomDatabase</h1> android.arch.persistence.room.RoomDatabase is a persistent storage library for Android and Java applications. It provides an abstraction layer over SQLite to allow for more robust database management and access. RoomDatabase provides developers with a way to quickly create and manage databases, as well as helper classes that make it easier to query and modify the structures of existing databases. In this article, we will explore how to use RoomDatabase to create, manage and query a SQLite-based Android database. 
+        <h2>Getting Started With RoomDatabase</h2> To get started with RoomDatabase, you'll need to install the library in your project. The easiest way to do this is through Gradle. Simply add the maven dependency to your app's build.gradle: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+dependencies {
+    implementation "androidx.room:room-runtime:2.2.5"
+}
+
+          </xmp></code></pre> Once the library is installed, you can start creating Room Database objects. To create an instance of RoomDatabase, you'll need to implement the RoomDatabase<t>
+          class. You'll also need to provide an entity (or table) and a data source that RoomDatabase can use to store and manage data. Here's an example of a RoomDatabase class that stores data about books: 
+         <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+           <xmp>
+            
+@Database(entities = {Book.class}, version = 1)
+public abstract class BookDatabase extends RoomDatabase {
+     public abstract BookDao bookDao();
+}
+
+           </xmp></code></pre> The @Database annotation is used to declare which entities and versions the database will contain. We also define an abstract method bookDao(), which will be implemented by a class that provides access to the database's data. 
+         <h2>Creating Entities</h2> Now that we have a RoomDatabase, we can start creating entities (or tables). Entities are simple POJOs that are annotated with the @Entity annotation and map to a table in the database. Here's an example of an entity that maps to the books table: 
+         <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+           <xmp>
+            
+@Entity
+public class Book {
+    
+    @PrimaryKey
+    private int id;
+
+    @ColumnInfo(name = "title")
+    private String title;
+
+}
+
+           </xmp></code></pre> As you can see, we provide a primary key and a column info annotation that specifies which column will be used to store the title field. Once the entity is defined, we can create the corresponding table in the database using the @Table annotation: 
+         <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+           <xmp>
+            
+@Table(name = "books")
+public class Book {
+    
+    @PrimaryKey
+    private int id;
+
+    @ColumnInfo(name = "title")
+    private String title;
+
+}
+
+           </xmp></code></pre> Once the table is created, we can now populate it with data. This can be done using the RoomDatabase.insert() method. For example, to insert a new book into the database we can use the following code: 
+         <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+           <xmp>
+            
+bookDatabase.bookDao().insert(new Book(1, "The Catcher in the Rye"));
+
+           </xmp></code></pre> 
+         <h2>Querying Data</h2> Room Database provides several methods for retrieving data from the database. The most commonly used queries are select and update queries. The most basic select query is a simple query that returns all rows in a table: 
+         <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+           <xmp>
+            
+List<Book> books = bookDatabase.bookDao().selectAll();
+
+           </xmp></code></pre> This query will return a list of all books stored in the database. We can also specify certain conditions for our query using the @Query annotation: 
+         <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+           <xmp>
+            
+@Query("SELECT * FROM books WHERE title = :title")
+List<Book> findBooksByTitle(String title);
+
+           </xmp></code></pre> This query will return a list of books that match the specified title. We can also use the @Update annotation to update records in the database. For example, if we wanted to update the title of a book we could use the following code: 
+         <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+           <xmp>
+            
+@Update
+void updateBookTitle(String title, int id);
+
+           </xmp></code></pre> This update statement will update the title of the book with the given id. Finally, we can also delete records in the database using the @Delete annotation: 
+         <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+           <xmp>
+            
+@Delete
+void deleteBook(Book book);
+
+           </xmp></code></pre> This statement will delete the specified book from the database. 
+         <h2>Conclusion</h2> In this article, we have explored how to use android.arch.persistence.room.RoomDatabase to quickly create and manage databases for Android applications. We have seen how to create an instance of RoomDatabase, create entities and tables, insert, update and delete records, and query the database. With RoomDatabase, developers can quickly create and manage databases for their applications, allowing them to focus on developing their app and not worry about managing the data.
+        </t> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Basic-Java-Applet-Example.html">Basic Java Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Check-if-ArrayList-is-empty.html">Check if ArrayList is empty</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/System/"> System </a> </p> <a href="/articles/Java/Miscellaneous-Classes/System/Get-classpath-using-System-class.html">Get classpath using System class</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/"> Hashtable </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Remove-value-from-Java-Hashtable-example.html">Remove value from Java Hashtable example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipFile/"> ZipFile </a> </p> <a href="/articles/Java/Java-Zip/ZipFile/Get-Specified-Entry-From-Zip-File-Example.html">Get Specified Entry From Zip File Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.ws.rs.core.MediaType.html">javax.ws.rs.core.MediaType</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.html">ConditionalOnWebApplication</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/"> Sorting </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-int-Array-Example.html">Java Sort int Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-List-in-reverse-order-using-Iterator.html">Iterate through List in reverse order using Iterator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.apache.lucene.analysis.standard.StandardAnalyzer.html">o.a.l.a.s.StandardAnalyzer</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-03 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.commons.exec.CommandLine.html">org.apache.commons.exec.CommandLine</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javafx.scene.layout.BorderPane.html">javafx.scene.layout.BorderPane</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Swap-elements-of-Java-Vector-example.html">Swap elements of Java Vector example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-copy-merge-or-clone-LinkedHashSet-in-Java.html">How to copy merge or clone LinkedHashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Iterate-through-keys-of-Java-Hashtable-example.html">Iterate through keys of Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Get-Checkbox-State-Example.html">Get Checkbox State Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-byte-from-file-using-DataInputStream.html">Read byte from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-print-LinkedHashSet-elements-(display-LinkedHashSet-elements).html">How to print LinkedHashSet elements (display LinkedHashSet elements)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Traverse-through-ArrayList-in-forward-direction-using-Java-ListIterator-Example.html">Traverse through ArrayList in forward direction using Java ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor.html">AuthorizationAttributeSourceAdvisor</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-long-primitive-to-Long-object-Example.html">Convert long primitive to Long object Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-long-Arrays-Example.html">Compare Two Java long Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-Java-TreeMap-in-reverse-direction-using-an-iterator.html">Iterate Java TreeMap in reverse direction using an iterator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/javax.servlet.WriteListener.html">javax.servlet.WriteListener</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.net.InetAddress.html">java.net.InetAddress</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-all-keys-from-the-TreeMap.html">How to get all keys from the TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.support.v4.util.ArrayMap.html">android.support.v4.util.ArrayMap</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-character-to-String.html">Convert character to String</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Determine-If-The-Label-Is-Enabled-Example.html">Determine If The Label Is Enabled Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-CheckboxGroup/Get-Selected-Radio-Button-Example.html">Get Selected Radio Button Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
