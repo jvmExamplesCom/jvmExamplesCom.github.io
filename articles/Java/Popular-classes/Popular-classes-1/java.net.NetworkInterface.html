@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.net.NetworkInterface</title> <!--timestamp=2023-08-14T00:11:48.030616533Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.net.NetworkInterface"> 
+  <meta name="keywords" content="java.net.NetworkInterface"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.net.NetworkInterface"> 
+  <meta property="og:description" content="java.net.NetworkInterface"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.net.NetworkInterface"> 
+  <meta name="twitter:description" content="java.net.NetworkInterface"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-08-13</small>
+        </div> 
+        <h1>Introduction to Network Interface in Java</h1> Network interface is a Java class which provides an application programming interface (API) to access the underlying networking configuration. It is present in the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+java.net
+
+          </xmp></code></pre> package and is part of the Java platform's core library. NetworkInterface provides network information about the system, such as details about all the installed network interfaces, IP addresses, broadcast addresses, and multicast addresses. This article will discuss some of the details related to the NetworkInterface class and give examples of how it can be used. 
+        <h2>Creating an Instance</h2> A NetworkInterface object can be created from either a String or an Integer. The String argument should provide either a name, a hardware address, or a display name of the network interface. The Integer should represent the index of the network interface. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+//Create an instance from a String
+NetworkInterface nf = NetworkInterface.getByName("en0");
+
+//Create an instance from an Integer
+NetworkInterface nfi = NetworkInterface.getByIndex(2);
+
+          </xmp></code></pre> The static method 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getByName
+
+          </xmp></code></pre> can also be used to obtain a list of all available network interfaces. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+List<NetworkInterface> interfaces = NetworkInterface.getByName("*");
+
+          </xmp></code></pre> 
+        <h2>Getting Information About a Network Interface</h2> Once an instance of NetworkInterface is created, the various methods defined in the NetworkInterface class can be used to get the details of the network interface. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+//Get the name of the network interface
+String name = nf.getName();
+System.out.println("Network Interface Name : " + name);
+
+//Get the hardware address associated with the network interface
+byte[] mac = nf.getHardwareAddress();
+System.out.println("Hardware Address: " + Arrays.toString(mac));
+
+//Get all IP addresses associated with the network interface
+Enumeration<InetAddress> inetAddresses = nf.getInetAddresses();
+while(inetAddresses.hasMoreElements()) { 
+   System.out.println("IP Address: " + inetAddresses.nextElement()); 
+}
+
+          </xmp></code></pre> 
+        <h2>Setting Network Interface Options</h2> The NetworkInterface class also allows setting network interface options such as the broadcast address and the maximum transmission unit (MTU). 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+//Set the broadcast address associated with the network interface
+boolean isSet = nf.setBroadcast(InetAddress.getByName("10.0.0.255"));
+if(isSet) {
+   System.out.println("Broadcast address set successfully");
+} else {
+   System.out.println("Unable to set broadcast address");
+}
+
+//Set the maximum transmission unit for the network interface
+isSet = nf.setMTU(1500);
+if(isSet) {
+   System.out.println("Maximum transmission unit set successfully");
+} else {
+   System.out.println("Unable to set maximum transmission unit");
+}
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> The NetworkInterface class provides an easy way to programmatically access and configure the underlying network configuration of the system. Its methods allow the programmer to get the network interfaces installed on the system, get the IP addresses associated with each network interface, set the options for each network interface, etc. This article discussed some of the features offered by the NetworkInterface class and provided examples of how it can be used. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Get-Horizontal-Alignment-of-JLabel-Example.html">Get Horizontal Alignment of JLabel Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Check-if-key-exists-in-HashMap-Java-example.html">Check if key exists in HashMap Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipFile/"> ZipFile </a> </p> <a href="/articles/Java/Java-Zip/ZipFile/Get-Specified-Entry-From-Zip-File-Example.html">Get Specified Entry From Zip File Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.widget.HorizontalScrollView.html">android.widget.HorizontalScrollView</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.persistence.Enumerated.html">javax.persistence.Enumerated</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/"> AWT Color </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Convert-HSB-To-RGB-Color-Example.html">Convert HSB To RGB Color Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/android.graphics.CornerPathEffect.html">android.graphics.CornerPathEffect</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-All-Elements-Of-Java-ArrayList-Example.html">Replace All Elements Of Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/"> Hashtable </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Remove-value-from-Java-Hashtable-example.html">Remove value from Java Hashtable example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/ArrayList-insert-element-at-the-beginning.html">ArrayList insert element at the beginning</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-04 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-sort-Vector-in-Java.html">How to sort Vector in Java</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/FileInputStream/Read-file-in-byte-array-using-FileInputStream.html">Read file in byte array using FileInputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.jsoup.nodes.Document.html">org.jsoup.nodes.Document</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/javax.xml.soap.SOAPMessage.html">javax.xml.soap.SOAPMessage</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-ArrayList-length.html">Get ArrayList length</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Short-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Short object to byte, short, int, long, float and double</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Check-if-ArrayList-is-empty.html">Check if ArrayList is empty</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-Java-String-to-Long-example.html">Convert Java String to Long example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-Java-LinkedList-to-Array.html">Convert Java LinkedList to Array</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.greenrobot.greendao.annotation.Entity.html">o.g.g.a.Entity</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-temporary-file.html">Create temporary file</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Smiley-In-Applet-Example.html">Draw Smiley In Applet Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-long-Array-Example.html">Java Sort long Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-over-Vector-elements-using-ListIterator.html">Iterate over Vector elements using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Remove-specified-element-from-Java-Vector-Example.html">Remove specified element from Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-create-TreeMap-objects-using-Comparable-interface.html">How to create TreeMap objects using Comparable interface</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-the-last-element-from-ArrayList.html">Remove the last element from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.time.LocalDate.html">java.time.LocalDate</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.enterprise.context.RequestScoped.html">j.e.c.RequestScoped</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.view.ContextThemeWrapper.html">android.view.ContextThemeWrapper</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
