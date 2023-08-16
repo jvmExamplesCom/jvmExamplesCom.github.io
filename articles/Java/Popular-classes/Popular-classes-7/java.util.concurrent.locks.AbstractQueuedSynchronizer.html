@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.util.concurrent.locks.AbstractQueuedSynchronizer</title> <!--timestamp=2023-08-16T00:11:36.172537439Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.util.concurrent.locks.AbstractQueuedSynchronizer"> 
+  <meta name="keywords" content="java.util.concurrent.locks.AbstractQueuedSynchronizer"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.util.concurrent.locks.AbstractQueuedSynchronizer"> 
+  <meta property="og:description" content="java.util.concurrent.locks.AbstractQueuedSynchronizer"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.util.concurrent.locks.AbstractQueuedSynchronizer"> 
+  <meta name="twitter:description" content="java.util.concurrent.locks.AbstractQueuedSynchronizer"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-08-15</small>
+        </div> 
+        <h1>java.util.concurrent.locks.AbstractQueuedSynchronizer</h1> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+java.util.concurrent.locks.AbstractQueuedSynchronizer
+
+          </xmp></code></pre> is a powerful utility class that allows developers to create locks and synchronizers in Java. This class provides much of the implementation for the lock framework, such as an atomic state variable, condition queue, and methods for acquire and release operations.
+         
+        <h2>Example Usage</h2> 
+        The following example demonstrates how to use
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+AbstractQueuedSynchronizer
+
+          </xmp></code></pre> to create a simple exclusive lock:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class ExclusiveLock extends AbstractQueuedSynchronizer {
+    public boolean tryAcquire() {
+        if (compareAndSetState(0, 1)) {
+            setExclusiveOwnerThread(Thread.currentThread());
+            return true;
+        }
+        return false; 
+    }
+    
+    public boolean tryRelease() {
+        setExclusiveOwnerThread(null); 
+        setState(0);
+        return true;
+    }
+    
+    public boolean isLocked() {
+        return getState() != 0;
+    }
+}
+
+          </xmp></code></pre> 
+        We can use this lock in the following manner: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ExclusiveLock lock = new ExclusiveLock();
+lock.tryAcquire();
+// do some exclusive operations here
+lock.tryRelease();
+
+          </xmp></code></pre> 
+        The
+        <pre>tryAcquire()</pre> method will attempt to acquire the lock, and if successful, set the thread that called this method as the exclusive owner of the lock. Then the thread can perform exclusive operations without the risk of being interrupted by other threads. When finished, the thread calls the 
+        <pre>tryRelease()</pre> method to release the lock and reset the state.
+         
+        <h2>Interrupts</h2> 
+        <p>If a thread is interrupted while waiting to acquire the lock, the thread is supported to throw an </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+InterruptedException
+
+          </xmp></code></pre>, and the lock operation fails. This can be useful for canceling a long-running lock operation from another thread. To enable this behavior, the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+AbstractQueuedSynchronizer
+
+          </xmp></code></pre> class provides the 
+        <pre>interrupt()</pre> method, which interrupts the thread currently attempting to acquire the lock.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+lock.interrupt(); // interrupt thread waiting for the lock
+
+          </xmp></code></pre> 
+        <h2>Condition Variables</h2> 
+        <p>In addition to providing basic lock functionality, the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+AbstractQueuedSynchronizer
+
+          </xmp></code></pre> class also exposes a powerful mechanism for condition variables. Condition variables are used to wait until certain conditions are met before proceeding with a given operation. To use condition variables, the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+AbstractQueuedSynchronizer
+
+          </xmp></code></pre> provides the 
+        <pre>await()</pre> and 
+        <pre>signalAll()</pre> methods.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyConditionVariable {
+    private final AbstractQueuedSynchronizer sync;
+
+    public MyConditionVariable() {
+        this.sync = new AbstractQueuedSynchronizer();
+    }
+    
+    public void await() throws InterruptedException {
+        this.sync.acquireSharedInterruptibly(1);
+    }
+    
+    public void signalAll() {
+        this.sync.releaseShared(1);
+    }
+}
+
+          </xmp></code></pre> 
+        We can use this condition variable like this: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MyConditionVariable cond = new MyConditionVariable();
+new Thread(() -> {
+    try {
+        cond.await(); // wait until signaled
+        // ... do something
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+}).start();
+
+// elsewhere in code
+cond.signalAll(); // signal any threads awaiting on the condition variable
+
+          </xmp></code></pre> 
+        <p>This example shows how to create a basic condition variable using the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+AbstractQueuedSynchronizer
+
+          </xmp></code></pre> class.
+         
+        <h2>Conclusion</h2> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+java.util.concurrent.locks.AbstractQueuedSynchronizer
+
+          </xmp></code></pre> class is a versatile utility class for creating locks and condition variables in Java. It provides powerful atomic operations, allowing developers to create robust synchronization primitives with relative ease.
+         
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Iterate-HashMap.html">Iterate HashMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.springframework.web.reactive.function.server.ServerResponse.html">o.s.w.r.f.s.ServerResponse</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-ArrayList-to-array.html">Convert ArrayList to array</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/com.google.gson.annotations.Expose.html">com.google.gson.annotations.Expose</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/"> Double Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Java-Double-compare-example.html">Java Double compare example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Create-JLabel-With-Image-Icon-and-Text-Example.html">Create JLabel With Image Icon and Text Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Math-Class/"> Math Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-natural-logarithm-value-of-a-number-using-Math.log.html">F.log</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Append-all-elements-of-other-Collection-to-Java-ArrayList-Example.html">Append all elements of other Collection to Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.eclipse.ui.IEditorPart.html">org.eclipse.ui.IEditorPart</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/System/"> System </a> </p> <a href="/articles/Java/Miscellaneous-Classes/System/Determine-operating-system-using-System-class.html">Determine operating system using System class</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-05 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Adam</h3> <p><a href="#">2023-09-23 11:32</a></p> great examples ... thnx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Gabriel</h3> <p><a href="#">2023-09-21 09:07</a></p> <p>These Programs Are Very Useful For Java Beginners!... Thanks! ...</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-array-to-Set-using-Arrays.html">Convert array to Set using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-contains-a-key-(indexOf).html">How to check if LinkedHashMap contains a key (indexOf)</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-new-empty-file.html">Create new empty file</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-all-occurrences-of-specified-element-of-Java-Vector-Example.html">Replace all occurrences of specified element of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent.html">o.a.c.f.r.c.PathChildrenCacheEvent</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-find-the-minimum-or-maximum-element-in-LinkedHashSet.html">How to find the minimum or maximum element in LinkedHashSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.util.EventListener.html">java.util.EventListener</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Convert-primitive-byte-value-to-String-object.html">Convert primitive byte value to String object</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Handle-Action-Events-for-AWT-Button-Example.html">Handle Action Events for AWT Button Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Find-Largest-and-Smallest-Number-in-an-Array-Example.html">Find Largest and Smallest Number in an Array Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Remove-An-Item-From-a-List-Example.html">Remove An Item From a List Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Mark-file-or-directory-Read-Only.html">Mark file or directory Read Only</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/javax.swing.ActionMap.html">javax.swing.ActionMap</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Change-Background-Color-Of-Label-Example.html">Change Background Color Of Label Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.springframework.security.crypto.password.PasswordEncoder.html">o.s.s.c.p.PasswordEncoder</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-boolean-Arrays-Example.html">Compare Two Java boolean Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/List-Contents-Of-Zip-File-Example.html">List Contents Of Zip File Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-value-from-TreeMap-using-the-key-(TreeMap-get-method).html">How to get value from TreeMap using the key (TreeMap get method)</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Set-Foreground-Color-of-JLabel-Example.html">Set Foreground Color of JLabel Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/javafx.scene.paint.Color.html">javafx.scene.paint.Color</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
