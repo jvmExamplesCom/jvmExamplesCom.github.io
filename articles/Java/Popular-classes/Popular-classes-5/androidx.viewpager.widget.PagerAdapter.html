@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - androidx.viewpager.widget.PagerAdapter</title> <!--timestamp=2023-08-17T00:11:15.173993018Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="androidx.viewpager.widget.PagerAdapter"> 
+  <meta name="keywords" content="androidx.viewpager.widget.PagerAdapter"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - androidx.viewpager.widget.PagerAdapter"> 
+  <meta property="og:description" content="androidx.viewpager.widget.PagerAdapter"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - androidx.viewpager.widget.PagerAdapter"> 
+  <meta name="twitter:description" content="androidx.viewpager.widget.PagerAdapter"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-08-16</small>
+        </div> 
+        <h1>AndroidX ViewPager Adapter</h1> AndroidX PagerAdapter is an easy to use and versatile library that allows developers to quickly create a custom view pager to display a collection of items. It provides an efficient way to implement a powerful sliding panel interface with minimal code. The library provides many convenience methods, making it easy to customize the look and feel of the pager with its built-in customization options. Additionally, the library is highly extensible, allowing developers to create their own custom adapter to tailor the functionality to their needs. In this article, we'll discuss the basics of using AndroidX PagerAdapter and look at some code examples. 
+        <h2>Creating an AndroidX PagerAdapter</h2> Creating a PagerAdapter is simple and can be done in just a few steps. First, you must import the necessary classes: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+import androidx.viewpager.widget.PagerAdapter;
+
+          </xmp></code></pre> Then, you can instantiate the PagerAdapter to get the object: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+PagerAdapter pagerAdapter = new PagerAdapter(context);
+
+          </xmp></code></pre> The context variable is used to access resources and application settings. Once the PagerAdapter has been instantiated, you can set the adapter data source: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+pagerAdapter.setDataSource(dataSource);
+
+          </xmp></code></pre> The dataSource variable can be any type of Collection, including an ArrayList or a Vector. Finally, you can set the number of pages that the PagerAdapter should have: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+pagerAdapter.setPageCount(pageCount);
+
+          </xmp></code></pre> Once these three steps have been completed, the setup for the PagerAdapter has been completed and it is ready to use. 
+        <h2>Customizing the View</h2> AndroidX PagerAdapter provides several methods for customizing the view of the pager. To start, you can set the background color of the pager: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+pagerAdapter.setBackgroundColor(color);
+
+          </xmp></code></pre> The color variable can be any Color int value. Additionally, you can set the height and width of the pager: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+pagerAdapter.setHeight(height);
+pagerAdapter.setWidth(width);
+
+          </xmp></code></pre> You can also set the transition animation for the pager: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+pagerAdapter.setTransitionAnimation(animation);
+
+          </xmp></code></pre> The transition animation can be one of the various built-in animations, such as slide, fade, flip, etc. 
+        <h2>Creating a New Page</h2> Once the PagerAdapter is setup, you can add new pages to the pager. This is done using the addPage method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+pagerAdapter.addPage(page);
+
+          </xmp></code></pre> The page variable must be an instance of a subclass of View, such as LinearLayout, ImageView, etc. Additionally, you can also add a page to a specific position in the pager by using the insertPage method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+pagerAdapter.insertPage(position, page);
+
+          </xmp></code></pre> The position variable can be any valid index into the pager’s page collection. 
+        <h2>Implementing Listeners</h2> AndroidX PagerAdapter allows you to easily add listeners to respond to user interaction with the pager. You can add a OnPageChangeListener to respond when the user scrolls to a new page: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+pagerAdapter.addOnPageChangeListener(listener);
+
+          </xmp></code></pre> Additionally, you can add an OnPageSelectedListener to respond when the user selects a page in the pager: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+pagerAdapter.addOnPageSelectedListener(listener);
+
+          </xmp></code></pre> These listeners can be used to perform actions in response to user actions on the pager. 
+        <h2>Conclusion</h2> AndroidX PagerAdapter is a powerful and versatile library that can be used to quickly create a custom view pager. It provides a wide range of convenience methods and is highly extensible, making it easy to tailor the pager to your needs. In this article, we looked at the basics of using AndroidX PagerAdapter and explored some of its most useful features. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Set-Foreground-Color-of-JLabel-Example.html">Set Foreground Color of JLabel Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Index-From-Single-Select-AWT-List-Example.html">Get Selected Index From Single Select AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Get-first-and-last-elements-from-LinkedList-Java-example.html">Get first and last elements from LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/java.text.FieldPosition.html">java.text.FieldPosition</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-check-if-LinkedHashSet-is-empty-in-Java.html">How to check if LinkedHashSet is empty in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-ArrayList-to-HashMap-Java-example.html">Convert ArrayList to HashMap Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-find-the-minimum-or-maximum-value-from-Java-HashSet.html">How to find the minimum or maximum value from Java HashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.bukkit.GameMode.html">org.bukkit.GameMode</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Sub-Map-from-Java-TreeMap-example.html">Get Sub Map from Java TreeMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/com.google.common.cache.CacheBuilder.html">com.google.common.cache.CacheBuilder</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-14 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-short-Arrays-Example.html">Compare Two Java short Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.apache.hadoop.mapred.FileSplit.html">org.apache.hadoop.mapred.FileSplit</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Flush-output-stream.html">Flush output stream</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/Calendar/Add-or-substract-weeks-to-current-date-using-Java-Calendar.html">Add or substract weeks to current date using Java Calendar</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/ArrayList-reverse-example.html">ArrayList reverse example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Perform-Binary-Search-on-Java-Vector-Example.html">Perform Binary Search on Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Fibonacci-Series-Java-Example.html">Fibonacci Series Java Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-all-occurrences-of-specified-element-of-Java-Vector-Example.html">Replace all occurrences of specified element of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.thymeleaf.context.Context.html">org.thymeleaf.context.Context</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-long-primitive-to-Long-object-Example.html">Convert long primitive to Long object Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-all-keys-of-LinkedHashMap-in-Java-(keySet-method).html">How to get all keys of LinkedHashMap in Java (keySet method)</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Index-From-Single-Select-AWT-List-Example.html">Get Selected Index From Single Select AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/io.flutter.plugin.common.MethodChannel.MethodCallHandler.html">i.f.p.c.M.MethodCallHandler</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.testng.annotations.AfterTest.html">org.testng.annotations.AfterTest</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Print-ArrayList-elements-using-Arrays.html">Print ArrayList elements using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Select-Particular-Item-Of-AWT-Choice-Or-Combobox-Example.html">Select Particular Item Of AWT Choice Or Combobox Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/InputStream/Read-character-from-console-using-InputStream.html">Read character from console using InputStream</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/BufferedOutputStream/Write-byte-array-to-file-using-BufferedOutputStream.html">Write byte array to file using BufferedOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.websocket.Session.html">javax.websocket.Session</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Create-AWT-Label-Example.html">Create AWT Label Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
