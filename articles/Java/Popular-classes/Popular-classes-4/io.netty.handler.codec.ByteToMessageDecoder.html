@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - io.netty.handler.codec.ByteToMessageDecoder</title> <!--timestamp=2023-08-21T00:11:30.804522366Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.netty.handler.codec.ByteToMessageDecoder"> 
+  <meta name="keywords" content="io.netty.handler.codec.ByteToMessageDecoder"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.netty.handler.codec.ByteToMessageDecoder"> 
+  <meta property="og:description" content="io.netty.handler.codec.ByteToMessageDecoder"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.netty.handler.codec.ByteToMessageDecoder"> 
+  <meta name="twitter:description" content="io.netty.handler.codec.ByteToMessageDecoder"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-08-20</small>
+        </div> 
+        <h1>Introduction to io.netty.handler.codec.ByteToMessageDecoder</h1> 
+        <p>The io.netty.handler.codec.ByteToMessageDecoder class is a part of Netty, an open source network application framework providing asynchronous I/O, event handling, and other services for Java applications. This class provides a decoder which converts a sequence of bytes in a ByteBuf into one or more messages that can be handled by any of the handlers implemented in Netty.</p> 
+        <h2>Purpose of io.netty.handler.codec.ByteToMessageDecoder</h2> 
+        <p>The main purpose of the io.netty.handler.codec.ByteToMessageDecoder class is to convert a sequence of bytes (represented as ByteBuf) into one or more messages that can be handled by any of the handlers implemented in Netty. This is especially useful for applications which receive data from external sources over the network, as it can quickly convert that data into messages that can be used by the application.</p> 
+        <h2>Example of a ByteToMessageDecoder</h2> 
+        <p>Below is an example of a ByteToMessageDecoder which reads 4 bytes from the received data and converts them into an integer. The decoder will then emit the integer as a message that can be handled by one of the handlers implemented in Netty:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class IntegerDecoder extends ByteToMessageDecoder {
+    @Override
+    protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
+        if (in.readableBytes() >= 4) {
+            int value = in.readInt();
+            out.add(value);
+        }
+    }
+}
+
+          </xmp></code></pre> 
+        <p>In this example, the decoder will read 4 bytes from the ByteBuf and convert them into an integer. It will then emit the integer as a message that can be processed by one of the handlers implemented in Netty.</p> 
+        <h2>Conclusion</h2> 
+        <p>The io.netty.handler.codec.ByteToMessageDecoder class is a powerful and useful tool for applications that need to convert a sequence of bytes into one or more messages that can be handled by any of the handlers implemented in Netty. This class is especially useful for applications that receive data from external sources over the network. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/"> Runtime </a> </p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Get-Java-Runtime-Example.html">Get Java Runtime Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-font/"> AWT font </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-font/Create-Bold-Font-Example.html">Create Bold Font Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/"> Integer Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-String-to-int-Example.html">Convert String to int Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Get-first-and-last-elements-from-LinkedList-Java-example.html">Get first and last elements from LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.LinkedHashMap.html">java.util.LinkedHashMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/javafx.scene.layout.BorderPane.html">javafx.scene.layout.BorderPane</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-reverse-order-of-the-TreeSet-elements-(iterate-TreeSet-in-reverse-order).html">How to reverse order of the TreeSet elements (iterate TreeSet in reverse order)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-array-to-LinkedHashSet-using-Arrays-class.html">Convert array to LinkedHashSet using Arrays class</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.text.Layout.html">android.text.Layout</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-the-size-of-the-TreeMap.html">How to get the size of the TreeMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-14 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Create-AWT-Choice-Or-Combobox-Example.html">Create AWT Choice Or Combobox Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Check-if-a-particular-element-exists-in-Java-LinkedHashSet-Example.html">Check if a particular element exists in Java LinkedHashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.preference.DialogPreference.html">android.preference.DialogPreference</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.openqa.selenium.support.ui.ExpectedConditions.html">o.o.s.s.u.ExpectedConditions</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Convert-String-to-ArrayList.html">Convert String to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-sublist-from-ArrayList.html">Get sublist from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Set-size-of-Java-Vector-Example.html">Set size of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-convert-HashMap-to-TreeMap-in-Java.html">How to convert HashMap to TreeMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Compressed-Size-of-Zip-Entry-Example.html">Get Compressed Size of Zip Entry Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Get-Transparency-Mode-Of-Color-Example.html">Get Transparency Mode Of Color Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Smiley-In-Applet-Example.html">Draw Smiley In Applet Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-submap,-headmap,-and-tailmap-from-Java-TreeMap.html">How to get submap, headmap, and tailmap from Java TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.springframework.beans.factory.config.BeanDefinition.html">o.s.b.f.c.BeanDefinition</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.script.Invocable.html">javax.script.Invocable</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-get-LinkedHashSet-elements-by-index-in-Java.html">How to get LinkedHashSet elements by index in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Head-Map-from-Java-TreeMap-example.html">Get Head Map from Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Get-Sub-Set-from-Java-TreeSet-example.html">Get Sub Set from Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/javax.ws.rs.core.GenericType.html">javax.ws.rs.core.GenericType</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-shuffle-Vector-elements-in-Java.html">How to shuffle Vector elements in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Copy-ArrayList-elements-to-other-ArrayList.html">Copy ArrayList elements to other ArrayList</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
