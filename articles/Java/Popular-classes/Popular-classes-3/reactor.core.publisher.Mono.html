@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - reactor.core.publisher.Mono</title> <!--timestamp=2023-08-25T00:12:27.132497338Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="reactor.core.publisher.Mono"> 
+  <meta name="keywords" content="reactor.core.publisher.Mono"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - reactor.core.publisher.Mono"> 
+  <meta property="og:description" content="reactor.core.publisher.Mono"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - reactor.core.publisher.Mono"> 
+  <meta name="twitter:description" content="reactor.core.publisher.Mono"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-08-24</small>
+        </div> 
+        <h1>Reactor Core Publisher Mono</h1> 
+        <p>Reactor Core Publisher Mono is a reactive programming library for Java, written on the Reactive Streams specification. Mono is a component of the Reactor project, a collection of libraries for building high-performance, low-latency reactive systems.</p> 
+        <p>Mono provides an efficient and lightweight asynchronous programming model for writing reactive Java applications. It is designed to support non-blocking, concurrent I/O operations, allowing developers to write asynchronous applications without having to learn complex threading models. Mono can also be used to write distributed computing applications that can scale across multiple cores and machines.</p> 
+        <h2>Creating a Mono</h2> 
+        <p>The simplest way to create a Mono is to use the factory method </p>
+        <pre>Mono.just()</pre>: 
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Mono<String> mono = Mono.just("Hello World!");
+
+          </xmp></code></pre> 
+        <p>This code creates a Mono that emits a single item, namely the String "Hello World!".</p> 
+        <p>It is also possible to create a Mono from a Publisher using the </p>
+        <pre>from()</pre> method:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Publisher<String> publisher = Flux.just("foo", "bar");
+Mono<String> mono = Mono.from(publisher);
+
+          </xmp></code></pre> 
+        <p>This code creates a Mono from a Flux containing two Strings, "foo" and "bar".</p> 
+        <h2>Transforming a Mono</h2> 
+        <p>Mono supports a wide range of transformation operations. These operations can be used to modify the emissions of a Mono in some way. For example, the </p>
+        <pre>map()</pre> operator can be used to transform each item emitted by the Mono:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Mono<String> mono = Mono.just("Hello World!");
+Mono<String> transformedMono = mono.map(s -> s.toUpperCase());
+
+          </xmp></code></pre> 
+        <p>This code creates a new Mono whose emissions are uppercase versions of the emissions of the original Mono. The transformation is applied lazily, i.e. only when the transformed Mono is subscribed to.</p> 
+        <h2>Subscribing to a Mono</h2> 
+        <p>Once a Mono has been created or transformed, it must be subscribed to in order for its emissions to be processed. This is done using the </p>
+        <pre>subscribe()</pre> method:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Mono<String> mono = Mono.just("Hello World!");
+Mono<String> transformedMono = mono.map(s -> s.toUpperCase());
+transformedMono.subscribe(s -> System.out.println(s));
+
+          </xmp></code></pre> 
+        <p>This code will print the uppercase version of the String "Hello World!" to the console.</p> 
+        <h2>Conclusion</h2> 
+        <p>In this article we have seen how to use Reactor Core Publisher Mono to create and transform Mono objects, and how to subscribe to them in order to process their emissions. Mono provides an efficient and lightweight asynchronous programming model that can be used to write reactive Java applications. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/springfox.documentation.service.ApiInfo.html">s.d.s.ApiInfo</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-5-Example.html">Java Pyramid 5 Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-get-LinkedHashSet-elements-by-index-in-Java.html">How to get LinkedHashSet elements by index in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Read-Number-from-Console-and-Check-if-it-is-a-Palindrome-Number.html">Read Number from Console and Check if it is a Palindrome Number</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Hashset-to-comma-separated-string-in-Java.html">Convert Hashset to comma separated string in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-sort-Vector-in-Java.html">How to sort Vector in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-print-elements-example.html">Java LinkedList print elements example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.util.EmptyStackException.html">java.util.EmptyStackException</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-All-Items-From-AWT-List-Example.html">Get All Items From AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/Convert-String-object-to-short-primitive-type.html">Convert String object to short primitive type</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-28 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Infinite-For-loop-Example.html">Infinite For loop Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-preserve-insertion-order-of-Java-HashSet-elements.html">How to preserve insertion order of Java HashSet elements</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Set-Foreground-Color-of-JTextField-Example.html">Set Foreground Color of JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-comma-separated-String-to-ArrayList-using-Arrays.html">Convert comma separated String to ArrayList using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-maxmimum-element-of-Java-ArrayList-Example.html">Find maxmimum element of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/com.netflix.zuul.ZuulFilter.html">com.netflix.zuul.ZuulFilter</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Iterate-LinkedList-example.html">Iterate LinkedList example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/androidx.appcompat.widget.AppCompatEditText.html">a.a.w.AppCompatEditText</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Double-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Double object to byte, short, int, long, float and double</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.springframework.orm.jpa.JpaTransactionManager.html">o.s.o.j.JpaTransactionManager</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Set-view-of-Keys-from-Java-TreeMap-example.html">Get Set view of Keys from Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-char-Array-Example.html">Performing Binary Search on Java char Array Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Change-Checkbox-Background-Color-Example.html">Change Checkbox Background Color Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.lang.instrument.Instrumentation.html">java.lang.instrument.Instrumentation</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Convert-array-to-HashSet.html">Convert array to HashSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.yaml.snakeyaml.constructor.Constructor.html">o.y.s.c.Constructor</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-TreeMap-key,-value-or-entry-greater-than-or-less-than-the-specified-key.html">How to get TreeMap key, value or entry greater than or less than the specified key</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Double-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Double object to byte, short, int, long, float and double</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.validation.Validation.html">javax.validation.Validation</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Convert-Java-String-Object-to-Boolean-Object.html">Convert Java String Object to Boolean Object</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
