@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - android.database.sqlite.SQLiteDatabase</title> <!--timestamp=2023-08-27T00:12:46.678561598Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="android.database.sqlite.SQLiteDatabase"> 
+  <meta name="keywords" content="android.database.sqlite.SQLiteDatabase"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - android.database.sqlite.SQLiteDatabase"> 
+  <meta property="og:description" content="android.database.sqlite.SQLiteDatabase"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - android.database.sqlite.SQLiteDatabase"> 
+  <meta name="twitter:description" content="android.database.sqlite.SQLiteDatabase"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-08-26</small>
+        </div> 
+        <h1>Overview of android.database.sqlite.SQLiteDatabase</h1> SQLiteDatabase is an API class from the Android framework in the package android.database.sqlite, that provides methods to manage a SQLite database. The SQLiteDatabase class provides methods such as insert(), query(), update() and delete() that enable you to manipulate database records as if they were normal Java objects. The SQLiteDatabase also provides other utility methods, such as getPath() which returns the path of the database file, and getVersion() which returns the version of the currently active database schema. The class also provides several cursors to manipulate database records, such as RawQueryCursor which executes a raw SQL statement and returns the results in a Cursor, and QueryCursor which is used for selecting records from the database table. 
+        <h2>Database Tables</h2> In order to use the SQLiteDatabase class, you need to define the structure of your database tables. Each table represents a data collection, so it must have at least one column and one row. To define a database table, you create a SQLiteOpenHelper subclass and override two methods, onCreate() and onUpgrade(). OnCreate() defines the structure of the table, creating columns and specifying data types. OnUpgrade() is used to modify the structure of the table after it has been created. An example of the SQLiteOpenHelper subclass is given below: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyDatabaseHelper extends SQLiteOpenHelper {
+
+    public static final String TABLE_NAME = "mytable";
+    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_AGE = "age";
+
+    private static final String DATABASE_NAME = "mydb.db";
+    private static final int DATABASE_VERSION = 1;
+
+    // SQL statement used to create the database
+    private static final String DATABASE_CREATE = 
+        "create table " + TABLE_NAME + "(" 
+        + COLUMN_ID + " integer primary key autoincrement, " 
+        + COLUMN_NAME + " text not null, " 
+        + COLUMN_AGE + " integer" + ");";
+
+    public MyDatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(DATABASE_CREATE);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(db);
+    }
+}
+
+          </xmp></code></pre> 
+        <h2>Opening and Closing the Database Connection</h2> Once the database table has been defined, you can open a connection to the database with the openOrCreateDatabase() method. This method accepts a name for the database and a flag argument for the mode of the database connection. It returns an instance of the SQLiteDatabase class which is used for manipulating the database records. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MyDatabaseHelper myDbHelper = new MyDatabaseHelper(context);
+SQLiteDatabase db = myDbHelper.getWritableDatabase();
+
+          </xmp></code></pre> When you are finished working with the database connection, you should close it using the close() method. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+db.close();
+
+          </xmp></code></pre> 
+        <h2>Inserting Records</h2> You can insert records into your database table using the insert() method. This method accepts three arguments: the table name, a ContentValues object containing the values and a conflict algorithm. The ContentValues object is populated with column names and their associated values. The conflict algorithm defines what should happen when a row is inserted and a conflict exists between the existing record and the new record. For example, if the same value already exists for a column, you can replace the existing record with the new one by setting the conflict algorithm to REPLACE. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ContentValues values = new ContentValues();
+values.put(COLUMN_NAME, "John Smith");
+values.put(COLUMN_AGE, 20);
+
+long rowId = db.insert(TABLE_NAME, null, values);
+
+          </xmp></code></pre> 
+        <h2>Querying Records</h2> You can query your database for records with the query() method. This method accepts several arguments, such as the table name, a list of columns and a selection clause. The selection clause specifies conditions for selecting the records, such as name="John Smith". The query() method returns a Cursor object which contains the selected records. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String[] columns = new String[]{COLUMN_NAME,COLUMN_AGE};
+String selection = COLUMN_NAME + "=?";
+String[] selectionArgs = new String[]{"John Smith"};
+
+Cursor cursor = db.query(TABLE_NAME, columns, selection, selectionArgs, 
+                        null, null, null);
+
+          </xmp></code></pre> 
+        <h2>Updating Records</h2> You can update existing records using the update() method. This method accepts several arguments, such as the table name, a ContentValues object containing the new values and a selection clause. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ContentValues values = new ContentValues();
+values.put(COLUMN_AGE, 21);
+
+String selection = COLUMN_NAME + "=?";
+String[] selectionArgs = new String[]{"John Smith"};
+
+int rowsUpdated = db.update(TABLE_NAME, values, selection, selectionArgs);
+
+          </xmp></code></pre> 
+        <h2>Deleting Records</h2> You can delete records from your database table using the delete() method. This method accepts several arguments, such as the table name and a selection clause. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String selection = COLUMN_NAME + "=?";
+String[] selectionArgs = new String[]{"John Smith"};
+
+int rowsDeleted = db.delete(TABLE_NAME, selection, selectionArgs);
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> android.database.sqlite.SQLiteDatabase is an API class from the Android framework that provides methods to manage a SQLite database. The class enables you to open and close database connections as well as perform operations on the database, such as inserting, querying, updating and deleting records. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Java-Zip/Adler32/"> Adler32 </a> </p> <a href="/articles/Java/Java-Zip/Adler32/Generate-Adler32-Checksum-For-Byte-Array-Example.html">Generate Adler32 Checksum For Byte Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/com.bumptech.glide.request.RequestOptions.html">c.b.g.r.RequestOptions</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Get-X-and-Y-Coordinates-of-JLabel-Example.html">Get X and Y Coordinates of JLabel Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.persistence.MappedSuperclass.html">javax.persistence.MappedSuperclass</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/"> Hashtable </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Get-Size-of-Java-Hashtable-Example.html">Get Size of Java Hashtable Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.swing.JMenu.html">javax.swing.JMenu</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/List-Even-Numbers-Java-Example.html">List Even Numbers Java Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/"> AWT Color </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Get-Alpha-Component-Of-Color-Example.html">Get Alpha Component Of Color Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Convert-LinkedHashMap-to-two-arrays.html">Convert LinkedHashMap to two arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-over-Vector-elements-using-ListIterator.html">Iterate over Vector elements using ListIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-15 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-lowest-and-highest-key-stored-in-Java-TreeMap-example.html">Get lowest and highest key stored in Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Break-Statement/Java-break-statement-with-label-example.html">Java break statement with label example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Remove-Particular-Item-From-AWT-Choice-Or-Combobox-Example.html">Remove Particular Item From AWT Choice Or Combobox Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.springframework.core.annotation.AnnotationAttributes.html">o.s.c.a.AnnotationAttributes</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.ibatis.reflection.MetaObject.html">o.a.i.r.MetaObject</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Shuffle-elements-of-ArrayList.html">Shuffle elements of ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Convert-HashSet-to-array.html">Convert HashSet to array</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Set-Foreground-Color-of-JTextField-Example.html">Set Foreground Color of JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Find-the-minimum-or-maximum-element-of-Vector-using-Comparable.html">Find the minimum or maximum element of Vector using Comparable</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.apache.commons.io.output.ByteArrayOutputStream.html">o.a.c.i.o.ByteArrayOutputStream</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-Java-LinkedList-to-Array.html">Convert Java LinkedList to Array</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.commons.beanutils.BeanUtils.html">o.a.c.b.BeanUtils</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-ceiling-value-of-a-number-using-Math.ceil.html">F.ceil</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-contains-a-key-(indexOf).html">How to check if LinkedHashMap contains a key (indexOf)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-String-or-String-array-to-HashMap.html">Convert String or String array to HashMap</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Get-Java-Runtime-Example.html">Get Java Runtime Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.springframework.amqp.core.Queue.html">org.springframework.amqp.core.Queue</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Convert-HashMap-to-TreeMap-using-Comparator.html">Convert HashMap to TreeMap using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/java.awt.Robot.html">java.awt.Robot</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-shuffle-Vector-elements-in-Java.html">How to shuffle Vector elements in Java</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
