@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.security.ProtectionDomain</title> <!--timestamp=2023-08-31T00:12:44.335974980Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.security.ProtectionDomain"> 
+  <meta name="keywords" content="java.security.ProtectionDomain"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.security.ProtectionDomain"> 
+  <meta property="og:description" content="java.security.ProtectionDomain"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.security.ProtectionDomain"> 
+  <meta name="twitter:description" content="java.security.ProtectionDomain"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-08-30</small>
+        </div> 
+        <h1>java.security.ProtectionDomain</h1> 
+        <p>Java's ProtectionDomain class encapsulates the characteristics of code sources, including the source location and the set of permissions granted to the code upon execution. It is used by the SecurityManager to enforce security policies for code that runs in the Java Virtual Machine (JVM). This article will provide an overview of the ProtectionDomain class and how it works, as well as code examples demonstrating its use.</p> 
+        <h2>Overview of ProtectionDomain</h2> 
+        <p>The ProtectionDomain class is an abstract representation of a code source and the set of associated permissions granted to the code when it is executed. It is used by the SecurityManager to enforce security policies, such as preventing unauthorized access to sensitive files or restricted system resources. The ProtectionDomain contains the following information:</p> 
+        <ul> 
+         <li>The CodeSource object, which represents the code source, such as the URL, location of the code, or the JAR file, from which the code was loaded.</li> 
+         <li>The Principal, or set of principals, associated with the code (optional).</li> 
+         <li>The ClassLoader object that is responsible for loading the code into the JVM.</li> 
+         <li>The set of Permission objects associated with the code.</li> 
+        </ul> 
+        <p>When code is loaded into the JVM, a ProtectionDomain is created to represent the code source and the permissions granted to the code. When the code attempts to access a sensitive resource, the SecurityManager checks the associated ProtectionDomain and determines if the code should be allowed access.</p> 
+        <h2>Creating a ProtectionDomain</h2> 
+        <p>A ProtectionDomain can be created using the constructor: </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ProtectionDomain(CodeSource cs, PermissionCollection permission)
+
+          </xmp></code></pre> 
+        <p>For example, to create a new ProtectionDomain for a code source located at </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+http://example.com/myapp.jar
+
+          </xmp></code></pre>, with a set of permissions, we could use the following code: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+URL url = new URL("http://example.com/myapp.jar");
+CodeSource cs = new CodeSource(url, null);
+PermissionCollection permission = new PermissionCollection();
+// Set permission here
+ProtectionDomain pd = new ProtectionDomain(cs, permission);
+
+          </xmp></code></pre> 
+        <h2>Using the ProtectionDomain</h2> 
+        <p>Once the ProtectionDomain has been created, the SecurityManager will use it to check whether code should be granted access to sensitive resources. For example, the following code shows how a ProtectionDomain can be used to check whether code, represented by a FileDescriptor object, should be allowed to read a file:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+File f = new File("/some/sensitive/file");
+FileDescriptor fd = new FileDescriptor(f);
+if (pd.implies(new FilePermission("read", f))) {
+  // Code is allowed to read the file
+} else {
+  // Code is not allowed to read the file
+}
+
+          </xmp></code></pre> 
+        <p>The implies() method of the ProtectionDomain class is used to check whether a particular permission is implied by the ProtectionDomain. In this case, we are checking whether the code represented by the FileDescriptor object is allowed to read the specified file.</p> 
+        <h2>Conclusion</h2> 
+        <p>The Java ProtectionDomain class is an abstract representation of a code source and the permissions associated with it. It is used by the SecurityManager to decide whether code should be allowed to access sensitive resources. This article provided an overview of the ProtectionDomain class and code examples demonstrating its use.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataInputStream/"> DataInputStream </a> </p> <a href="/articles/Java/File-And-IO/DataInputStream/Read-double-from-file-using-DataInputStream.html">Read double from file using DataInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.xml.sax.Locator.html">org.xml.sax.Locator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-print-elements-example.html">Java LinkedList print elements example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/"> Float Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Java-Float-isInfinite-Method-Example.html">Java Float isInfinite Method Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/BufferedOutputStream/"> BufferedOutputStream </a> </p> <a href="/articles/Java/File-And-IO/BufferedOutputStream/Write-byte-array-to-file-using-BufferedOutputStream.html">Write byte array to file using BufferedOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Math-Class/"> Math Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-maximum-of-two-numbers-using-Math.max.html">F.max</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.servlet.ServletRequest.html">javax.servlet.ServletRequest</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.springframework.beans.factory.support.AbstractBeanDefinition.html">o.s.b.f.s.AbstractBeanDefinition</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Create-Java-ArrayList-From-Enumeration-Example.html">Create Java ArrayList From Enumeration Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-all-keys-of-LinkedHashMap-in-Java-(keySet-method).html">How to get all keys of LinkedHashMap in Java (keySet method)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-03 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>JavaFan</h3> <p><a href="#">2023-10-08 19:39</a></p> great examples ... thnx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Mark</h3> <p><a href="#">2023-10-03 19:50</a></p> thanks <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-create-a-new-TreeMap-object-in-Java-(TreeMap-constructors).html">How to create a new TreeMap object in Java (TreeMap constructors)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-unique-values-from-ArrayList.html">Get unique values from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.swing.JComponent.html">javax.swing.JComponent</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.persistence.TypedQuery.html">javax.persistence.TypedQuery</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-convert-comma-separated-string-to-Java-HashSet.html">How to convert comma separated string to Java HashSet</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-unsigned-byte-from-file-using-DataInputStream.html">Read unsigned byte from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/JLabel-Set-Font-Example.html">JLabel Set Font Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Iterate-through-elements-of-Java-LinkedList-using-ListIterator-example.html">Iterate through elements of Java LinkedList using ListIterator example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/io.netty.channel.ChannelInboundHandlerAdapter.html">i.n.c.ChannelInboundHandlerAdapter</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Iterate-through-values-of-Java-Hashtable-example.html">Iterate through values of Java Hashtable example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Create-AWT-Label-Example.html">Create AWT Label Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Java-Float-isNaN-Method-Example.html">Java Float isNaN Method Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.management.MBeanServer.html">javax.management.MBeanServer</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Convert-array-to-HashSet.html">Convert array to HashSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-TreeSet-to-List-(ArrayList-or-LinkedList).html">How to convert TreeSet to List (ArrayList or LinkedList)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Remove-an-element-from-specified-index-of-Java-Vector-Example.html">Remove an element from specified index of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/net.minecraft.client.renderer.Tessellator.html">n.m.c.r.Tessellator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.opencv.core.Rect.html">org.opencv.core.Rect</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Items-From-Multi-Select-AWT-List-Example.html">Get Selected Items From Multi Select AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Compressed-Size-of-Zip-Entry-Example.html">Get Compressed Size of Zip Entry Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
