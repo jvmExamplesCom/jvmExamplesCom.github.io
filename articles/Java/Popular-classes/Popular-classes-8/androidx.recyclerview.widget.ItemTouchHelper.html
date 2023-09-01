@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - androidx.recyclerview.widget.ItemTouchHelper</title> <!--timestamp=2023-09-01T00:13:55.909986174Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="androidx.recyclerview.widget.ItemTouchHelper"> 
+  <meta name="keywords" content="androidx.recyclerview.widget.ItemTouchHelper"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - androidx.recyclerview.widget.ItemTouchHelper"> 
+  <meta property="og:description" content="androidx.recyclerview.widget.ItemTouchHelper"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - androidx.recyclerview.widget.ItemTouchHelper"> 
+  <meta name="twitter:description" content="androidx.recyclerview.widget.ItemTouchHelper"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-08-31</small>
+        </div> 
+        <h1>What is Androidx.RecyclerView.Widget.ItemTouchHelper</h1> Androidx.RecyclerView.Widget.ItemTouchHelper is a support library for Android RecyclerView that enables users to drag and drop items within the view. It also provides the ability to swipe and dismiss items, as well as provides a customizable item decorations for graphics and animations for both item states and transitions. ItemTouchHelper was first introduced in Android 5.0 (Lollipop). 
+        <h2>How To Use ItemTouchHelper</h2> Using ItemTouchHelper is fairly straightforward. To implement it in your code, you need to do two things: 1. Create an `ItemTouchHelper` instance. 2. Attach the instance to your `RecyclerView`. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Step 1: Create an ItemTouchHelper instance.
+ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+
+// Step 2: Attach the instance to your RecyclerView.
+itemTouchHelper.attachToRecyclerView(recyclerView);
+
+          </xmp></code></pre> Now that you have your `ItemTouchHelper` instance attached to your `RecyclerView`, you are ready to start creating the drag and drop behavior and item movement. This behavior is implemented through a `SimpleCallback` class that is passed into the `ItemTouchHelper` constructor. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create a SimpleCallback implementation
+ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(
+    dragFlags, swipeFlags) {
+];
+
+          </xmp></code></pre> The `dragFlags` and `swipeFlags` arguments determine which directions the user is able to drag and swipe items. `ItemTouchHelper.UP`, `ItemTouchHelper.DOWN`, `ItemTouchHelper.LEFT`, and `ItemTouchHelper.RIGHT` are available and can be combined together to enable all directions. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Allow user to drag items up/down and left/right
+int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN |
+    ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+
+// Allow user to swipe items left/right
+int swipeFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+
+          </xmp></code></pre> Once the drag and swipe flags are set, the `onMove` and `onSwiped` callbacks must be implemented. The `onMove` callback is used to handle the logic of when an item is being dragged, while the `onSwiped` callback is used to handle the logic when an item is being swiped. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Implement onMove and onSwiped callbacks
+@Override
+public boolean onMove(RecyclerView recyclerView, 
+                      RecyclerView.ViewHolder viewHolder, 
+                      RecyclerView.ViewHolder target) {
+    // Handle move logic here
+    return true;
+}
+
+@Override
+public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+    // Handle swipe logic here
+}
+
+          </xmp></code></pre> Finally, the `onSelectedChanged` and `clearView` callbacks must be implemented in order to move items from their current position to the new position. The `onSelectedChanged` callback is invoked when an item is selected, while the `clearView` callback is invoked when the item is released and the animation is completed. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Implement onSelectedChanged and clearView callbacks
+@Override
+public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, 
+                              int actionState) {
+    // Handle selected state change logic here
+}
+
+@Override
+public void clearView(RecyclerView recyclerView, 
+                      RecyclerView.ViewHolder viewHolder) {
+    // Handle remove logic here
+}
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> Androidx.RecyclerView.Widget.ItemTouchHelper is a great way to add drag and drop functionality to your RecyclerView in an easy and efficient way. With just a few lines of code, you can enable your users to drag and drop items and even swipe to dismiss them. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Create-DataOutputStream-from-FileOutputStream.html">Create DataOutputStream from FileOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-comma-separated-String-to-ArrayList-using-Arrays.html">Convert comma separated String to ArrayList using Arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Declare-multiple-variables-in-for-loop-Example.html">Declare multiple variables in for loop Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.springframework.messaging.handler.annotation.SendTo.html">o.s.m.h.a.SendTo</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Change-Checkbox-Font-Example.html">Change Checkbox Font Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/android.security.keystore.KeyProperties.html">a.s.k.KeyProperties</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Get-name-of-specified-file-or-directory.html">Get name of specified file or directory</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Convert-HashSet-to-array.html">Convert HashSet to array</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/"> AWT Button </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Determine-If-The-Button-Is-Enabled-Example.html">Determine If The Button Is Enabled Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.web.bind.annotation.PostMapping.html">o.s.w.b.a.PostMapping</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-06 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Mark</h3> <p><a href="#">2023-10-09 16:34</a></p> Grt ;-) <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Abral</h3> <p><a href="#">2023-10-16 19:54</a></p> thanks <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.kafka.clients.admin.AdminClient.html">o.a.k.c.a.AdminClient</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Set-Background-Color-of-JTextField-Example.html">Set Background Color of JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.graphics.Canvas.html">android.graphics.Canvas</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-get-random-elements-from-Java-HashSet.html">How to get random elements from Java HashSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-submap,-headmap,-and-tailmap-from-Java-TreeMap.html">How to get submap, headmap, and tailmap from Java TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-Integer-to-Java-String-object.html">Convert Integer to Java String object</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Delete-all-mappings-or-clear-HashMap-example.html">Delete all mappings or clear HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/CheckedOutputStream/Create-Zip-File-With-Adler32-Checksum-Example.html">Create Zip File With Adler32 Checksum Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.app.Fragment.html">android.app.Fragment</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Replace-an-Element-of-LinkedList-Java-example.html">Replace an Element of LinkedList Java example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Byte-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Byte object to byte, short, int, long, float and double</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.google.common.util.concurrent.AtomicDouble.html">c.g.c.u.c.AtomicDouble</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/java.security.Policy.html">java.security.Policy</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Item-From-AWT-List-Example.html">Get Item From AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-byte-to-a-file-using-DataOutputStream.html">Write byte to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.osgi.framework.FrameworkUtil.html">org.osgi.framework.FrameworkUtil</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Set-Status-Message-in-Applet-Window-Example.html">Set Status Message in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Convert-HSB-To-RGB-Color-Example.html">Convert HSB To RGB Color Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Remove-value-from-Java-LinkedHashMap-example.html">Remove value from Java LinkedHashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Find-index-of-LinkedList-elements-using-indexOf-and-lastIndexOf-methods.html">Find index of LinkedList elements using indexOf and lastIndexOf methods</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
