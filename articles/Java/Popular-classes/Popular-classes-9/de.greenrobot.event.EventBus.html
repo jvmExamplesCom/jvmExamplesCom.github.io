@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - de.greenrobot.event.EventBus</title> <!--timestamp=2023-09-02T00:11:32.274630900Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="de.greenrobot.event.EventBus"> 
+  <meta name="keywords" content="de.greenrobot.event.EventBus"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - de.greenrobot.event.EventBus"> 
+  <meta property="og:description" content="de.greenrobot.event.EventBus"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - de.greenrobot.event.EventBus"> 
+  <meta name="twitter:description" content="de.greenrobot.event.EventBus"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-09-01</small>
+        </div> 
+        <h1>EventBus in Java</h1> 
+        <p>EventBus is a popular library used in Java to simplify communication between different parts of an application. It abstracts away complicated message passing methods and allows for easy integration into applications. In this article, we will take a look at some common use cases for EventBus, how to set it up, and familiarize ourselves with some of the features of this powerful tool.</p> 
+        <h2>What Is EventBus?</h2> 
+        <p>EventBus is an event-driven programming model that allows for communication between different objects without having to explicitly define the communication protocols and paths. EventBus is often used to facilitate communication between components in a large system, so that a certain action can be executed from one object, and trigger the corresponding response from another object. It provides an efficient way of decoupling components, making it easier and more reliable to communicate within a system.</p> 
+        <p>To set up EventBus, you need to include the necessary dependencies. This can be done by adding the following line to your build.gradle:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+implementation 'de.greenrobot:eventbus:3.2.0'
+
+          </xmp></code></pre> 
+        <p>Once you have set up EventBus, you can start to use it in your code. EventBus works by allowing objects to subscribe and publish events. The objects that publish events are known as the post or publishers, while the objects that receive events from the publishers are called the subscriber or receivers. To register an object, use the following code:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EventBus.getDefault().register(this);
+
+          </xmp></code></pre> 
+        To publish an event, use the following code: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EventBus.getDefault().post(event);
+
+          </xmp></code></pre> 
+        <p>The post() method takes an object of type Event as its argument. The Event object is the data that is sent from the publisher to the subscriber. Once the post() method is called, all the registered subscribers will receive the event.</p> 
+        <h2>Example Usage</h2> 
+        <p>Let’s consider a simple example application that consists of three parts – a producer, a consumer, and a central hub. The producer is responsible for creating messages and sending them to the central hub. The consumer is responsible for receiving messages from the central hub and processing them. We can use EventBus to connect the different parts of the application together and enable communication between them.</p> 
+        <p>First, we will create an EventBus instance and register the producer and consumer with it using the register() method. This will allow the producer and consumer to communicate with each other through the central hub.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EventBus eventBus = new EventBus();
+eventBus.register(producer);
+eventBus.register(consumer);
+
+          </xmp></code></pre> 
+        <p>Next, we will create a ProducerMessage class that represents the data that needs to be sent from the producer to the consumer. The ProducerMessage class should contain all the data that the consumer needs in order to process the message.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class ProducerMessage {
+    private String message;
+    public ProducerMessage(String message) {
+        this.message = message;
+    }
+    public String getMessage() {
+        return message;
+    }
+}
+
+          </xmp></code></pre> 
+        <p>With this class in place, we can now publish the message from the producer to the consumer. To do this, we will call the post() method on the EventBus instance we created earlier and pass in an instance of the ProducerMessage class.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EventBus eventBus = new EventBus();
+ProducerMessage message = new ProducerMessage("Hello World!");
+eventBus.post(message);
+
+          </xmp></code></pre> 
+        <p>The post() method will send the message to all the registered consumers, which can then process the message.</p> 
+        <p>Finally, we will create a ConsumerHandler class that will process any incoming messages from the producer. This class should contain a callback method that will be called when a message is received from the producer.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class ConsumerHandler {
+    public void onProducerMessage(ProducerMessage message) {
+        System.out.println("Received message: " + message.getMessage());
+    }
+}
+
+          </xmp></code></pre> 
+        <p>To register the ConsumerHandler class with the EventBus instance, we use the register() method and pass in an instance of the ConsumerHandler class.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EventBus eventBus = new EventBus();
+ConsumerHandler consumer = new ConsumerHandler();
+eventBus.register(consumer);
+
+          </xmp></code></pre> 
+        <p>Now, whenever the producer publishes a message, the ConsumerHandler class will receive it and process it.</p> 
+        <h2>Conclusion</h2> 
+        <p>EventBus is a powerful tool for managing communication between components in a large system. It makes it easier to decouple components and enables communication between any components that are registered with the EventBus instance. In this article, we have seen how to set up EventBus and how to use it to send and receive messages between components. With EventBus, communication between all parts of an application can be streamlined and simplified.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Wrappers/"> Wrappers </a> </p> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Short-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Short object to byte, short, int, long, float and double</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Threads/"> Threads </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Threads/Get-Current-Thread-Example.html">Get Current Thread Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.view.WindowManager.html">android.view.WindowManager</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.management.remote.JMXConnector.html">javax.management.remote.JMXConnector</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/"> ListIterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-LinkedHashMap-using-an-Iterator.html">How to iterate LinkedHashMap using an Iterator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-get-size-example-(LinkedList-length).html">Java LinkedList get size example (LinkedList length)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.apache.ibatis.annotations.Insert.html">org.apache.ibatis.annotations.Insert</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Simple-Java-TreeSet-example.html">Simple Java TreeSet example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/"> Convertion </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-short.html">Convert String to short</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-convert-Vector-to-an-array.html">How to convert Vector to an array</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-01 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-font/Create-Bold-Font-Example.html">Create Bold Font Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-LinkedHashMap-key-by-index.html">How to get LinkedHashMap key by index</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-compare-two-TreeSet-objects-using-the-equals-method.html">How to compare two TreeSet objects using the equals method</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Generate-Bouncing-Lines-Using-Applet-Example.html">Generate Bouncing Lines Using Applet Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-through-Vector-in-reverse-direction-using-the-ListIterator.html">How to iterate through Vector in reverse direction using the ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.springframework.expression.spel.support.StandardEvaluationContext.html">o.s.e.s.s.StandardEvaluationContext</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Remove-specified-element-from-Java-TreeSet-example.html">Remove specified element from Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.content.res.AssetFileDescriptor.html">a.c.r.AssetFileDescriptor</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/com.google.gson.annotations.SerializedName.html">c.g.g.a.SerializedName</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Get-Sub-List-of-Java-Vector-Example.html">Get Sub List of Java Vector Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Search-elements-of-LinkedList-Java-example.html">Search elements of LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-String-to-primitive-byte-Example.html">Convert String to primitive byte Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Search-ArrayList-element-using-binary-search.html">Search ArrayList element using binary search</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Remove-All-Items-From-a-List-Example.html">Remove All Items From a List Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.umeng.analytics.MobclickAgent.html">com.umeng.analytics.MobclickAgent</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.view.Menu.html">android.view.Menu</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.lang.reflect.ParameterizedType.html">java.lang.reflect.ParameterizedType</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Remove-all-values-from-Java-TreeMap-example.html">Remove all values from Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Long-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Long object to byte, short, int, long, float and double</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Get-Darker-Version-Of-Current-Color-Example.html">Get Darker Version Of Current Color Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
