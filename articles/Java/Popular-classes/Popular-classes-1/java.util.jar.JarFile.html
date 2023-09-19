@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.util.jar.JarFile</title> <!--timestamp=2023-09-19T00:12:07.653272910Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.util.jar.JarFile"> 
+  <meta name="keywords" content="java.util.jar.JarFile"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.util.jar.JarFile"> 
+  <meta property="og:description" content="java.util.jar.JarFile"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.util.jar.JarFile"> 
+  <meta name="twitter:description" content="java.util.jar.JarFile"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-09-18</small>
+        </div> 
+        <h1>java.util.jar.JarFile</h1> Java provides a powerful library that allows developers to easily access the contents of Jar files. The java.util.jar.JarFile class provides the functionality necessary to read from and write to Java Archive (JAR) files. This class is the primary interface for reading and writing JAR files. 
+        <h2>Creating a JarFile Instance</h2> A 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JarFile
+
+          </xmp></code></pre> instance can be created with either a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+File
+
+          </xmp></code></pre> object, representing the location of the JAR file on disk, or a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String
+
+          </xmp></code></pre>, representing the path to the JAR file. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Creating JarFile instance with a File object
+File jarFile = new File("path/to/jarfile.jar");
+JarFile jf = new JarFile(jarFile);
+
+// Creating a JarFile instance with a String path
+String jarPath = "path/to/jarfile.jar";
+JarFile jf2 = new JarFile(jarPath);
+
+          </xmp></code></pre> 
+        <h2>Reading from a JarFile</h2> The most common operation performed with a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JarFile
+
+          </xmp></code></pre> is reading from it. Reading from a JAR file is done through the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getInputStream()
+
+          </xmp></code></pre> method. This method takes a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JarEntry
+
+          </xmp></code></pre> object as an argument and returns an input stream, which can be used to read the contents of the JAR entry. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Get the JarEntry object
+JarEntry je = jf.getJarEntry("myFile.txt"); 
+
+// Get the InputStream
+InputStream is = jf.getInputStream(je);
+
+          </xmp></code></pre> Once you have the InputStream, you can use it to read the contents of the JAR entry, using either a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Scanner
+
+          </xmp></code></pre> or a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+BufferedReader
+
+          </xmp></code></pre>. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Read the file using a Scanner
+Scanner sc = new Scanner(is);
+while (sc.hasNextLine()) {
+    System.out.println(sc.nextLine());
+}
+
+// Read the file using a BufferedReader
+BufferedReader br = new BufferedReader(new InputStreamReader(is));
+String line;
+while ((line = br.readLine()) != null) {
+    System.out.println(line);
+}
+
+          </xmp></code></pre> 
+        <h2>Writing to a JarFile</h2> Writing to a JAR file is slightly more complex than reading from one. In order to write to a JAR file, you need to first create a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JarOutputStream
+
+          </xmp></code></pre>, and then use it to add 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JarEntry
+
+          </xmp></code></pre> objects to the JAR file. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create the JarOutputStream
+FileOutputStream fos = new FileOutputStream("myJarFile.jar");
+JarOutputStream jos = new JarOutputStream(fos);
+
+// Add the entries 
+for (JarEntry je : myJarEntries) {
+    // Write the entry to the JarOutputStream
+    jos.putNextEntry(je);
+
+    // Get the InputStream for the entry
+    InputStream is = jf.getInputStream(je);
+    byte[] buffer = new byte[1024];
+    int bytesRead;
+
+    // Copy the data from the InputStream to the JarOutputStream
+    while ((bytesRead = is.read(buffer)) > 0) {
+        jos.write(buffer, 0, bytesRead);
+    }
+    jos.closeEntry();
+}
+jos.close();
+
+          </xmp></code></pre> 
+        <h2>Closing a JarFile</h2> When you are done using a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JarFile
+
+          </xmp></code></pre> object, it is important to close it to release any resources that it may be holding. This can be done with the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+close()
+
+          </xmp></code></pre> method. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Close the JarFile
+jf.close();
+
+          </xmp></code></pre> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/"> Data types </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/Java-boolean-Example.html">Java boolean Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/java.util.function.IntConsumer.html">java.util.function.IntConsumer</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.apache.poi.xssf.streaming.SXSSFWorkbook.html">o.a.p.x.s.SXSSFWorkbook</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Delete-file-or-directory.html">Delete file or directory</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-find-element-index-in-LinkedHashSet.html">How to find element index in LinkedHashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/CheckedOutputStream/"> CheckedOutputStream </a> </p> <a href="/articles/Java/Java-Zip/CheckedOutputStream/Create-Zip-File-With-Adler32-Checksum-Example.html">Create Zip File With Adler32 Checksum Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-int-to-a-file-using-DataOutputStream.html">Write int to a file using DataOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/"> Runtime </a> </p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Suggest-JVM-to-Run-Garbage-Collector-Example.html">Suggest JVM to Run Garbage Collector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/"> Convertion </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-double-to-String.html">Convert double to String</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.eclipse.swt.events.DisposeEvent.html">org.eclipse.swt.events.DisposeEvent</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-22 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Robert</h3> <p><a href="#">2023-10-30 09:14</a></p> Grt ;-) <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Ojas</h3> <p><a href="#">2023-10-27 11:26</a></p> <p>thanks. This is the first sample project I checked so far</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-convert-Vector-to-ArrayList-and-ArrayList-to-Vector-in-Java.html">How to convert Vector to ArrayList and ArrayList to Vector in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Get-Size-of-Java-LinkedHashSet-Example.html">Get Size of Java LinkedHashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Remove-all-values-from-Java-LinkedHashMap-example.html">Remove all values from Java LinkedHashMap example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/reactor.core.publisher.Flux.html">reactor.core.publisher.Flux</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.google.android.gms.common.api.PendingResult.html">c.g.a.g.c.a.PendingResult</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.intellij.openapi.application.ApplicationManager.html">c.i.o.a.ApplicationManager</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Get-Checkbox-State-Example.html">Get Checkbox State Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-float-from-file-using-DataInputStream.html">Read float from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Iterate-through-elements-Java-ArrayList-using-ListIterator-Example.html">Iterate through elements Java ArrayList using ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/WhileLoop/While-Loop-Example.html">While Loop Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Display-Image-in-an-Applet-Example.html">Display Image in an Applet Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Java-ArrayList-Iterator-example.html">Java ArrayList Iterator example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Traverse-through-ArrayList-in-reverse-direction-using-Java-ListIterator-Example.html">Traverse through ArrayList in reverse direction using Java ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Find-Largest-and-Smallest-Number-in-an-Array-Example.html">Find Largest and Smallest Number in an Array Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.webkit.WebResourceResponse.html">android.webkit.WebResourceResponse</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.springframework.web.servlet.mvc.support.RedirectAttributes.html">o.s.w.s.m.s.RedirectAttributes</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Copy-all-elements-of-Java-HashSet-to-an-Object-Array-Example.html">Copy all elements of Java HashSet to an Object Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Convert-ArrayList-to-LinkedHashMap-in-Java.html">Convert ArrayList to LinkedHashMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.support.v4.view.MenuItemCompat.html">a.s.v.v.MenuItemCompat</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Set-Background-Color-of-JTextField-Example.html">Set Background Color of JTextField Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
