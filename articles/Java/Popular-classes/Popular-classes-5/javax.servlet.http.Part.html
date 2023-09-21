@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javax.servlet.http.Part</title> <!--timestamp=2023-09-21T00:12:14.302383009Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.servlet.http.Part"> 
+  <meta name="keywords" content="javax.servlet.http.Part"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.servlet.http.Part"> 
+  <meta property="og:description" content="javax.servlet.http.Part"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.servlet.http.Part"> 
+  <meta name="twitter:description" content="javax.servlet.http.Part"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-09-20</small>
+        </div> 
+        <h1>javax.servlet.http.Part</h1> 
+        <p>The javax.servlet.http.Part interface is part of the Java Servlet API, and provides access to a file contained within a </p>
+        <pre>multipart/form-data</pre> request body. It is commonly used as part of a form submission, and can be retrieved from within the server-side code handling the form submission. In this article, we will look at various ways of handling form data when using the javax.servlet.http.Part interface.
+         
+        <h2>Retrieving the Part</h2> 
+        <p>A Part object can be retrieved from a request using the method </p>
+        <pre>getPart()</pre>. The request must include a header of 
+        <pre>multipart/form-data</pre>. For example:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String name = request.getParameter("name");
+Part part = request.getPart("file");
+
+          </xmp></code></pre> 
+        The
+        <pre>name</pre> parameter must match the 'name' attribute of the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+<input type='file'>
+
+          </xmp></code></pre> element of the HTML form. The Part object returned will contain the contents of the file specified in the form.
+         
+        <h2>Retrieving Attributes</h2> 
+        <p>The Part interface contains several methods for retrieving attributes associated with the file. These include the file name (</p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getSubmittedFileName()
+
+          </xmp></code></pre>), content type (
+        <pre>getContentType()</pre>), and size (
+        <pre>getSize()</pre>).
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String fileName = part.getSubmittedFileName();
+String contentType = part.getContentType();
+long fileSize = part.getSize();
+
+          </xmp></code></pre> 
+        <h2>Writing to File</h2> 
+        <p>The contents of a Part can be written to a file using the method </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+write(String fileName)
+
+          </xmp></code></pre>. This will write the contents of the Part to the specified file. For example:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String savePath = "/path/to/save/to";
+String fileName = part.getSubmittedFileName();
+part.write(savePath + fileName);
+
+          </xmp></code></pre> 
+        In addition to the
+        <pre>write()</pre> method, the Part also includes the methods 
+        <pre>getInputStream()</pre> and 
+        <pre>getReader()</pre>, which can be used to read the contents of the Part as a stream or reader, respectively.
+         
+        <h2>Example</h2> 
+        <p>An example of using the javax.servlet.http.Part interface to handle a file upload is shown below. This example creates a new file in the specified directory based on the file's submitted name. It also prints out some of the attributes of the uploaded file.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Get the parameters from the request
+String fieldName = request.getParameter("fieldName");
+Part part = request.getPart("file");
+
+// Get the file attributes
+String fileName = part.getSubmittedFileName();
+String contentType = part.getContentType();
+long fileSize = part.getSize();
+
+// Create the new file
+String savePath = "/path/to/save/to";
+File file = new File(savePath + fileName);
+
+// Write the uploaded part to the file
+part.write(file.getAbsolutePath());
+
+// Output some information about the file
+out.println("File name: " + fileName);
+out.println("Content type: " + contentType);
+out.println("File size: " + fileSize);
+
+          </xmp></code></pre> 
+        <p>The above example can easily be extended to create more complex file handling logic. For example, to ensure that only images of a certain type are uploaded, the </p>
+        <pre>contentType</pre> attribute can be checked before writing the file to the server.
+         
+        <h2>Conclusion</h2> 
+        <p>In this article, we looked at how to use javax.servlet.http.Part to handle file uploads in a web application. We looked at how the Part object can be retrieved, and how its attributes can be accessed and used. We also looked at an example of how a Part can be written to a new file.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-convert-Vector-to-ArrayList-and-ArrayList-to-Vector-in-Java.html">How to convert Vector to ArrayList and ArrayList to Vector in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Iterate-through-elements-Java-Vector-using-ListIterator-Example.html">Iterate through elements Java Vector using ListIterator Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Smiley-In-Applet-Example.html">Draw Smiley In Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Copy-all-elements-of-Java-ArrayList-to-an-Object-Array-Example.html">Copy all elements of Java ArrayList to an Object Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/"> If Else Statement </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/Compare-Two-Numbers-Java-Example.html">Compare Two Numbers Java Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-add-key-value-pairs-to-LinkedHashMap-in-Java.html">How to add key-value pairs to LinkedHashMap in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/io.netty.handler.codec.http.HttpVersion.html">i.n.h.c.h.HttpVersion</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Iterate-Java-ArrayList.html">Iterate Java ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.apache.kafka.clients.consumer.ConsumerRecord.html">o.a.k.c.c.ConsumerRecord</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/javax.swing.UIManager.LookAndFeelInfo.html">j.s.U.LookAndFeelInfo</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-24 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-clear-TreeSet-(remove-all-elements).html">How to clear TreeSet (remove all elements)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/java.security.cert.CertificateParsingException.html">j.s.c.CertificateParsingException</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-check-if-TreeSet-is-empty-(isEmpty-method).html">How to check if TreeSet is empty (isEmpty method)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-all-values-of-LinkedHashMap-in-Java.html">How to get all values of LinkedHashMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.text.SpannableString.html">android.text.SpannableString</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-List-(ArrayList,-LinkedList)-to-Array.html">Convert List (ArrayList, LinkedList) to Array</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Item-From-AWT-List-Example.html">Get Item From AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Create-List-from-Java-Object-Array-Example.html">Create List from Java Object Array Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.antlr.v4.runtime.tree.TerminalNode.html">o.a.v.r.t.TerminalNode</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Load-New-HTML-File-Using-Applet-Context-Example.html">Load New HTML File Using Applet Context Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/List-contents-of-a-directory.html">List contents of a directory</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/javax.management.openmbean.TabularData.html">j.m.o.TabularData</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.hardware.camera2.params.StreamConfigurationMap.html">a.h.c.p.StreamConfigurationMap</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Create-DataOutputStream-from-FileOutputStream.html">Create DataOutputStream from FileOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Iterate-through-elements-of-Java-LinkedList-using-Iterator-example.html">Iterate through elements of Java LinkedList using Iterator example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-int-Array-Example.html">Java Sort int Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-comma-separated-string-to-HashSet-in-Java.html">Convert comma separated string to HashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Break-Statement/Java-break-statement-with-label-example.html">Java break statement with label example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Convert-Java-float-Primitive-Value-to-Float-Object-Example.html">Convert Java float Primitive Value to Float Object Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.security.UnrecoverableKeyException.html">j.s.UnrecoverableKeyException</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

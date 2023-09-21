@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter</title> <!--timestamp=2023-09-21T00:12:35.264244854Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter"> 
+  <meta name="keywords" content="org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter"> 
+  <meta property="og:description" content="org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter"> 
+  <meta name="twitter:description" content="org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-09-20</small>
+        </div> 
+        <h1>AbstractAuthenticationProcessingFilter</h1> 
+        <p>The AbstractAuthenticationProcessingFilter is a base class for authentication processing filters provided by Spring Security. It is an abstract class which must be extended for a particular authentication mechanism to be supported. It provides essential features such as: requiring that the request already be authenticated, performing additional authentication if necessary and then passing control over to the AuthenticationManager.</p> 
+        <h2>Initializing the Filter</h2> 
+        <p>In order to initialize the filter, you will need to extend the AbstractAuthenticationProcessingFilter and provide two methods: one for obtain the request path and the other for obtain the request method.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class CustomAuthFilter extends AbstractAuthenticationProcessingFilter {
+
+    public CustomAuthFilter(String defaultFilterProcessesUrl) {
+        super(defaultFilterProcessesUrl);
+    }
+
+    @Override
+    protected String getHttpMethod() {
+        return "POST";
+    }
+
+    @Override
+    protected String[] getRequiredAttributes() {
+        return new String[] {"username", "password"};
+    }
+
+}
+
+          </xmp></code></pre> 
+        The
+        <pre>getHttpMethod()</pre> method is used set the HTTP method of the authentication request. The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getRequiredAttributes()
+
+          </xmp></code></pre> method is used to set the list of required attributes for proper authentication.
+         
+        <h2>Processing the Request</h2> 
+        <p>Once the filter is initialized, it is ready to process requests. To do this, the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+attemptAuthentication()
+
+          </xmp></code></pre> method must be implemented. This method will be responsible for obtaining the request path, checking for authentication and then passing the authentication credentials to the AuthenticationManager for further processing.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@Override
+protected Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
+
+    UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
+
+    // Allow subclasses to set the "details" property
+    setDetails(request, authRequest);
+
+    // Authenticate the user
+    return this.getAuthenticationManager().authenticate(authRequest);
+}
+
+          </xmp></code></pre> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+attemptAuthentication()
+
+          </xmp></code></pre> method is responsible for obtaining the username and password from the request and then creating a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+UsernamePasswordAuthenticationToken
+
+          </xmp></code></pre> using the values obtained. The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+UsernamePasswordAuthenticationToken
+
+          </xmp></code></pre> is then passed to the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+AuthenticationManager
+
+          </xmp></code></pre> for further processing.
+         
+        <h2>Performing Authentication</h2> 
+        Once the
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+UsernamePasswordAuthenticationToken
+
+          </xmp></code></pre> is created, the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+AuthenticationManager
+
+          </xmp></code></pre> is responsible for performing the authentication. Depending on the authentication mechanism being used, the authentication logic may vary. For example, if basic authentication is being used, the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+AuthenticationManager
+
+          </xmp></code></pre> will use the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+BasicAuthenticationProvider
+
+          </xmp></code></pre> to verify the username and password provided in the request. If a custom authentication mechanism is being used, a custom authentication provider can be used to perform the authentication.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class CustomAuthProvider implements AuthenticationProvider {
+
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        String username = authentication.getName();
+        String password = authentication.getCredentials().toString();
+
+        // Authenticate the user using a custom authentication mechanism
+        // ...
+
+        // Create the authenticated token based on the authenticated user
+        Authentication authenticated = new UsernamePasswordAuthenticationToken(username, password);
+
+        return authenticated;
+    }
+
+}
+
+          </xmp></code></pre> 
+        <p>Once authentication has been completed, the authenticated token is returned to the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+AbstractAuthenticationProcessingFilter
+
+          </xmp></code></pre> which will then continue with the authentication process.
+         
+        <h2>Post Authentication Processing</h2> 
+        Once authentication has been successful, the
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+successfulAuthentication()
+
+          </xmp></code></pre> method is called to perform any post authentication processing. This could include setting up session information, sending response messages etc. The following example shows how the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+successfulAuthentication()
+
+          </xmp></code></pre> method can be used to send a response message to the client upon successful authentication:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@Override
+protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+    // Send a successful authentication response
+    response.setStatus(HttpServletResponse.SC_OK);
+    response.getWriter().println("Authentication successful!");
+}
+
+          </xmp></code></pre> 
+        Once the
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+successfulAuthentication()
+
+          </xmp></code></pre> method has been executed, the authentication process is complete and the user is successfully authenticated.
+         
+        <h2>Conclusion</h2> 
+        <p>In this tutorial, we have discussed the AbstractAuthenticationProcessingFilter and how it can be extended in order to support custom authentication mechanisms. The AbstractAuthenticationProcessingFilter is an important part of the authentication process and provides essential features such as requiring that the request already be authenticated, performing additional authentication if necessary, and then passing control over to the AuthenticationManager.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-sort-HashSet-elements-using-Comparator.html">How to sort HashSet elements using Comparator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/"> Data types </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/Java-float-Example.html">Java float Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/BigInteger/"> BigInteger </a> </p> <a href="/articles/Java/Wrapper-Classes/BigInteger/Find-Square-Root-of-BigInteger-Example.html">Find Square Root of BigInteger Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Wrappers/"> Wrappers </a> </p> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Double-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Double object to byte, short, int, long, float and double</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.swing.table.TableModel.html">javax.swing.table.TableModel</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Compare-two-file-paths.html">Compare two file paths</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-double-to-a-file-using-DataOutputStream.html">Write double to a file using DataOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.support.v7.widget.DividerItemDecoration.html">a.s.v.w.DividerItemDecoration</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.springframework.cloud.netflix.feign.FeignClient.html">o.s.c.n.f.FeignClient</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/"> AWT Choice </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Get-Particular-Item-Of-AWT-Choice-Or-Combobox-Example.html">Get Particular Item Of AWT Choice Or Combobox Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-20 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Victor</h3> <p><a href="#">2023-11-18 13:32</a></p> great examples ... thnx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Gabriel</h3> <p><a href="#">2023-10-21 13:12</a></p> Interesting, thx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Determine-If-The-Checkbox-Is-Enabled-Example.html">Determine If The Checkbox Is Enabled Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-Java-String-to-Long-example.html">Convert Java String to Long example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Vector-to-ArrayList-and-ArrayList-to-Vector.html">Convert Vector to ArrayList and ArrayList to Vector</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.support.annotation.IntDef.html">android.support.annotation.IntDef</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Long-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Long object to byte, short, int, long, float and double</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.springframework.core.env.MapPropertySource.html">o.s.c.e.MapPropertySource</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.apache.lucene.index.DirectoryReader.html">o.a.l.i.DirectoryReader</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedList-using-Comparator.html">Sort LinkedList using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Check-if-a-particular-element-exists-in-Java-LinkedHashSet-Example.html">Check if a particular element exists in Java LinkedHashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-any-primitive-type-to-String.html">Convert any primitive type to String</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-String-to-character-array,-character-array-to-String.html">Convert String to character array, character array to String</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-print-elements-example.html">Java LinkedList print elements example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.swing.JMenu.html">javax.swing.JMenu</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.xml.parsers.DocumentBuilderFactory.html">j.x.p.DocumentBuilderFactory</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.lmax.disruptor.dsl.Disruptor.html">com.lmax.disruptor.dsl.Disruptor</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-array-to-LinkedHashSet-using-Arrays-class.html">Convert array to LinkedHashSet using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Reverse-Number-using-Java.html">Reverse Number using Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-HashSet-to-TreeSet-in-Java.html">Convert HashSet to TreeSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Shuffle-elements-of-ArrayList.html">Shuffle elements of ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Convert-HashMap-to-TreeMap-using-Comparator.html">Convert HashMap to TreeMap using Comparator</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
