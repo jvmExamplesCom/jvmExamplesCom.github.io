@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javax.swing.TransferHandler</title> <!--timestamp=2023-09-29T00:11:55.039312089Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.swing.TransferHandler"> 
+  <meta name="keywords" content="javax.swing.TransferHandler"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.swing.TransferHandler"> 
+  <meta property="og:description" content="javax.swing.TransferHandler"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.swing.TransferHandler"> 
+  <meta name="twitter:description" content="javax.swing.TransferHandler"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-09-28</small>
+        </div> 
+        <h1>javax.swing.TransferHandler</h1> The javax.swing.TransferHandler class is used for implementing transfer operations for a Java Swing application. It defines methods for creating and managing drag-and-drop operations within applications. When dealing with data or components, Java Swing uses the TransferHandler to determine how to handle transferring data or components. It provides abstract methods for handling both operations. The TransferHandler is an abstract class, and must be extended in order to work. In order to implement it, one must provide concrete implementations of the abstract methods, as well as define import and export methods. 
+        <h2>Creating the TransferHandler</h2> In order to create a TransferHandler, one must first create a subclass and override the abstract methods. The following is an example of a simple implementation of the TransferHandler class: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyTransferHandler extends TransferHandler {
+
+    public boolean canImport(TransferHandler.TransferSupport support) {
+        return false;
+    }
+
+    public boolean importData(TransferHandler.TransferSupport support) {
+        return false;
+    }
+
+    public boolean canExport() {
+        return false;
+    }
+
+    public int getSourceActions(JComponent c) {
+        return 0;
+    }
+
+    public Transferable createTransferable(JComponent c) {
+        return null;
+    }
+
+    public void exportDone(JComponent c, Transferable t, int action) {
+    }
+
+}
+
+          </xmp></code></pre> To instantiate the TransferHandler, simply create an instance of the class. This can be done in the constructor of the component (e.g. JButton, JTable, etc.) that is to receive drag and drop events. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MyTransferHandler myHandler = new MyTransferHandler();
+myButton.setTransferHandler(myHandler);
+
+          </xmp></code></pre> 
+        <h2>Importing Data</h2> The TransferHandler is responsible for determining whether a particular type of data or elements can be imported into the component. The importData() method is used to actually import the data. The method receives a TransferSupport object, which contains information about the data being transferred. The TransferSupport object contains methods such as getDataFlavors() to determine what type of data is being transferred, and getTransferable() to obtain the actual data. One example of using this method is shown below: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public boolean importData(TransferHandler.TransferSupport support) {
+    if (!support.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+        return false;
+    }
+
+    Transferable t = support.getTransferable();
+
+    try {
+        String text = (String)t.getTransferData(DataFlavor.stringFlavor);
+        // do something with the string
+    } catch (UnsupportedFlavorException ufe) {
+        return false;
+    } catch (IOException ioe) {
+        return false;
+    }
+
+    return true;
+}
+
+          </xmp></code></pre> 
+        <h2>Exporting Data</h2> The TransferHandler is responsible for determining if the data or elements can be exported from the component, and for creating a Transferable object that contains the data. The createTransferable() method is used to create the Transferable object, and the getSourceActions() method is used to determine what types of actions are enabled for the transfer operation. To enable a drag-and-drop operation, createTransferable() must return a valid Transferable object, and getSourceActions() must return an appropriate value. One example of enabling dragging of text is shown below: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public int getSourceActions(JComponent c) {
+    return TransferHandler.COPY_OR_MOVE;
+}
+
+public Transferable createTransferable(JComponent c) {
+    return new StringSelection("Text to be transferred");
+}
+
+          </xmp></code></pre> 
+        <h2>Handling the Transfer</h2> Once the data has been transferred, the TransferHandler is responsible for cleaning up after the transfer operation. The exportDone() method is used for this purpose. It is called when the transfer action has been completed, and receives information about the transfer in the form of a Transferable object, an action type, and the component from which the transfer originated. An example of using this method is shown below: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public void exportDone(JComponent c, Transferable t, int action) {
+    if (action == TransferHandler.MOVE) {
+        // clean up the source component
+    }
+}
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> The javax.swing.TransferHandler provides an easy way to implement drag-and-drop operations in a Java application. It allows components to both receive data and send data via drag-and-drop operations. By extending the TransferHandler class and providing appropriate implementations of its abstract methods, one can easily create an application that supports drag-and-drop operations. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-clear-or-remove-all-elements-from-HashSet.html">How to clear or remove all elements from HashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-remove-elements.html">Java LinkedList remove elements</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Continue-Statement/"> Continue Statement </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Continue-Statement/Java-continue-statement-example.html">Java continue statement example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Swap-elements-of-Java-Vector-example.html">Swap elements of Java Vector example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/io.netty.buffer.Unpooled.html">io.netty.buffer.Unpooled</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.context.EnvironmentAware.html">o.s.c.EnvironmentAware</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-array-to-ArrayList.html">Convert String array to ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/"> AWT Button </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Set-Action-Command-For-AWT-Button-Example.html">Set Action Command For AWT Button Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipEntry/"> ZipEntry </a> </p> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Compressed-Size-of-Zip-Entry-Example.html">Get Compressed Size of Zip Entry Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/androidx.recyclerview.widget.DividerItemDecoration.html">a.r.w.DividerItemDecoration</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-27 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Mark</h3> <p><a href="#">2023-11-21 08:52</a></p> great examples ... thnx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Thomas</h3> <p><a href="#">2023-10-30 05:28</a></p> Great example! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-size-of-the-TreeSet-object-(TreeSet-length).html">How to get size of the TreeSet object (TreeSet length)</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Java-Interface-Example.html">Java Interface Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-Minimum-element-of-Java-HashSet-Example.html">Find Minimum element of Java HashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-remove-the-first-entry-or-last-entry-from-the-Java-TreeMap.html">How to remove the first entry or last entry from the Java TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider.html">UsernamePasswordCredentialsProvider</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Print-ArrayList-example.html">Print ArrayList example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.google.inject.name.Named.html">com.google.inject.name.Named</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Java-Short-Example.html">Java Short Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-convert-LinkedHashMap-to-List-in-Java.html">How to convert LinkedHashMap to List in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/android.provider.Settings.Secure.html">android.provider.Settings.Secure</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Handle-Action-Events-for-AWT-Button-Example.html">Handle Action Events for AWT Button Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-contains-a-key-(indexOf).html">How to check if LinkedHashMap contains a key (indexOf)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.jboss.shrinkwrap.api.spec.JavaArchive.html">o.j.s.a.s.JavaArchive</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Swap-Numbers-Without-Using-Third-Variable-Java-Example.html">Swap Numbers Without Using Third Variable Java Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/StringBuffer/Java-StringBuffer-SubString-Example.html">Java StringBuffer SubString Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Set-Icon-for-JLabel-Example.html">Set Icon for JLabel Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Number-Of-Visible-Rows-Of-AWT-List-Example.html">Get Number Of Visible Rows Of AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.springframework.cloud.client.discovery.EnableDiscoveryClient.html">o.s.c.c.d.EnableDiscoveryClient</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-sublist-from-ArrayList.html">Get sublist from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Rounded-Corner-Rectangle-&-Square-in-Applet-Window-Example.html">Draw Rounded Corner Rectangle & Square in Applet Window Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
