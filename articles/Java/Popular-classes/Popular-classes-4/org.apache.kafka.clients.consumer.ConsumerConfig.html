@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.apache.kafka.clients.consumer.ConsumerConfig</title> <!--timestamp=2023-09-30T00:12:03.201196194Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.apache.kafka.clients.consumer.ConsumerConfig"> 
+  <meta name="keywords" content="org.apache.kafka.clients.consumer.ConsumerConfig"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.apache.kafka.clients.consumer.ConsumerConfig"> 
+  <meta property="og:description" content="org.apache.kafka.clients.consumer.ConsumerConfig"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.apache.kafka.clients.consumer.ConsumerConfig"> 
+  <meta name="twitter:description" content="org.apache.kafka.clients.consumer.ConsumerConfig"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-09-29</small>
+        </div> 
+        <h1>org.apache.kafka.clients.consumer.ConsumerConfig</h1> 
+        <p>org.apache.kafka.clients.consumer.ConsumerConfig is an interface that provides the configuration of a Kafka Consumer. It is used to configure a consumer's behavior when it connects to a Kafka cluster for message consumption, such as fetching messages, committing offsets and manual rebalancing. In this article, we will discuss the different components of the interface and look at some code examples.</p> 
+        <h2>Configuring the Consumer</h2> 
+        <p>The ConsumerConfig object is used to configure the consumer when connecting to the cluster. This is done by setting the appropriate configuration keys and their respective values. There are a wide range of configuration options available, which can be found in the documentation. The most important keys are:</p> 
+        <ul> 
+         <li><pre>bootstrap.servers:</pre> An array of strings that list the hosts and ports of the brokers in the Kafka cluster. If a broker fails, the consumer will automatically connect to another broker. This key is required.</li> 
+         <li><pre>group.id:</pre> The identifier of the consumer group to which the consumer belongs. All members of a consumer group share their offsets and coordinate their message consumption. If a consumer belongs to a group, then it's mandatory to set this key.</li> 
+         <li><pre>enable.auto.commit:</pre> A boolean that indicates whether the consumer should periodically commit its offsets. It defaults to <pre>true</pre>.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+auto.commit.interval.ms:
+
+            </xmp></code></pre> The frequency (in milliseconds) at which the offsets should be committed. It defaults to 5000.</li> 
+         <li><pre>session.timeout.ms:</pre> The timeout (in milliseconds) after which the consumer is considered inactive and will be disconnected from the cluster. It defaults to 30000.</li> 
+         <li><pre>max.poll.records:</pre> The maximum number of records returned in a single poll operation. It defaults to 500.</li> 
+         <li><pre>key.deserializer:</pre> The deserializer for the keys of records. This is usually a class name, followed by a serialized object. It defaults to <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+"org.apache.kafka.common.serialization.StringDeserializer"
+
+            </xmp></code></pre>.</li> 
+         <li><pre>value.deserializer:</pre> The deserializer for the values of records. This is usually a class name, followed by a serialized object. It defaults to <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+"org.apache.kafka.common.serialization.StringDeserializer"
+
+            </xmp></code></pre>.</li> 
+        </ul> 
+        <h2>Code Examples</h2> 
+        <p>The following code examples illustrate how to configure a consumer using the ConsumerConfig interface. The first example shows how to configure the consumer with the default configuration. The second example shows how to override the default configuration by setting custom values for the required keys.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Properties props = new Properties();
+props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+props.put(ConsumerConfig.GROUP_ID_CONFIG, "myGroupId");
+
+ConsumerConfig config = new ConsumerConfig(props);
+
+          </xmp></code></pre> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Properties props = new Properties();
+props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+props.put(ConsumerConfig.GROUP_ID_CONFIG, "myGroupId");
+props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
+props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 10000);
+props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 30000);
+props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 1000);
+props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+
+ConsumerConfig config = new ConsumerConfig(props);
+
+          </xmp></code></pre> 
+        <p>In this article, we discussed the org.apache.kafka.clients.consumer.ConsumerConfig interface and looked at some code examples demonstrating how to configure a consumer. We also looked at some of the configuration keys that are important for setting up a consumer.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataInputStream/"> DataInputStream </a> </p> <a href="/articles/Java/File-And-IO/DataInputStream/Read-boolean-from-file-using-DataInputStream.html">Read boolean from file using DataInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-convert-Vector-to-ArrayList-and-ArrayList-to-Vector-in-Java.html">How to convert Vector to ArrayList and ArrayList to Vector in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/FileInputStream/"> FileInputStream </a> </p> <a href="/articles/Java/File-And-IO/FileInputStream/Read-file-using-FileInputStream.html">Read file using FileInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/"> Convertion </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-float.html">Convert String to float</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/CheckedOutputStream/"> CheckedOutputStream </a> </p> <a href="/articles/Java/Java-Zip/CheckedOutputStream/Create-Zip-File-With-CRC32-Checksum-Example.html">Create Zip File With CRC32 Checksum Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/"> Sorting </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-float-Array-Example.html">Java Sort float Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/com.google.common.collect.ImmutableSet.html">c.g.c.c.ImmutableSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.ws.rs.HttpMethod.html">javax.ws.rs.HttpMethod</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-add-elements-to-Java-HashSet-(add,-addAll-method).html">How to add elements to Java HashSet (add, addAll method)</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.TreeSet.html">java.util.TreeSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-22 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Uberel</h3> <p><a href="#">2023-11-22 18:27</a></p> <p>These Programs Are Very Useful For Java Beginners!... Thanks! ...</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>JavaFan</h3> <p><a href="#">2023-11-22 12:45</a></p> Great example! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Do-While-Loop/Do-While-loop-Example.html">Do While loop Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-ArrayList-to-TreeSet.html">How to convert ArrayList to TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Determine-If-The-Button-Is-Visible-Example.html">Determine If The Button Is Visible Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-character-to-String.html">Convert character to String</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.bukkit.command.Command.html">org.bukkit.command.Command</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-short-Array-Example.html">Performing Binary Search on Java short Array Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.Set.html">java.util.Set</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-byte-Array-Example.html">Performing Binary Search on Java byte Array Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Java-String-Length-Example.html">Java String Length Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipFile/Find-File-in-a-Zip-File-Example.html">Find File in a Zip File Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.xml.transform.TransformerFactory.html">j.x.t.TransformerFactory</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-List-to-array.html">Convert List to array</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-iterate-LinkedHashSet-elements.html">How to iterate LinkedHashSet elements</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-natural-logarithm-value-of-a-number-using-Math.log.html">F.log</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-over-Vector-elements-in-reverse-or-backward-direction.html">Iterate over Vector elements in reverse or backward direction</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Disable-Label-Example.html">Disable Label Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Simple-Java-HashSet-example.html">Simple Java HashSet example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Set-Graphics-Color-Example.html">Set Graphics Color Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.springframework.beans.factory.config.BeanDefinition.html">o.s.b.f.c.BeanDefinition</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.apache.hadoop.mapreduce.InputSplit.html">o.a.h.m.InputSplit</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
