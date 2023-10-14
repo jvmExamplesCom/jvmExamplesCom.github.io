@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - How to split String in Java</title> <!--timestamp=2023-10-14T00:12:21.049530171Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="How to split String in Java"> 
+  <meta name="keywords" content="How to split String in Java"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - How to split String in Java"> 
+  <meta property="og:description" content="How to split String in Java"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - How to split String in Java"> 
+  <meta name="twitter:description" content="How to split String in Java"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-10-13</small>
+        </div> 
+        <h1>How to Split a String in Java</h1> Java provides several ways to split a string into multiple parts. Knowing the different options for splitting a string can help you write effective and efficient code. This article covers the various ways to split a string in Java, from the simplest to more complex algorithms. 
+        <h2>Split Using String’s split() Method</h2> The simplest way to split a string in Java is using the split() method of the String class. This method takes a regular expression (regex) as the parameter and splits the string around matches of this regex. For example, if we have the following string: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String str = "This is a test string";
+
+          </xmp></code></pre> We can use the space character as the regex argument to split the string around the spaces and produce an array of substrings. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String[] subStrings = str.split("\\s+");
+
+          </xmp></code></pre> The array returned by this code will contain the following elements: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+["This", "is", "a", "test", "string"]
+
+          </xmp></code></pre> 
+        <h2>Split Using StringTokenizer</h2> Another way to split a string in Java is by using the StringTokenizer class. This class provides methods for tokenizing a string. A token is a substring of the original string that is separated by one or more delimiters (characters that separate tokens). For example, to tokenize the same string as in the previous example, we can use the following code: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+StringTokenizer strTok = new StringTokenizer(str, "\\s+");
+
+          </xmp></code></pre> Then, we can loop through the tokens and print them: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+while(strTok.hasMoreTokens()) {
+    System.out.println(strTok.nextToken());
+}
+
+          </xmp></code></pre> The output of this code will be: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+This
+is
+a
+test
+string
+
+          </xmp></code></pre> 
+        <h2>Split Using Scanner Class</h2> The Scanner class was added in Java 1.5 and provides a convenient way to tokenize strings. It has several methods for splitting a string. For example, the following code will tokenize the same string as in the previous examples: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Scanner scanner = new Scanner(str);
+
+          </xmp></code></pre> We can then loop through the tokens and print them: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+while(scanner.hasNext()) {
+    System.out.println(scanner.next());
+}
+
+          </xmp></code></pre> The output of this code will be the same as with the StringTokenizer class: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+This
+is
+a
+test
+string
+
+          </xmp></code></pre> 
+        <h2>Split Using Regular Expressions</h2> Regular expressions are powerful tools for working with strings. They allow us to match patterns in strings and use those matches to split a string. For example, to split the same string as in the previous examples by a specific character, we can use the following code: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String[] subStrings = str.split("e");
+
+          </xmp></code></pre> This code will return the following array: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+["This is a t", "st string"]
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> In this article, we looked at different ways to split a string in Java. We saw how to use the split() method of the String class, the StringTokenizer class, the Scanner class, and regular expressions. Each of these approaches has its own advantages and disadvantages and can be used depending on the specific requirements of a project. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/javafx.geometry.Pos.html">javafx.geometry.Pos</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Get-elements-from-LinkedList-Java-example.html">Get elements from LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-ArrayList-elements-using-ListIterator.html">Iterate ArrayList elements using ListIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Get-Size-of-Java-TreeSet-Example.html">Get Size of Java TreeSet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-convert-LinkedHashSet-to-array-in-Java.html">How to convert LinkedHashSet to array in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-new-empty-file.html">Create new empty file</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.context.annotation.Conditional.html">o.s.c.a.Conditional</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.google.firebase.database.DatabaseReference.html">c.g.f.d.DatabaseReference</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Hello-World-Applet-Example.html">Hello World Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Remove-value-from-Java-LinkedHashMap-example.html">Remove value from Java LinkedHashMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-16 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Abral</h3> <p><a href="#">2023-11-22 01:55</a></p> Interesting, thx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Gabriel</h3> <p><a href="#">2023-11-13 11:16</a></p> Grt ;-) <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Convert-String-to-InputStream.html">Convert String to InputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Iterate-through-elements-of-Java-LinkedHashSet-example.html">Iterate through elements of Java LinkedHashSet example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Change-Button-Background-Color-Example.html">Change Button Background Color Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Convert-primitive-long-value-to-String-object.html">Convert primitive long value to String object</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Map-to-List-(Convert-HashMap-to-ArrayList).html">Convert Map to List (Convert HashMap to ArrayList)</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-All-Items-From-AWT-List-Example.html">Get All Items From AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-elements-of-HashSet-in-Java-using-an-iterator.html">Iterate through elements of HashSet in Java using an iterator</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Circle-Perimeter-using-Java-Example.html">Calculate Circle Perimeter using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory.html">r.a.r.RxJava2CallAdapterFactory</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/Java-long-Example.html">Java long Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-ArrayList-elements-using-ListIterator.html">Iterate ArrayList elements using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-elements-of-LinkedHashSet-in-Java.html">Iterate through elements of LinkedHashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-short-Arrays-Example.html">Compare Two Java short Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-HashMap-to-TreeMap.html">Convert HashMap to TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Convert-java-Double-to-numeric-primitive-data-types-example.html">Convert java Double to numeric primitive data types example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.bukkit.event.EventHandler.html">org.bukkit.event.EventHandler</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Determine-If-The-Label-Is-Visible-Example.html">Determine If The Label Is Visible Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.HashSet.html">java.util.HashSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Array-to-LinkedList.html">Convert Array to LinkedList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.xml.xpath.XPathExpressionException.html">j.x.x.XPathExpressionException</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

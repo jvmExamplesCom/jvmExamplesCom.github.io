@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javax.persistence.ManyToMany</title> <!--timestamp=2023-10-14T00:11:53.466187960Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.persistence.ManyToMany"> 
+  <meta name="keywords" content="javax.persistence.ManyToMany"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.persistence.ManyToMany"> 
+  <meta property="og:description" content="javax.persistence.ManyToMany"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.persistence.ManyToMany"> 
+  <meta name="twitter:description" content="javax.persistence.ManyToMany"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-10-13</small>
+        </div> 
+        <h1>javax.persistence.ManyToMany</h1> 
+        <p>javax.persistence.ManyToMany is a Java Persistence API (JPA) annotation used to define relationships between entities in a database. This annotation allows many-to-many association between two entities, so that each entity can have multiple instances of the other entity. javax.persistence.ManyToMany annotation is used in both sides of the relationship, making it bidirectional.</p> 
+        <h2>Using ManyToMany Annotation</h2> 
+        <p>In order to set up a ManyToMany relationship, two entities must be specified. For example, Student and Teacher entities could have a ManyToMany relationship, since a teacher can teach multiple students, and a student can have multiple teachers.</p> 
+        <p>For the Student entity, we will add an attribute of type Set<!--?--> to store the teachers. We will annotate the field using the @ManyToMany annotation.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@ManyToMany
+private Set<Teacher> teachers;
+
+          </xmp></code></pre> 
+        <p>Similarly, for the Teacher entity, we will add an attribute of type Set<!--?--> to store the students. We will also annotate the field with the @ManyToMany annotation.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@ManyToMany
+private Set<Student> students;
+
+          </xmp></code></pre> 
+        <p>We also need to specify the join table that will be used to store the relationship information. We can do this by using the @JoinTable annotation.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@ManyToMany
+@JoinTable(name = “teacher_student_table”,
+           joinColumns = { @JoinColumn(name="teacher_id”, 
+                                       referencedColumnName=”id”)},
+           inverseJoinColumns = { @JoinColumn(name="student_id”, 
+                                              referencedColumnName=”id”)})
+private Set<Teacher> teachers;
+
+          </xmp></code></pre> 
+        <h2>Example Code</h2> 
+        <p> Here is a simple example of how to use the @ManyToMany annotation in a Java application.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@Entity
+public class Student {
+
+   @ManyToMany
+   private Set<Teacher> teachers;
+
+   //getters and setters
+}
+
+@Entity
+public class Teacher {
+
+   @ManyToMany
+   private Set<Student> students;
+
+   //getters and setters
+}
+
+          </xmp></code></pre> 
+        <p>In this example, we are defining a many-to-many relationship between Student and Teacher entities. We also specify the join table using the @JoinTable annotation.</p> 
+        <h2>Conclusion</h2> 
+        <p>In this article, we learned about the javax.persistence.ManyToMany annotation and how to use it to define a many-to-many relationship between two entities. We also saw an example of how to use the annotation in a Java application. Knowing how to properly use this annotation is essential for building applications that use JPA.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Get-or-Set-Gap-Between-JLabel’s-Icon-and-Text-Example.html">Get or Set Gap Between JLabel’s Icon and Text Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Append-all-elements-of-other-Collection-to-Java-Vector-Example.html">Append all elements of other Collection to Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/hudson.model.TaskListener.html">hudson.model.TaskListener</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/"> AWT Color </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Set-Drawing-Mode-To-XOR-Example.html">Set Drawing Mode To XOR Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Item-From-AWT-List-Example.html">Get Item From AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/androidx.databinding.DataBindingUtil.html">androidx.databinding.DataBindingUtil</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-array-to-Set-(Convert-array-to-HashSet).html">Convert array to Set (Convert array to HashSet)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/org.apache.http.client.HttpClient.html">org.apache.http.client.HttpClient</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-byte-Arrays-Example.html">Compare Two Java byte Arrays Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/"> AWT Label </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Change-Background-Color-Of-Label-Example.html">Change Background Color Of Label Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-26 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.commons.fileupload.servlet.ServletFileUpload.html">o.a.c.f.s.ServletFileUpload</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Copy-Elements-of-One-Java-ArrayList-to-Another-Java-ArrayList-Example.html">Copy Elements of One Java ArrayList to Another Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Check-if-a-particular-element-exists-in-Java-LinkedHashSet-Example.html">Check if a particular element exists in Java LinkedHashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/List-Odd-Numbers-Java-Example.html">List Odd Numbers Java Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Applet-Life-Cycle-Example.html">Applet Life Cycle Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Operators/Arithmetic-Operators-Example.html">Arithmetic Operators Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/java.io.StreamTokenizer.html">java.io.StreamTokenizer</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Append-all-elements-of-other-Collection-to-Java-ArrayList-Example.html">Append all elements of other Collection to Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.view.animation.LinearInterpolator.html">a.v.a.LinearInterpolator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Check-if-key-exists-in-HashMap-Java-example.html">Check if key exists in HashMap Java example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-int-to-a-file-using-DataOutputStream.html">Write int to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.ws.rs.FormParam.html">javax.ws.rs.FormParam</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-List-(ArrayList,-LinkedList)-to-Array.html">Convert List (ArrayList, LinkedList) to Array</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.google.android.gms.common.GoogleApiAvailability.html">c.g.a.g.c.GoogleApiAvailability</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-sort-LinkedHashSet-in-Java.html">How to sort LinkedHashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-HashMap-to-TreeMap.html">Convert HashMap to TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/net.minecraft.world.IBlockAccess.html">net.minecraft.world.IBlockAccess</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Check-if-key-exists-in-HashMap-Java-example.html">Check if key exists in HashMap Java example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-byte.html">Convert String to byte</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Java-HashMap-put-method-example.html">Java HashMap put method example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
