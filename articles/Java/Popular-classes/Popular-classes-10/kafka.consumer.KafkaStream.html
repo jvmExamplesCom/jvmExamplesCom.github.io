@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - kafka.consumer.KafkaStream</title> <!--timestamp=2023-10-17T00:13:24.146965836Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="kafka.consumer.KafkaStream"> 
+  <meta name="keywords" content="kafka.consumer.KafkaStream"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - kafka.consumer.KafkaStream"> 
+  <meta property="og:description" content="kafka.consumer.KafkaStream"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - kafka.consumer.KafkaStream"> 
+  <meta name="twitter:description" content="kafka.consumer.KafkaStream"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-10-16</small>
+        </div> 
+        <h1>Kafka Streams and Java</h1> Kafka Streams is a powerful stream processing library from Apache Kafka that allows developers to build powerful data streaming applications. It provides powerful tools to process, analyze, and aggregate data in real-time. This article will demonstrate how to use the Kafka Streams API in Java. 
+        <h2>Kafka Streams Definition</h2> Kafka Streams is a library for building streaming applications using the Apache Kafka messaging system. It enables developers to easily create distributed, fault-tolerant, data-driven applications that process and analyze data in real-time. Kafka Streams also supports stateful processing and fault tolerance, making it an ideal choice for mission critical applications. 
+        <h2>KafkaStream Class</h2> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+KafkaStream
+
+          </xmp></code></pre> class is the main entry point for developers to create streaming applications with the Kafka Streams API. It provides methods for creating and configuring stream processing topologies, connecting to Kafka topics and consuming messages, performing intermediate operations such as filtering, mapping and joining, and writing the results back to Kafka topics. 
+        <h2>Creating a Kafka Stream</h2> Creating a Kafka Stream is straightforward. All applications must first create an instance of the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+KafkaStreams
+
+          </xmp></code></pre> class, providing necessary broker information, input and output topics, and any other settings. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Configure broker connection
+Properties props = new Properties();
+props.put("bootstrap.servers", "localhost:9092");
+
+// Create KafkaStreams instance
+KafkaStreams streams = new KafkaStreams(topology, props);
+
+// Start streaming
+streams.start();
+
+          </xmp></code></pre> 
+        <h2>Configuring Topologies</h2> A topology is a graph of interconnected stream processors that form the core of any Kafka Streams application. The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+KafkaStreams
+
+          </xmp></code></pre> class provides methods to configure and add stream processors to topologies. The following code example shows how to create a simple topology with a single source, a filter processor, and a sink. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create the topology 
+Topology topology = new Topology();
+
+// Add the source processor 
+topology.addSource("source-processor", inputTopic);
+
+// Add the filter processor 
+topology.addProcessor("filter-processor", 
+    () -> new FilterProcessor(), 
+    "source-processor");
+
+// Add the sink processor
+topology.addSink("sink-processor", outputTopic, 
+"filter-processor");
+
+// Build the topology 
+KafkaStreams streams = new KafkaStreams(topology, props);
+
+          </xmp></code></pre> 
+        <h2>Connecting to Kafka Topics</h2> Kafka Streams applications must define the input and output topics for the stream processors. The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+KafkaStreams
+
+          </xmp></code></pre> class provides methods for connecting to Kafka topics and consuming messages. The following code example shows how to connect to a Kafka topic and consume messages. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Define the Kafka consumer properties
+Properties consumerProps = new Properties();
+consumerProps.put("group.id", groupId);
+consumerProps.put("auto.offset.reset", "earliest");
+
+// Create a Kafka consumer 
+KafkaConsumer consumer = new KafkaConsumer (consumerProps);
+
+// Subscribe the consumer to the topic 
+consumer.subscribe(Arrays.asList(topic));
+
+// Poll messages from the topic 
+ConsumerRecords<String, String> records = consumer.poll(100);
+
+          </xmp></code></pre> 
+        <h2>Performing Operations</h2> Once connected, Kafka Streams provides many methods to perform operations on the streaming data. These include filtering, mapping, joining, and aggregating the data. The following code example shows how to filter a stream of integers and print the result. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create a stream of integers 
+KStream<String, Integer> inputStream = 
+    builder.stream(inputTopic);
+
+// Filter the stream
+KStream<String, Integer> filteredStream = 
+    inputStream.filter((key, value) -> value > 3);
+
+// Print the filtered stream 
+filteredStream.print();
+
+          </xmp></code></pre> 
+        <h2>Writing Results to Topics</h2> After performing operations, Kafka Streams applications can write the results to output topics. The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+KafkaStreams
+
+          </xmp></code></pre> class provides methods for writing data to topics. The following code example shows how to write the results of a transformation back to a Kafka topic. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Transform the input stream 
+KStream<String, String> transformedStream = 
+    inputStream.mapValues(v -> v.toUpperCase());
+
+// Write the transformed stream to the output topic 
+transformedStream.to(outputTopic);
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> The Kafka Streams API provides powerful tools for building streaming applications in Java. This article has demonstrated how to create a Kafka Streams application and configure input and output topics, perform operations on streams, and write the results to topics. With its support for stateful processing and fault tolerance, Kafka Streams is ideal for creating mission-critical applications. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/javafx.scene.control.Tab.html">javafx.scene.control.Tab</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Display-Image-in-an-Applet-Example.html">Display Image in an Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-sort-HashSet-elements-using-Comparable.html">How to sort HashSet elements using Comparable</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Find-element-in-ArrayList-using-indexOf-and-lastIndexOf-methods.html">Find element in ArrayList using indexOf and lastIndexOf methods</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/io.vertx.core.http.HttpServerOptions.html">io.vertx.core.http.HttpServerOptions</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.fasterxml.jackson.core.TreeNode.html">com.fasterxml.jackson.core.TreeNode</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-compare-two-HashSet-objects-using-the-equals-method.html">How to compare two HashSet objects using the equals method</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/"> Basic Java Examples </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Find-Largest-and-Smallest-Number-in-an-Array-Example.html">Find Largest and Smallest Number in an Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-ArrayList-to-TreeSet.html">How to convert ArrayList to TreeSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Copy-all-elements-of-Java-TreeSet-to-an-Object-Array-Example.html">Copy all elements of Java TreeSet to an Object Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-07 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Thomas</h3> <p><a href="#">2023-11-27 09:41</a></p> Thank you guys for your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Uberel</h3> <p><a href="#">2023-11-21 15:08</a></p> Appreciate your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-to-ArrayList.html">Convert String to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipFile/Get-Specified-Entry-From-Zip-File-Example.html">Get Specified Entry From Zip File Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-clear-or-remove-all-elements-from-the-Vector.html">How to clear or remove all elements from the Vector</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipOutputStream/Create-Zip-File-From-Directory-using-ZipOutputStream-Example.html">Create Zip File From Directory using ZipOutputStream Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-convert-an-array-to-LinkedHashSet-in-Java.html">How to convert an array to LinkedHashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/StringBuffer/StringBuffer-toString-Java-Example.html">StringBuffer toString Java Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/javax.json.JsonValue.html">javax.json.JsonValue</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.springframework.security.authentication.dao.DaoAuthenticationProvider.html">o.s.s.a.d.DaoAuthenticationProvider</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Change-Button-Background-Color-Example.html">Change Button Background Color Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/FileInputStream/Read-file-using-FileInputStream.html">Read file using FileInputStream</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Disable-Checkbox-Example.html">Disable Checkbox Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-elements-to-ArrayList.html">Add elements to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.lang.annotation.Retention.html">java.lang.annotation.Retention</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-through-List-using-ListIterator.html">How to iterate through List using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.security.spec.RSAPublicKeySpec.html">java.security.spec.RSAPublicKeySpec</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-Java-String-to-Long-example.html">Convert Java String to Long example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Java-Convert-array-to-TreeSet.html">Java Convert array to TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.widget.CheckedTextView.html">android.widget.CheckedTextView</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Read-text-file-to-Java-HashMap-example.html">Read text file to Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Java-ArrayList-capacity.html">Java ArrayList capacity</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
