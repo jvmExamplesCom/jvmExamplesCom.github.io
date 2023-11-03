@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - androidx.lifecycle.MutableLiveData</title> <!--timestamp=2023-11-03T00:12:14.615974789Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="androidx.lifecycle.MutableLiveData"> 
+  <meta name="keywords" content="androidx.lifecycle.MutableLiveData"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - androidx.lifecycle.MutableLiveData"> 
+  <meta property="og:description" content="androidx.lifecycle.MutableLiveData"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - androidx.lifecycle.MutableLiveData"> 
+  <meta name="twitter:description" content="androidx.lifecycle.MutableLiveData"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-11-02</small>
+        </div> 
+        <h1>androidx.lifecycle.MutableLiveData</h1> 
+        <p>androidx.lifecycle.MutableLiveData is an open-source library from Android which provides a Model-View-ViewModel pattern for developing Android applications. It allows for seamless code sharing between views and models, allowing developers to create highly efficient and modularized apps. The library is part of the AndroidX framework and provides an advanced set of APIs for working with data on devices running Android 4.0 or higher. </p> 
+        <h2>Features</h2> 
+        <p>MutableLiveData includes several features that make it a powerful tool for developing Android applications. Some of these include:</p> 
+        <ul> 
+         <li>Observers- MutableLiveData has built-in observability support, allowing developers to detect when data in the model changes and react accordingly.</li> 
+         <li>Data Binding- MutableLiveData can be used to bind data from the model to views, eliminating the need for complex data synchronization code.</li> 
+         <li>Threading Support- MutableLiveData has thread safety features, ensuring that any data-related operations are performed on the correct thread.</li> 
+        </ul> 
+        <p>MutableLiveData also provides several useful utility classes for working with Views, database operations, and other common tasks.</p> 
+        <h2>Example Usage</h2> 
+        <p>To use androidx.lifecycle.MutableLiveData, first create a class that extends </p>
+        <pre>MutableLiveData</pre>, and then override the 
+        <pre>onChanged()</pre> method to be called when new data is available.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyMutableLiveData extends MutableLiveData<MyData> {
+  @Override
+  public void onChanged(@Nullable MyData data) {
+    // do something with data
+  }
+}
+
+          </xmp></code></pre> 
+        <p>Next, register an observer to receive data updates from the MutableLiveData. This is usually done inside the Activity or Fragment's </p>
+        <pre>onCreate()</pre> or 
+        <pre>onStart()</pre> method.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MyMutableLiveData liveData = new MyMutableLiveData();
+
+liveData.observe(this, myData -> {
+  // Do something with the changed data
+});
+
+          </xmp></code></pre> 
+        When new data is available, the
+        <pre>onChanged()</pre> method will be invoked. The observer will then receive the new data and can act accordingly. In addition, the observer will be notified of any changes to the data, allowing for efficient code reuse.
+         
+        Finally, if changes are made to the data, the
+        <pre>setValue()</pre> method can be used to alert observers of the new data. This will cause the 
+        <pre>onChanged()</pre> method to be called, allowing the view to be updated accordingly.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+liveData.setValue(newData);
+
+          </xmp></code></pre> 
+        <p>With this pattern, developers can easily create highly efficient and scalable Android applications.</p> 
+        <h2>Conclusion</h2> 
+        <p>Androidx.lifecycle.MutableLiveData is an advanced library that provides powerful data-binding and threading support for building efficient Android applications. With its built-in observability and utility classes, developers are able to quickly and easily create modularized apps with minimal code.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.script.ScriptEngineManager.html">javax.script.ScriptEngineManager</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/"> Hashtable </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Simple-Java-Hashtable-example.html">Simple Java Hashtable example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Iterate-through-elements-of-Java-LinkedList-using-Iterator-example.html">Iterate through elements of Java LinkedList using Iterator example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Convert-Java-LinkedList-to-Array.html">Convert Java LinkedList to Array</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.codehaus.jackson.type.TypeReference.html">o.c.j.t.TypeReference</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/"> Data types </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/Java-byte-Example.html">Java byte Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-keys-using-Comparator-interface.html">Sort LinkedHashMap by keys using Comparator interface</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Print-array-elements-using-Arrays-class.html">Print array elements using Arrays class</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/java.time.format.TextStyle.html">java.time.format.TextStyle</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-check-if-the-TreeMap-is-empty.html">How to check if the TreeMap is empty</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-30 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>JavaFan</h3> <p><a href="#">2023-12-30 14:13</a></p> Can somebody elaborate more? <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Martin</h3> <p><a href="#">2023-12-04 15:30</a></p> it was very helpful <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Java-TreeMap-forEach-example.html">Java TreeMap forEach example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Check-if-array-contains-value-using-Arrays-class.html">Check if array contains value using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Determine-If-The-Checkbox-Is-Enabled-Example.html">Determine If The Checkbox Is Enabled Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/JLabel-Set-Tooltip-Example.html">JLabel Set Tooltip Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.util.concurrent.ScheduledThreadPoolExecutor.html">j.u.c.ScheduledThreadPoolExecutor</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Convert-Java-String-to-Double-example.html">Convert Java String to Double example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.google.common.collect.Table.html">com.google.common.collect.Table</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-find-element-index-in-LinkedHashSet.html">How to find element index in LinkedHashSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-elements-of-Java-ArrayList-Example.html">Sort elements of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.elasticsearch.common.transport.InetSocketTransportAddress.html">o.e.c.t.InetSocketTransportAddress</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.springframework.cloud.stream.annotation.EnableBinding.html">o.s.c.s.a.EnableBinding</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Perform-Binary-Search-on-Java-ArrayList-Example.html">Perform Binary Search on Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-iterate-the-Vector-elements-in-the-reverse-order-(backward-direction).html">How to iterate the Vector elements in the reverse order (backward direction)</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Get-Darker-Version-Of-Current-Color-Example.html">Get Darker Version Of Current Color Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-ArrayList-elements-using-Comparator.html">Sort ArrayList elements using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-3-Example.html">Java Pyramid 3 Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.google.android.exoplayer2.ExoPlaybackException.html">c.g.a.e.ExoPlaybackException</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.bluetooth.BluetoothDevice.html">android.bluetooth.BluetoothDevice</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Tail-Map-from-Java-TreeMap-example.html">Get Tail Map from Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Get-Set-view-of-Keys-from-Java-LinkedHashMap-example.html">Get Set view of Keys from Java LinkedHashMap example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.net.MulticastSocket</title> <!--timestamp=2023-11-03T00:12:44.262700819Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.net.MulticastSocket"> 
+  <meta name="keywords" content="java.net.MulticastSocket"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.net.MulticastSocket"> 
+  <meta property="og:description" content="java.net.MulticastSocket"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.net.MulticastSocket"> 
+  <meta name="twitter:description" content="java.net.MulticastSocket"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-11-02</small>
+        </div> 
+        <h1>Java.net.MulticastSocket</h1> 
+        <p>Java's multicast socket class java.net.MulticastSocket enables applications to send and receive data to and from multiple hosts simultaneously over network. MulticastSocket is a subclass of DatagramSocket, and thus extends its features. This class is most commonly used for broadcasting messages across LAN or WAN networks.</p> 
+        <p>To create a MulticastSocket, we must specify a port number on which to bind the socket. To join a multicast group, the application must use the joinGroup() method, specifying a multicast address. To leave a multicast group, the application must use the leaveGroup() method. The setTimeToLive(int ttl) method allows the application to specify the Time-To-Live (TTL) value for multicast packets. This is the number of hops (routers) the packet will travel until it expires.</p> 
+        Let's look at an example of code. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+import java.net.*;
+
+public class MulticastSend {
+   public static void main(String[] args) throws Exception {
+      System.out.println("Sending Packet");
+      InetAddress group = InetAddress.getByName("230.0.0.1");
+      MulticastSocket s = new MulticastSocket();
+      s.setTimeToLive(1);
+      DatagramPacket hi = new DatagramPacket("Hello".getBytes(), "Hello".length(), group, 4446);
+      s.send(hi);
+      s.close();
+   }
+}
+
+          </xmp></code></pre> 
+        <p>In this example, we create a MulticastSocket and bind it to port 4446. We then set a TTL value of 1, indicating that the packets will travel through a maximum of 1 router hop. We create a DatagramPacket with the message "Hello" and specify the group address 230.0.0.1 as the destination. Finally, we send the packet and close the socket.</p> 
+        <p>We can also receive packets from groups through a MulticastSocket. The following code example shows how to receive packets from a multicast group.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+import java.net.*;
+
+public class MulticastReceive {
+   public static void main(String[] args) throws Exception {
+      System.out.println("Receiving Packet");
+      InetAddress group = InetAddress.getByName("230.0.0.1");
+      MulticastSocket s = new MulticastSocket(4446);
+      s.joinGroup(group);
+      byte[] buf = new byte[1000];
+      DatagramPacket recv = new DatagramPacket(buf, buf.length);
+      s.receive(recv);
+      String msg = new String(recv.getData(), 0, recv.getLength());
+      System.out.println("Received: " + msg);
+      s.leaveGroup(group);
+      s.close();
+   }
+}
+
+          </xmp></code></pre> 
+        <p>In this example, we create a MulticastSocket and bind it to port 4446. We then join the group address 230.0.0.1. We create a buffer and DatagramPacket to receive packets, and then use the receive() method to receive a packet. Finally, we print out the received message and leave the group before closing the socket.</p> 
+        <p>MulticastSocket makes it easy to send and receive data between multiple hosts. It allows applications to broadcast data to a large number of recipients without requiring direct connections between each sender and receiver, making it ideal for large-scale data distribution.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.google.gson.ExclusionStrategy.html">com.google.gson.ExclusionStrategy</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-iterate-HashSet-in-Java.html">How to iterate HashSet in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.awaitility.Awaitility.html">org.awaitility.Awaitility</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/JLabel-Get-Tooltip-Example.html">JLabel Get Tooltip Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.springframework.cloud.stream.annotation.StreamListener.html">o.s.c.s.a.StreamListener</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Change-Checkbox-Background-Color-Example.html">Change Checkbox Background Color Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/"> AWT Color </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Colored-Hello-World-Applet-Example.html">Colored Hello World Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/"> Convertion </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-int.html">Convert String to int</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-copy,-merge,-or-clone-the-TreeSet-in-Java.html">How to copy, merge, or clone the TreeSet in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-get-HashMap-size-example.html">How to get HashMap size example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-10 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-elements-of-Java-ArrayList-Example.html">Sort elements of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Get-Tail-Set-from-Java-TreeSet-example.html">Get Tail Set from Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/FileOutputStream/Create-FileOutputStream-object-from-File-object.html">Create FileOutputStream object from File object</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.util.concurrent.ConcurrentSkipListSet.html">j.u.c.ConcurrentSkipListSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Delete-all-mappings-or-clear-HashMap-example.html">Delete all mappings or clear HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-square-root-of-a-number-using-Math.sqrt.html">F.sqrt</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.commons.csv.CSVPrinter.html">org.apache.commons.csv.CSVPrinter</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Find-the-minimum-or-maximum-element-of-Vector-using-Comparator.html">Find the minimum or maximum element of Vector using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/com.google.common.primitives.Ints.html">com.google.common.primitives.Ints</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Frame/Create-Frame-Window-With-Window-Close-Event-Example.html">Create Frame Window With Window Close Event Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Get-all-keys-of-Java-HashMap-example.html">Get all keys of Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-all-occurrences-of-specified-element-of-Java-Vector-Example.html">Replace all occurrences of specified element of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Get-X-and-Y-Coordinates-of-JTextField-Example.html">Get X and Y Coordinates of JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.http.message.BasicHttpResponse.html">o.a.h.m.BasicHttpResponse</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Circle-Perimeter-using-Java-Example.html">Calculate Circle Perimeter using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-String-array-to-List-(Convert-String-array-to-ArrayList,-LinkedList).html">Convert String array to List (Convert String array to ArrayList, LinkedList)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-through-Vector-in-reverse-direction-using-the-ListIterator.html">How to iterate through Vector in reverse direction using the ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Convert-ArrayList-to-LinkedHashMap-in-Java.html">Convert ArrayList to LinkedHashMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.eclipse.jgit.revwalk.RevCommit.html">org.eclipse.jgit.revwalk.RevCommit</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/java.io.StreamTokenizer.html">java.io.StreamTokenizer</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
