@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - androidx.preference.PreferenceManager</title> <!--timestamp=2023-11-05T00:13:54.594893015Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="androidx.preference.PreferenceManager"> 
+  <meta name="keywords" content="androidx.preference.PreferenceManager"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - androidx.preference.PreferenceManager"> 
+  <meta property="og:description" content="androidx.preference.PreferenceManager"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - androidx.preference.PreferenceManager"> 
+  <meta name="twitter:description" content="androidx.preference.PreferenceManager"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-11-04</small>
+        </div> 
+        <h1>Introduction to androidx.preference.PreferenceManager</h1> 
+        <p>The AndroidX Preference Manager library is a highly versatile and powerful library that can be used to easily save and manage application preferences. Preferences can range from simple primitive types like numbers and strings to more complex objects such as lists, maps, and objects. The Preference Manager library also provides a simple API which allows developers to quickly and easily read, write, and edit preferences in a very user-friendly way. This guide will explain how to setup the AndroidX Preference Manager library, use it to read and write preferences, and offer code examples for each step of the way.</p> 
+        <h2>Setting up the Preference Manager Library</h2> 
+        <p>Setting up the AndroidX Preference Manager library is fairly easy and straightforward. To begin, simply add the following line of code to your application’s dependencies:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+implementation 'androidx.preference:preference:1.0.0'
+
+          </xmp></code></pre> 
+        <p>Once this line of code is added, you should now have the ability to use the Preference Manager API. Now that the Preference Manager library is set up, you can begin using it to read, write, and edit preferences.</p> 
+        <h2>Reading Preferences with PreferenceManager</h2> 
+        <p>Using the Preference Manager library, reading preferences is quite simple. All you need to do is call </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+PreferenceManager.getDefaultSharedPreferences()
+
+          </xmp></code></pre> to retrieve the application’s default preferences. After that, you can simply pass in a key and the method will return the associated value.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    String userName = sharedPreferences.getString("user_name", "");
+
+          </xmp></code></pre> 
+        In this example, the
+        <pre>getString()</pre> method is used to retrieve the value associated with the “user_name” preference. If the preference does not exist, the second parameter specified in the method call will be returned instead.
+         
+        <h2>Writing Preferences with PreferenceManager</h2> 
+        <p>Writing preferences with the Preference Manager library is just as simple as reading them. To do this, you need to first call the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getDefaultSharedPreferences()
+
+          </xmp></code></pre> method and then use the returned 
+        <pre>SharedPreferences</pre> object to write the desired preferences.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+    editor.putString("user_name", "john");
+    editor.apply();
+
+          </xmp></code></pre> 
+        <p>In this example, we are writing the “user_name” preference with a value of “john”. Once the preference is written, you must call the </p>
+        <pre>apply()</pre> method to ensure the changes are saved.
+         
+        <h2>Clearing Preferences with PreferenceManager</h2> 
+        <p>To clear all preferences stored with the Preference Manager library, you can simply call the </p>
+        <pre>clear()</pre> method. However, if you wish to remove a specific preference, you can do so by using the 
+        <pre>remove(String key)</pre> method. For example, to remove the “user_name” preference, you would call the following line of code:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+PreferenceManager.getDefaultSharedPreferences(context).edit().remove("user_name").apply();
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>The AndroidX Preference Manager library is a powerful and easy-to-use library that can be used to easily read, write, and edit application preferences. Using the methods described in this guide, you should now have a better understanding of how the library works and how to use it to improve the user experience of your application.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Tail-Map-from-Java-TreeMap-example.html">Get Tail Map from Java TreeMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipEntry/"> ZipEntry </a> </p> <a href="/articles/Java/Java-Zip/ZipEntry/Determine-if-the-Zip-Entry-Is-Directory-Example.html">Determine if the Zip Entry Is Directory Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Convert-LinkedHashMap-to-two-arrays.html">Convert LinkedHashMap to two arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.commons.lang3.builder.ToStringStyle.html">o.a.c.l.b.ToStringStyle</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/com.google.common.collect.Sets.html">com.google.common.collect.Sets</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-get-random-elements-from-LinkedHashSet.html">How to get random elements from LinkedHashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/How-to-convert-exception-stack-trace-to-String.html">How to convert exception stack trace to String</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/"> Convertion </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-int-to-String.html">Convert int to String</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-clear-or-remove-all-mappings-from-LinkedHashMap.html">How to clear or remove all mappings from LinkedHashMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Java-Convert-TreeSet-to-array.html">Java Convert TreeSet to array</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-17 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>JavaFan</h3> <p><a href="#">2023-12-15 13:03</a></p> <p>thanks. This is the first sample project I checked so far</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Thomas</h3> <p><a href="#">2023-12-19 09:13</a></p> Grt ;-) <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Simple-Java-LinkedHashMap-example.html">Simple Java LinkedHashMap example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-Java-String-to-Byte-example.html">Convert Java String to Byte example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/net.minecraft.client.gui.GuiScreen.html">net.minecraft.client.gui.GuiScreen</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-exponential-value-of-a-number-using-Math.exp.html">F.exp</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Java-String-Split-Example.html">Java String Split Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-unsigned-byte-from-file-using-DataInputStream.html">Read unsigned byte from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Hide-Button-Example.html">Hide Button Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.intellij.psi.PsiDocumentManager.html">com.intellij.psi.PsiDocumentManager</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-get-size-example-(LinkedList-length).html">Java LinkedList get size example (LinkedList length)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Remove-first-and-last-elements-of-LinkedList-Java-example.html">Remove first and last elements of LinkedList Java example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Iterate-LinkedList-example.html">Iterate LinkedList example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/android.support.v4.widget.CursorAdapter.html">a.s.v.w.CursorAdapter</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-the-first-and-last-elements-of-the-TreeSet.html">How to get the first and last elements of the TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Get-elements-from-LinkedList-Java-example.html">Get elements from LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-get-absolute-path-of-a-file-in-Java.html">How to get absolute path of a file in Java</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Read-Number-from-Console-and-Check-if-it-is-a-Palindrome-Number.html">Read Number from Console and Check if it is a Palindrome Number</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.openqa.selenium.WebDriver.html">org.openqa.selenium.WebDriver</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Java-ArrayList-Example.html">Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/android.media.MediaPlayer.OnPreparedListener.html">a.m.M.OnPreparedListener</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Read-text-file-to-Java-HashMap-example.html">Read text file to Java HashMap example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
