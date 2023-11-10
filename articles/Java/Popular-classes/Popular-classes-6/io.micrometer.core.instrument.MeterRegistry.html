@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - io.micrometer.core.instrument.MeterRegistry</title> <!--timestamp=2023-11-10T00:12:52.918406056Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.micrometer.core.instrument.MeterRegistry"> 
+  <meta name="keywords" content="io.micrometer.core.instrument.MeterRegistry"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.micrometer.core.instrument.MeterRegistry"> 
+  <meta property="og:description" content="io.micrometer.core.instrument.MeterRegistry"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.micrometer.core.instrument.MeterRegistry"> 
+  <meta name="twitter:description" content="io.micrometer.core.instrument.MeterRegistry"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-11-09</small>
+        </div> 
+        <h1>Introduction to io.micrometer.core.instrument.MeterRegistry</h1> 
+        <p>The io.micrometer.core.instrument.MeterRegistry is a Java library for collecting and publishing application metrics. It provides a streamlined way to collect and store metrics from applications, making them available for diagnostic and analysis purposes. This article will provide an overview of the MeterRegistry, including how it works and how to use it to collect and publish application-level metrics.</p> 
+        <h2>How Does MeterRegistry Work?</h2> 
+        <p>MeterRegistry works by allowing developers to register a meter with it, which will then be used to record and publish metrics. The meter can be configured with different settings, such as the measurement type, frequency, and the range of values that will be monitored. Once the meter is registered, it will begin to capture and store metrics. These metrics can then be published to an external storage mechanism, such as a time-series database or an alerting system.</p> 
+        <p>MeterRegistry also provides support for a variety of metric types, such as counters, gauges, and timers. These metrics can be collected over a specified timeframe, and then published to an external source, such as a time-series database or an alerting system. For example, a meters can measure the number of HTTP requests received by an application, the amount of time spent on a particular query, or the number of queries exceeding a certain threshold.</p> 
+        <h2>Using MeterRegistry to Monitor Performance</h2> 
+        <p>MeterRegistry can be used to monitor application performance in real-time. This can be done by setting up meters to measure key performance indicators (KPIs), such as response time, throughput, or latency. The metrics collected can then be used to identify potential issues or bottlenecks within an application.</p> 
+        <p>For example, if the response time of an application is decreasing, the meter can be used to monitor the impact this has on other KPIs, such as throughput or latency. If these KPIs are also affected, then the issue can be identified and addressed quickly.</p> 
+        <p>MeterRegistry also provides support for aggregating metrics, allowing developers to measure performance across multiple application components. This can be useful for identifying slow components or areas of the application that may require attention. This data can then be used to improve the overall performance of the application.</p> 
+        <h2>Examples of Using MeterRegistry</h2> 
+        <p>Using MeterRegistry is straightforward and simple. Here are a few examples of how it can be used to monitor application performance:</p> 
+        <ul> 
+         <li><p>Registering a gauge to measure the HTTP response time of an application:</p> <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+MeterRegistry registry = new SimpleMeterRegistry();
+Gauge latencyGauge = Gauge
+    .builder("http_response_time", () -> getResponseTime())
+    .register(registry);
+
+            </xmp></code></pre> </li> 
+         <li><p>Registering a timer to measure the duration of a specific query:</p> <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+MeterRegistry registry = new SimpleMeterRegistry();
+Timer queryTimer = Timer
+    .builder("query_execution_time")
+    .register(registry);
+
+            </xmp></code></pre> </li> 
+         <li><p>Registering a counter to measure the number of requests over a specified time period:</p> <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+MeterRegistry registry = new SimpleMeterRegistry();
+Counter requestCounter = Counter
+    .builder("http_requests")
+    .register(registry);
+
+            </xmp></code></pre> </li> 
+        </ul> 
+        <h2>Conclusion</h2> 
+        <p>MeterRegistry is a powerful tool for monitoring and collecting application metrics. It provides an easy way to set up and configure meters, as well as aggregating metrics across multiple components. MeterRegistry is highly customizable and provides support for a variety of metric types, making it an ideal choice for monitoring application performance in real-time.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Compare-two-ArrayList.html">Compare two ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/Java-Reverse-String-Array-Example.html">Java Reverse String Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Static/"> Static </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Static/Java-static-method-example.html">Java static method example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Rectangle-&-Square-in-Applet-Window-Example.html">Draw Rectangle & Square in Applet Window Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.logging.Logger.html">java.util.logging.Logger</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Generate-Pyramid-For-a-Given-Number-Example.html">Generate Pyramid For a Given Number Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-preserve-insertion-order-of-Java-HashSet-elements.html">How to preserve insertion order of Java HashSet elements</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.squareup.javapoet.AnnotationSpec.html">com.squareup.javapoet.AnnotationSpec</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-get-the-first-or-last-element-from-LinkedHashSet.html">How to get the first or last element from LinkedHashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Convert-HashMap-to-LinkedList.html">Convert HashMap to LinkedList</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-07 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Nahish</h3> <p><a href="#">2023-12-29 17:19</a></p> Interesting, thx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Robert</h3> <p><a href="#">2023-12-27 03:46</a></p> Grt ;-) <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/StringBuffer/Java-StringBuffer-SubString-Example.html">Java StringBuffer SubString Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.openjdk.jmh.runner.options.OptionsBuilder.html">o.o.j.r.o.OptionsBuilder</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Java-ArrayList-of-arrays.html">Java ArrayList of arrays</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Check-if-a-particular-element-exists-in-Java-HashSet-Example.html">Check if a particular element exists in Java HashSet Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-String-as-bytes-to-a-file-using-DataOutputStream.html">Write String as bytes to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-check-if-file-exists-in-Java.html">How to check if file exists in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-convert-Java-TreeMap-to-an-ArrayList-(List).html">How to convert Java TreeMap to an ArrayList (List)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-Map-to-List.html">Convert Map to List</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.log4j.LogManager.html">org.apache.log4j.LogManager</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-iterate-HashSet-in-Java.html">How to iterate HashSet in Java</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/com.google.common.base.Objects.html">com.google.common.base.Objects</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Iterate-through-keys-of-Java-Hashtable-example.html">Iterate through keys of Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Change-AWT-Button-Font-Example.html">Change AWT Button Font Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Sort-HashMap-by-values.html">Sort HashMap by values</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Float-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Float object to byte, short, int, long, float and double</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-headset,-tailset,-and-subset-from-the-Java-TreeSet.html">How to get headset, tailset, and subset from the Java TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/CheckedInputStream/Extract-Zip-File-With-Adler32-Checksum-Example.html">Extract Zip File With Adler32 Checksum Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Mark-file-or-directory-Read-Only.html">Mark file or directory Read Only</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.persistence.JoinColumn.html">javax.persistence.JoinColumn</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.graphics.drawable.BitmapDrawable.html">a.g.d.BitmapDrawable</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
