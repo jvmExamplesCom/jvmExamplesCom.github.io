@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - androidx.localbroadcastmanager.content.LocalBroadcastManager</title> <!--timestamp=2023-11-16T00:13:00.043678675Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="androidx.localbroadcastmanager.content.LocalBroadcastManager"> 
+  <meta name="keywords" content="androidx.localbroadcastmanager.content.LocalBroadcastManager"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - androidx.localbroadcastmanager.content.LocalBroadcastManager"> 
+  <meta property="og:description" content="androidx.localbroadcastmanager.content.LocalBroadcastManager"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - androidx.localbroadcastmanager.content.LocalBroadcastManager"> 
+  <meta name="twitter:description" content="androidx.localbroadcastmanager.content.LocalBroadcastManager"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-11-15</small>
+        </div> 
+        <h1>Introduction to androidx.localbroadcastmanager.content.LocalBroadcastManager</h1> 
+        <p>androidx.localbroadcastmanager.content.LocalBroadcastManager is a powerful tool which allows you to easily send and receive LocalBroadcast messages throughout your Android application. This tutorial will explain the basics of how to use this framework and provide sample code snippets to get you started.</p> 
+        <h2> Setting up the Environment </h2> 
+        <p>In order to use the LocalBroadcastManager, you must add the dependency to your build.gradle file:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
+
+          </xmp></code></pre> 
+        <p>Once you have the dependency added, you must then declare the <em>LocalBroadcastManager</em> in the application class and register it in the <em>onCreate()</em> method:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyApplication extends Application {
+
+    private static LocalBroadcastManager localBroadcastManager;
+
+    public static LocalBroadcastManager getLocalBroadcastManager() {
+        return localBroadcastManager;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
+    }
+}
+
+          </xmp></code></pre> 
+        <h2>Sending LocalBroadcast Messages</h2> 
+        <p>Once the environment is set up, you can start sending LocalBroadcast messages. To do so, create an <em>Intent</em> object with the action string, <em>MyAction</em> :</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Intent intent = new Intent("MyAction");
+
+          </xmp></code></pre> 
+        <p>You can also include some data in the intent such as <em>String</em>, <em>Integer</em>, or <em>Bundle</em> objects:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+intent.putExtra("param_name", "Hello World!");
+
+          </xmp></code></pre> 
+        <p>To send the message, use the <em>sendBroadcast()</em> method of the <em>LocalBroadcastManager</em>:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+
+          </xmp></code></pre> 
+        <h2>Receiving LocalBroadcast Messages</h2> 
+        <p>To receive a LocalBroadcast message, you must register a <em>BroadcastReceiver</em> for the specific action string:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+LocalBroadcastManager.getInstance(this).registerReceiver(myReceiver, 
+    new IntentFilter("MyAction"));
+
+          </xmp></code></pre> 
+        <p>Then implement the <em>BroadcastReceiver</em> and handle the received message in the <em>onReceive()</em> method:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+BroadcastReceiver myReceiver = new BroadcastReceiver() {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        String paramName = intent.getStringExtra("param_name");
+        // Handle the received message here
+    }
+};
+
+          </xmp></code></pre> 
+        <p>To unregister the receiver once it is no longer needed, call the <em>unregisterReceiver()</em> method:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+LocalBroadcastManager.getInstance(this).unregisterReceiver(myReceiver);
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>Using the androidx.localbroadcastmanager.content.LocalBroadcastManager is an easy way to send and receive LocalBroadcast messages throughout your Android application. With the steps provided in this tutorial, you should have no trouble getting started with this powerful tool.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Create-an-object-array-from-elements-of-LinkedList-Java-example.html">Create an object array from elements of LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Threads/"> Threads </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Threads/Set-Thread-Name-Example.html">Set Thread Name Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/org.w3c.dom.Element.html">org.w3c.dom.Element</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-get-first-or-last-elements-from-Java-HashSet.html">How to get first or last elements from Java HashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Math-Class/"> Math Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-square-root-of-a-number-using-Math.sqrt.html">F.sqrt</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/"> Convertion </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-long-to-String.html">Convert long to String</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipEntry/"> ZipEntry </a> </p> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Zip-Entry-Example.html">Get Zip Entry Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-an-array-to-TreeSet.html">How to convert an array to TreeSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.swing.Action.html">javax.swing.Action</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.view.KeyCharacterMap.html">android.view.KeyCharacterMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-08 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Nahish</h3> <p><a href="#">2023-12-19 02:21</a></p> <p>These Programs Are Very Useful For Java Beginners!... Thanks! ...</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Victor</h3> <p><a href="#">2023-12-21 14:00</a></p> Appreciate your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/javax.jms.DeliveryMode.html">javax.jms.DeliveryMode</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-HashMap-by-key-using-Comparator.html">Sort HashMap by key using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/com.bumptech.glide.request.RequestOptions.html">c.b.g.r.RequestOptions</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Get-Total-Memory-of-Java-Virtual-Machine(JVM)-Example.html">Get Total Memory of Java Virtual Machine(JVM) Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-LinkedHashMap-key-by-index.html">How to get LinkedHashMap key by index</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Set-Foreground-Color-of-JLabel-Example.html">Set Foreground Color of JLabel Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-long-primitive-to-Long-object-Example.html">Convert long primitive to Long object Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-String-to-int-Example.html">Convert String to int Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.google.zxing.Result.html">com.google.zxing.Result</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-add-elements-to-Vector-in-Java.html">How to add elements to Vector in Java</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-to-ArrayList-using-Arrays.html">Convert String to ArrayList using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Print-ArrayList-example.html">Print ArrayList example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/net.sf.cglib.proxy.MethodInterceptor.html">net.sf.cglib.proxy.MethodInterceptor</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Create-JLabel-With-Image-Icon-and-Text-Example.html">Create JLabel With Image Icon and Text Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-double-to-a-file-using-DataOutputStream.html">Write double to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-char-from-file-using-DataInputStream.html">Read char from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Java-HashMap-get-method-example.html">Java HashMap get method example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.hardware.camera2.CameraAccessException.html">a.h.c.CameraAccessException</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Select-Particular-Item-Of-AWT-Choice-Or-Combobox-Example.html">Select Particular Item Of AWT Choice Or Combobox Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/java.lang.reflect.UndeclaredThrowableException.html">j.l.r.UndeclaredThrowableException</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
