@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.hamcrest.BaseMatcher</title> <!--timestamp=2023-11-25T00:12:02.242906379Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.hamcrest.BaseMatcher"> 
+  <meta name="keywords" content="org.hamcrest.BaseMatcher"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.hamcrest.BaseMatcher"> 
+  <meta property="og:description" content="org.hamcrest.BaseMatcher"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.hamcrest.BaseMatcher"> 
+  <meta name="twitter:description" content="org.hamcrest.BaseMatcher"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-11-24</small>
+        </div> 
+        <h1>org.hamcrest.BaseMatcher</h1> 
+        <p>The org.hamcrest.BaseMatcher is an abstract class that provides a framework for creating custom matchers for use in Java. It implements the org.hamcrest.Matcher interface and provides methods for evaluating and describing the outcome of a test. It can be used to write tests that compare the results of two expressions, check the validity of an assertion, or check the correctness of a data structure.</p> 
+        <h2>Basic Example</h2> 
+        <p>The following code demonstrates a basic usage of the org.hamcrest.BaseMatcher class. It creates a custom matcher that checks whether a given string contains the substring "hello".</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+org.hamcrest.BaseMatcher m = new org.hamcrest.BaseMatcher() {
+    public boolean matches(Object o) {
+        return o.toString().contains("hello");
+    }
+    
+    public void describeTo(Description description) {
+        description.appendText("string contains hello");
+    }
+};
+
+assertThat("Hello world", m);
+
+          </xmp></code></pre> 
+        <p>The matcher is then used with the assertThat method to verify that the string "Hello world" does indeed contain the substring "hello".</p> 
+        <h2>Custom Descriptions</h2> 
+        <p>The BaseMatcher allows you to provide a custom description for any matcher that you create. This description is used by the assertThat method to provide more descriptive error messages if the matcher fails.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+org.hamcrest.BaseMatcher m = new org.hamcrest.BaseMatcher() {
+    public boolean matches(Object o) {
+        return o.toString().contains("hello");
+    }
+    
+    public void describeTo(Description description) {
+        description.appendText("string contains hello");
+    }
+};
+
+assertThat("Hello world", m.describedAs("Test for 'hello'"));
+
+          </xmp></code></pre> 
+        <p>In this example, the matcher is given a custom description of "Test for 'hello'". If the matcher fails, the error message will state that the test failed for the specified reason. This makes it easier to identify what went wrong in the test.</p> 
+        <h2>Custom Error Messages</h2> 
+        <p>The BaseMatcher also provides the ability to specify a custom error message when an assertion fails. This can be used to provide more detailed information about why the assertion failed. This is done by passing an additional parameter to the assertThat method.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+org.hamcrest.BaseMatcher m = new org.hamcrest.BaseMatcher() {
+    public boolean matches(Object o) {
+        return o.toString().contains("hello");
+    }
+    
+    public void describeTo(Description description) {
+        description.appendText("string contains hello");
+    }
+};
+
+assertThat("Goodbye world", m, "String does not contain 'hello'");
+
+          </xmp></code></pre> 
+        <p>If the matcher fails, the specified error message will be displayed instead of the default one. This makes it easier to pinpoint where the problem occurred and what needs to be fixed.</p> 
+        <h2>Conclusion</h2> 
+        <p>The org.hamcrest.BaseMatcher is a powerful tool for writing custom matchers for use in Java. It provides methods for evaluating and describing the outcomes of a test as well as methods for specifying custom descriptions and error messages. By using the BaseMatcher, you can easily create powerful and flexible tests that ensure the correctness of your code.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Handle-Checkbox-Event-Example.html">Handle Checkbox Event Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/"> Convertion </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-short-to-String.html">Convert short to String</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/io.reactivex.Flowable.html">io.reactivex.Flowable</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Declare-multiple-variables-in-for-loop-Example.html">Declare multiple variables in for loop Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.android.vending.billing.IInAppBillingService.html">c.a.v.b.IInAppBillingService</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Insert-all-elements-of-other-Collection-to-Specified-Index-of-Java-Vector-Example.html">Insert all elements of other Collection to Specified Index of Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.eclipse.swt.widgets.Table.html">org.eclipse.swt.widgets.Table</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JTextField/"> JTextField </a> </p> <a href="/articles/Java/Swing/JTextField/Create-Read-Only-JTextField-Example.html">Create Read Only JTextField Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Iterate-HashMap.html">Iterate HashMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Create-AWT-Checkbox-Example.html">Create AWT Checkbox Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-03 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Ojas</h3> <p><a href="#">2024-01-13 16:16</a></p> Can somebody elaborate more? <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Victor</h3> <p><a href="#">2024-01-11 13:51</a></p> great examples ... thnx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/android.app.job.JobParameters.html">android.app.job.JobParameters</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.graphics.Camera.html">android.graphics.Camera</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/ArrayList-insert-element-at-the-beginning.html">ArrayList insert element at the beginning</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Get-elements-by-index-from-Java-TreeSet.html">Get elements by index from Java TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Simple-Java-TreeSet-example.html">Simple Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-Java-Vector-in-descending-order-using-comparator-example.html">Sort Java Vector in descending order using comparator example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Java-ArrayList-Example.html">Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Item-Count-Of-AWT-List-Example.html">Get Item Count Of AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Disable-Button-Example.html">Disable Button Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/com.mongodb.MongoClient.html">com.mongodb.MongoClient</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-1-Example.html">Java Pyramid 1 Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean.html">o.s.b.a.c.ConditionalOnMissingBean</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Copy-ArrayList-elements-to-other-ArrayList.html">Copy ArrayList elements to other ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.w3c.dom.ProcessingInstruction.html">org.w3c.dom.ProcessingInstruction</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Convert-java-double-to-Double-object-Example.html">Convert java double to Double object Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/android.transition.Transition.html">android.transition.Transition</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-long-primitive-to-Long-object-Example.html">Convert long primitive to Long object Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Remove-all-elements-or-clear-LinkedList-Java-example.html">Remove all elements or clear LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Remove-all-values-from-Java-HashMap-example.html">Remove all values from Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Double-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Double object to byte, short, int, long, float and double</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
