@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - io.vertx.core.json.JsonArray</title> <!--timestamp=2023-12-10T00:14:28.626786393Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.vertx.core.json.JsonArray"> 
+  <meta name="keywords" content="io.vertx.core.json.JsonArray"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.vertx.core.json.JsonArray"> 
+  <meta property="og:description" content="io.vertx.core.json.JsonArray"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.vertx.core.json.JsonArray"> 
+  <meta name="twitter:description" content="io.vertx.core.json.JsonArray"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-12-09</small>
+        </div> 
+        <h1>Working with JSONArray in Java</h1> JSONArray is a class from the Vertx library for working with JSON arrays. It provides methods for adding and retrieving data from an array, as well as allowing manipulation of the array such as sorting and filtering. In this article, we'll take a look at how to use the methods in JSONArray to perform different tasks. 
+        <h2>Creating a JSONArray</h2> Before you can start manipulating an array, you need to create it. You can do this by passing in a JSON encoded array as a string, or by creating a new JSONArray object. First, let's look at how to create a new instance of JSONArray using the static method 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JSONArray.parse(String)
+
+          </xmp></code></pre>. This method takes a JSON encoded string and will return a new JSONArray instance. For example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String jsonString = "[1,2,3,4,5]";
+JSONArray array = JSONArray.parse(jsonString);
+
+          </xmp></code></pre> You can also create a new empty array object like so: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JSONArray array = new JSONArray();
+
+          </xmp></code></pre> 
+        <h2>Adding Elements to a JSONArray</h2> Once you have created an array, you can add elements to it. To add an element to an array, use the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+add(Object)
+
+          </xmp></code></pre> method. This method takes an Object as its argument and adds it to the end of the array. For example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+array.add(6);
+
+          </xmp></code></pre> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+add
+
+          </xmp></code></pre> method can add any type of Object, including primitive objects, Strings, JSONObjects, and other JSONArrays. For example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String str = "Hello World";
+JSONObject obj = new JSONObject();
+JSONArray subArray = new JSONArray();
+
+array.add(str);
+array.add(obj);
+array.add(subArray);
+
+          </xmp></code></pre> Note that if you are adding a primitive object, such as an int, you must use the wrapper class such as Integer. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// This is invalid
+array.add(7);
+
+// This is valid
+array.add(Integer.valueOf(7));
+
+          </xmp></code></pre> 
+        <h2>Retrieving Elements from a JSONArray</h2> If you need to retrieve an element from an array, you can do so using the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+get(int)
+
+          </xmp></code></pre> method. This method takes an int argument, which is the index of the element you wish to retrieve. For example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Object firstElement = array.get(0);
+
+          </xmp></code></pre> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+get
+
+          </xmp></code></pre> method returns an Object, so you should cast the object to the appropriate type to use it. For example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Integer secondElement = (Integer) array.get(1);
+
+          </xmp></code></pre> 
+        <h2>Sorting a JSONArray</h2> The Vertx library also provides an easy way to sort a JSONArray. The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+sort(Comparator)
+
+          </xmp></code></pre> method takes a Comparator as its argument, which defines the comparison rules used to sort the elements of the array. For example, if we wanted to sort an array of integers in ascending order: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JSONArray array = JSONArray.parse("[3,2,5,1,4]");
+
+array.sort(Comparator.naturalOrder());
+
+          </xmp></code></pre> After this code is executed, the array will be sorted in ascending order, with 1 being the first element, 2 being the second, and so on. 
+        <h2>Filtering a JSONArray</h2> In addition to sorting, the Vertx library also provides a way to filter the elements of a JSONArray. The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+filter(Predicate)
+
+          </xmp></code></pre> method takes a Predicate as its argument, which defines the criteria used to filter the elements of the array. For example, if we wanted to filter an array to only keep elements that are greater than 3: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JSONArray array = JSONArray.parse("[3,2,5,1,4]");
+
+array.filter(item -> (int) item > 3);
+
+          </xmp></code></pre> After this code is executed, the array will contain only the elements 5 and 4, since they are the only elements greater than 3. 
+        <h2>Conclusion</h2> In this article we looked at how to work with JSONArray in Java using the Vertx library. We looked at how to create a new array, add elements to it, retrieve elements from it, sort it, and filter it. We hope this article has been helpful in getting you started with manipulating JSON arrays in Java. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Break-Statement/"> Break Statement </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Break-Statement/Java-break-statement-example.html">Java break statement example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/List/"> List </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-List-to-array.html">Convert List to array</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-ArrayList-to-String[]-array.html">Convert ArrayList to String[] array</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-get-HashMap-size-example.html">How to get HashMap size example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JTextField/"> JTextField </a> </p> <a href="/articles/Java/Swing/JTextField/Set-JTextField-Border-Example.html">Set JTextField Border Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.eclipse.jface.preference.IPreferenceStore.html">o.e.j.p.IPreferenceStore</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/retrofit2.http.Path.html">retrofit2.http.Path</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataInputStream/"> DataInputStream </a> </p> <a href="/articles/Java/File-And-IO/DataInputStream/Read-byte-from-file-using-DataInputStream.html">Read byte from file using DataInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/javax.enterprise.inject.spi.BeanManager.html">j.e.i.s.BeanManager</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-List-(ArrayList,-LinkedList)-to-Array.html">Convert List (ArrayList, LinkedList) to Array</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-21 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Grigorii</h3> <p><a href="#">2024-01-16 05:09</a></p> Can somebody elaborate more? <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Thomas</h3> <p><a href="#">2024-01-31 21:18</a></p> Grt ;-) <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-random-elements-from-Java-HashSet-using-Arrays-class.html">Get random elements from Java HashSet using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.json.simple.JSONArray.html">org.json.simple.JSONArray</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-Vector-using-the-ListIterator.html">How to iterate Vector using the ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Find-the-minimum-or-maximum-element-of-Vector-using-Comparable.html">Find the minimum or maximum element of Vector using Comparable</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.data.domain.Pageable.html">o.s.d.d.Pageable</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-LinkedHashMap-in-reverse-order-using-ListIterator.html">How to iterate LinkedHashMap in reverse order using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-remove-the-first-element-or-last-element-from-the-Vector.html">How to remove the first element or last element from the Vector</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.hamcrest.core.IsEqual.html">org.hamcrest.core.IsEqual</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Copy-Elements-of-One-Java-Vector-to-Another-Java-Vector-Example.html">Copy Elements of One Java Vector to Another Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Zip-Entry-Example.html">Get Zip Entry Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.eclipse.jetty.server.HttpConnectionFactory.html">o.e.j.s.HttpConnectionFactory</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-5-Example.html">Java Pyramid 5 Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-compare-two-HashSet-objects-using-the-equals-method.html">How to compare two HashSet objects using the equals method</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/Java-double-Example.html">Java double Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-List-to-array.html">Convert List to array</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/Adler32/Generate-Adler32-Checksum-For-Byte-Array-Example.html">Generate Adler32 Checksum For Byte Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-iterate-Java-TreeMap-in-reverse-order.html">How to iterate Java TreeMap in reverse order</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Set-Foreground-Color-Of-an-Applet-Window-Example.html">Set Foreground Color Of an Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.jboss.shrinkwrap.api.ShrinkWrap.html">org.jboss.shrinkwrap.api.ShrinkWrap</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.google.inject.Binder.html">com.google.inject.Binder</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
