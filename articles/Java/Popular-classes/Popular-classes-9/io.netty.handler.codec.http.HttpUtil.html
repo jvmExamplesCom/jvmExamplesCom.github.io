@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - io.netty.handler.codec.http.HttpUtil</title> <!--timestamp=2023-12-13T00:12:41.683342064Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.netty.handler.codec.http.HttpUtil"> 
+  <meta name="keywords" content="io.netty.handler.codec.http.HttpUtil"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.netty.handler.codec.http.HttpUtil"> 
+  <meta property="og:description" content="io.netty.handler.codec.http.HttpUtil"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.netty.handler.codec.http.HttpUtil"> 
+  <meta name="twitter:description" content="io.netty.handler.codec.http.HttpUtil"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-12-12</small>
+        </div> 
+        <h1>Overview of io.netty.handler.codec.http.HttpUtil</h1> 
+        <p>io.netty.handler.codec.http.HttpUtil is a utility class that provides various tools for working with HTTP protocol, including the ability to build and parse HTTP messages, enforce compliance with HTTP standards, and more. This article provides an overview of HttpUtil and some code examples demonstrating its usage in practice.</p> 
+        <h2>Building HTTP Messages with HttpUtil</h2> 
+        <p>The HttpUtil class provides several static methods for building valid HTTP messages. These methods allow developers to create properly formatted HTTP requests and responses that meet the HTTP standards.</p> 
+        <p>To construct a simple HTTP request with HttpUtil, the “request()” method is used. This method requires the full URL of the request, the HTTP method (GET, POST, etc.), and a map of the headers for the request. The following example shows how to construct an HTTP GET request for http://example.com using HttpUtil:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+HttpRequest request = HttpUtil.request("http://example.com", HttpMethod.GET, headers);
+
+          </xmp></code></pre> 
+        <p>Similarly, to construct an HTTP POST request, the parameters of the request can be added using the “setContent()” method. The following example shows how to construct an HTTP POST request for http://example.com with a JSON body:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+HttpRequest request = HttpUtil.request("http://example.com", HttpMethod.POST, headers);
+request.setContent("{\"foo\":\"bar\"}")
+
+          </xmp></code></pre> 
+        <p>To construct a response from an HTTP request, the “response()” method is used. This method takes two parameters: the status code of the response, and a map of the headers for the response. The following example shows how to construct an HTTP response with a status code of 200 OK:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+HttpResponse response = HttpUtil.response(200, headers);
+
+          </xmp></code></pre> 
+        <p>The response can also be populated with a body by using the “setContent()” method. The following example shows how to construct an HTTP response with a status code of 200 OK and a JSON body:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+HttpResponse response = HttpUtil.response(200, headers);
+response.setContent("{\"foo\":\"bar\"}")
+
+          </xmp></code></pre> 
+        <h2>Parsing HTTP Messages with HttpUtil</h2> 
+        <p>In addition to allowing developers to build HTTP messages, HttpUtil also provides tools for parsing existing HTTP messages. The “parseRequest()” and “parseResponse()” methods can be used to parse an HTTP request or response, respectively. These methods take an InputStream containing the raw HTTP message as a parameter. The following example shows how to parse an HTTP request from an InputStream:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+HttpRequest request = HttpUtil.parseRequest(inputStream);
+
+          </xmp></code></pre> 
+        <p>The parsed HTTP request can then be acted upon. For example, the “getMethod()” method can be used to retrieve the HTTP method of the request, or the “getHeaders()” method can be used to retrieve the request headers.</p> 
+        <p>Similarly, the following example shows how to parse an HTTP response from an InputStream:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+HttpResponse response = HttpUtil.parseResponse(inputStream);
+
+          </xmp></code></pre> 
+        <p>The parsed HTTP response can then be acted upon. For example, the “getStatusCode()” method can be used to retrieve the status code of the response, or the “getBody()” method can be used to retrieve the response body.</p> 
+        <h2>Enforcing Compliance with HTTP Standards with HttpUtil</h2> 
+        <p>The HttpUtil class also provides several methods for ensuring that HTTP messages comply with HTTP standards. The “isValidRequest()” and “isValidResponse()” methods can be used to validate that an HTTP request or response is valid, respectively. These methods take an HttpMessage (either a request or a response) as a parameter and return a boolean indicating whether or not the message is valid.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+boolean isValidRequest = HttpUtil.isValidRequest(request);
+boolean isValidResponse = HttpUtil.isValidResponse(response);
+
+          </xmp></code></pre> 
+        <p>If an HttpMessage is invalid, the “getInvalidReason()” method can be used to retrieve the reason why. This method also takes an HttpMessage (either a request or a response) as a parameter and returns a string indicating the reason why the message is invalid.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String invalidReason = HttpUtil.getInvalidReason(message);
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>This article has provided an overview of io.netty.handler.codec.http.HttpUtil and some code examples demonstrating its usage in practice. HttpUtil is a useful tool for working with HTTP protocol, providing the ability to build and parse HTTP messages, enforce compliance with HTTP standards, and more.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-fix-Java-TreeSet-java.lang.ClassCastExcpetion-exception.html">H.l.ClassCastExcpetion exception</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Change-Checkbox-Font-Example.html">Change Checkbox Font Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-LinkedHashSet-to-ArrayList.html">Convert LinkedHashSet to ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/"> Basic Java Examples </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Java-Factorial-Using-Recursion-Example.html">Java Factorial Using Recursion Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/org.mockito.ArgumentCaptor.html">org.mockito.ArgumentCaptor</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/javax.transaction.SystemException.html">javax.transaction.SystemException</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Frame/"> AWT Frame </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Frame/Create-Frame-Window-With-Window-Close-Event-Example.html">Create Frame Window With Window Close Event Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/"> AWT Color </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Get-Transparency-Mode-Of-Color-Example.html">Get Transparency Mode Of Color Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Iterate-ArrayList-using-ListIterator.html">Iterate ArrayList using ListIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/io.netty.handler.logging.LogLevel.html">io.netty.handler.logging.LogLevel</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-16 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Robert</h3> <p><a href="#">2024-01-27 17:49</a></p> Grt ;-) <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Adam</h3> <p><a href="#">2024-01-30 10:15</a></p> Interesting, thx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.shiro.authz.SimpleAuthorizationInfo.html">o.a.s.a.SimpleAuthorizationInfo</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Simple-Java-TreeMap-example.html">Simple Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.swing.JEditorPane.html">javax.swing.JEditorPane</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Java-Float-isNaN-Method-Example.html">Java Float isNaN Method Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Get-Size-of-Java-TreeSet-Example.html">Get Size of Java TreeSet Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Iterate-through-the-values-of-Java-LinkedHashMap-example.html">Iterate through the values of Java LinkedHashMap example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-decimal-integer-to-octal-number-example.html">Convert decimal integer to octal number example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/net.minecraft.item.ItemBlock.html">net.minecraft.item.ItemBlock</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Suggest-JVM-to-Run-Object-Finalization-Example.html">Suggest JVM to Run Object Finalization Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Simple-Java-Vector-Example.html">Simple Java Vector Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Add-an-element-at-specified-index-of-Java-Vector-Example.html">Add an element at specified index of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.apache.hadoop.util.Tool.html">org.apache.hadoop.util.Tool</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.lucene.util.Version.html">org.apache.lucene.util.Version</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Select-Item-From-AWT-List-Example.html">Select Item From AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.eclipse.swt.widgets.Shell.html">org.eclipse.swt.widgets.Shell</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-add-an-element-at-the-beginning-(at-the-front).html">Java LinkedList add an element at the beginning (at the front)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Simple-Java-LinkedHashSet-example.html">Simple Java LinkedHashSet example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-char-to-a-file-using-DataOutputStream.html">Write char to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Get-Set-view-of-Keys-from-Java-HashMap-example.html">Get Set view of Keys from Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Java-ArrayList-replace-element.html">Java ArrayList replace element</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
