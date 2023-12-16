@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.springframework.mock.web.MockHttpServletResponse</title> <!--timestamp=2023-12-16T00:13:04.187789601Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.springframework.mock.web.MockHttpServletResponse"> 
+  <meta name="keywords" content="org.springframework.mock.web.MockHttpServletResponse"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.springframework.mock.web.MockHttpServletResponse"> 
+  <meta property="og:description" content="org.springframework.mock.web.MockHttpServletResponse"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.springframework.mock.web.MockHttpServletResponse"> 
+  <meta name="twitter:description" content="org.springframework.mock.web.MockHttpServletResponse"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-12-15</small>
+        </div> 
+        <h1>Introduction to MockHttpServletResponse</h1> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+org.springframework.mock.web.MockHttpServletResponse
+
+          </xmp></code></pre> class is a tool provided by the Spring framework for testing servlets and web applications. It provides a convenient way to simulate HTTP requests and responses without having to actually hit an HTTP server. This is useful when unit testing code that relies on an HTTP response, such as AJAX calls. In this article, we will explore how to use the MockHttpServletResponse class to test these types of applications.
+         
+        <h2>Creating a Basic MockHttpServletResponse</h2> 
+        <p>Creating a MockHttpServletResponse is easy. All you have to do is call the constructor, passing in the request object that you wish to mock.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MockHttpServletResponse response = new MockHttpServletResponse(request);
+
+          </xmp></code></pre> 
+        <h2>Setting Response Headers</h2> 
+        You can set response headers using the
+        <pre>setHeader()</pre> method. For example, to set the response code to 200, you can do this:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+response.setHeader("HTTP/1.1", "200 OK");
+
+          </xmp></code></pre> 
+        <p>You can also set other response headers like content type, content length, etc. using the same method.</p> 
+        <h2>Setting the Response Body</h2> 
+        To set the response body, you can use the
+        <pre>setContent()</pre> method. This method takes a 
+        <pre>String</pre> parameter representing the response body. For example, to return a simple HTML document, you can do this:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+response.setContent("<html><head><title>My HTML Document</title></head><body>This is my HTML document</body></html>");
+
+          </xmp></code></pre> 
+        <h2>Returning a Different Response Body Depending on the Request Method</h2> 
+        <p>If you need to return a different response body depending on the HTTP request method (e.g. GET vs POST), you can use the </p>
+        <pre>getMethod()</pre> method provided by the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MockHttpServletRequest
+
+          </xmp></code></pre> class. For example, if you want to return a different response body for a GET vs a POST, you can do this:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+if(request.getMethod().equals("GET")) {
+	response.setContent("<html><head><title>My HTML Document</title></head><body>This is my HTML document</body></html>");
+} else if (request.getMethod().equals("POST")) {
+	response.setContent("<html><head><title>My HTML Document</title></head><body>This is my HTML document for POST requests</body></html>");
+}
+
+          </xmp></code></pre> 
+        <h2>Adding Cookies to the Response</h2> 
+        You can add cookies to the response by using the
+        <pre>addCookie()</pre> method. This method takes a 
+        <pre>Cookie</pre> object as a parameter. For example, to add a cookie with the name "foo" and the value "bar", you can do this:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Cookie c = new Cookie("foo", "bar");
+response.addCookie(c);
+
+          </xmp></code></pre> 
+        <h2>Adding Headers to the Response</h2> 
+        You can add headers to the response using the
+        <pre>addHeader()</pre> method. This method takes a 
+        <pre>String</pre> parameter representing the header name, followed by a 
+        <pre>String[]</pre> parameter representing the values. For example, to add a header named "X-Foo" with the values "bar" and "baz", you can do this:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String[] vals = {"bar", "baz"};
+response.addHeader("X-Foo", vals);
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>In this article, we have explored how to use the MockHttpServletResponse class to simulate HTTP requests and responses. We have seen how to create a basic MockHttpServletResponse, how to set response headers and body, how to return different response bodies depending on the request method, how to add cookies to the response, and how to add headers to the response. We hope you found this article helpful!</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.widget.ScrollView.html">android.widget.ScrollView</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Check-if-a-particular-value-exists-in-Java-HashMap-example.html">Check if a particular value exists in Java HashMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-all-keys-of-LinkedHashMap-in-Java.html">How to get all keys of LinkedHashMap in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/"> If Else Statement </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/If-statement-Example.html">If statement Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/"> ListIterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-ArrayList-in-reverse-direction-using-ListIterator.html">How to iterate ArrayList in reverse direction using ListIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.validation.constraints.NotBlank.html">j.v.c.NotBlank</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.hardware.camera2.CameraManager.html">a.h.c.CameraManager</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-ArrayList-using-Comparator.html">Sort ArrayList using Comparator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-Java-TreeSet-to-array.html">Convert Java TreeSet to array</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-ArrayList-example.html">Iterate through ArrayList example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-05 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Thomas</h3> <p><a href="#">2024-01-19 16:07</a></p> Great example! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Mark</h3> <p><a href="#">2024-02-12 22:57</a></p> Thank you guys for your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/List-Even-Numbers-Java-Example.html">List Even Numbers Java Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.log4j.PatternLayout.html">org.apache.log4j.PatternLayout</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.net.JarURLConnection.html">java.net.JarURLConnection</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Set-Background-Color-of-JLabel-Example.html">Set Background Color of JLabel Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/android.widget.AdapterView.OnItemLongClickListener.html">a.w.A.OnItemLongClickListener</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/JLabel-Set-Tooltip-Example.html">JLabel Set Tooltip Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/FileOutputStream/Create-FileOutputStream-object-from-String-file-path.html">Create FileOutputStream object from String file path</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Fibonacci-Series-Java-Example.html">Fibonacci Series Java Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Simple-Java-LinkedList-example.html">Simple Java LinkedList example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Set-from-Java-HashSet-example.html">Get Synchronized Set from Java HashSet example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.fasterxml.jackson.databind.BeanDescription.html">c.f.j.d.BeanDescription</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Search-an-element-of-Java-Vector-Example.html">Search an element of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.swing.JMenu.html">javax.swing.JMenu</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.http.client.utils.URLEncodedUtils.html">o.a.h.c.u.URLEncodedUtils</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-print-TreeSet-elements-in-Java.html">How to print TreeSet elements in Java</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-create-new-empty-file-in-Java.html">How to create new empty file in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-over-Vector-elements-in-reverse-or-backward-direction.html">Iterate over Vector elements in reverse or backward direction</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-byte-Array-Example.html">Performing Binary Search on Java byte Array Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/FileInputStream/Read-file-using-FileInputStream.html">Read file using FileInputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-LinkedHashMap-to-List.html">Convert LinkedHashMap to List</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
