@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - Append output to file using FileOutputStream</title> <!--timestamp=2023-12-20T00:11:48.915120182Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="Append output to file using FileOutputStream"> 
+  <meta name="keywords" content="Append output to file using FileOutputStream"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - Append output to file using FileOutputStream"> 
+  <meta property="og:description" content="Append output to file using FileOutputStream"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - Append output to file using FileOutputStream"> 
+  <meta name="twitter:description" content="Append output to file using FileOutputStream"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-12-19</small>
+        </div> 
+        <h1>Append Output to File using FileOutputStream</h1> 
+        In Java, writing to a file using the
+        <pre>FileOutputStream</pre> class is a quick and simple process. By appending output to an existing file, it is possible to add data to the end of the file without having to rewrite the entire file. The following code example provides a demonstration of how to append output to a file with 
+        <pre>FileOutputStream</pre>: 
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create out FileOutputStream object 
+FileOutputStream fos = new FileOutputStream("myfile.txt", true);
+
+// Write data to the end of the file 
+String data = "This is a new line of text "; 
+fos.write(data.getBytes()); 
+
+// Close the stream 
+fos.close();
+
+          </xmp></code></pre> 
+        The
+        <pre>true</pre> parameter in the 
+        <pre>FileOutputStream</pre> constructor is key to enabling file appending. This parameter specifies whether or not the existing contents should be overwritten by the newly written data. When set to 
+        <pre>true</pre>, any existing data will remain and the new data will be added after it.
+         
+        <h2>Using a BufferedWriter</h2> 
+        The above example required the creation of a
+        <pre>FileOutputStream</pre> object for each write to the file. A more efficient method is to use a 
+        <pre>BufferedWriter</pre>. The following code example demonstrates how to append output to a file using a 
+        <pre>BufferedWriter</pre>.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create out BufferedWriter object 
+BufferedWriter bw = new BufferedWriter(new FileWriter("myfile.txt", true)); 
+
+// Write data to the end of the file 
+String data = "This is a new line of text "; 
+bw.write(data); 
+
+// Close the stream 
+bw.close();
+
+          </xmp></code></pre> 
+        By using a
+        <pre>BufferedWriter</pre> object, you can write multiple lines of text to the end of the file in one go, rather than having to open and close the file for each write operation as with the 
+        <pre>FileOutputStream</pre> approach.
+         
+        <h2>Conclusion</h2> 
+        Whether you choose to use the
+        <pre>FileOutputStream</pre> or 
+        <pre>BufferedWriter</pre> approach, appending output to a file in Java is relatively straightforward. There are several benefits of appending to a file, such as the ability to add new data at the end of the file without having to rewrite its entire contents.
+         
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/"> Integer Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-Java-String-to-Integer-object-Example.html">Convert Java String to Integer object Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Get-Set-view-of-Keys-from-Java-HashMap-example.html">Get Set view of Keys from Java HashMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Check-if-array-contains-value-using-Arrays-class.html">Check if array contains value using Arrays class</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-add-an-element-at-the-beginning-(at-the-front).html">Java LinkedList add an element at the beginning (at the front)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.EnumMap.html">java.util.EnumMap</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-String-array-using-Comparator.html">Sort String array using Comparator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Get-name-of-parent-directory.html">Get name of parent directory</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/com.google.common.base.Charsets.html">com.google.common.base.Charsets</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.lucene.queryparser.classic.QueryParser.html">o.a.l.q.c.QueryParser</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-TreeMap-key-or-TreeMap-value-using-index.html">How to get TreeMap key or TreeMap value using index</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-13 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Simple-Java-Vector-Example.html">Simple Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-all-occurrences-of-specified-element-of-Java-Vector-Example.html">Replace all occurrences of specified element of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Simple-Java-LinkedHashSet-example.html">Simple Java LinkedHashSet example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-java-int-to-Integer-object-Example.html">Convert java int to Integer object Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-String-as-characters-to-a-file-using-DataOutputStream.html">Write String as characters to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Iterate-through-elements-Java-Vector-using-Iterator-Example.html">Iterate through elements Java Vector using Iterator Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/android.support.v4.media.session.MediaSessionCompat.html">a.s.v.m.s.MediaSessionCompat</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-fix-java.lang.ClassCastException-–-cannot-be-cast-to-java.lang.Comparable-while-adding-entries-to-the-TreeMap.html">Comparable while adding entries to the TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.swing.JMenu.html">javax.swing.JMenu</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.support.v7.app.AlertDialog.html">android.support.v7.app.AlertDialog</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-print-TreeMap-in-Java.html">How to print TreeMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-iterate-HashSet-in-Java.html">How to iterate HashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.annotation.processing.AbstractProcessor.html">j.a.p.AbstractProcessor</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/FileOutputStream/Create-FileOutputStream-object-from-String-file-path.html">Create FileOutputStream object from String file path</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.widget.RadioButton.html">android.widget.RadioButton</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Determine-number-of-bytes-written-to-DataOutputStream.html">Determine number of bytes written to DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-maxmimum-element-of-Java-HashSet-Example.html">Find maxmimum element of Java HashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Check-if-a-particular-value-exists-in-Java-HashMap-example.html">Check if a particular value exists in Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.html">j.x.b.a.a.XmlJavaTypeAdapter</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-replace-elements.html">Java LinkedList replace elements</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
