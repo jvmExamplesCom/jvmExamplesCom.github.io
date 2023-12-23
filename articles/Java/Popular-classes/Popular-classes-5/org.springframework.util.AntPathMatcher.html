@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.springframework.util.AntPathMatcher</title> <!--timestamp=2023-12-23T00:12:38.562931840Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.springframework.util.AntPathMatcher"> 
+  <meta name="keywords" content="org.springframework.util.AntPathMatcher"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.springframework.util.AntPathMatcher"> 
+  <meta property="og:description" content="org.springframework.util.AntPathMatcher"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.springframework.util.AntPathMatcher"> 
+  <meta name="twitter:description" content="org.springframework.util.AntPathMatcher"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-12-22</small>
+        </div> 
+        <h1>org.springframework.util.AntPathMatcher</h1> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+org.springframework.util.AntPathMatcher
+
+          </xmp></code></pre> is a utility class used to perform matching operations on Ant-style path patterns. This class is used in the context of file system operations, or for any other kind of path-based resource lookup.
+         
+        <p>Using AntPathMatcher, you can match a request path against one or more Ant-style path patterns and then determine which one matches the most accurately. This is particularly useful when attempting to dispatch requests to controllers or methods based on the incoming request path.</p> 
+        <h2>Matching Paths</h2> 
+        <p>To illustrate how AntPathMatcher works, let's consider the following example:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String[] patterns = {
+    "/foo/bar/**",
+    "/baz/*"
+};
+String path = "/foo/bar/test";
+
+AntPathMatcher matcher = new AntPathMatcher();
+boolean result = matcher.match(patterns, path);
+System.out.println(result);
+
+          </xmp></code></pre> 
+        When executed, this code will print
+        <pre>true</pre> as the result. This demonstrates that the given 
+        <pre>path</pre> (i.e. 
+        <pre>"/foo/bar/test"</pre>) matches one of the given patterns (i.e. 
+        <pre>"/foo/bar/**"</pre>).
+         
+        <h2>Wildcards</h2> 
+        <p>AntPathMatcher uses <em>wildcards</em> to allow for flexibility when matching paths. A wildcard denotes an unknown portion of the path and can be specified in a few different ways. These are:</p> 
+        <ul> 
+         <li><pre>?</pre> - Matches a single character</li> 
+         <li><pre>*</pre> - Matches zero or more characters</li> 
+         <li><pre>**</pre> - Matches zero or more directories in a path</li> 
+        </ul> 
+        <h2>Case Sensitivity</h2> 
+        <p>By default, AntPathMatcher is case sensitive. However, you can configure it to be case insensitive by calling </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+setCaseSensitive(false)
+
+          </xmp></code></pre> as in the following example:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+AntPathMatcher matcher = new AntPathMatcher();
+matcher.setCaseSensitive(false);
+
+          </xmp></code></pre> 
+        <p>It is important to note that setting AntPathMatcher to be case insensitive may have an impact on performance. As such, it should be used with caution.</p> 
+        <h2>Special Characters</h2> 
+        <p>There are a few special characters that have a specific meaning when used with AntPathMatcher. These are:</p> 
+        <ul> 
+         <li><pre>\</pre> - Escapes the following character</li> 
+         <li><pre>{</pre> and <pre>}</pre> - Defines a pattern subset</li> 
+         <li><pre>,</pre> - Used to separate multiple patterns within a subset</li> 
+        </ul> 
+        For example, the following pattern matches either
+        <pre>/foo/bar</pre> or 
+        <pre>/baz</pre>:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+/{foo/bar,baz}
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        The
+        <pre>AntPathMatcher</pre> utility class provides a powerful and flexible way to match paths against one another. Its use of wildcards and special characters make it particularly well-suited to matching incoming request paths to controller methods and other resources.
+         
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Copy-ArrayList-elements-to-other-ArrayList.html">Copy ArrayList elements to other ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Hello-World-Applet-Example.html">Hello World Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-duplicate-elements-from-String-array-using-Arrays-class.html">Remove duplicate elements from String array using Arrays class</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/How-to-concatenate-Strings-in-Java.html">How to concatenate Strings in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Smiley-In-Applet-Example.html">Draw Smiley In Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-iterate-through-the-Vector-elements.html">How to iterate through the Vector elements</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/FileOutputStream/"> FileOutputStream </a> </p> <a href="/articles/Java/File-And-IO/FileOutputStream/Copy-binary-file-using-Streams.html">Copy binary file using Streams</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/"> Sorting </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-int-Array-Example.html">Java Sort int Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.dom4j.DocumentException.html">org.dom4j.DocumentException</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/com.fasterxml.jackson.databind.node.ObjectNode.html">c.f.j.d.n.ObjectNode</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-27 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/javax.crypto.CipherOutputStream.html">javax.crypto.CipherOutputStream</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Compare-two-file-paths.html">Compare two file paths</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-Size-of-Java-ArrayList-and-loop-through-elements-Example.html">Get Size of Java ArrayList and loop through elements Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Display-Image-in-an-Applet-Example.html">Display Image in an Applet Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.commons.math3.stat.descriptive.DescriptiveStatistics.html">o.a.c.m.s.d.DescriptiveStatistics</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Check-if-a-particular-element-exists-in-LinkedList-Java-example.html">Check if a particular element exists in LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Java-HashMap-put-method-example.html">Java HashMap put method example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Iterate-ArrayList-using-Iterator.html">Iterate ArrayList using Iterator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.eclipse.jface.viewers.ISelectionChangedListener.html">o.e.j.v.ISelectionChangedListener</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Get-Previous-and-next-index-using-Java-ListIterator-Example.html">Get Previous and next index using Java ListIterator Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Iterate-List-example.html">Iterate List example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/io.netty.channel.ChannelHandler.html">io.netty.channel.ChannelHandler</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Get-Brighter-Version-Of-Current-Color-Example.html">Get Brighter Version Of Current Color Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Convert-Java-String-Object-to-Boolean-Object.html">Convert Java String Object to Boolean Object</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Sort-HashMap-by-values.html">Sort HashMap by values</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-LinkedHashSet-to-ArrayList.html">Convert LinkedHashSet to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Get-Darker-Version-Of-Current-Color-Example.html">Get Darker Version Of Current Color Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Java-HashMap-get-key-using-value-example.html">Java HashMap get key using value example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/io.netty.util.concurrent.DefaultThreadFactory.html">i.n.u.c.DefaultThreadFactory</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Convert-byte-array-to-String.html">Convert byte array to String</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
