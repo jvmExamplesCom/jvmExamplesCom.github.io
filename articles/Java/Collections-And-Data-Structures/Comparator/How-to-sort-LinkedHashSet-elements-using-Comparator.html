@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - How to sort LinkedHashSet elements using Comparator</title> <!--timestamp=2023-12-29T00:12:20.260399501Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="How to sort LinkedHashSet elements using Comparator"> 
+  <meta name="keywords" content="How to sort LinkedHashSet elements using Comparator"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - How to sort LinkedHashSet elements using Comparator"> 
+  <meta property="og:description" content="How to sort LinkedHashSet elements using Comparator"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - How to sort LinkedHashSet elements using Comparator"> 
+  <meta name="twitter:description" content="How to sort LinkedHashSet elements using Comparator"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-12-28</small>
+        </div> 
+        <h1>How to Sort LinkedHashSet Elements Using Comparator</h1> LinkedHashSet is a great class for storing elements in the form of a linked list. It provides fast and efficient access to the elements stored in the set. It also maintains insertion order, which is useful for applications that require a predefined order of elements. However, there are times when you may need to sort the elements in a LinkedHashSet according to some criteria. This is where Comparator comes in handy. In this article, we'll look at how to sort LinkedHashSet elements using a Comparator. 
+        <h2>Using the sort() Method</h2> The easiest way to sort LinkedHashSet elements is to use the sort() method. This method takes a Comparator as an argument and returns a new sorted LinkedHashSet. Here's a simple example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Set<String> linkedHashSet = new LinkedHashSet<>();
+linkedHashSet.add("One");
+linkedHashSet.add("Two");
+linkedHashSet.add("Three");
+
+// Create a comparator
+Comparator<String> comparator = Comparator.comparing(String::length);
+
+// Sort the LinkedHashSet elements using the comparator
+Set<String> sortedSet = linkedHashSet.sort(comparator);
+
+// Print the sorted LinkedHashSet
+System.out.println(sortedSet); // Prints [One, Two, Three]
+
+          </xmp></code></pre> In the above example, we create a Comparator that compares strings by their length. We then pass this Comparator to the sort() method, which returns a new sorted LinkedHashSet. 
+        <h2>Using the Stream API</h2> Another way to sort LinkedHashSet elements is to use the Stream API. The Stream API allows us to transform collections of data into streams and perform various operations on the stream. Here's an example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Set<String> linkedHashSet = new LinkedHashSet<>();
+linkedHashSet.add("One");
+linkedHashSet.add("Two");
+linkedHashSet.add("Three");
+
+// Create a comparator
+Comparator<String> comparator = Comparator.comparing(String::length);
+
+// Create a stream from the LinkedHashSet
+Stream<String> stream = linkedHashSet.stream();
+
+// Sort the stream using the comparator
+Stream<String> sortedStream = stream.sorted(comparator);
+
+// Collect the sorted stream elements into a LinkedHashSet
+Set<String> sortedSet = sortedStream.collect(Collectors.toCollection(LinkedHashSet::new));
+
+// Print the sorted LinkedHashSet
+System.out.println(sortedSet); // Prints [One, Two, Three]
+
+          </xmp></code></pre> In the above example, we create a Comparator that compares strings by their length. We then create a stream from the LinkedHashSet and sort it using the comparator. Finally, we collect the sorted stream elements into a LinkedHashSet. 
+        <h2>Conclusion</h2> In this article, we looked at how to sort LinkedHashSet elements using a Comparator. We looked at two ways of sorting the elements: using the sort() method and using the Stream API. Both methods provide easy and efficient ways to sort LinkedHashSet elements. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/android.text.method.PasswordTransformationMethod.html">a.t.m.PasswordTransformationMethod</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/ArrayList-clone-example.html">ArrayList clone example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Check-Whether-JLabel-is-Visible-or-Enabled-Example.html">Check Whether JLabel is Visible or Enabled Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Iterate-through-elements-of-Java-TreeSet-example.html">Iterate through elements of Java TreeSet example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Get-Absolute-path-of-the-file.html">Get Absolute path of the file</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/System/"> System </a> </p> <a href="/articles/Java/Miscellaneous-Classes/System/Run-object-finalization-using-System-class.html">Run object finalization using System class</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.apache.http.conn.ClientConnectionManager.html">o.a.h.c.ClientConnectionManager</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/javax.tools.JavaFileObject.Kind.html">javax.tools.JavaFileObject.Kind</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Wrappers/"> Wrappers </a> </p> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Float-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Float object to byte, short, int, long, float and double</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Static/"> Static </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Static/Java-static-member-variable-example.html">Java static member variable example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-18 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.awt.event.ItemListener.html">java.awt.event.ItemListener</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Find-index-of-LinkedList-elements-using-indexOf-and-lastIndexOf-methods.html">Find index of LinkedList elements using indexOf and lastIndexOf methods</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.google.api.client.http.HttpTransport.html">c.g.a.c.h.HttpTransport</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-create-new-HashSet-objects-using-HashSet-constructor.html">How to create new HashSet objects using HashSet constructor</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Iterate-ArrayList-using-for-loop-or-for-each-loop.html">Iterate ArrayList using for loop or for each loop</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Remove-AWT-Button-From-Applet-or-Window-Frame-Example.html">Remove AWT Button From Applet or Window Frame Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Convert-String-to-title-case.html">Convert String to title case</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-int-Array-Example.html">Java Sort int Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Java-HashMap-put-method-example.html">Java HashMap put method example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Get-Transparency-Mode-Of-Color-Example.html">Get Transparency Mode Of Color Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-ArrayList<String>-to-String[]-array.html">Convert ArrayList<String> to String[] array</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-maintain-insertion-order-in-HashMap.html">How to maintain insertion order in HashMap</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-get-absolute-path-of-a-file-in-Java.html">How to get absolute path of a file in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.junit.jupiter.api.AfterAll.html">org.junit.jupiter.api.AfterAll</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-headset,-tailset,-and-subset-from-the-Java-TreeSet.html">How to get headset, tailset, and subset from the Java TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-LinkedHashMap-using-an-Iterator.html">Iterate through LinkedHashMap using an Iterator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.testcontainers.containers.GenericContainer.html">o.t.c.GenericContainer</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.management.ObjectName.html">javax.management.ObjectName</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-make-file-read-only-in-Java.html">How to make file read only in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-create-new-objects-of-LinkedHashSet-class-(LinkedHashSet-constructors).html">How to create new objects of LinkedHashSet class (LinkedHashSet constructors)</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
