@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.kohsuke.args4j.CmdLineException</title> <!--timestamp=2023-12-30T00:12:32.922213090Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.kohsuke.args4j.CmdLineException"> 
+  <meta name="keywords" content="org.kohsuke.args4j.CmdLineException"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.kohsuke.args4j.CmdLineException"> 
+  <meta property="og:description" content="org.kohsuke.args4j.CmdLineException"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.kohsuke.args4j.CmdLineException"> 
+  <meta name="twitter:description" content="org.kohsuke.args4j.CmdLineException"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2023-12-29</small>
+        </div> 
+        <h1>org.kohsuke.args4j.CmdLineException</h1> 
+        <p>org.kohsuke.args4j.CmdLineException is a Java class used for representing errors in the command line parsing. It is a checked exception that is thrown when there is an error in command line parameters or options. This class allows users to get the error message by calling the </p>
+        <pre>getMessage()</pre> method, as well as the option with the invalid parameter by calling the 
+        <pre>getOption()</pre> method. Additionally, it allows users to get the invalid parameter type with the 
+        <pre>getType()</pre> method.
+         
+        <h2>Example 1: Generating CmdLineException Error</h2> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public static void main(String[] args) throws CmdLineException {
+  Options options = new Options();
+  Option option = new Option("t", true, "time");
+  options.addOption(option);
+
+  CommandLineParser parser = new DefaultParser();
+  CommandLine cmd;
+  try {
+    cmd = parser.parse(options, args);
+    String time = cmd.getOptionValue("t");
+  } catch (CmdLineException e) {
+    System.err.println(e.getMessage());
+    
+    HelpFormatter formatter = new HelpFormatter();
+    formatter.printHelp("myprog", options);
+    throw e;
+  }
+}
+
+          </xmp></code></pre> 
+        <p>This program parses through the command line options and arguments and checks if the option </p>
+        <pre>-t</pre> is present. If it is not present, the program prints out an error message and the available options. The error message is generated by calling the 
+        <pre>getMessage()</pre> method of the 
+        <pre>CmdLineException</pre>.
+         
+        <h2>Example 2: Getting the Option with an Invalid Parameter</h2> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public static void main(String[] args) throws CmdLineException {
+  Options options = new Options();
+  Option option = new Option("s", true, "string");
+  options.addOption(option);
+
+  CommandLineParser parser = new DefaultParser();
+  CommandLine cmd;
+  try {
+    cmd = parser.parse(options, args);
+    int value = Integer.parseInt(cmd.getOptionValue("s"));
+  } catch (CmdLineException e) {
+    Option optionWithError = e.getOption();
+    System.out.println("Invalid option: " + optionWithError.getOpt());
+    throw e;
+  }
+}
+
+          </xmp></code></pre> 
+        This program attempts to parse the option
+        <pre>-s</pre> into an integer. However, if the argument for this option is not a valid integer, the program will throw a 
+        <pre>CmdLineException</pre>, which can be caught. By using the 
+        <pre>getOption()</pre> method of the 
+        <pre>CmdLineException</pre>, we can get the Option object responsible for the error and print out the option name (
+        <pre>-s</pre> in this case).
+         
+        <h2>Example 3: Getting the Invalid Parameter Type</h2> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public static void main(String[] args) throws CmdLineException {
+  Options options = new Options();
+  Option option = new Option("l", true, "long");
+  options.addOption(option);
+
+  CommandLineParser parser = new DefaultParser();
+  CommandLine cmd;
+  try {
+    cmd = parser.parse(options, args);
+    long value = Long.parseLong(cmd.getOptionValue("l"));
+  } catch (CmdLineException e) {
+    Class<?>type = e.getType();
+    System.out.println("Expected type of argument for '-l': " + type.toString());
+    throw e;
+  }
+}
+
+          </xmp></code></pre> 
+        This program attempts to parse the option
+        <pre>-l</pre> into a long. If the argument for this option is not a valid long, the program will throw a 
+        <pre>CmdLineException</pre>, which can be caught. By using the 
+        <pre>getType()</pre> method of the 
+        <pre>CmdLineException</pre>, we can get the type of the variable that was expected. In this case, it would be 
+        <pre>long</pre>.
+         
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/Java-Date-Formatting/"> Java Date Formatting </a> </p> <a href="/articles/Java/Popular-Java-Classes/Java-Date-Formatting/Formatting-Minutes-using-SimpleDateFormat.html">Formatting Minutes using SimpleDateFormat</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/"> Sorting </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-double-Array-Example.html">Java Sort double Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Map-from-Java-HashMap-example.html">Get Synchronized Map from Java HashMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.nio.file.FileSystems.html">java.nio.file.FileSystems</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Enumeration-over-Java-HashSet-Example.html">Get Enumeration over Java HashSet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/"> If Else Statement </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/If-Else-If-statement-Example.html">If Else-If statement Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.function.Predicate.html">java.util.function.Predicate</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Get-Size-of-Java-LinkedHashSet-Example.html">Get Size of Java LinkedHashSet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-CheckboxGroup/"> AWT CheckboxGroup </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-CheckboxGroup/Get-Selected-Radio-Button-Example.html">Get Selected Radio Button Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Convert-HashMap-to-TreeMap-using-Comparator.html">Convert HashMap to TreeMap using Comparator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-21 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/List-Even-Numbers-Java-Example.html">List Even Numbers Java Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/com.fasterxml.jackson.core.Version.html">com.fasterxml.jackson.core.Version</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Convert-String-to-short-primitive-Example.html">Convert String to short primitive Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Create-Custom-Color-Using-HSB-Example.html">Create Custom Color Using HSB Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-the-size-of-the-TreeMap.html">How to get the size of the TreeMap</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-byte-from-file-using-DataInputStream.html">Read byte from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.google.firebase.iid.FirebaseInstanceId.html">c.g.f.i.FirebaseInstanceId</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Search-ArrayList-element-using-binary-search.html">Search ArrayList element using binary search</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-any-primitive-type-to-String.html">Convert any primitive type to String</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.security.spec.AlgorithmParameterSpec.html">j.s.s.AlgorithmParameterSpec</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/FileInputStream/Read-file-in-byte-array-using-FileInputStream.html">Read file in byte array using FileInputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.bukkit.configuration.ConfigurationSection.html">o.b.c.ConfigurationSection</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-all-values-of-LinkedHashMap-in-Java-(values-method).html">How to get all values of LinkedHashMap in Java (values method)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-compare-two-TreeSet-objects-using-the-equals-method.html">How to compare two TreeSet objects using the equals method</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-elements-to-ArrayList.html">Add elements to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/JLabel-Set-Tooltip-Example.html">JLabel Set Tooltip Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/androidx.appcompat.app.AlertDialog.html">androidx.appcompat.app.AlertDialog</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-HashSet-to-TreeSet-in-Java.html">Convert HashSet to TreeSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/hudson.model.AbstractProject.html">hudson.model.AbstractProject</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-Java-Vector-using-Comparator.html">Sort Java Vector using Comparator</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
