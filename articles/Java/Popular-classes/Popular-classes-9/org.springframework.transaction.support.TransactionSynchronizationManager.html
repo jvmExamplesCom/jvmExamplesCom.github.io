@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.springframework.transaction.support.TransactionSynchronizationManager</title> <!--timestamp=2024-01-02T00:12:59.423136930Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.springframework.transaction.support.TransactionSynchronizationManager"> 
+  <meta name="keywords" content="org.springframework.transaction.support.TransactionSynchronizationManager"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.springframework.transaction.support.TransactionSynchronizationManager"> 
+  <meta property="og:description" content="org.springframework.transaction.support.TransactionSynchronizationManager"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.springframework.transaction.support.TransactionSynchronizationManager"> 
+  <meta name="twitter:description" content="org.springframework.transaction.support.TransactionSynchronizationManager"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-01-01</small>
+        </div> 
+        <h1>Introduction to org.springframework.transaction.support.TransactionSynchronizationManager</h1> 
+        <p>The TransactionSynchronizationManager is an important part of the Spring framework which provides a framework for transaction synchronization in Java applications. It allows for a consistent, straightforward way for different components of an application to participate in the same transaction and ensures that each component is aware of when the transaction begins and ends.</p> 
+        <h2>Overview: How TransactionSynchronizationManager Works</h2> 
+        <p>The TransactionSynchronizationManager provides a way for multiple components of an application to coordinate their participation in a single transaction. It does this in two main ways. First, it manages the synchronization of the components' state, meaning that each component can be notified when the transaction has begun and ended. Second, it provides the ability for components to register synchronization objects, which are special classes that allow for callbacks to be executed during different stages of the transaction.</p> 
+        <p>For example, if a component needs to perform some action when the transaction commits, it can register a synchronization object that will be called when the commit occurs. This allows for a consistent, unified way for different parts of an application to participate in the same transaction.</p> 
+        <h2>Using TransactionSynchronizationManager</h2> 
+        <p>The TransactionSynchronizationManager provides several useful methods for managing transactions and registering synchronization objects. Here are some examples of common uses of the TransactionSynchronizationManager:</p> 
+        <h3>Starting a Transaction</h3> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+TransactionSynchronizationManager.beginTransaction();
+
+          </xmp></code></pre> 
+        <h3>Registering a Synchronization Object</h3> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+TransactionSynchronizationManager.registerSynchronization(new MySynchronizationObject());
+
+          </xmp></code></pre> 
+        <h3>Completing a Transaction</h3> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+TransactionSynchronizationManager.commitTransaction();
+
+          </xmp></code></pre> 
+        <h3>Executing a Callback</h3> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+TransactionSynchronizationManager.executeCallback(new MyCallback());
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>In this article, we discussed the TransactionSynchronizationManager, an important part of the Spring framework which provides a framework for transaction synchronization in Java applications. We looked at the basics of how the TransactionSynchronizationManager works, as well as some examples of common uses of the TransactionSynchronizationManager.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/"> ListIterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Traverse-through-ArrayList-in-reverse-direction-using-Java-ListIterator-Example.html">Traverse through ArrayList in reverse direction using Java ListIterator Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.apache.commons.pool2.impl.GenericObjectPool.html">o.a.c.p.i.GenericObjectPool</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-add-an-element-at-the-beginning-(at-the-front).html">Java LinkedList add an element at the beginning (at the front)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/"> AWT Button </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Hide-Button-Example.html">Hide Button Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-print-TreeMap-in-Java.html">How to print TreeMap in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Create-Multi-Select-AWT-List-Example.html">Create Multi Select AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/net.minecraft.block.material.Material.html">n.m.b.m.Material</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/"> Double Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Java-Double-compare-example.html">Java Double compare example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.bumptech.glide.module.AppGlideModule.html">c.b.g.m.AppGlideModule</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/Adler32/"> Adler32 </a> </p> <a href="/articles/Java/Java-Zip/Adler32/Generate-Adler32-Checksum-For-Byte-Array-Example.html">Generate Adler32 Checksum For Byte Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-07 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/How-to-split-String-into-equal-length-substrings.html">How to split String into equal length substrings</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Enumeration/Enumerate-through-a-Vector-using-Java-Enumeration-Example.html">Enumerate through a Vector using Java Enumeration Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.graphics.LinearGradient.html">android.graphics.LinearGradient</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Line-in-Applet-Window-Example.html">Draw Line in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Infinite-For-loop-Example.html">Infinite For loop Example</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Get-Maximum-Memory-Available-to-Java-Virtual-Machine(JVM)-Example.html">Get Maximum Memory Available to Java Virtual Machine(JVM) Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-LinkedHashMap-in-reverse-order-using-ListIterator.html">How to iterate LinkedHashMap in reverse order using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-print-elements-example.html">Java LinkedList print elements example</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/System/Determine-operating-system-using-System-class.html">Determine operating system using System class</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.time.LocalTime.html">java.time.LocalTime</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Compressed-Size-of-Zip-Entry-Example.html">Get Compressed Size of Zip Entry Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-create-TreeMap-objects-using-Comparable-interface.html">How to create TreeMap objects using Comparable interface</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.xml.sax.XMLReader.html">org.xml.sax.XMLReader</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet-Context-Example.html">Get Applet Context Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/androidx.viewpager.widget.ViewPager.html">androidx.viewpager.widget.ViewPager</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Remove-value-from-Java-HashMap-example.html">Remove value from Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.ws.rs.core.SecurityContext.html">javax.ws.rs.core.SecurityContext</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Remove-all-values-from-Java-LinkedHashMap-example.html">Remove all values from Java LinkedHashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-Map-to-List.html">Convert Map to List</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-short-to-String.html">Convert short to String</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
