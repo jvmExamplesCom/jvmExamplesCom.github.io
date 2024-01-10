@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.nio.file.Path</title> <!--timestamp=2024-01-10T00:13:15.977882174Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.nio.file.Path"> 
+  <meta name="keywords" content="java.nio.file.Path"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.nio.file.Path"> 
+  <meta property="og:description" content="java.nio.file.Path"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.nio.file.Path"> 
+  <meta name="twitter:description" content="java.nio.file.Path"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-01-09</small>
+        </div> 
+        <h1>Java NIO File Path </h1> 
+        <p>The java.nio.file.Path class is part of the Java NIO (New I/O) API for working with files and directories in Java. The Path class provides many useful methods for querying and manipulating a path, including getting the parent directory, getting a file name, determining if a file exists, etc. </p> 
+        <h2>Creating an Instance</h2> 
+        <p>To create an instance of the Path class, we can use the static Paths.get() method, which takes a single string argument. For example:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Path path = Paths.get("my_directory");
+
+          </xmp></code></pre> 
+        <p>This will create a Path instance, pointing to a directory or file named my_directory. This directory or file must, of course, exist on disk.</p> 
+        <h2>Retrieving Information About a Path</h2> 
+        <p>The Path class provides several methods for retrieving information about a path. These include:</p> 
+        <ul> 
+         <li><pre>getFileName()</pre>: returns the file name of the path</li> 
+         <li><pre>getParent()</pre>: returns the parent directory of the path</li> 
+         <li><pre>getRoot()</pre>: returns the root component of the path</li> 
+         <li><pre>isAbsolute()</pre>: determines if the path is absolute</li> 
+         <li><pre>toAbsolutePath()</pre>: returns an absolute version of the path</li> 
+         <li><pre>toUri()</pre>: returns a java.net.URI object representing the path</li> 
+        </ul> 
+        Let's look at an example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Path path = Paths.get("my_directory");
+String fileName = path.getFileName();
+Path parentPath = path.getParent();
+Path rootPath = path.getRoot();
+boolean isAbsolute = path.isAbsolute();
+Path absolutePath = path.toAbsolutePath();
+
+          </xmp></code></pre> 
+        <p>In this code snippet, we first create a Path instance, pointing to the my_directory. Then we retrieve the file name, parent directory, root component, whether the path is absolute, and finally an absolute version of the path.</p> 
+        <h2>Checking if a Path Exists</h2> 
+        <p>The Path class also provides a method for checking if a path actually exists on disk. The method is called </p>
+        <pre>exists()</pre> and it takes no arguments. It returns true if the path exists, and false otherwise.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Path path = Paths.get("my_directory");
+if (path.exists()) {
+    System.out.println("Path exists!");
+} else {
+    System.out.println("Path does not exist.");
+}
+
+          </xmp></code></pre> 
+        <p>In this code snippet, we check if the path my_directory exists. If it does, then the code prints out "Path exists!". Otherwise, it prints "Path does not exist.".</p> 
+        <h2>Creating Directories or Files</h2> 
+        <p>The Path class also provides methods for creating directories or files. To create a directory, we can call the </p>
+        <pre>createDirectory()</pre> method, which takes no arguments and returns a Path instance corresponding to the newly created directory. 
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Path directory = Paths.get("new_directory");
+directory.createDirectory();
+
+          </xmp></code></pre> 
+        <p>This code creates a new directory at the given path. </p> 
+        To create a file, we can call the
+        <pre>createFile()</pre> method, which takes no arguments and returns a Path instance corresponding to the newly created file. 
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Path file = Paths.get("new_file.txt");
+file.createFile();
+
+          </xmp></code></pre> 
+        This code creates a new file at the given path. 
+        <h2>Deleting Directories or Files</h2> 
+        <p>The Path class also provides methods for deleting directories or files. To delete a directory, we can call the </p>
+        <pre>deleteDirectory()</pre> method, which takes no arguments and returns a boolean value indicating whether the directory was successfully deleted. 
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Path directory = Paths.get("new_directory");
+boolean wasDeleted = directory.deleteDirectory();
+
+          </xmp></code></pre> 
+        <p>This code deletes the directory at the given path. </p> 
+        To delete a file, we can call the
+        <pre>deleteFile()</pre> method, which takes no arguments and returns a boolean value indicating whether the file was successfully deleted. 
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Path file = Paths.get("new_file.txt");
+boolean wasDeleted = file.deleteFile();
+
+          </xmp></code></pre> 
+        This code deletes the file at the given path. 
+        <h2>Conclusion</h2> 
+        <p>In this article, we've discussed the java.nio.file.Path class and some of its useful methods. We've seen how to create instances of the Path class, as well as how to retrieve and manipulate information about a path. We've also discussed how to check if a path exists, as well as how to create and delete directories and files. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Indexes-From-Multi-Select-AWT-List-Example.html">Get Selected Indexes From Multi Select AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Deselect-Item-From-AWT-List-Example.html">Deselect Item From AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.security.core.Authentication.html">o.s.s.c.Authentication</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/"> Boolean Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Convert-Java-boolean-Primitive-to-Boolean-object.html">Convert Java boolean Primitive to Boolean object</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-Set-to-array-(Convert-HashSet-to-Array).html">Convert Set to array (Convert HashSet to Array)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.util.EventObject.html">java.util.EventObject</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipOutputStream/"> ZipOutputStream </a> </p> <a href="/articles/Java/Java-Zip/ZipOutputStream/Create-Zip-File-From-Directory-Recursively-Using-ZipOutputStream-Example.html">Create Zip File From Directory Recursively Using ZipOutputStream Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-print-LinkedHashMap.html">How to print LinkedHashMap</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.util.PriorityQueue.html">java.util.PriorityQueue</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/"> Basic Java Examples </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Java-Interface-Example.html">Java Interface Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-05 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-iterate-HashSet-in-Java.html">How to iterate HashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.io.FilenameFilter.html">java.io.FilenameFilter</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Convert-Java-String-to-Float-Object-Example.html">Convert Java String to Float Object Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Copy-Elements-of-ArrayList-to-Java-Vector-Example.html">Copy Elements of ArrayList to Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.google.android.exoplayer2.ExoPlayerFactory.html">c.g.a.e.ExoPlayerFactory</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-String-to-wrapper-objects.html">Convert String to wrapper objects</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-3D-Rectangle-&-Square-in-Applet-Window-Example.html">Draw 3D Rectangle & Square in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Show-Or-Hide-JLabel-Example.html">Show Or Hide JLabel Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Remove-an-element-from-specified-index-of-Java-Vector-Example.html">Remove an element from specified index of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.zookeeper.data.ACL.html">org.apache.zookeeper.data.ACL</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-value-from-TreeMap-using-the-key-(TreeMap-get-method).html">How to get value from TreeMap using the key (TreeMap get method)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.xml.bind.annotation.XmlAccessType.html">j.x.b.a.XmlAccessType</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Line-in-Applet-Window-Example.html">Draw Line in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.app.Dialog.html">android.app.Dialog</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.openjdk.jmh.runner.Runner.html">org.openjdk.jmh.runner.Runner</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Get-Last-modification-time-of-a-file-or-directory.html">Get Last modification time of a file or directory</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/Java-short-Example.html">Java short Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-comma-separated-String-to-ArrayList.html">Convert comma separated String to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-font/Create-Font-Object-Example.html">Create Font Object Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-exponential-value-of-a-number-using-Math.exp.html">F.exp</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
