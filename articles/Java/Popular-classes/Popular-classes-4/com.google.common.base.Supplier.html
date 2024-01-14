@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - com.google.common.base.Supplier</title> <!--timestamp=2024-01-14T00:13:59.735888253Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="com.google.common.base.Supplier"> 
+  <meta name="keywords" content="com.google.common.base.Supplier"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - com.google.common.base.Supplier"> 
+  <meta property="og:description" content="com.google.common.base.Supplier"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - com.google.common.base.Supplier"> 
+  <meta name="twitter:description" content="com.google.common.base.Supplier"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-01-13</small>
+        </div> 
+        <h1>Introduction to com.google.common.base.Supplier</h1> 
+        The Java
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+com.google.common.base.Supplier
+
+          </xmp></code></pre> interface enables the retrieval of values from a supplier. This is useful for retrieving automatically generated resources, such as network connections, threads, etc. This article will explore the functionality of the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+com.google.common.base.Supplier
+
+          </xmp></code></pre> and demonstrate its use with code examples.
+         
+        <h2>The Supplier Interface</h2> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+com.google.common.base.Supplier
+
+          </xmp></code></pre> interface is a simple functional interface that consists of the following method:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+T get()
+
+          </xmp></code></pre> 
+        <p>It takes no arguments and is expected to return a result of type </p>
+        <pre>T</pre>. This method is intended to be used to produce or retrieve objects on demand, such as a thread pool connection or a network resource.
+         
+        <h2>The Supplier<t>
+           Interface
+         </t></h2> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+com.google.common.base.Supplier<T>
+
+          </xmp></code></pre> interface is an extension of the base 
+        <pre>Supplier</pre> interface. It allows you to create suppliers of specific types. To use it, you must pass a generic argument to the interface. For example:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Supplier<String> stringSupplier = () -> "Hello World!";
+
+          </xmp></code></pre> 
+        This creates a
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Supplier<String>
+
+          </xmp></code></pre> which can be used to retrieve a 
+        <pre>String</pre>:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String result = stringSupplier.get();
+System.out.println(result);
+// Outputs "Hello World!"
+
+          </xmp></code></pre> 
+        <h2>Using Suppliers</h2> 
+        The
+        <pre>Supplier</pre> interface can be used to retrieve any kind of object on demand. A common use case is to generate new objects from existing objects. For example, a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Supplier<Integer>
+
+          </xmp></code></pre> can be used to generate integers in a particular range:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+int min = 10;
+int max = 20;
+
+Supplier<Integer> intSupplier = () -> ThreadLocalRandom.current().nextInt(min, max + 1);
+
+Integer result = intSupplier.get();
+System.out.println(result);
+// Outputs a random integer between 10 and 20
+
+          </xmp></code></pre> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-float-Arrays-Example.html">Compare Two Java float Arrays Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-to-ArrayList.html">Convert String to ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-String-array-using-Arrays-class.html">Sort String array using Arrays class</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-elements-of-LinkedHashSet-in-Java.html">Iterate through elements of LinkedHashSet in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/java.text.Format.html">java.text.Format</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipOutputStream/"> ZipOutputStream </a> </p> <a href="/articles/Java/Java-Zip/ZipOutputStream/Create-Zip-File-From-Multiple-Files-using-ZipOutputStream-Example.html">Create Zip File From Multiple Files using ZipOutputStream Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/android.app.LoaderManager.html">android.app.LoaderManager</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-keys-using-Comparator-interface.html">Sort LinkedHashMap by keys using Comparator interface</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-font/"> AWT font </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-font/Get-Font-Information-Example.html">Get Font Information Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.crypto.SecretKeyFactory.html">javax.crypto.SecretKeyFactory</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-11 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Check-if-a-particular-key-exists-in-Java-TreeMap-example.html">Check if a particular key exists in Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Item-Count-Of-AWT-List-Example.html">Get Item Count Of AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/InputStream/Read-line-of-characters-from-console-using-InputStream.html">Read line of characters from console using InputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.time.Duration.html">java.time.Duration</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Remove-value-from-Java-HashMap-example.html">Remove value from Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Determine-Multiple-Selection-Mode-Of-AWT-List-Example.html">Determine Multiple Selection Mode Of AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/System/Get-classpath-using-System-class.html">Get classpath using System class</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Find-Largest-and-Smallest-Number-in-an-Array-Example.html">Find Largest and Smallest Number in an Array Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.joda.time.DateTimeZone.html">org.joda.time.DateTimeZone</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.springframework.core.io.DefaultResourceLoader.html">o.s.c.i.DefaultResourceLoader</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-font/Create-Bold-Font-Example.html">Create Bold Font Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.annotation.concurrent.ThreadSafe.html">j.a.c.ThreadSafe</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.sql.Blob.html">java.sql.Blob</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-create-new-objects-of-LinkedHashSet-class-(LinkedHashSet-constructors).html">How to create new objects of LinkedHashSet class (LinkedHashSet constructors)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Check-if-a-particular-key-exists-in-Java-LinkedHashMap-example.html">Check if a particular key exists in Java LinkedHashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-get-elements-from-Vector-(Vector-get-method).html">How to get elements from Vector (Vector get method)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-Java-TreeMap-in-reverse-direction-using-an-iterator.html">Iterate Java TreeMap in reverse direction using an iterator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.lucene.util.Version.html">org.apache.lucene.util.Version</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Insert-an-Element-into-LinkedList-Java-example.html">Insert an Element into LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Prime-Numbers-Java-Example.html">Prime Numbers Java Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

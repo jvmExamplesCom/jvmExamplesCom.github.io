@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.util.concurrent.PriorityBlockingQueue</title> <!--timestamp=2024-01-14T00:14:43.368117461Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.util.concurrent.PriorityBlockingQueue"> 
+  <meta name="keywords" content="java.util.concurrent.PriorityBlockingQueue"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.util.concurrent.PriorityBlockingQueue"> 
+  <meta property="og:description" content="java.util.concurrent.PriorityBlockingQueue"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.util.concurrent.PriorityBlockingQueue"> 
+  <meta name="twitter:description" content="java.util.concurrent.PriorityBlockingQueue"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-01-13</small>
+        </div> 
+        <h1>java.util.concurrent.PriorityBlockingQueue</h1> Java's PriorityBlockingQueue is a powerful implementation of the BlockingQueue interface, providing an efficient means of waiting for elements with a higher priority to be added to a queue. The PriorityBlockingQueue provides an API that allows threads to wait until elements with a higher priority are available before returning them to the calling thread, giving it greater control over the scheduling of elements within a queue. This article will provide an in-depth look at the PriorityBlockingQueue class, covering its unique features, usage scenarios and code examples. 
+        <h2>Overview</h2> PriorityBlockingQueue is a concurrent queue data structure, implemented as part of Java's java.util.concurrent package. It is designed to store elements of any type that can be sorted according to an arbitrary Comparator, or according to their natural ordering. Elements retrieved from the PriorityBlockingQueue are returned in order of priority, meaning that the highest priority elements are always consumed first. The PriorityBlockingQueue is a thread-safe data structure, meaning that multiple threads can concurrently access the queue and manipulate its contents without requiring external synchronization. It also provides blocking operations, allowing threads to wait until an element with greater priority is added to the queue before returning it. The PriorityBlockingQueue also provides methods such as peek, poll, take and offer, which allow for efficient manipulation of its contents. 
+        <h2>Features and Usage</h2> One of the primary uses of the PriorityBlockingQueue is for task scheduling. Each element stored in the queue can contain a task that needs to be executed at some point in the future. When a thread attempts to retrieve an element from the PriorityBlockingQueue, it will wait for elements with a higher priority to be added before returning one. This allows threads to ensure that certain tasks are performed in the proper order. The PriorityBlockingQueue also supports several other features, such as the ability to limit the number of elements that can be stored in the queue, as well as the ability to block threads until an element becomes available. The PriorityBlockingQueue also supports timeouts, allowing threads to timeout if no element with a higher priority is added within a certain period of time. The PriorityBlockingQueue also provides methods that allow for efficient manipulation of its contents, such as peek, poll, take and offer. 
+        <h2>Code Examples</h2> Below are a few examples of how to use the PriorityBlockingQueue in Java: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+PriorityBlockingQueue<String> queue = new PriorityBlockingQueue<>();
+
+// Add an element with priority 1 
+queue.put("Element 1");
+
+// Add an element with priority 2 
+queue.put("Element 2");
+
+// Retrieve an element from the queue 
+String element = queue.take(); // Will return "Element 1"
+
+          </xmp></code></pre> In this example, we create a PriorityBlockingQueue and add two elements, each with a different priority. When we call the take() method, it will return the element with the highest priority (in this case, "Element 1"). 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create a PriorityBlockingQueue with a limit of 10 elements
+PriorityBlockingQueue<String> queue = new PriorityBlockingQueue<>(10);
+
+// Add an element 
+queue.put("Element 1");
+
+// Block the current thread until an element with a higher priority is added
+String element = queue.take(); // Will block the current thread until an element with a higher priority is added
+
+          </xmp></code></pre> In this example, we create a PriorityBlockingQueue with a limit of 10 elements. When we call the take() method, it will block the current thread until an element with a higher priority is added to the queue. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+queue.offer("Element 3", 5, TimeUnit.SECONDS); // Will offer the element with a 5 second timeout
+
+          </xmp></code></pre> In this example, we use the offer() method to add an element to the queue with a 5 second timeout. If no element with a higher priority is added within the specified timeout, the offer() method will return false. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create a PriorityBlockingQueue with a priority comparator 
+PriorityBlockingQueue<Integer> queue = new PriorityBlockingQueue<>(Comparator.comparingInt(Integer::intValue));
+
+// Add elements 
+queue.add(1);
+queue.add(2);
+
+// Retrieve an element from the queue 
+int element = queue.take(); // Will return 2
+
+          </xmp></code></pre> In this example, we create a PriorityBlockingQueue with a priority comparator. When we add two elements, they will be ordered according to their natural ordering (in this case, integers). When we call the take() method, it will return the element with the highest priority (in this case, 2). 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+queue.setCapacity(20); // Set the capacity of the queue to 20 elements
+
+          </xmp></code></pre> In this example, we use the setCapacity() method to set the capacity of the PriorityBlockingQueue to 20 elements. 
+        <h2>Conclusion</h2> The PriorityBlockingQueue is an invaluable tool for thread-safe task scheduling and manipulation of concurrent queues. Its features and API make it a powerful and versatile tool for manipulating queues in multithreaded applications. With its support for priority-based scheduling, timeouts and capacity management, the PriorityBlockingQueue is an essential tool for any Java developer. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/"> Float Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Convert-Java-String-to-Float-Object-Example.html">Convert Java String to Float Object Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Get-Size-of-Java-TreeSet-Example.html">Get Size of Java TreeSet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.hadoop.io.SequenceFile.html">org.apache.hadoop.io.SequenceFile</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.springframework.security.authentication.AbstractAuthenticationToken.html">o.s.s.a.AbstractAuthenticationToken</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/"> AWT Color </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Set-Drawing-Mode-To-XOR-Example.html">Set Drawing Mode To XOR Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/"> Basic Java Examples </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Java-Factorial-Using-Recursion-Example.html">Java Factorial Using Recursion Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/"> Runtime </a> </p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Terminate-Java-Virtual-Machine-(JVM)-Example.html">Terminate Java Virtual Machine (JVM) Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.preference.DialogPreference.html">android.preference.DialogPreference</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/"> Sorting </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-char-Array-Example.html">Java Sort char Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-font/"> AWT font </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-font/Get-Available-Font-Family-Names-Example.html">Get Available Font Family Names Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-01 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Simple-Java-Integer-Example.html">Simple Java Integer Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.hardware.camera2.CameraCharacteristics.html">a.h.c.CameraCharacteristics</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-sort-LinkedHashSet-in-Java.html">How to sort LinkedHashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/net.minecraft.block.material.Material.html">n.m.b.m.Material</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-fix-java.io.FileNotFoundException-(access-is-denied).html">FileNotFoundException (access is denied)</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Create-Read-Only-JTextField-Example.html">Create Read Only JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Convert-Java-Boolean-object-to-boolean-primitive-example.html">Convert Java Boolean object to boolean primitive example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Append-all-elements-of-other-Collection-to-Java-ArrayList-Example.html">Append all elements of other Collection to Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.apache.shiro.authc.AuthenticationInfo.html">o.a.s.a.AuthenticationInfo</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Prime-Numbers-Java-Example.html">Prime Numbers Java Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-ArrayList-elements-using-Comparator.html">Sort ArrayList elements using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.w3c.dom.ProcessingInstruction.html">org.w3c.dom.ProcessingInstruction</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Get-Sub-List-of-Java-Vector-Example.html">Get Sub List of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/System/Get-system-time-using-System-class.html">Get system time using System class</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/StringBuffer/Java-StringBuffer-append-new-line-example.html">Java StringBuffer append new line example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.google.inject.name.Named.html">com.google.inject.name.Named</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Read-text-file-to-Java-HashMap-example.html">Read text file to Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Reverse-order-of-all-elements-of-Java-ArrayList-Example.html">Reverse order of all elements of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-values-using-Comparable-interface.html">Sort LinkedHashMap by values using Comparable interface</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-get-random-elements-from-Java-HashSet.html">How to get random elements from Java HashSet</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

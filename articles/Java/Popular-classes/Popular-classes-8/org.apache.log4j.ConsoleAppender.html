@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.apache.log4j.ConsoleAppender</title> <!--timestamp=2024-01-14T00:14:56.516931430Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.apache.log4j.ConsoleAppender"> 
+  <meta name="keywords" content="org.apache.log4j.ConsoleAppender"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.apache.log4j.ConsoleAppender"> 
+  <meta property="og:description" content="org.apache.log4j.ConsoleAppender"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.apache.log4j.ConsoleAppender"> 
+  <meta name="twitter:description" content="org.apache.log4j.ConsoleAppender"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-01-13</small>
+        </div> 
+        <h1>Introduction to org.apache.log4j.ConsoleAppender</h1> 
+        <p>The org.apache.log4j.ConsoleAppender is a useful tool for logging information from a Java application to the console. It is part of the Apache Log4j library and allows you to write log messages with a variety of levels and formats. This guide will provide an overview of the ConsoleAppender and how to use it. </p> 
+        <h2>Overview of the ConsoleAppender</h2> 
+        <p>The ConsoleAppender is one of several Appenders available in Log4j. An Appender is an object which can be configured to send log messages to different destinations, such as files or the system console. The ConsoleAppender sends log messages to the console output stream. </p> 
+        <p>The ConsoleAppender has several configurable properties. These properties include:</p> 
+        <ul> 
+         <li>Target: The target output stream. Can be either System.out or System.err.</li> 
+         <li>Encoding: The character encoding of the log messages.</li> 
+         <li>Threshold: The minimum log level that will be logged.</li> 
+         <li>Layout: The format of the log messages.</li> 
+        </ul> 
+        <p>In addition to the above properties, the ConsoleAppender supports the use of log filters, which allow you to specify which messages should be logged and which should not. </p> 
+        <h2>Using the ConsoleAppender</h2> 
+        <p>The ConsoleAppender can be used in many different ways. Here are some examples of how it can be used: </p> 
+        <h3>Basic Usage</h3> 
+        <p>The simplest way to use the ConsoleAppender is to just configure it with the default settings. For example, this code will create a ConsoleAppender with the default settings: </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Logger rootLogger = Logger.getRootLogger();
+ConsoleAppender consoleAppender = new ConsoleAppender();
+rootLogger.addAppender(consoleAppender);
+
+          </xmp></code></pre> 
+        <p>With the above configuration, all messages logged with the root logger will be sent to the console. </p> 
+        <h3>Configuring Output Streams</h3> 
+        <p>The ConsoleAppender can be configured to write log messages to either System.out or System.err. For example, this code will create a ConsoleAppender which writes log messages to System.err: </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Logger rootLogger = Logger.getRootLogger();
+ConsoleAppender consoleAppender = new ConsoleAppender();
+consoleAppender.setTarget("System.err");
+rootLogger.addAppender(consoleAppender);
+
+          </xmp></code></pre> 
+        <h3>Setting a Log Level Threshold</h3> 
+        <p>The ConsoleAppender can be configured to only log messages at or above a certain level. For example, this code will create a ConsoleAppender which will only log messages at the INFO level and above: </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Logger rootLogger = Logger.getRootLogger();
+Level threshold = Level.INFO;
+ConsoleAppender consoleAppender = new ConsoleAppender();
+consoleAppender.setThreshold(threshold);
+rootLogger.addAppender(consoleAppender);
+
+          </xmp></code></pre> 
+        <h3>Configuring the Log Layout</h3> 
+        <p>The ConsoleAppender can be configured to use different layouts to format the log messages. For example, this code will create a ConsoleAppender which uses the PatternLayout to format log messages as text: </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Logger rootLogger = Logger.getRootLogger();
+String pattern = "%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n";
+PatternLayout layout = new PatternLayout(pattern);
+ConsoleAppender consoleAppender = new ConsoleAppender();
+consoleAppender.setLayout(layout);
+rootLogger.addAppender(consoleAppender);
+
+          </xmp></code></pre> 
+        <h3>Using Filters</h3> 
+        <p>The ConsoleAppender supports the use of log filters to control which log messages are sent to the console. For example, this code will create a ConsoleAppender which only logs messages which have a TRACE level: </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Logger rootLogger = Logger.getRootLogger();
+DenyAllFilter denyAllFilter = new DenyAllFilter();
+LevelMatchFilter levelMatchFilter = new LevelMatchFilter();
+levelMatchFilter.setLevelToMatch(Level.TRACE);
+levelMatchFilter.setAcceptOnMatch(true);
+Filter filterChain[] = {denyAllFilter, levelMatchFilter};
+FilterChain filterChainObj = new FilterChain(filterChain);
+ConsoleAppender consoleAppender = new ConsoleAppender();
+consoleAppender.setFilter(filterChainObj);
+rootLogger.addAppender(consoleAppender);
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>The org.apache.log4j.ConsoleAppender is a powerful and flexible tool for logging messages from a Java application to the console. It can be easily configured to send log messages with different levels and formats, and to use filters to control which messages are sent to the console. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer.html">ConfigurableEmbeddedServletContainer</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.apache.hadoop.mapreduce.Reducer.html">org.apache.hadoop.mapreduce.Reducer</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-check-if-the-TreeMap-is-empty.html">How to check if the TreeMap is empty</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-check-if-Vector-is-empty-in-Java-(isEmpty-method).html">How to check if Vector is empty in Java (isEmpty method)</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.quartz.impl.StdSchedulerFactory.html">org.quartz.impl.StdSchedulerFactory</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-maxmimum-element-of-Java-ArrayList-Example.html">Find maxmimum element of Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-LinkedHashMap-to-two-arrays.html">Convert LinkedHashMap to two arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/"> Runtime </a> </p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Get-Maximum-Memory-Available-to-Java-Virtual-Machine(JVM)-Example.html">Get Maximum Memory Available to Java Virtual Machine(JVM) Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JTextField/"> JTextField </a> </p> <a href="/articles/Java/Swing/JTextField/Get-X-and-Y-Coordinates-of-JTextField-Example.html">Get X and Y Coordinates of JTextField Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/"> Data types </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/Java-int-Example.html">Java int Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-29 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-random-elements-from-ArrayList.html">Get random elements from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.swing.event.TreeSelectionEvent.html">javax.swing.event.TreeSelectionEvent</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.hibernate.boot.registry.StandardServiceRegistryBuilder.html">StandardServiceRegistryBuilder</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Rename-file-or-directory.html">Rename file or directory</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-insert-an-element-at-the-beginning-of-the-Java-Vector.html">How to insert an element at the beginning of the Java Vector</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Determine-If-The-Checkbox-Is-Enabled-Example.html">Determine If The Checkbox Is Enabled Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-compare-two-TreeSet-objects-using-the-equals-method.html">How to compare two TreeSet objects using the equals method</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-all-keys-of-LinkedHashMap-in-Java-(keySet-method).html">How to get all keys of LinkedHashMap in Java (keySet method)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/com.google.common.base.Preconditions.html">com.google.common.base.Preconditions</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Iterate-through-the-values-of-Java-TreeMap-example.html">Iterate through the values of Java TreeMap example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Iterate-through-the-values-of-Java-LinkedHashMap-example.html">Iterate through the values of Java LinkedHashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-keys-using-Comparator-interface.html">Sort LinkedHashMap by keys using Comparator interface</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/How-to-check-if-String-is-palindrome.html">How to check if String is palindrome</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Set-from-Java-HashSet-example.html">Get Synchronized Set from Java HashSet example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-TreeSet-to-an-array.html">How to convert TreeSet to an array</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.util.EventListener.html">java.util.EventListener</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Oval-&-Circle-in-Applet-Window-Example.html">Draw Oval & Circle in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/CheckedOutputStream/Create-Zip-File-With-Adler32-Checksum-Example.html">Create Zip File With Adler32 Checksum Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.swing.border.LineBorder.html">javax.swing.border.LineBorder</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/JLabel-Set-Tooltip-Example.html">JLabel Set Tooltip Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
