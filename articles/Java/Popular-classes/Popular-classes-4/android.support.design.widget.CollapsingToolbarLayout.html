@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - android.support.design.widget.CollapsingToolbarLayout</title> <!--timestamp=2024-01-17T00:12:47.603836172Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="android.support.design.widget.CollapsingToolbarLayout"> 
+  <meta name="keywords" content="android.support.design.widget.CollapsingToolbarLayout"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - android.support.design.widget.CollapsingToolbarLayout"> 
+  <meta property="og:description" content="android.support.design.widget.CollapsingToolbarLayout"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - android.support.design.widget.CollapsingToolbarLayout"> 
+  <meta name="twitter:description" content="android.support.design.widget.CollapsingToolbarLayout"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-01-16</small>
+        </div> 
+        <h1>android.support.design.widget.CollapsingToolbarLayout</h1> The android.support.design.widget.CollapsingToolbarLayout is a ViewGroup that implements many of the visual pattern from Google's Material Design specification. This class provides a handy way to add a compound view of title and floating action buttons, along with an optional expanded content area. 
+        <h2>Basic Usage</h2> In order to use the CollapsingToolbarLayout, you must include the following dependencies in your project: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+implementation 'com.android.support:design:27.+'
+implementation 'com.android.support:appcompat-v7:27.+'
+
+          </xmp></code></pre> The CollapsingToolbarLayout should be placed inside the AppBarLayout, which is itself a direct child of the CoordinatorLayout, like so: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+<android.support.design.widget.CoordinatorLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            ...
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    ...
+
+</android.support.design.widget.CoordinatorLayout>
+
+          </xmp></code></pre> 
+        <h2>Attributes</h2> The CollapsingToolbarLayout has several attributes that can be set in order to customize the behavior and appearance of the view. 
+        <h3>app:layout_scrollFlags</h3> This attribute sets the scrolling behavior when the user scrolls up or down. By setting the scroll flags, you can control whether the view should collapse or expand when the user scrolls. The available values are: 
+        <ul> 
+         <li>scroll: the view should scroll offscreen</li> 
+         <li>exitUntilCollapsed: the view should exit until it is completely collapsed</li> 
+         <li>enterAlways: the view should enter even if the user scrolls up</li> 
+         <li>enterAlwaysCollapsed: the view should enter only if the user scrolls up and the view is completely collapsed</li> 
+        </ul> For example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+android:layout_scrollFlags="scroll|exitUntilCollapsed"
+
+          </xmp></code></pre> 
+        <h3>app:layout_collapseMode</h3> This attribute defines how the view should collapse when the user scrolls up or down. The available values are: 
+        <ul> 
+         <li>pin: the view should remain pinned at the top of the screen</li> 
+         <li>parallax: the view should collapse with a parallax effect</li> 
+        </ul> For example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+android:layout_collapseMode="parallax"
+
+          </xmp></code></pre> 
+        <h3>app:layout_collapseParallaxMultiplier</h3> This attribute sets the multiplier for the parallax effect. The default value is 0.5, which means the view should collapse at half the speed of the user's scrolling. The value should be between 0 and 1. For example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+android:layout_collapseParallaxMultiplier="0.75"
+
+          </xmp></code></pre> 
+        <h2>Methods</h2> The CollapsingToolbarLayout has several methods that can be used in order to customize the behavior and appearance of the view. 
+        <h3>setTitle(CharSequence title)</h3> This method sets the title of the view. The title will be displayed in the collapsed toolbar. 
+        <h3>setCollapsedTitleTextAppearance(int resId)</h3> This method sets the text appearance of the title in the collapsed toolbar. The text appearance should be provided as a resource id. 
+        <h3>setExpandedTitleTextAppearance(int resId)</h3> This method sets the text appearance of the title in the expanded toolbar. The text appearance should be provided as a resource id. 
+        <h3>setCollapsedTitleGravity(int gravity)</h3> This method sets the gravity of the title in the collapsed toolbar. The gravity should be provided as an integer. 
+        <h3>setExpandedTitleGravity(int gravity)</h3> This method sets the gravity of the title in the expanded toolbar. The gravity should be provided as an integer. 
+        <h2>Example</h2> In this example, we will create a simple CollapsingToolbarLayout that displays a title, an image, and a floating action button. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+<android.support.design.widget.CoordinatorLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_collapseMode="parallax"
+            app:layout_collapseParallaxMultiplier="0.75"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:id="@+id/backdrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        ...
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_share"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="bottom|right|end" />
+
+</android.support.design.widget.CoordinatorLayout>
+
+          </xmp></code></pre> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.google.inject.multibindings.Multibinder.html">c.g.i.m.Multibinder</a> <h6><i class="fa fa-clock-o"></i> <span>2024-01-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/javax.persistence.Basic.html">javax.persistence.Basic</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-iterate-over-elements-of-TreeSet-in-Java.html">How to iterate over elements of TreeSet in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Indexes-From-Multi-Select-AWT-List-Example.html">Get Selected Indexes From Multi Select AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-all-keys-from-the-TreeMap.html">How to get all keys from the TreeMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-font/"> AWT font </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-font/Get-Available-Font-Family-Names-Example.html">Get Available Font Family Names Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-short-Arrays-Example.html">Compare Two Java short Arrays Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataInputStream/"> DataInputStream </a> </p> <a href="/articles/Java/File-And-IO/DataInputStream/Read-short-from-file-using-DataInputStream.html">Read short from file using DataInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/"> ListIterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Replace-an-element-from-ArrayList-using-Java-ListIterator-Example.html">Replace an element from ArrayList using Java ListIterator Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.io.BufferedWriter.html">java.io.BufferedWriter</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-08 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet-Info-Example.html">Get Applet Info Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/android.graphics.drawable.shapes.RoundRectShape.html">a.g.d.s.RoundRectShape</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Sub-Map-from-Java-TreeMap-example.html">Get Sub Map from Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-sort-TreeSet-elements-using-Comparable-interface.html">How to sort TreeSet elements using Comparable interface</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Java-Convert-TreeSet-to-array.html">Java Convert TreeSet to array</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.awt.event.WindowListener.html">java.awt.event.WindowListener</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/com.fasterxml.jackson.databind.ObjectMapper.html">c.f.j.d.ObjectMapper</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Get-Brighter-Version-Of-Current-Color-Example.html">Get Brighter Version Of Current Color Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-short-Array-Example.html">Performing Binary Search on Java short Array Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-character-to-String.html">Convert character to String</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-create-new-Vector-objects-in-Java.html">How to create new Vector objects in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Replace-an-element-at-specified-index-of-Java-ArrayList-Example.html">Replace an element at specified index of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-byte-from-file-using-DataInputStream.html">Read byte from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Iterate-LinkedList-in-reverse-direction-using-the-ListIterator.html">Iterate LinkedList in reverse direction using the ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.badlogic.gdx.math.MathUtils.html">com.badlogic.gdx.math.MathUtils</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Create-JLabel-With-Image-Icon-and-Text-Example.html">Create JLabel With Image Icon and Text Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipInputStream/Extract-First-File-From-Zip-File-Example.html">Extract First File From Zip File Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.lang.reflect.Method.html">java.lang.reflect.Method</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.springframework.boot.autoconfigure.web.ServerProperties.html">o.s.b.a.w.ServerProperties</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/System/Run-object-finalization-using-System-class.html">Run object finalization using System class</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
