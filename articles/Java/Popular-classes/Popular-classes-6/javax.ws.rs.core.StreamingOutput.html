@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javax.ws.rs.core.StreamingOutput</title> <!--timestamp=2024-01-18T00:13:06.309537903Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.ws.rs.core.StreamingOutput"> 
+  <meta name="keywords" content="javax.ws.rs.core.StreamingOutput"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.ws.rs.core.StreamingOutput"> 
+  <meta property="og:description" content="javax.ws.rs.core.StreamingOutput"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.ws.rs.core.StreamingOutput"> 
+  <meta name="twitter:description" content="javax.ws.rs.core.StreamingOutput"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-01-17</small>
+        </div> 
+        <h1>javax.ws.rs.core.StreamingOutput Overview</h1> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+javax.ws.rs.core.StreamingOutput
+
+          </xmp></code></pre> class is used to write streaming data to a client in a REST environment. It provides a way to write streaming output efficiently while still allowing the server to control the lifetime of the response. This class is used in conjunction with 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+javax.ws.rs.core.Response
+
+          </xmp></code></pre> to write a response with the specified response code, headers, and entity. 
+         
+        <h2>Using StreamingOutput</h2> 
+        <p>To use StreamingOutput, you first create an instance of it by passing in a </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+java.io.OutputStream
+
+          </xmp></code></pre>. Then you can use the write() method to write the data you want to send in the response. Here is an example:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ByteArrayOutputStream baos = new ByteArrayOutputStream();
+StreamingOutput output = new StreamingOutput() {
+    @Override
+    public void write(OutputStream os) throws IOException {
+        os.write(baos.toByteArray());
+    }
+};
+
+          </xmp></code></pre> 
+        <p>Then you can create a response using the StreamingOutput and the Response object like so:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Response response = Response
+    .ok(output)
+    .header("Content-Type", "application/json")
+    .build();
+
+          </xmp></code></pre> 
+        <p>Finally, you can write the response to the client:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+response.writeTo(client);
+
+          </xmp></code></pre> 
+        <p>This will send the data from the StreamingOutput instance to the client in an efficient manner. </p> 
+        <h2>Example Usage</h2> 
+        <p>Here is an example of how this might be used in practice. For this example, we will assume that you have a class called </p>
+        <pre>Person</pre> that contains information about a person (name, age, etc). We will also assume that you have a list of 
+        <pre>Person</pre> objects that you want to send to the client as a JSON array.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+List<Person> people = ...;
+
+StreamingOutput output = new StreamingOutput() {
+    @Override
+    public void write(OutputStream os) throws IOException {
+        JsonGenerator generator = Json.createGenerator(os);
+        generator.writeStartArray();
+        for (Person person : people) {
+            generator.writeStartObject()
+                .write("name", person.getName())
+                .write("age", person.getAge())
+                .writeEnd();
+        }
+        generator.writeEnd();
+        generator.flush();
+    }
+};
+
+Response response = Response
+    .ok(output)
+    .header("Content-Type", "application/json")
+    .build();
+
+response.writeTo(client);
+
+          </xmp></code></pre> 
+        <p>This will write out the list of people as a JSON array to the client in an efficient manner.</p> 
+        <h2>Conclusion</h2> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+javax.ws.rs.core.StreamingOutput
+
+          </xmp></code></pre> class is a useful tool for writing streaming output in a REST environment. By using this class, you can efficiently write out data to the client without having to worry about managing the lifetime of the response.
+         
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Compare-two-ArrayList.html">Compare two ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/BigInteger/"> BigInteger </a> </p> <a href="/articles/Java/Wrapper-Classes/BigInteger/Find-Square-Root-of-BigInteger-Example.html">Find Square Root of BigInteger Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/How-to-check-if-String-ends-with-another-String-or-substring.html">How to check if String ends with another String or substring</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Print-ArrayList-elements-using-Arrays.html">Print ArrayList elements using Arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Change-Checkbox-Background-Color-Example.html">Change Checkbox Background Color Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.view.ScaleGestureDetector.html">android.view.ScaleGestureDetector</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.swing.event.ListSelectionEvent.html">javax.swing.event.ListSelectionEvent</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Get-File-size-in-bytes.html">Get File size in bytes</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/"> Convertion </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-any-primitive.html">Convert String to any primitive</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-a-union-or-intersection-of-two-TreeSet-objects.html">How to get a union or intersection of two TreeSet objects</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-06 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-int-to-String.html">Convert int to String</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.springframework.web.filter.CorsFilter.html">o.s.w.f.CorsFilter</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Get-Maximum-Memory-Available-to-Java-Virtual-Machine(JVM)-Example.html">Get Maximum Memory Available to Java Virtual Machine(JVM) Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/android.net.wifi.WifiConfiguration.html">android.net.wifi.WifiConfiguration</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Round-Java-float-and-double-numbers-using-Math.round.html">R.round</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-check-if-the-value-exists-in-the-TreeMap-(TreeMap-contains-a-value).html">How to check if the value exists in the TreeMap (TreeMap contains a value)</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/JTextField-Horizontal-Alignment-Example.html">JTextField Horizontal Alignment Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-convert-LinkedHashSet-to-array-in-Java.html">How to convert LinkedHashSet to array in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.apache.hadoop.io.NullWritable.html">org.apache.hadoop.io.NullWritable</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-create-new-Vector-objects-in-Java.html">How to create new Vector objects in Java</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-an-element-to-specified-index-of-Java-ArrayList-Example.html">Add an element to specified index of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-convert-LinkedHashMap-to-List-in-Java.html">How to convert LinkedHashMap to List in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.transaction.Transactional.html">javax.transaction.Transactional</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Threads/Pause-Thread-Using-Sleep-Method-Example.html">Pause Thread Using Sleep Method Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Index-From-Single-Select-AWT-List-Example.html">Get Selected Index From Single Select AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.spark.api.java.JavaPairRDD.html">o.a.s.a.j.JavaPairRDD</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Remove-all-elements-from-Java-TreeSet-example.html">Remove all elements from Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.junit.runner.notification.RunListener.html">o.j.r.n.RunListener</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-through-List-using-ListIterator.html">How to iterate through List using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-TreeMap-key-or-TreeMap-value-using-index.html">How to get TreeMap key or TreeMap value using index</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

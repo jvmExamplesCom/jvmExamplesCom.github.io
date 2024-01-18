@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.springframework.context.ApplicationEventPublisher</title> <!--timestamp=2024-01-18T00:12:55.598801644Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.springframework.context.ApplicationEventPublisher"> 
+  <meta name="keywords" content="org.springframework.context.ApplicationEventPublisher"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.springframework.context.ApplicationEventPublisher"> 
+  <meta property="og:description" content="org.springframework.context.ApplicationEventPublisher"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.springframework.context.ApplicationEventPublisher"> 
+  <meta name="twitter:description" content="org.springframework.context.ApplicationEventPublisher"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-01-17</small>
+        </div> 
+        <h1>org.springframework.context.ApplicationEventPublisher</h1> 
+        <p>The ApplicationEventPublisher is an interface used in Spring applications to asynchronously publish events. It provides support for publish-subscribe pattern, allowing components to subscribe to an event source and publish events that those listeners can receive.</p> 
+        <p>This interface is particularly useful when an application wants to decouple its event sources from the components that want to listen to them. For example, if a library needs to expose certain events to its users, it can do so by defining an event publisher and notifying the users of its existence. Then, any user of the library can register as a listener for those events without having to know about the library's inner workings.</p> 
+        <p>The ApplicationEventPublisher interface consists of the following methods:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public void publishEvent(ApplicationEvent event);
+public void publishEvent(Object event);
+public void publishEvent(Object event, ResolvableType eventType);
+public boolean containsListener(Class<?> eventType);
+public void notifyListeners(ApplicationEvent event);
+public void notifyListeners(Object event, ResolvableType eventType);
+
+          </xmp></code></pre> 
+        <h2>publishEvent() Method</h2> 
+        <p>The publishEvent() method is used to asynchronously publish an event. The event is sent to all registered listeners that are subscribed to the same event type. This method can be called with either an ApplicationEvent or an Object.</p> 
+        <h3>Using The publishEvent() Method With An ApplicationEvent</h3> 
+        <p>When using the publishEvent() method with an ApplicationEvent, we must ensure that the provided event is an instance of ApplicationEvent:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+if (event instanceof ApplicationEvent) {
+    applicationContext.publishEvent(event);
+}
+
+          </xmp></code></pre> 
+        <p>Once we have verified that the event is an ApplicationEvent, we can then publish it to the ApplicationContext:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+applicationContext.publishEvent(event);
+
+          </xmp></code></pre> 
+        <h3>Using The publishEvent() Method With An Object</h3> 
+        <p>When using the publishEvent() method with an Object, we must specify the event type. This is done via the ResolvableType parameter: </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+applicationContext.publishEvent(event, ResolvableType.forClass(MyEvent.class));
+
+          </xmp></code></pre> 
+        <h2>containsListener() Method</h2> 
+        <p>The containsListener() method is used to check if any listeners have been registered for a given event type. It takes a Class as a parameter and returns true if there are any registered listeners for that event type or false otherwise:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+boolean hasListeners = applicationContext.containsListener(MyEvent.class);
+
+          </xmp></code></pre> 
+        <h2>notifyListeners() Method</h2> 
+        <p>The notifyListeners() method is used to synchronously notify all registered listeners of a given event. This method can be called with either an ApplicationEvent or an Object. As with the publishEvent() method, when using the notifyListeners() method with an Object, we must specify the event type via the ResolvableType parameter.</p> 
+        <h3>Using The notifyListeners() Method with An ApplicationEvent</h3> 
+        <p>When using the notifyListeners() method with an ApplicationEvent, we must ensure that the provided event is an instance of ApplicationEvent:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+if (event instanceof ApplicationEvent) {
+    applicationContext.notifyListeners(event);
+}
+
+          </xmp></code></pre> 
+        <p>Once we have verified that the event is an ApplicationEvent, we can then notify the listeners:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+applicationContext.notifyListeners(event);
+
+          </xmp></code></pre> 
+        <h3>Using The notifyListeners() Method with An Object</h3> 
+        <p>When using the notifyListeners() method with an Object, we must specify the event type. This is done via the ResolvableType parameter:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+applicationContext.notifyListeners(event, ResolvableType.forClass(MyEvent.class));
+
+          </xmp></code></pre> 
+        <p>The ApplicationEventPublisher interface provides methods that are used to publish and notify events to the Spring application context. By using this interface, components can decouple their event sources from the components that want to listen to them, allowing for a more flexible and robust application architecture. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-headset,-tailset,-and-subset-from-the-Java-TreeSet.html">How to get headset, tailset, and subset from the Java TreeSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.swing.JSlider.html">javax.swing.JSlider</a> <h6><i class="fa fa-clock-o"></i> <span>2024-01-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Java-ArrayList-Iterator-example.html">Java ArrayList Iterator example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/"> Searching </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-float-Array-Example.html">Performing Binary Search on Java float Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/"> AWT Color </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Convert-RGB-To-HSB-Color-Example.html">Convert RGB To HSB Color Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.ws.rs.QueryParam.html">javax.ws.rs.QueryParam</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.view.animation.RotateAnimation.html">a.v.a.RotateAnimation</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-LinkedHashMap-to-two-arrays.html">Convert LinkedHashMap to two arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/"> Hashtable </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Simple-Java-Hashtable-example.html">Simple Java Hashtable example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/"> AWT Color </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Print-Hello-World-in-an-Applet-in-different-Colors-Example.html">Print Hello World in an Applet in different Colors Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-24 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Read-text-file-to-Java-HashMap-example.html">Read text file to Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-List-to-Map-(Convert-List-to-HashMap).html">Convert List to Map (Convert List to HashMap)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Java-HashMap-put-method-example.html">Java HashMap put method example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/javafx.geometry.Point2D.html">javafx.geometry.Point2D</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Remove-AWT-Label-From-Applet-or-Window-Frame-Example.html">Remove AWT Label From Applet or Window Frame Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-add-elements-to-Vector-in-Java.html">How to add elements to Vector in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Find-the-minimum-or-maximum-value-in-ArrayList.html">Find the minimum or maximum value in ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.maven.artifact.Artifact.html">org.apache.maven.artifact.Artifact</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.graphics.LinearGradient.html">android.graphics.LinearGradient</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-Long-to-numeric-primitive-data-types-example.html">Convert Long to numeric primitive data types example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Static/Java-static-method-example.html">Java static method example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/com.intellij.openapi.project.Project.html">com.intellij.openapi.project.Project</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Set-JTextField-Border-Example.html">Set JTextField Border Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-long-Array-Example.html">Performing Binary Search on Java long Array Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Make-Item-Of-AWT-List-Visible-Example.html">Make Item Of AWT List Visible Example</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Suggest-JVM-to-Run-Garbage-Collector-Example.html">Suggest JVM to Run Garbage Collector Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.widget.TableRow.html">android.widget.TableRow</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.support.v7.widget.DefaultItemAnimator.html">a.s.v.w.DefaultItemAnimator</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-get-absolute-path-of-a-file-in-Java.html">How to get absolute path of a file in Java</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-exponential-value-of-a-number-using-Math.exp.html">F.exp</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
