@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.reactivestreams.Subscription</title> <!--timestamp=2024-01-24T00:13:36.471570392Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.reactivestreams.Subscription"> 
+  <meta name="keywords" content="org.reactivestreams.Subscription"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.reactivestreams.Subscription"> 
+  <meta property="og:description" content="org.reactivestreams.Subscription"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.reactivestreams.Subscription"> 
+  <meta name="twitter:description" content="org.reactivestreams.Subscription"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-01-23</small>
+        </div> 
+        <h1>Introduction to org.reactivestreams.Subscription</h1> 
+        <p>org.reactivestreams.Subscription is an interface in the Reactive Streams API that represents a one-to-one lifecycle of a Subscriber subscribing to a Publisher.</p> 
+        <p>It represents the stage in a reactive exchange where a Publisher has a Subscriber and both have called the subscribe() method on the other instance.</p> 
+        <p>It provides methods to request data from a Publisher to a Subscriber, cancel an ongoing subscription and check if a subscription is still valid.</p> 
+        <h2>Example of org.reactivestreams.Subscription</h2> 
+        <p>The following example demonstrates how to use org.reactivestreams.Subscription.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class ExampleSubscription {
+  public static void main(String[] args) {
+    // Create a publisher
+    Flux<String> flux = Flux.just("Hello", "World");
+    
+    // Create a subscriber
+    FluxSink<String> subscriber = flux.subscribe();
+    
+    // Subscribe to the publisher
+    flux.subscribe(subscriber::next);
+    
+    // Get the active subscription
+    Subscription sub = subscriber.currentSubscription();
+    
+    // Request two items from the publisher
+    sub.request(2);
+    
+    // Cancel the subscription
+    sub.cancel();
+    
+    // Check if subscription is still valid
+    System.out.println(sub.isCancelled());
+  }
+}
+
+          </xmp></code></pre> 
+        The output of the above code will be: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+true
+
+          </xmp></code></pre> 
+        <h2>Methods of org.reactivestreams.Subscription</h2> 
+        <p>The org.reactivestreams.Subscription interface has five methods that can be used to manage the subscription process.</p> 
+        <ul> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+void request(long n)
+
+            </xmp></code></pre> : This method requests a certain number of items from the Publisher.</li> 
+         <li><pre>void cancel()</pre> : This method cancels the subscription.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+boolean isCancelled()
+
+            </xmp></code></pre> : This method checks if the subscription is still valid or not.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+void onRequest(long n)
+
+            </xmp></code></pre> : This method is called by the Subscriber when it requests for items from the Publisher.</li> 
+         <li><pre>void onCancel()</pre> : This method is called by the Subscriber when it cancels the subscription.</li> 
+        </ul> 
+        <h2>Conclusion</h2> 
+        <p>In conclusion, org.reactivestreams.Subscription is an interface in the Reactive Streams API that represents a one-to-one lifecycle of a Subscriber subscribing to a Publisher. It provides methods to request data from a Publisher to a Subscriber, cancel an ongoing subscription and check if a subscription is still valid.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-maintain-insertion-order-in-HashMap.html">How to maintain insertion order in HashMap</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-add-key-value-mapping-to-the-TreeMap-(TreeMap-put-method).html">How to add key-value mapping to the TreeMap (TreeMap put method)</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-directory.html">Create directory</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-Set-to-array-(Convert-HashSet-to-Array).html">Convert Set to array (Convert HashSet to Array)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.chad.library.adapter.base.BaseQuickAdapter.html">c.c.l.a.b.BaseQuickAdapter</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Wrappers/"> Wrappers </a> </p> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Long-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Long object to byte, short, int, long, float and double</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/"> Long Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-Long-to-numeric-primitive-data-types-example.html">Convert Long to numeric primitive data types example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/"> Basic Java Examples </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Circle-Perimeter-using-Java-Example.html">Calculate Circle Perimeter using Java Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/Java-Date-Formatting/"> Java Date Formatting </a> </p> <a href="/articles/Java/Popular-Java-Classes/Java-Date-Formatting/Formatting-seconds-using-SimpleDateFormat.html">Formatting seconds using SimpleDateFormat</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/java.security.interfaces.ECPublicKey.html">java.security.interfaces.ECPublicKey</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-08 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-check-HashSet-size-(size-method).html">How to check HashSet size (size method)</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/If-statement-Example.html">If statement Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.graphics.Path.html">android.graphics.Path</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/ArrayList-clone-example.html">ArrayList clone example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-check-if-the-value-exists-in-the-TreeMap-(TreeMap-contains-a-value).html">How to check if the value exists in the TreeMap (TreeMap contains a value)</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Get-parent-directory-as-a-File-object.html">Get parent directory as a File object</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-is-empty.html">How to check if LinkedHashMap is empty</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.springframework.transaction.support.TransactionTemplate.html">o.s.t.s.TransactionTemplate</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-convert-comma-separated-string-to-Java-HashSet.html">How to convert comma separated string to Java HashSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.os.SystemClock.html">android.os.SystemClock</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-sort-TreeSet-elements-using-Comparable-interface.html">How to sort TreeSet elements using Comparable interface</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-convert-LinkedHashSet-to-ArrayList-in-Java.html">How to convert LinkedHashSet to ArrayList in Java</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Disable-Label-Example.html">Disable Label Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Sorting-Algorithms/Java-Bubble-Sort-Example.html">Java Bubble Sort Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.springframework.validation.BindingResult.html">o.s.v.BindingResult</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.content.ContentValues.html">android.content.ContentValues</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-Minimum-element-of-Java-HashSet-Example.html">Find Minimum element of Java HashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Get-Total-Memory-of-Java-Virtual-Machine(JVM)-Example.html">Get Total Memory of Java Virtual Machine(JVM) Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-ArrayList-to-array.html">Convert ArrayList to array</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.eclipse.jface.wizard.WizardPage.html">org.eclipse.jface.wizard.WizardPage</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
