@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - android.os.CancellationSignal</title> <!--timestamp=2024-01-26T00:12:39.679013364Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="android.os.CancellationSignal"> 
+  <meta name="keywords" content="android.os.CancellationSignal"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - android.os.CancellationSignal"> 
+  <meta property="og:description" content="android.os.CancellationSignal"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - android.os.CancellationSignal"> 
+  <meta name="twitter:description" content="android.os.CancellationSignal"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-01-25</small>
+        </div> 
+        <h1>What is Android.os.CancellationSignal?</h1> Android.os.CancellationSignal is a powerful tool for managing cancellation requests in Android applications. It allows the application to handle cancellation requests in a background thread without affecting the main application’s flow of execution. This enables the application to make more efficient use of resources, improve scalability, and speed up development processes. 
+        <h2>Creating a CancellationSignal</h2> Creating a CancellationSignal instance is simple: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+CancellationSignal c = new CancellationSignal();
+
+          </xmp></code></pre> This will create a new CancellationSignal instance that can be used with any background tasks or operations. 
+        <h2>Cancelling an Operation Using a CancellationSignal</h2> Once a CancellationSignal has been created, it can be used to cancel an operation by calling its `cancel()` method. This will immediately cause the operation to stop and the associated callback method to be invoked. For example, to cancel a background operation that is running in a different thread: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+//In the same thread
+c.cancel();
+
+//In the background thread
+boolean isCancelled = c.isCancelled();
+if(isCancelled) {
+    //Cancel operation
+}
+
+          </xmp></code></pre> The `isCancelled()` method will return true if the operation has been cancelled. 
+        <h2>Advantages of Using a CancellationSignal</h2> Using a CancellationSignal provides several advantages: - Improved resource management: A CancellationSignal allows the application to manage resources more efficiently. Operations can be cancelled before they are completed, allowing the application to conserve resources such as memory and processor time. - Improved scalability: The ability to cancel operations means that the application can scale to handle larger numbers of requests. - Easier development: CancellationSignals make the development process faster and easier by allowing developers to quickly and easily cancel operations. This reduces the overhead of having to write complex logic for managing cancellations. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.crypto.spec.IvParameterSpec.html">javax.crypto.spec.IvParameterSpec</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/JLabel-Set-Tooltip-Example.html">JLabel Set Tooltip Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-TreeSet-to-List-(ArrayList-or-LinkedList).html">Convert TreeSet to List (ArrayList or LinkedList)</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Operators/"> Operators </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Operators/Arithmetic-Assignment-Operators-Example.html">Arithmetic Assignment Operators Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/com.google.common.collect.Maps.html">com.google.common.collect.Maps</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/android.os.Messenger.html">android.os.Messenger</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Wrappers/"> Wrappers </a> </p> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-primitive-to-wrapper-objects.html">Convert primitive to wrapper objects</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Display-Image-in-an-Applet-Example.html">Display Image in an Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-Java-Vector-in-descending-order-using-comparator-example.html">Sort Java Vector in descending order using comparator example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/"> Data types </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/Java-short-Example.html">Java short Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-27 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Mark</h3> <p><a href="#">2024-03-16 03:42</a></p> Can somebody elaborate more? <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Adam</h3> <p><a href="#">2024-03-13 05:55</a></p> it was very helpful <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Static/Java-static-method-example.html">Java static method example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-LinkedHashMap-in-reverse-order-using-ListIterator.html">How to iterate LinkedHashMap in reverse order using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Convert-java-Double-to-numeric-primitive-data-types-example.html">Convert java Double to numeric primitive data types example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Remove-all-elements-from-Java-TreeSet-example.html">Remove all elements from Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-size-of-the-TreeSet-object-(TreeSet-length).html">How to get size of the TreeSet object (TreeSet length)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.curator.retry.ExponentialBackoffRetry.html">o.a.c.r.ExponentialBackoffRetry</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Convert-HashSet-to-array.html">Convert HashSet to array</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Set-Action-Command-For-AWT-Button-Example.html">Set Action Command For AWT Button Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.squareup.picasso.Callback.html">com.squareup.picasso.Callback</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.tools.ToolProvider.html">javax.tools.ToolProvider</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-print-LinkedHashMap.html">How to print LinkedHashMap</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/android.view.Choreographer.html">android.view.Choreographer</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Convert-java-Boolean-object-to-String-object-Example.html">Convert java Boolean object to String object Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Print-Hello-World-in-an-Applet-in-different-Colors-Example.html">Print Hello World in an Applet in different Colors Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.http.conn.scheme.Scheme.html">org.apache.http.conn.scheme.Scheme</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-find-an-element-in-the-Vector-using-indexOf-and-lastIndexOf-methods.html">How to find an element in the Vector using indexOf and lastIndexOf methods</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-ArrayList-to-HashMap-Java-example.html">Convert ArrayList to HashMap Java example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Create-JLabel-With-Image-Icon-Example.html">Create JLabel With Image Icon Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-double-Array-Example.html">Performing Binary Search on Java double Array Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.kohsuke.stapler.QueryParameter.html">org.kohsuke.stapler.QueryParameter</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
