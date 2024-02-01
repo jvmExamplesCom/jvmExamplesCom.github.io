@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.objectweb.asm.FieldVisitor</title> <!--timestamp=2024-02-01T00:13:42.508606937Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.objectweb.asm.FieldVisitor"> 
+  <meta name="keywords" content="org.objectweb.asm.FieldVisitor"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.objectweb.asm.FieldVisitor"> 
+  <meta property="og:description" content="org.objectweb.asm.FieldVisitor"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.objectweb.asm.FieldVisitor"> 
+  <meta name="twitter:description" content="org.objectweb.asm.FieldVisitor"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-01-31</small>
+        </div> 
+        <h1>org.objectweb.asm.FieldVisitor</h1> 
+        <p>The org.objectweb.asm.FieldVisitor interface enables the creation of classes that can be used to modify fields in a Java class at runtime. It is part of the Java bytecode manipulation library ASM, which provides developers with a powerful set of tools for generating, analyzing, and transforming Java bytecode. The FieldVisitor interface is one of the main components of ASM, and it enables developers to modify fields in existing classes, create new fields, add annotations, and more.</p> 
+        <h2>Creating an Instance of FieldVisitor</h2> 
+        <p>Instances of FieldVisitor can be created by passing an implementation of the FieldVisitor class as an argument to the visitField method of the ClassVisitor class. The visitField method accepts two arguments: an access flag and a descriptor string. The access flag can be used to specify the modifiers that apply to the field, such as public, private, or final. The descriptor string is used to identify the type of the field, such as int, float, or Object.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ClassVisitor cv = new ClassVisitor() {
+    public FieldVisitor visitField(int access, String descriptor) {
+        return new FieldVisitor(access, descriptor);
+    }
+};
+
+          </xmp></code></pre> 
+        <h2>Modifying a Field</h2> 
+        <p>Once the FieldVisitor instance has been created, it can be used to access or modify the fields of a Java class. For example, the setValue method can be used to set the value of an existing field. This method takes two arguments: a reference to the object to be modified, and a new value for the field. The new value must have the same type as the original field.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FieldVisitor fv = new FieldVisitor();
+
+Class c = MyClass.class;
+Object o = c.newInstance();
+
+fv.setValue(o, 12345); // sets the value of 'o' to 12345
+
+          </xmp></code></pre> 
+        <h2>Creating a New Field</h2> 
+        <p>In addition to modifying existing fields, FieldVisitor can also be used to create new fields. The createField method can be used to create a new field in an existing class. This method takes three arguments: an access flag, a descriptor string, and an initial value. After the new field has been created, it can be accessed or modified using the same methods used for existing fields.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FieldVisitor fv = new FieldVisitor();
+
+Class c = MyClass.class;
+
+fv.createField(Opcodes.ACC_PUBLIC, "int", 0); // creates a new public int field with an initial value of 0
+
+          </xmp></code></pre> 
+        <h2>Adding Annotations</h2> 
+        <p>The FieldVisitor also provides methods for adding annotations to fields. The addAnnotation method can be used to add an annotation to an existing field, while the addAnnotations method can be used to add multiple annotations to a field. The annotations must be specified as an instance of the AnnotationVisitor class, which can be used to create an annotation with the appropriate attributes.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FieldVisitor fv = new FieldVisitor();
+
+Class c = MyClass.class;
+Object o = c.newInstance();
+
+AnnotationVisitor av = new AnnotationVisitor();
+av.addAttribute("foo", "bar");
+
+fv.addAnnotation(o, av); // adds the annotation to the field
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>The org.objectweb.asm.FieldVisitor interface provides a powerful set of tools for manipulating fields in Java classes at runtime. It enables developers to access and modify existing fields, create new fields, add annotations, and more. By making use of this interface, developers can create powerful applications capable of transforming Java code in ways not possible before.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-comma-separated-String-to-ArrayList-using-Arrays.html">Convert comma separated String to ArrayList using Arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-int-Arrays-Example.html">Compare Two Java int Arrays Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-array-to-Set-using-Arrays.html">Convert array to Set using Arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.util.SparseBooleanArray.html">android.util.SparseBooleanArray</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Math-Class/"> Math Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-floor-value-of-a-number-using-Math.floor.html">F.floor</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Shuffle-elements-of-ArrayList.html">Shuffle elements of ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-the-size-of-the-TreeMap.html">How to get the size of the TreeMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.naming.directory.Attributes.html">javax.naming.directory.Attributes</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.junit.runners.Suite.SuiteClasses.html">org.junit.runners.Suite.SuiteClasses</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/"> Data types </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/int-to-String-Example.html">int to String Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-12 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Martin</h3> <p><a href="#">2024-03-11 20:26</a></p> Can somebody elaborate more? <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Nahish</h3> <p><a href="#">2024-03-03 06:24</a></p> its very helpful programs to all Thanks...... <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.util.zip.Checksum.html">java.util.zip.Checksum</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-last-key,-last-value,-or-last-entry-from-the-Java-TreeMap.html">How to get last key, last value, or last entry from the Java TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-convert-HashSet-to-ArrayList.html">How to convert HashSet to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.intellij.openapi.actionSystem.PlatformDataKeys.html">c.i.o.a.PlatformDataKeys</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.codahale.metrics.Slf4jReporter.html">com.codahale.metrics.Slf4jReporter</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-create-new-objects-of-LinkedHashSet-class-(LinkedHashSet-constructors).html">How to create new objects of LinkedHashSet class (LinkedHashSet constructors)</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipFile/Get-All-Entries-From-Zip-File-Example.html">Get All Entries From Zip File Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-array-to-LinkedHashSet.html">Convert array to LinkedHashSet</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/JTextField-ToolTip-Example.html">JTextField ToolTip Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Threads/Pause-Thread-Using-Sleep-Method-Example.html">Pause Thread Using Sleep Method Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.awt.event.MouseEvent.html">java.awt.event.MouseEvent</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.ws.rs.core.MediaType.html">javax.ws.rs.core.MediaType</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-4-Example.html">Java Pyramid 4 Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-ArrayList-to-String[]-array.html">Convert ArrayList to String[] array</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-insert-an-element-at-the-beginning-of-the-Java-Vector.html">How to insert an element at the beginning of the Java Vector</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/System/Run-object-finalization-using-System-class.html">Run object finalization using System class</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-convert-comma-separated-string-to-Java-HashSet.html">How to convert comma separated string to Java HashSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-all-values-of-LinkedHashMap-in-Java.html">How to get all values of LinkedHashMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.antlr.v4.runtime.tree.TerminalNode.html">o.a.v.r.t.TerminalNode</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Disable-AWT-Choice-Or-Combobox-Example.html">Disable AWT Choice Or Combobox Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
