@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - android.widget.Scroller</title> <!--timestamp=2024-02-02T00:12:27.947767421Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="android.widget.Scroller"> 
+  <meta name="keywords" content="android.widget.Scroller"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - android.widget.Scroller"> 
+  <meta property="og:description" content="android.widget.Scroller"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - android.widget.Scroller"> 
+  <meta name="twitter:description" content="android.widget.Scroller"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-02-01</small>
+        </div> 
+        <h1>android.widget.Scroller</h1> 
+        <p>The android.widget.Scroller class is a powerful and versatile utility that enables smooth scrolling of views within Android. It allows developers to quickly and easily create scrolling effects, including flings, animations, and more. It also provides an easy way to synchronize other scrolling operations with the scrolling of a view. This article will cover the basics of using the android.widget.Scroller class, as well as providing some useful code examples.</p> 
+        <h2>Using the Scroller Class</h2> 
+        <p>The Scroller class is relatively straightforward to use, and is typically employed in the following manner:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Scroller scroller = new Scroller(context);
+
+          </xmp></code></pre> 
+        <p>Once you have instantiated the class, you will need to call the </p>
+        <pre>startScroll</pre> method. This method requires six parameters: The first parameter is the initial X coordinate, the second parameter is the initial Y coordinate, the third parameter is the total distance to scroll in the X direction, the fourth parameter is the total distance to scroll in the Y direction, the fifth parameter is the duration of the scroll, and the sixth parameter is the interpolator.
+         
+        Once you have called the
+        <pre>startScroll</pre> method, you can check the progress of the scroll by calling the 
+        <pre>computeScrollOffset</pre> method. This method returns a boolean value indicating whether or not the scrolling operation is finished. If the value is 
+        <pre>false</pre>, then the scrolling operation is still in progress; if the value is 
+        <pre>true</pre>, then the scrolling operation is finished. Once the scrolling has finished, you can call the 
+        <pre>getCurrX</pre> and 
+        <pre>getCurrY</pre> methods to retrieve the current scroll position.
+         
+        <h2>Code Examples</h2> 
+        <p>The following code examples demonstrate how to use the Scroller class:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+//Create a new Scroller instance
+Scroller scroller = new Scroller(context);
+
+//Start a scroll from position (0, 0) to position (100, 100)
+scroller.startScroll(0, 0, 100, 100, 1000, null);
+
+//Poll the Scroller to see if the scroll has finished
+if (scroller.computeScrollOffset()) {
+
+    //Scroll is not finished - retrieve the current scroll position 
+    int xPos = scroller.getCurrX();
+    int yPos = scroller.getCurrY();
+
+    //Continue to poll until the scroll has finished
+
+} else {
+
+   //Scroll is finished
+
+}
+
+          </xmp></code></pre> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+//Create a new Scroller with an interpolator
+Scroller scroller = new Scroller(context, new LinearInterpolator());
+
+//Start a scroll from position (0, 0) to position (100, 100)
+scroller.startScroll(0, 0, 100, 100, 1000);
+
+//Poll the Scroller to see if the scroll has finished
+if (scroller.computeScrollOffset()) {
+
+    //Scroll is not finished - retrieve the current scroll position 
+    int xPos = scroller.getCurrX();
+    int yPos = scroller.getCurrY();
+
+    //Continue to poll until the scroll has finished
+
+} else {
+
+   //Scroll is finished
+
+}
+
+          </xmp></code></pre> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create a new Scroller with a custom duration
+Scroller scroller = new Scroller(context, 500);
+
+//Start a scroll from position (0, 0) to position (100, 100)
+scroller.startScroll(0, 0, 100, 100, null);
+
+//Poll the Scroller to see if the scroll has finished
+if (scroller.computeScrollOffset()) {
+
+    //Scroll is not finished - retrieve the current scroll position 
+    int xPos = scroller.getCurrX();
+    int yPos = scroller.getCurrY();
+
+    //Continue to poll until the scroll has finished
+
+} else {
+
+   //Scroll is finished
+
+}
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>The android.widget.Scroller class is a powerful tool for creating smooth scrolling effects in Android apps. It is quick and simple to use, and provides a consistent and versatile way of controlling scrolling operations.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/"> Integer Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-java-int-to-Integer-object-Example.html">Convert java int to Integer object Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-String-array-to-List-(Convert-String-array-to-ArrayList,-LinkedList).html">Convert String array to List (Convert String array to ArrayList, LinkedList)</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.shiro.SecurityUtils.html">org.apache.shiro.SecurityUtils</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-print-LinkedHashMap.html">How to print LinkedHashMap</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/"> Basic Java Examples </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Circle-Area-using-Java-Example.html">Calculate Circle Area using Java Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.google.common.io.ByteSource.html">com.google.common.io.ByteSource</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/Calendar/"> Calendar </a> </p> <a href="/articles/Java/Popular-Java-Classes/Calendar/Add-or-substract-minutes-to-current-time-using-Java-Calendar.html">Add or substract minutes to current time using Java Calendar</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/"> Runtime </a> </p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Suggest-JVM-to-Run-Object-Finalization-Example.html">Suggest JVM to Run Object Finalization Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Replace-an-element-at-specified-index-of-Java-ArrayList-Example.html">Replace an element at specified index of Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Get-Sub-List-of-Java-Vector-Example.html">Get Sub List of Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-29 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Uberel</h3> <p><a href="#">2024-03-26 10:35</a></p> Thank you very much! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Robert</h3> <p><a href="#">2024-03-27 16:02</a></p> Grt ;-) <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Swing/JLabel/Set-Icon-for-JLabel-Example.html">Set Icon for JLabel Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Remove-all-values-from-Java-Hashtable-example.html">Remove all values from Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-get-random-elements-from-the-Vector.html">How to get random elements from the Vector</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.app.DatePickerDialog.html">android.app.DatePickerDialog</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Determine-If-The-Checkbox-Is-Visible-Example.html">Determine If The Checkbox Is Visible Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/com.google.common.base.Splitter.html">com.google.common.base.Splitter</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Circle-Area-using-Java-Example.html">Calculate Circle Area using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-absolute-value-of-float,-int,-double-and-long-using-Math.abs.html">F.abs</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-ArrayList<String>-to-String[]-array.html">Convert ArrayList<String> to String[] array</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.servlet.http.HttpSession.html">javax.servlet.http.HttpSession</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Double-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Double object to byte, short, int, long, float and double</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-double-Array-Example.html">Performing Binary Search on Java double Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-all-elements-from-Java-ArrayList-Example.html">Remove all elements from Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-Sub-List-of-Java-ArrayList-Example.html">Get Sub List of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/androidx.annotation.Nullable.html">androidx.annotation.Nullable</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-over-Vector-elements-using-ListIterator.html">Iterate over Vector elements using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Java-Float-isNaN-Method-Example.html">Java Float isNaN Method Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Iterate-LinkedList-in-reverse-order.html">Iterate LinkedList in reverse order</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.servlet.FilterChain.html">javax.servlet.FilterChain</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.xml.bind.JAXBElement.html">javax.xml.bind.JAXBElement</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
