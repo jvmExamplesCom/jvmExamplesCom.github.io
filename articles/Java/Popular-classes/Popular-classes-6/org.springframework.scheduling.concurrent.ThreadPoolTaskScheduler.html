@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler</title> <!--timestamp=2024-02-06T00:11:58.344362832Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler"> 
+  <meta name="keywords" content="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler"> 
+  <meta property="og:description" content="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler"> 
+  <meta name="twitter:description" content="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-02-05</small>
+        </div> 
+        <h1>org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler</h1> 
+        <p>The org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler is a component that is part of the Spring Framework and is used to run tasks in a background thread pool. It is designed to be used in applications where task execution needs to be managed in an efficient manner, such as for batch processing or asynchronously executing tasks. The ThreadPoolTaskScheduler is configured via a ScheduledExecutorService and provides a convenient way to schedule tasks with a fixed thread pool and flexible execution options.</p> 
+        <h2>Creating a ThreadPoolTaskScheduler Instance</h2> 
+        <p>A ThreadPoolTaskScheduler can be created using one of its factory methods:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+
+          </xmp></code></pre> 
+        <p>The ThreadPoolTaskScheduler can also be configured with various parameters such as the default thread name, the core pool size (the number of threads to maintain in the pool even when idle), the maximum pool size, and the keep-alive time (the amount of time to wait before terminating idle threads).</p> 
+        <h2>Scheduling Tasks with the ThreadPoolTaskScheduler</h2> 
+        <p>Tasks can be scheduled for execution with the ThreadPoolTaskScheduler with various options. The simplest way to schedule a task is to call the </p>
+        <pre>schedule()</pre> method with a Runnable:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+scheduler.schedule(new MyRunnable(), new Date());
+
+          </xmp></code></pre> 
+        <p>The above example will execute the runnable at the specified date. Alternatively, the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+scheduleAtFixedRate()
+
+          </xmp></code></pre> and 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+scheduleWithFixedDelay()
+
+          </xmp></code></pre> methods can be used to schedule tasks to be executed at regular intervals.
+         
+        <h2>Example</h2> 
+        <p>The following example shows how to use the ThreadPoolTaskScheduler to schedule a task:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+ 
+// Start the scheduler
+scheduler.initialize();
+ 
+// Schedule a task to run every 10 seconds
+scheduler.scheduleAtFixedRate(new MyRunnable(), new Date(), 10000L);
+
+// Stop the scheduler
+scheduler.shutdown();
+
+          </xmp></code></pre> 
+        <p>In the above example, the MyRunnable class implements the Runnable interface and contains the code to be executed. The </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+scheduleAtFixedRate()
+
+          </xmp></code></pre> method takes a Runnable, a start date, and a period in milliseconds. The task will be executed every 10 seconds starting from the specified date.
+         
+        <h2>Conclusion</h2> 
+        <p>The org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler makes it easy and efficient to schedule tasks with a fixed thread pool. With the various options provided by the ThreadPoolTaskScheduler, tasks can be scheduled for execution at specific dates or at regular intervals.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.junit.runners.JUnit4.html">org.junit.runners.JUnit4</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/Deflater/"> Deflater </a> </p> <a href="/articles/Java/Java-Zip/Deflater/Compress-Byte-Array-Using-Deflater-Example.html">Compress Byte Array Using Deflater Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-last-key,-last-value,-or-last-entry-from-the-Java-TreeMap.html">How to get last key, last value, or last entry from the Java TreeMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/"> If Else Statement </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/Determine-If-Year-Is-Leap-Year-Java-Example.html">Determine If Year Is Leap Year Java Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-array-to-Set-(Convert-array-to-HashSet).html">Convert array to Set (Convert array to HashSet)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-print-TreeSet-elements-in-Java.html">How to print TreeSet elements in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/android.support.v4.app.ActionBarDrawerToggle.html">a.s.v.a.ActionBarDrawerToggle</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataInputStream/"> DataInputStream </a> </p> <a href="/articles/Java/File-And-IO/DataInputStream/Read-byte-array-from-file-using-DataInputStream.html">Read byte array from file using DataInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-comma-separated-string-to-HashSet-in-Java.html">Convert comma separated string to HashSet in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.apache.http.entity.mime.content.FileBody.html">o.a.h.e.m.c.FileBody</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-28 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Adam</h3> <p><a href="#">2024-03-18 04:24</a></p> Grt ;-) <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Gabriel</h3> <p><a href="#">2024-03-18 14:10</a></p> Interesting, thx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Swap-elements-of-Java-ArrayList-example.html">Swap elements of Java ArrayList example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/net.minecraft.util.ResourceLocation.html">net.minecraft.util.ResourceLocation</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-HashSet-to-TreeSet-in-Java.html">Convert HashSet to TreeSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Simple-Java-LinkedList-example.html">Simple Java LinkedList example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-natural-logarithm-value-of-a-number-using-Math.log.html">F.log</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-through-Vector-in-reverse-direction-using-the-ListIterator.html">How to iterate through Vector in reverse direction using the ListIterator</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Determine-number-of-bytes-written-to-DataOutputStream.html">Determine number of bytes written to DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.awt.image.BufferedImage.html">java.awt.image.BufferedImage</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Convert-LinkedHashMap-to-two-arrays.html">Convert LinkedHashMap to two arrays</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.concurrent.TimeoutException.html">j.u.c.TimeoutException</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-reverse-order-of-the-TreeSet-elements-(iterate-TreeSet-in-reverse-order).html">How to reverse order of the TreeSet elements (iterate TreeSet in reverse order)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/javax.persistence.EmbeddedId.html">javax.persistence.EmbeddedId</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-2-Example.html">Java Pyramid 2 Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Print-ArrayList-elements-using-Arrays.html">Print ArrayList elements using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-replace-an-element-at-a-specific-index-of-the-Vector.html">How to replace an element at a specific index of the Vector</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-remove-duplicate-elements.html">Java LinkedList remove duplicate elements</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/java.awt.geom.Arc2D.html">java.awt.geom.Arc2D</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Disable-Button-Example.html">Disable Button Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.lang.annotation.Annotation.html">java.lang.annotation.Annotation</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Java-HashMap-get-method-example.html">Java HashMap get method example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
