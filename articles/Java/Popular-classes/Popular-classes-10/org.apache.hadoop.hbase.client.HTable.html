@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.apache.hadoop.hbase.client.HTable</title> <!--timestamp=2024-02-13T00:13:13.184137671Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.apache.hadoop.hbase.client.HTable"> 
+  <meta name="keywords" content="org.apache.hadoop.hbase.client.HTable"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.apache.hadoop.hbase.client.HTable"> 
+  <meta property="og:description" content="org.apache.hadoop.hbase.client.HTable"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.apache.hadoop.hbase.client.HTable"> 
+  <meta name="twitter:description" content="org.apache.hadoop.hbase.client.HTable"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-02-12</small>
+        </div> 
+        <h1>Introduction to org.apache.hadoop.hbase.client.HTable</h1> The org.apache.hadoop.hbase.client.HTable class is the main API for interacting with an HBase table. It provides the basic operations for reading and writing data in the table, as well as methods for creating and deleting tables, checking table status, flushing tables, and updating table properties. 
+        <h2>Creating an HTable Object</h2> An HTable object can be created by calling the constructor on the HTable class and passing it a valid Configuration object. A Configuration object can be obtained from the HBaseConfiguration class. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Configuration config = HBaseConfiguration.create(); 
+HTable hTable = new HTable(config, "table_name");
+
+          </xmp></code></pre> 
+        <h2>Writing to an HTable</h2> A Put object is used to write data to an HTable. A Put object must contain at least one row key and at least one column family and qualifier. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Put put = new Put("row_key".getBytes());
+put.addColumn("column_family".getBytes(), "column_qualifier".getBytes(), value);
+hTable.put(put);
+
+          </xmp></code></pre> 
+        <h2>Reading from an HTable</h2> A Get object is used to read data from an HTable. The Get object must specify a valid row key. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Get get = new Get("row_key".getBytes());
+Result result = hTable.get(get);
+byte[] value = result.getValue("column_family".getBytes(), "column_qualifier".getBytes());
+
+          </xmp></code></pre> 
+        <h2>Deleting Rows From an HTable</h2> A Delete object can be used to delete rows from an HTable. The Delete object must specify a valid row key. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Delete delete = new Delete("row_key".getBytes());
+hTable.delete(delete);
+
+          </xmp></code></pre> 
+        <h2>Checking Table Status</h2> The isTableAvailable() method of the HTable class can be used to check whether or not a table exists and is available. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+boolean isTableAvailable = hTable.isTableAvailable();
+
+          </xmp></code></pre> 
+        <h2>Flushing Tables to Disk</h2> The flushCommits() method of the HTable class can be used to flush all changes to the HBase table to disk. This is necessary in order to guarantee that data is not lost in the event of a system failure. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+hTable.flushCommits();
+
+          </xmp></code></pre> 
+        <h2>Updating Table Properties</h2> The modifyTable() method of the HTable class can be used to update the properties of a table, such as the number of regions or the region split policy. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+hTable.modifyTable("table_name", hcd);
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> The org.apache.hadoop.hbase.client.HTable class provides the basic operations for interacting with an HBase table. It provides methods for creating and deleting tables, reading and writing data to the table, checking table status, flushing tables, and modifying table properties. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-find-the-minimum-or-maximum-element-in-LinkedHashSet.html">How to find the minimum or maximum element in LinkedHashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand.html">c.n.h.c.j.a.HystrixCommand</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Display-Image-in-an-Applet-Example.html">Display Image in an Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/io.dropwizard.Configuration.html">io.dropwizard.Configuration</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.gradle.api.Plugin.html">org.gradle.api.Plugin</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipFile/"> ZipFile </a> </p> <a href="/articles/Java/Java-Zip/ZipFile/Get-Specified-Entry-From-Zip-File-Example.html">Get Specified Entry From Zip File Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Java-ArrayList-replace-element.html">Java ArrayList replace element</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-headset,-tailset,-and-subset-from-the-Java-TreeSet.html">How to get headset, tailset, and subset from the Java TreeSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Print-ArrayList-example.html">Print ArrayList example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-get-random-elements-from-LinkedHashSet.html">How to get random elements from LinkedHashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-28 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Swing/JTextField/Change-Font-of-JTextField-Example.html">Change Font of JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Get-parent-directory-as-a-File-object.html">Get parent directory as a File object</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-TreeMap-key,-value-or-entry-greater-than-or-less-than-the-specified-key.html">How to get TreeMap key, value or entry greater than or less than the specified key</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.curator.retry.ExponentialBackoffRetry.html">o.a.c.r.ExponentialBackoffRetry</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Continue-Statement/Java-continue-statement-example.html">Java continue statement example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Rectangle-&-Square-in-Applet-Window-Example.html">Draw Rectangle & Square in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/com.alibaba.druid.pool.DruidDataSource.html">c.a.d.p.DruidDataSource</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-ArrayList-to-array.html">Convert ArrayList to array</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.awt.event.ActionEvent.html">java.awt.event.ActionEvent</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Remove-Particular-Item-From-AWT-Choice-Or-Combobox-Example.html">Remove Particular Item From AWT Choice Or Combobox Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.io.BufferedReader.html">java.io.BufferedReader</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.graphics.drawable.AnimationDrawable.html">a.g.d.AnimationDrawable</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-directory.html">Create directory</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/com.bumptech.glide.load.engine.DiskCacheStrategy.html">c.b.g.l.e.DiskCacheStrategy</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-byte-Array-Example.html">Java Sort byte Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-String-array-using-Comparator.html">Sort String array using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-check-HashSet-size-(size-method).html">How to check HashSet size (size method)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-convert-Vector-to-an-array.html">How to convert Vector to an array</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-power-using-Math.pow.html">Find power using Math.pow</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Copy-all-elements-of-Java-LinkedHashSet-to-an-Object-Array-Example.html">Copy all elements of Java LinkedHashSet to an Object Array Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
