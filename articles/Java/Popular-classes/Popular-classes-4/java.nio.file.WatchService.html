@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.nio.file.WatchService</title> <!--timestamp=2024-02-24T00:12:23.294077150Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.nio.file.WatchService"> 
+  <meta name="keywords" content="java.nio.file.WatchService"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.nio.file.WatchService"> 
+  <meta property="og:description" content="java.nio.file.WatchService"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.nio.file.WatchService"> 
+  <meta name="twitter:description" content="java.nio.file.WatchService"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-02-23</small>
+        </div> 
+        <h1>Introduction to Java.nio.file.WatchService</h1> The Java NIO File WatchService API is a powerful tool for monitoring changes to files and folders on the file system. It can be used to detect when files are created, modified, or deleted and respond accordingly. This tutorial will explain how to use the Java NIO File WatchService API to monitor file system events. 
+        <h2>Creating a WatchService</h2> To create a WatchService object, you will need to first create a Path object that points to the directory that you want to monitor: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Path dir = Paths.get("/Users/myuser/Documents");
+WatchService watcher = FileSystems.getDefault().newWatchService();
+dir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE, 
+StandardWatchEventKinds.ENTRY_MODIFY, 
+StandardWatchEventKinds.ENTRY_DELETE);
+
+          </xmp></code></pre> This code will create a Watcher object that will observe the /Users/myuser/Documents directory. The register() method takes three parameters, the WatchService and an array of watch events we want to monitor. In this example, we are monitoring for file creations, modifications, and deletions. 
+        <h2>Polling the WatchService</h2> The next step is to poll the WatchService to check if there have been any changes to the file system. To do this, we can use the take() and poll() methods: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Polling the watcher every 5 seconds
+while (true) {
+    WatchKey key = watcher.take();
+
+    // Check if there was a change
+    if (key != null) {
+        // Process changes
+        // ...
+    }
+
+    Thread.sleep(5000);
+}
+
+          </xmp></code></pre> The take() method will wait for an event to occur, then return the WatchKey associated with the event. If no events occur within a certain timeout, it will return null. The poll() method works in a similar way, but instead of waiting for an event to occur it just checks for pending events and immediately returns the associated WatchKey or null if there were no events. 
+        <h2>Processing Events</h2> Once we have received a valid WatchKey from the WatchService, we can process the associated events. We can use the pollEvents() method to get all of the events associated with the given WatchKey: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+List<WatchEvent<?>> events = key.pollEvents();
+for (WatchEvent<?> event : events) {
+    Path filename = (Path) event.context();
+    WatchEvent.Kind kind = event.kind();
+
+    if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
+        // File created
+        // ...
+    } else if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
+        // File modified
+        // ...
+    } else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
+        // File deleted
+        // ...
+    }
+}
+
+          </xmp></code></pre> The pollEvents() method will return a list of WatchEvent objects. Each WatchEvent object has a kind() method that will tell us what kind of event occurred (create, modify, delete). We can also use the context() method to get the name of the file that was modified. 
+        <h2>Conclusion</h2> In this tutorial, we learned how to use the Java NIO File WatchService API to monitor files and folders for changes. We saw how to create a WatchService and poll for events, as well as how to process them when they occur. With the Java NIO File WatchService API, you can easily detect and respond to changes to the file system. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.validation.constraints.NotNull.html">javax.validation.constraints.NotNull</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-Set-to-array-(Convert-HashSet-to-Array).html">Convert Set to array (Convert HashSet to Array)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/Java-String-Replace-Example.html">Java String Replace Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Java-ArrayList-of-arrays.html">Java ArrayList of arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-print-TreeMap-in-Java.html">How to print TreeMap in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/CRC32/"> CRC32 </a> </p> <a href="/articles/Java/Java-Zip/CRC32/Generate-CRC32-Checksum-For-Byte-Array-Example.html">Generate CRC32 Checksum For Byte Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/"> Data types </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/Java-byte-Example.html">Java byte Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.intellij.openapi.util.Pair.html">com.intellij.openapi.util.Pair</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-check-if-element-exists-in-Vector-in-Java.html">How to check if element exists in Vector in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Check-if-element-exists-in-Java-LinkedList-(LinkedList-contains-element).html">Check if element exists in Java LinkedList (LinkedList contains element)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-09 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.net.Inet4Address.html">java.net.Inet4Address</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Zip-Entry-Example.html">Get Zip Entry Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipOutputStream/Create-Zip-File-From-Directory-using-ZipOutputStream-Example.html">Create Zip File From Directory using ZipOutputStream Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-replace-a-value-for-key-in-Java-HashMap-example.html">How to replace a value for key in Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-CheckboxGroup/Create-AWT-Radio-Buttons-Using-CheckboxGroup-Example.html">Create AWT Radio Buttons Using CheckboxGroup Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/android.animation.LayoutTransition.html">android.animation.LayoutTransition</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/com.alibaba.fastjson.serializer.SerializerFeature.html">c.a.f.s.SerializerFeature</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-String-or-String-array-to-HashMap.html">Convert String or String array to HashMap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Set-from-Java-TreeSet-example.html">Get Synchronized Set from Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-first-and-last-elements-from-ArrayList.html">Get first and last elements from ArrayList</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-int-from-file-using-DataInputStream.html">Read int from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Add-an-element-at-specified-index-of-Java-Vector-Example.html">Add an element at specified index of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Resize-Applet-Window-Example.html">Resize Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.apache.commons.lang3.tuple.Pair.html">org.apache.commons.lang3.tuple.Pair</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/io.reactivex.annotations.NonNull.html">io.reactivex.annotations.NonNull</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-font/Create-Bold-Font-Example.html">Create Bold Font Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Determine-number-of-bytes-written-to-DataOutputStream.html">Determine number of bytes written to DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.security.Principal.html">java.security.Principal</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-ArrayList-using-Comparator.html">Sort ArrayList using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Copy-all-elements-of-Java-TreeSet-to-an-Object-Array-Example.html">Copy all elements of Java TreeSet to an Object Array Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
