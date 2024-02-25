@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.springframework.beans.factory.config.BeanPostProcessor</title> <!--timestamp=2024-02-25T00:13:32.528530764Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.springframework.beans.factory.config.BeanPostProcessor"> 
+  <meta name="keywords" content="org.springframework.beans.factory.config.BeanPostProcessor"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.springframework.beans.factory.config.BeanPostProcessor"> 
+  <meta property="og:description" content="org.springframework.beans.factory.config.BeanPostProcessor"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.springframework.beans.factory.config.BeanPostProcessor"> 
+  <meta name="twitter:description" content="org.springframework.beans.factory.config.BeanPostProcessor"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-02-24</small>
+        </div> 
+        <h1>org.springframework.beans.factory.config.BeanPostProcessor</h1> 
+        <p>The org.springframework.beans.factory.config.BeanPostProcessor is an interface used in the Spring framework to allow for custom post-processing of newly created bean instances, right after their construction but before any initialization callbacks (like InitializingBean's afterPropertiesSet or a custom init-method). It offers several methods to inspect and manipulate newly constructed beans.</p> 
+        <h2>Overview Of Methods</h2> 
+        <p>The BeanPostProcessor interface defines two methods: postProcessBeforeInitialization and postProcessAfterInitialization. Both methods accept a single parameter of type Object, which contains the Spring bean to be processed. The return value should be the same instance passed as parameter, including any changes done by the post-processor in the meanwhile.</p> 
+        <h2>postProcessBeforeInitialization</h2> 
+        <p>The postProcessBeforeInitialization method is called before the bean is passed to any other initialization method, such as the InitializingBean interface, init-method declaration in XML, or any custom initialization callback.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public Object postProcessBeforeInitialization(Object bean, String beanName) 
+        throws BeansException {  
+    // your custom logic here
+    return bean;
+}
+
+          </xmp></code></pre> 
+        <p>This method can be used to do any pre-processing that may be necessary for the bean. This could include setting up data for the bean, altering references to other beans, or simply logging information about the bean.</p> 
+        <h2>postProcessAfterInitialization</h2> 
+        <p>The postProcessAfterInitialization method is called after the bean has been initialized. This allows you to make any changes to the bean after it has been fully initialized.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public Object postProcessAfterInitialization(Object bean, String beanName) 
+        throws BeansException {  
+    // your custom logic here
+    return bean;
+}
+
+          </xmp></code></pre> 
+        <p>This method can be used to do any post-processing that may be necessary for the bean. This could include setting up data for the bean, altering references to other beans, or simply logging information about the bean.</p> 
+        <h2>Usage</h2> 
+        <p>To use the BeanPostProcessor, you must register it with the application context. This can be done using XML or using Java code. When using XML you can use the "bean-post-processor" tag to register the BeanPostProcessor.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+<beans>
+    <bean class="org.example.MyBeanPostProcessor"/>
+</beans>
+
+          </xmp></code></pre> 
+        <p>When using Java code, you can register the BeanPostProcessor by creating an instance and then calling the context's addBeanPostProcessor() method.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+MyBeanPostProcessor myBeanPostProcessor = new MyBeanPostProcessor();
+context.addBeanPostProcessor(myBeanPostProcessor);
+
+          </xmp></code></pre> 
+        <p>Once registered, the BeanPostProcessor will be called for every single bean in the application context. It is important to note that the BeanPostProcessor does not need to implement any specific methods, and can simply be an interface such as InitializingBean or DisposableBean.</p> 
+        <h2>Conclusion</h2> 
+        <p>The org.springframework.beans.factory.config.BeanPostProcessor is a powerful tool for customizing the way beans are created and configured in the Spring framework. It allows for pre- and post-processing for beans, and can be used for tasks such as setting up data for the beans, altering references to other beans, or simply logging information about the beans. By registering the BeanPostProcessor with the application context, the postProcessBeforeInitialization and postProcessAfterInitialization methods will be called for every bean in the application context.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.beust.jcommander.Parameters.html">com.beust.jcommander.Parameters</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Reverse-array-using-Arrays-class.html">Reverse array using Arrays class</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Disable-JLabel-Example.html">Disable JLabel Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipFile/"> ZipFile </a> </p> <a href="/articles/Java/Java-Zip/ZipFile/Get-Number-Of-Entries-In-Zip-File-Example.html">Get Number Of Entries In Zip File Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-LinkedHashMap-value-by-index.html">How to get LinkedHashMap value by index</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.kafka.common.serialization.ByteArrayDeserializer.html">o.a.k.c.s.ByteArrayDeserializer</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-create-a-directory-in-Java.html">How to create a directory in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/FileInputStream/"> FileInputStream </a> </p> <a href="/articles/Java/File-And-IO/FileInputStream/Read-file-in-byte-array-using-FileInputStream.html">Read file in byte array using FileInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/"> AWT Label </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Determine-If-The-Label-Is-Visible-Example.html">Determine If The Label Is Visible Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.ws.rs.core.Context.html">javax.ws.rs.core.Context</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-12 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Daniel</h3> <p><a href="#">2024-04-14 16:12</a></p> Thank you guys for your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Abral</h3> <p><a href="#">2024-04-23 21:18</a></p> Nice <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Zip/ZipOutputStream/Create-Zip-File-From-Multiple-Files-using-ZipOutputStream-Example.html">Create Zip File From Multiple Files using ZipOutputStream Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Break-Statement/Java-break-statement-example.html">Java break statement example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.graphics.drawable.RippleDrawable.html">a.g.d.RippleDrawable</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-sort-HashSet-elements-using-Comparable.html">How to sort HashSet elements using Comparable</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-remove-elements.html">Java LinkedList remove elements</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource.html">o.s.j.d.l.AbstractRoutingDataSource</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Foreground-Color-Of-an-Applet-Window-Example.html">Get Foreground Color Of an Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Convert-Java-Float-Object-to-String-Object-Example.html">Convert Java Float Object to String Object Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Convert-Short-to-numeric-primitive-data-types-example.html">Convert Short to numeric primitive data types example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.junit.jupiter.api.Nested.html">org.junit.jupiter.api.Nested</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-keys-using-Comparator-interface.html">Sort LinkedHashMap by keys using Comparator interface</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.nio.CharBuffer.html">java.nio.CharBuffer</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Create-Custom-Color-Using-HSB-Example.html">Create Custom Color Using HSB Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-Set-to-array-(Convert-HashSet-to-Array).html">Convert Set to array (Convert HashSet to Array)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-remove-duplicate-elements.html">Java LinkedList remove duplicate elements</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.maven.artifact.repository.ArtifactRepository.html">o.a.m.a.r.ArtifactRepository</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-float-to-a-file-using-DataOutputStream.html">Write float to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Round-Java-float-and-double-numbers-using-Math.round.html">R.round</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Shuffle-elements-of-Java-ArrayList-example.html">Shuffle elements of Java ArrayList example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.io.DataOutputStream.html">java.io.DataOutputStream</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
