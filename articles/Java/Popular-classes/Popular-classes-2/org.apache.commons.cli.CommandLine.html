@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.apache.commons.cli.CommandLine</title> <!--timestamp=2024-02-29T00:12:35.224691781Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.apache.commons.cli.CommandLine"> 
+  <meta name="keywords" content="org.apache.commons.cli.CommandLine"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.apache.commons.cli.CommandLine"> 
+  <meta property="og:description" content="org.apache.commons.cli.CommandLine"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.apache.commons.cli.CommandLine"> 
+  <meta name="twitter:description" content="org.apache.commons.cli.CommandLine"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-02-28</small>
+        </div> 
+        <h1> Introduction to org.apache.commons.cli.CommandLine </h1> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+org.apache.commons.cli.Command Line
+
+          </xmp></code></pre> is a Java class that provides an easy way for developers to parse command line arguments from the user and store them in an organized way. This can be especially useful when creating applications that require the user to specify certain options or arguments before execution. 
+        <h2> Basic Usage and Syntax </h2> To use this class, the user must first create a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Options
+
+          </xmp></code></pre> object that defines all of the possible options that the program can accept. This can be done by calling the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+new Option()
+
+          </xmp></code></pre> constructor for each option you wish to add, and adding it to the Options object with the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+addOption()
+
+          </xmp></code></pre> method. Once all the options have been added to the Options object, the user can call the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+CommandLineParser.parse()
+
+          </xmp></code></pre> method, passing in the Options and the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+args[]
+
+          </xmp></code></pre> array from the main method, to create an instance of the CommandLine class. Once the CommandLine instance has been created, the user can use its various methods to check for the presence and value of any given option specified by the user. The following example demonstrates how to check if the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+-v
+
+          </xmp></code></pre> option was included, and if so, what value it had. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public static void main(String[] args) {
+	Options options = new Options();
+	options.addOption("v", false, "verbose");
+
+	CommandLineParser parser = new DefaultParser();
+	CommandLine cmd = parser.parse(options, args);
+
+	if (cmd.hasOption("v")) {
+		System.out.println("option v: " + cmd.getOptionValue("v"));
+	}
+}
+
+          </xmp></code></pre> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+hasOption()
+
+          </xmp></code></pre> method returns true if the argument was specified, false otherwise. The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getOptionValue()
+
+          </xmp></code></pre> method can be used to get the value that the user specified for a given argument, or null if no value was specified. 
+        <h2> Other Methods and Usage Examples </h2> The CommandLine class also provides several other methods for accessing the arguments given by the user. The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getArgList()
+
+          </xmp></code></pre> method returns a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+List<String>
+
+          </xmp></code></pre> containing all of the arguments that were specified on the command line. The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getArgs()
+
+          </xmp></code></pre> method returns an array of strings that contains all of the arguments specified on the command line. And the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getOptionValues()
+
+          </xmp></code></pre> method returns an array of strings containing all of the values associated with a given argument. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public static void main(String[] args) {
+	Options options = new Options();
+	options.addOption("v", false, "verbose");
+	options.addOption("n", true, "number of times");
+	options.addOption("f", true, "filename");
+
+	CommandLineParser parser = new DefaultParser();
+	CommandLine cmd = parser.parse(options, args);
+
+	// Get the list of arguments
+	List<String> argList = cmd.getArgList();
+
+	// Get the array of arguments
+	String[] argsArray = cmd.getArgs();
+
+	// Get the number of times option
+	String numTimes = cmd.getOptionValue("n");
+
+	// Get the filename option
+	String filename = cmd.getOptionValue("f");
+}
+
+          </xmp></code></pre> The CommandLine class also provides several methods for handling errors, such as the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+printHelp()
+
+          </xmp></code></pre> method which prints out a help message, and the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+isExpectedUsage()
+
+          </xmp></code></pre> method which checks if the user supplied the expected arguments. 
+        <h2> Conclusion </h2> In conclusion, the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+org.apache.commons.cli.CommandLine
+
+          </xmp></code></pre> class is an incredibly powerful tool for parsing and managing command line arguments in Java applications. It provides a wide range of methods for obtaining information about the arguments given by the user and validating them to ensure that they are correct. This makes it an invaluable resource for any developer looking to create robust command-line applications in Java. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-TreeSet-to-List-(ArrayList-or-LinkedList).html">How to convert TreeSet to List (ArrayList or LinkedList)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.commons.lang3.SystemUtils.html">org.apache.commons.lang3.SystemUtils</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-LinkedHashSet-to-ArrayList.html">Convert LinkedHashSet to ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Show-Or-Hide-JLabel-Example.html">Show Or Hide JLabel Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-sort-TreeSet-elements-using-Comparable-interface.html">How to sort TreeSet elements using Comparable interface</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.awt.event.WindowEvent.html">java.awt.event.WindowEvent</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-LinkedList-in-reverse-direction-using-ListIterator.html">Iterate LinkedList in reverse direction using ListIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Operators/"> Operators </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Operators/Arithmetic-Operators-Example.html">Arithmetic Operators Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.time.ZoneId.html">java.time.ZoneId</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Enumeration/"> Enumeration </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Enumeration/Enumerate-through-a-Vector-using-Java-Enumeration-Example.html">Enumerate through a Vector using Java Enumeration Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-03 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Ojas</h3> <p><a href="#">2024-04-13 16:52</a></p> Can somebody elaborate more? <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Abral</h3> <p><a href="#">2024-04-19 02:30</a></p> Nice <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.widget.TableRow.html">android.widget.TableRow</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.management.MBeanServerConnection.html">j.m.MBeanServerConnection</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-font/Get-Available-Font-Objects-Example.html">Get Available Font Objects Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-byte-to-String.html">Convert byte to String</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/org.junit.Before.html">org.junit.Before</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Java-Boolean-Example.html">Java Boolean Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipFile/Get-Specified-Entry-From-Zip-File-Example.html">Get Specified Entry From Zip File Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-char-Arrays-Example.html">Compare Two Java char Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-convert-ArrayList-to-LinkedHashSet-in-Java.html">How to convert ArrayList to LinkedHashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/BufferedOutputStream/Write-byte-to-file-using-BufferedOutputStream.html">Write byte to file using BufferedOutputStream</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.Map.Entry.html">java.util.Map.Entry</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-LinkedHashMap-value-by-index.html">How to get LinkedHashMap value by index</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Create-JLabel-With-Text-Example.html">Create JLabel With Text Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Reverse-order-of-all-elements-of-Java-ArrayList-Example.html">Reverse order of all elements of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-find-the-minimum-or-maximum-element-in-LinkedHashSet.html">How to find the minimum or maximum element in LinkedHashSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-List-to-array.html">Convert List to array</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-check-if-TreeSet-is-empty-(isEmpty-method).html">How to check if TreeSet is empty (isEmpty method)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/io.reactivex.Observable.html">io.reactivex.Observable</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-convert-LinkedHashSet-to-ArrayList-in-Java.html">How to convert LinkedHashSet to ArrayList in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.security.auth.callback.Callback.html">j.s.a.c.Callback</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
