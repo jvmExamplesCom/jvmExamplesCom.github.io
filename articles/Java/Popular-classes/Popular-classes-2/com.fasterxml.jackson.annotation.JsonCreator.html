@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - com.fasterxml.jackson.annotation.JsonCreator</title> <!--timestamp=2024-03-05T00:12:37.366819623Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="com.fasterxml.jackson.annotation.JsonCreator"> 
+  <meta name="keywords" content="com.fasterxml.jackson.annotation.JsonCreator"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - com.fasterxml.jackson.annotation.JsonCreator"> 
+  <meta property="og:description" content="com.fasterxml.jackson.annotation.JsonCreator"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - com.fasterxml.jackson.annotation.JsonCreator"> 
+  <meta name="twitter:description" content="com.fasterxml.jackson.annotation.JsonCreator"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-03-04</small>
+        </div> 
+        <h1>Introduction to com.fasterxml.jackson.annotation.JsonCreator</h1> 
+        The
+        <pre>JsonCreator</pre> annotation is used in Jackson JSON processing to define methods as creators for deserialization purposes. It defines a "deserialization factory" for an annotated class, which is used to find the right constructor or static factory method to use during deserialization process.
+         
+        <h2>Using JsonCreator Annotation</h2> 
+        To use the
+        <pre>JsonCreator</pre> annotation, it needs to be added to the constructor or static factory method that should act as deserialization factory. It can also be used at field level or parameter level, to indicate which properties or parameters are to be included in resulting object. If no annotations are used, all fields and parameters are used.
+         Example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class SampleBean {
+    private final int id;
+ 
+    @JsonCreator
+    public SampleBean(@JsonProperty("id") int id) {
+        this.id = id;
+    }
+}
+
+          </xmp></code></pre> 
+        <h2>Using Multiple Constructors or Factory Methods with JsonCreator</h2> 
+        <p>When there are multiple constructors or factory methods with the same set of parameters, the annotation </p>
+        <pre>JsonCreator</pre> can be used to specify which one to use. The annotation can be placed on any of the constructors or factory methods, and only one such annotation can be used. If no annotations are used, the first such method or constructor is chosen by default.
+         Example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class SampleBean {
+    private final int id;
+    private final String name;
+ 
+    @JsonCreator
+    public SampleBean(@JsonProperty("id") int id, 
+                      @JsonProperty("name") String name) {
+        this.id = id;
+        this.name = name;
+    }
+ 
+    public SampleBean(int id) {
+        this(id, null);
+    }
+}
+
+          </xmp></code></pre> 
+        <h2>Using Property-based or Parameter-based Deserialization with JsonCreator</h2> 
+        The annotation
+        <pre>JsonCreator</pre> also supports property-based and parameter-based deserialization. This annotation can be used to pass in an array of 
+        <pre>String[]</pre> indicating which properties or parameters should be included in resulting object. If no parameters or properties are specified, all fields and parameters are used.
+         Example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class SampleBean {
+    private final int id;
+    private final String name;
+ 
+    @JsonCreator
+    public SampleBean(@JsonProperty("id") int id, 
+                      @JsonProperty("name") String name) {
+        this.id = id;
+        this.name = name;
+    }
+ 
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    public SampleBean(@JsonProperty("id") int id) {
+        this(id, null);
+    }
+}
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        In conclusion, the annotation
+        <pre>JsonCreator</pre> is used in Jackson JSON processing to define methods as creators for deserialization purposes. It defines a "deserialization factory" for an annotated class, which can be used to specify which constructor or static factory method to use during deserialization process. It can also be used to indicate which properties or parameters should be included in the resulting object.
+         
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-remove-elements.html">Java LinkedList remove elements</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-reverse-order-of-the-TreeSet-elements-(iterate-TreeSet-in-reverse-order).html">How to reverse order of the TreeSet elements (iterate TreeSet in reverse order)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/How-to-remove-last-character-from-String.html">How to remove last character from String</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.openjdk.jmh.runner.RunnerException.html">o.o.j.r.RunnerException</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/"> Convertion </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-double.html">Convert String to double</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/"> Integer Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-decimal-integer-to-hexadecimal-number-example.html">Convert decimal integer to hexadecimal number example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-int-to-a-file-using-DataOutputStream.html">Write int to a file using DataOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JTextField/"> JTextField </a> </p> <a href="/articles/Java/Swing/JTextField/Change-Font-of-JTextField-Example.html">Change Font of JTextField Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.hardware.camera2.CameraCaptureSession.html">a.h.c.CameraCaptureSession</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/WhileLoop/"> WhileLoop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/WhileLoop/While-Loop-Example.html">While Loop Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-12 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Disable-AWT-Choice-Or-Combobox-Example.html">Disable AWT Choice Or Combobox Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/io.reactivex.Scheduler.html">io.reactivex.Scheduler</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Create-New-JTextField-Example.html">Create New JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-List-to-array.html">Convert List to array</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-duplicate-elements-from-String-array-using-Arrays-class.html">Remove duplicate elements from String array using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/BufferedOutputStream/Write-byte-to-file-using-BufferedOutputStream.html">Write byte to file using BufferedOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.awt.GraphicsEnvironment.html">java.awt.GraphicsEnvironment</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.location.LocationManager.html">android.location.LocationManager</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Find-elemnet-index-in-Java-TreeSet.html">Find elemnet index in Java TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-headset,-tailset,-and-subset-from-the-Java-TreeSet.html">How to get headset, tailset, and subset from the Java TreeSet</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Suggest-JVM-to-Run-Object-Finalization-Example.html">Suggest JVM to Run Object Finalization Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.springframework.web.socket.WebSocketSession.html">o.s.w.s.WebSocketSession</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-4-Example.html">Java Pyramid 4 Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-array-to-ArrayList.html">Add array to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-font/Create-Font-Object-Example.html">Create Font Object Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/com.facebook.soloader.SoLoader.html">com.facebook.soloader.SoLoader</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-char-Array-Example.html">Performing Binary Search on Java char Array Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.swing.JToggleButton.html">javax.swing.JToggleButton</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-get-absolute-path-of-a-file-in-Java.html">How to get absolute path of a file in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-Vector-in-reverse-direction-using-ListIterator.html">Iterate Vector in reverse direction using ListIterator</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
