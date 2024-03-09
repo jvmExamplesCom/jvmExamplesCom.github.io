@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.apache.commons.net.ftp.FTP</title> <!--timestamp=2024-03-09T00:11:55.474020692Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.apache.commons.net.ftp.FTP"> 
+  <meta name="keywords" content="org.apache.commons.net.ftp.FTP"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.apache.commons.net.ftp.FTP"> 
+  <meta property="og:description" content="org.apache.commons.net.ftp.FTP"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.apache.commons.net.ftp.FTP"> 
+  <meta name="twitter:description" content="org.apache.commons.net.ftp.FTP"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-03-08</small>
+        </div> 
+        <h1>org.apache.commons.net.ftp.FTP</h1> 
+        <p>The org.apache.commons.net.ftp.FTP class is a high-level API that allows you to connect to an FTP server and perform basic operations like copying files and directories, downloading files, uploading files, and deleting files and directories. It also enables you to rename files, get file information, and retrieve a directory listing.</p> 
+        <h2>Connecting to an FTP Server</h2> 
+        <p>To connect to an FTP server, use the connect() method. This method takes the hostname or IP address of the FTP server as the parameter. The following code example shows how to connect to an FTP server.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FTPClient ftpClient = new FTPClient();
+String server = "localhost";
+int port = 21;
+String user = "anonymous";
+String pass = "anonymous@example.com";
+ftpClient.connect(server, port);
+ftpClient.login(user, pass);
+
+          </xmp></code></pre> 
+        <h2>Getting the List of Files and Directories</h2> 
+        <p>To get the list of files and directories in the current working directory, use the listFiles() method. This method takes two parameters, an optional boolean flag for recursive search and an optional filter. The following code example shows how to get the list of files and directories in the current working directory.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+FTPFile[] files = ftpClient.listFiles();
+for (FTPFile file : files) {
+    System.out.println(file.getName());
+}
+
+          </xmp></code></pre> 
+        <h2>Downloading a File</h2> 
+        <p>To download a file from an FTP server, use the retrieveFile() method. This method takes two parameters, the remote file name and the local file name. The following code example shows how to download a file from the server and save it in the local filesystem.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String remoteFileName = "/remote/path/file.txt";
+File localFile = new File("/local/path/file.txt");
+OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(localFile));
+boolean success = ftpClient.retrieveFile(remoteFileName, outputStream);
+outputStream.close();
+
+          </xmp></code></pre> 
+        <h2>Uploading a File</h2> 
+        <p>To upload a file to the FTP server, use the storeFile() method. This method takes two parameters, the local file name and the remote file name. The following code example shows how to upload a file from the local filesystem to the server.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String remoteFileName = "/remote/path/file.txt";
+File localFile = new File("/local/path/file.txt");
+InputStream inputStream = new BufferedInputStream(new FileInputStream(localFile));
+boolean success = ftpClient.storeFile(remoteFileName, inputStream);
+inputStream.close();
+
+          </xmp></code></pre> 
+        <h2>Renaming a File</h2> 
+        <p>To rename a file on the FTP server, use the rename() method. This method takes two parameters, the old name and the new name. The following code example shows how to rename a file on the server.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String oldName = "/remote/path/old_name.txt";
+String newName = "/remote/path/new_name.txt";
+boolean success = ftpClient.rename(oldName, newName);
+
+          </xmp></code></pre> 
+        <h2>Deleting a File</h2> 
+        <p>To delete a file from the FTP server, use the deleteFile() method. This method takes the remote file name as the parameter. The following code example shows how to delete a file from the server.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+boolean success = ftpClient.deleteFile("/remote/path/file.txt");
+
+          </xmp></code></pre> 
+        <h2>Disconnecting from the FTP Server</h2> 
+        <p>Finally, to disconnect from the FTP server, use the disconnect() method. The following code example shows how to disconnect from the server.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ftpClient.logout();
+ftpClient.disconnect();
+
+          </xmp></code></pre> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/"> Hashtable </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Get-Size-of-Java-Hashtable-Example.html">Get Size of Java Hashtable Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.gradle.api.DefaultTask.html">org.gradle.api.DefaultTask</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/io.netty.util.Attribute.html">io.netty.util.Attribute</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-contains-a-value.html">How to check if LinkedHashMap contains a value</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/"> Runtime </a> </p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Get-Maximum-Memory-Available-to-Java-Virtual-Machine(JVM)-Example.html">Get Maximum Memory Available to Java Virtual Machine(JVM) Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-font/"> AWT font </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-font/Create-Bold-Font-Example.html">Create Bold Font Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-check-if-the-value-exists-in-the-TreeMap-(TreeMap-contains-a-value).html">How to check if the value exists in the TreeMap (TreeMap contains a value)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-LinkedHashMap-in-reverse-order-using-ListIterator.html">Iterate through LinkedHashMap in reverse order using ListIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/"> Basic Java Examples </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Java-Class-Example.html">Java Class Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.google.common.primitives.Bytes.html">com.google.common.primitives.Bytes</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-07 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Martin</h3> <p><a href="#">2024-05-03 14:22</a></p> Can somebody elaborate more? <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Vartel</h3> <p><a href="#">2024-04-11 04:58</a></p> <p>These Programs Are Very Useful For Java Beginners!... Thanks! ...</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/javax.swing.event.PopupMenuListener.html">javax.swing.event.PopupMenuListener</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Remove-an-element-from-specified-index-of-Java-Vector-Example.html">Remove an element from specified index of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-contains-a-key-(indexOf).html">How to check if LinkedHashMap contains a key (indexOf)</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Set-Action-Command-For-AWT-Button-Example.html">Set Action Command For AWT Button Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Convert-Java-String-Object-to-Boolean-Object.html">Convert Java String Object to Boolean Object</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Search-an-element-of-Java-ArrayList-Example.html">Search an element of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Java-LinkedHashMap-forEach-example.html">Java LinkedHashMap forEach example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.jayway.jsonpath.Configuration.html">com.jayway.jsonpath.Configuration</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Java-Float-Wrapper-Class-Example.html">Java Float Wrapper Class Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.context.annotation.Primary.html">o.s.c.a.Primary</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Calculate-Average-value-of-Array-elements-using-Java-Example.html">Calculate Average value of Array elements using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Search-elements-of-LinkedList-Java-example.html">Search elements of LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.google.zxing.MultiFormatReader.html">com.google.zxing.MultiFormatReader</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Deselect-Item-From-AWT-List-Example.html">Deselect Item From AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-LinkedHashMap-using-an-Iterator.html">How to iterate LinkedHashMap using an Iterator</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Set-Background-Color-Of-an-Applet-Window-Example.html">Set Background Color Of an Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javafx.stage.FileChooser.html">javafx.stage.FileChooser</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-through-List-using-ListIterator.html">How to iterate through List using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.crypto.NoSuchPaddingException.html">javax.crypto.NoSuchPaddingException</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Get-Size-of-Java-Hashtable-Example.html">Get Size of Java Hashtable Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
