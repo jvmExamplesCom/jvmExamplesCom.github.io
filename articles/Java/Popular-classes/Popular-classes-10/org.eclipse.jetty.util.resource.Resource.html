@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.eclipse.jetty.util.resource.Resource</title> <!--timestamp=2024-03-15T00:12:55.041781347Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.eclipse.jetty.util.resource.Resource"> 
+  <meta name="keywords" content="org.eclipse.jetty.util.resource.Resource"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.eclipse.jetty.util.resource.Resource"> 
+  <meta property="og:description" content="org.eclipse.jetty.util.resource.Resource"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.eclipse.jetty.util.resource.Resource"> 
+  <meta name="twitter:description" content="org.eclipse.jetty.util.resource.Resource"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-03-14</small>
+        </div> 
+        <h1>Understanding the org.eclipse.jetty.util.resource.Resource Class</h1> The org.eclipse.jetty.util.resource.Resource class enables applications to access files located in local, remote, or virtual directories. This is an important utility class for web applications written using Java. It allows you to rapidly retrieve a file from any type of source. 
+        <h2>Overview of the org.eclipse.jetty.util.resource.Resource Constructors</h2> The org.eclipse.jetty.util.resource.Resource class contains several constructors that allow you to easily retrieve resources. 
+        <h3>Constructor With a File Parameter</h3> If you have the path to a file on the local filesystem, you can use the Resource constructor that accepts a File parameter. For example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+File file = new File("/tmp/myfile.txt");
+Resource resource = new Resource(file);
+
+          </xmp></code></pre> 
+        <h3>Constructor With a URL Parameter</h3> You can also use the Resource constructor that takes a URL parameter to access a remote file: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+URL url = new URL("http://www.example.com/myfile.txt");
+Resource resource = new Resource(url);
+
+          </xmp></code></pre> 
+        <h3>Constructor With a Path String Parameter</h3> The Resource class also provides a constructor with a String parameter. This constructor will automatically determine if the given String is a valid path to a local file, or a URL to a remote file: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String path = "/tmp/myfile.txt";
+Resource resource = new Resource(path);
+
+          </xmp></code></pre> It will automatically determine the correct constructor to call based on the type of path provided. 
+        <h2>Using the org.eclipse.jetty.util.resource.Resource Methods</h2> Once you’ve constructed a Resource instance, you can begin to use its methods to read and write data from the associated file. 
+        <h3>The getName() Method</h3> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getName()
+
+          </xmp></code></pre> method returns the name of the Resource instance. This is the name of the file or URL associated with the Resource instance. For example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Resource resource = new Resource("/tmp/myfile.txt");
+String fileName = resource.getName();
+// fileName == "/tmp/myfile.txt"
+
+          </xmp></code></pre> 
+        <h3>The exists() Method</h3> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+exists()
+
+          </xmp></code></pre> method checks to see if the file or URL associated with the Resource instance actually exists. It returns a boolean value indicating the result. For example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Resource resource = new Resource("/tmp/myfile.txt");
+boolean exists = resource.exists();
+// exists == true
+
+          </xmp></code></pre> 
+        <h3>The getInputStream() Method</h3> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getInputStream()
+
+          </xmp></code></pre> method returns an InputStream object that can be used to read data from the file associated with the Resource instance. For example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Resource resource = new Resource("/tmp/myfile.txt");
+InputStream inputStream = resource.getInputStream();
+// inputStream is an InputStream object that can be used to read data from /tmp/myfile.txt
+
+          </xmp></code></pre> 
+        <h3>The getOutputStream() Method</h3> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+getOutputStream()
+
+          </xmp></code></pre> method returns an OutputStream object that can be used to write data to the file associated with the Resource instance. For example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Resource resource = new Resource("/tmp/myfile.txt");
+OutputStream outputStream = resource.getOutputStream();
+// outputStream is an OutputStream object that can be used to write data to /tmp/myfile.txt
+
+          </xmp></code></pre> 
+        <h3>The close() Method</h3> Once you are finished reading or writing data from the file associated with the Resource instance, it is important to call the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+close()
+
+          </xmp></code></pre> method to release any underlying resources that were allocated when the Resource instance was created. For example: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Resource resource = new Resource("/tmp/myfile.txt");
+InputStream inputStream = resource.getInputStream();
+// ...
+resource.close();
+// All resources associated with the Resource instance are now released
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> The org.eclipse.jetty.util.resource.Resource class is an important utility class for accessing files from local, remote, or virtual directories. It enables your web applications to rapidly retrieve files from any type of source. It is easy to use, and provides a number of useful methods that make it simple to read and write data from files. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.springframework.http.converter.StringHttpMessageConverter.html">o.s.h.c.StringHttpMessageConverter</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Determine-number-of-bytes-written-to-DataOutputStream.html">Determine number of bytes written to DataOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Perform-Binary-Search-on-Java-Vector-Example.html">Perform Binary Search on Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.eclipse.jface.wizard.Wizard.html">org.eclipse.jface.wizard.Wizard</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-Sub-List-of-Java-ArrayList-Example.html">Get Sub List of Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Align-Icon-in-JLabel-Example.html">Align Icon in JLabel Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Get-name-of-specified-file-or-directory.html">Get name of specified file or directory</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/com.google.inject.Guice.html">com.google.inject.Guice</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Determine-if-file-or-directory-exists.html">Determine if file or directory exists</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-check-if-the-value-exists-in-the-TreeMap-(TreeMap-contains-a-value).html">How to check if the value exists in the TreeMap (TreeMap contains a value)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-29 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Gabriel</h3> <p><a href="#">2024-04-24 22:12</a></p> Thank you very much! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Nahish</h3> <p><a href="#">2024-05-02 05:51</a></p> thanks <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.facebook.stetho.Stetho.html">com.facebook.stetho.Stetho</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.util.logging.LogManager.html">java.util.logging.LogManager</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-iterate-over-elements-of-TreeSet-in-Java.html">How to iterate over elements of TreeSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Remove-an-element-from-ArrayList-using-Java-ListIterator-Example.html">Remove an element from ArrayList using Java ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Threads/Get-Current-Thread-Example.html">Get Current Thread Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Hello-World-example.html">Hello World example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Generate-Random-Int-Within-Given-Range-Example.html">Generate Random Int Within Given Range Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.security.InvalidAlgorithmParameterException.html">InvalidAlgorithmParameterException</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-sort-Vector-in-Java.html">How to sort Vector in Java</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-float-from-file-using-DataInputStream.html">Read float from file using DataInputStream</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/android.hardware.Camera.CameraInfo.html">android.hardware.Camera.CameraInfo</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sorting-custom-objects-using-Comparator.html">Sorting custom objects using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-ArrayList-to-LinkedHashMap.html">Convert ArrayList to LinkedHashMap</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Determine-If-The-Index-Is-Selected-AWT-List-Example.html">Determine If The Index Is Selected AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Smiley-In-Applet-Example.html">Draw Smiley In Applet Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.database.DatabaseUtils.html">android.database.DatabaseUtils</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Remove-all-elements-or-clear-LinkedList-Java-example.html">Remove all elements or clear LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.bukkit.entity.EntityType.html">org.bukkit.entity.EntityType</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Set-Background-Color-of-JTextField-Example.html">Set Background Color of JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-get-LinkedHashSet-elements-by-index-in-Java.html">How to get LinkedHashSet elements by index in Java</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
