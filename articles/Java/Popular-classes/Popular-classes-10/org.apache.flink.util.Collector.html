@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.apache.flink.util.Collector</title> <!--timestamp=2024-03-18T00:14:13.269491138Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.apache.flink.util.Collector"> 
+  <meta name="keywords" content="org.apache.flink.util.Collector"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.apache.flink.util.Collector"> 
+  <meta property="og:description" content="org.apache.flink.util.Collector"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.apache.flink.util.Collector"> 
+  <meta name="twitter:description" content="org.apache.flink.util.Collector"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-03-17</small>
+        </div> 
+        <h1>Introduction to org.apache.flink.util.Collector</h1> The org.apache.flink.util.Collector class is a powerful tool used in the Apache Flink programming model. The Collector is the primary interface for collecting data from the user-defined functions in Flink. It is responsible for collecting and forwarding data to further processing and output. This tutorial provides an introduction to the Collector concept, explains how it works, and provides several code examples. 
+        <h2>What is the Collector?</h2> The Collector is a specialized interface provided by Apache Flink and is responsible for collecting data from user-defined functions. In general, user-defined functions are pieces of code implemented by the user. The data collected from the user-defined functions can be further processed or forwarded to an external system depending on the application requirements. The Collector is used when a user wishes to collect data from user-defined functions. The most common way to do this is to provide the Collector with an argument that is of type Collector with user-defined parameters. For example, the following code implements a Collector with two arguments of type String text and Integer count: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public static void myUserFunction(String text, Integer count, Collector<String, Integer> collector) {
+    collector.collect(text, count);
+}
+
+          </xmp></code></pre> Once the Collector instance is provided as an argument to the function, the user-defined code can be implemented inside the function. Inside the function, the Collector instance can be used to collect data and store it in the specified parameter (i.e., text and count). The Collector allows the user-defined code to collect data from multiple sources and store them in the specified parameters. 
+        <h2>How Does the Collector Work?</h2> The Collector works by allowing user-defined functions to collect data from multiple sources and store them in the specified parameters. Once the data is collected, the Collector can forward the data to further processing or output. To use the Collector, the user must provide an argument of type Collector when writing a user-defined function. The user must also specify the parameters of the Collector instance. For example, the user may specify two parameters of type String text and Integer count. Once the Collector instance is created, the user-defined code can be implemented inside the function. The user-defined code can access the parameters of the Collector instance and store data in them. The Collector allows the user-defined code to collect data from multiple sources and store them in the specified parameters. After the user-defined code is finished collecting data, the Collector instance can forward the collected data to further processing or output. The Collector can also forward the collected data to an external system, depending on the application requirements. 
+        <h2>Example of Collectors</h2> Here are some examples of how Collectors can be used in the Apache Flink programming model. 
+        <h3>Example 1</h3> The following example shows how to create a Collector instance and forward collected data to an external system. The user-defined function takes two parameters of type String text and Integer count. The Collector instance stores data in these two parameters. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public static void myUserFunction(String text, Integer count, Collector<String, Integer> collector) {
+    collector.collect(text, count);
+    
+    // Forward data to external system.
+    MyExternalSystem.sendData(text, count);
+}
+
+          </xmp></code></pre> In this example, the user-defined code is responsible for collecting data from multiple sources and storing them in the Collector's parameters. Once the data is collected, the Collector forwards the data to an external system. 
+        <h3>Example 2</h3> The following example shows how to create a Collector instance and forward collected data to an upstream task. Here, the user-defined function takes one parameter of type Tuple3<string, integer, long>
+         . The Collector instance stores data in the specified Tuple3 parameters. 
+         <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+           <xmp>
+            
+public static void myUserFunction(Tuple3<String, Integer, Long> tuple, Collector<String, Integer, Long> collector) {
+    collector.collect(tuple.f0, tuple.f1, tuple.f2);
+    
+    // Forward data to upstream task.
+    MyUpstreamTask.sendData(tuple.f0, tuple.f1, tuple.f2);
+}
+
+           </xmp></code></pre> In this example, the user-defined code is responsible for collecting data from multiple sources and storing them in the Collector's parameters. Once the data is collected, the Collector forwards the data to an upstream task. 
+         <h2>Conclusion</h2> This tutorial has provided an introduction to the idea of the Collector in Apache Flink. The Collector is a powerful tool for collecting data from user-defined functions. It is responsible for collecting and forwarding data to further processing and output. It also showed several code examples illustrating how the Collector can be used. Using the Collector, user-defined functions can collect data from multiple sources and store them in the specified parameters. The Collector can then forward the collected data to further processing or output.
+        </string,> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Sorting-Algorithms/"> Sorting Algorithms </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Sorting-Algorithms/Java-Bubble-Sort-Descending-Order-Example.html">Java Bubble Sort Descending Order Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Delete-file-or-directory.html">Delete file or directory</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-LinkedHashMap-value-by-index.html">How to get LinkedHashMap value by index</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.graphics.RectF.html">android.graphics.RectF</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/io.netty.util.concurrent.Future.html">io.netty.util.concurrent.Future</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/"> AWT Label </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Create-AWT-Label-With-Text-Alignment-Example.html">Create AWT Label With Text Alignment Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/springfox.documentation.service.ApiInfo.html">s.d.s.ApiInfo</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-font/"> AWT font </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-font/Get-Font-Information-Example.html">Get Font Information Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Determine-if-a-file-can-be-read.html">Determine if a file can be read</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/"> Searching </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-float-Array-Example.html">Performing Binary Search on Java float Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-29 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Grigorii</h3> <p><a href="#">2024-04-21 19:18</a></p> thanks <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Martin</h3> <p><a href="#">2024-05-12 21:41</a></p> Can somebody elaborate more? <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Create-Custom-Color-Using-HSB-Example.html">Create Custom Color Using HSB Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-Java-LinkedList-to-Array.html">Convert Java LinkedList to Array</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipOutputStream/Create-Zip-File-From-Multiple-Files-using-ZipOutputStream-Example.html">Create Zip File From Multiple Files using ZipOutputStream Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.WeakHashMap.html">java.util.WeakHashMap</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Load-New-HTML-File-Using-Applet-Context-Example.html">Load New HTML File Using Applet Context Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Get-Collection-of-Values-from-Java-Hashtable-example.html">Get Collection of Values from Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.squareup.javapoet.FieldSpec.html">com.squareup.javapoet.FieldSpec</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/Compare-Two-Numbers-Java-Example.html">Compare Two Numbers Java Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.html">UsernamePasswordAuthenticationFilter</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-array-to-String-using-Arrays.html">Convert String array to String using Arrays</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Get-SubList-from-LinkedList-Java-example.html">Get SubList from LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-3D-Rectangle-&-Square-in-Applet-Window-Example.html">Draw 3D Rectangle & Square in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/Java-long-Example.html">Java long Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Short-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Short object to byte, short, int, long, float and double</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Get-Alpha-Component-Of-Color-Example.html">Get Alpha Component Of Color Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.junit.jupiter.api.extension.AfterEachCallback.html">o.j.j.a.e.AfterEachCallback</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.cache.annotation.EnableCaching.html">o.s.c.a.EnableCaching</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Rectangle-Area-using-Java-Example.html">Calculate Rectangle Area using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Remove-an-element-from-ArrayList-using-Java-ListIterator-Example.html">Remove an element from ArrayList using Java ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.elasticsearch.action.update.UpdateRequest.html">o.e.a.u.UpdateRequest</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
