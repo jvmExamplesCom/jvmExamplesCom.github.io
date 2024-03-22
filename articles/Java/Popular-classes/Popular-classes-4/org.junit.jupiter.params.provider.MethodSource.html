@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.junit.jupiter.params.provider.MethodSource</title> <!--timestamp=2024-03-22T00:12:53.833683712Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.junit.jupiter.params.provider.MethodSource"> 
+  <meta name="keywords" content="org.junit.jupiter.params.provider.MethodSource"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.junit.jupiter.params.provider.MethodSource"> 
+  <meta property="og:description" content="org.junit.jupiter.params.provider.MethodSource"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.junit.jupiter.params.provider.MethodSource"> 
+  <meta name="twitter:description" content="org.junit.jupiter.params.provider.MethodSource"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-03-21</small>
+        </div> 
+        <h1>Introduction to JUnit Parameterized Tests using org.junit.jupiter.params.provider.MethodSource</h1> JUnit parameterized tests allow us to easily run the same test multiple times with different parameters. This is useful in situations where we need to make sure that our code behaves correctly in various scenarios, or when we need to identify errors in our code with data-driven testing. JUnit 5 provides a powerful API for this, in the form of the org.junit.jupiter.params.provider.MethodSource class. This class allows us to create parameterized tests that use a data source from a given method. In this article, we’ll look at how to use org.junit.jupiter.params.provider.MethodSource for creating data-driven tests in JUnit 5. We’ll also take a look at some examples of the class in action. 
+        <h2>Parameterized Tests with org.junit.jupiter.params.provider.MethodSource</h2> The org.junit.jupiter.params.provider.MethodSource class provides a way to create parameterized tests that use data from a given method as a data source. This allows us to easily create tests that can accept different sets of data and run them multiple times with different parameters. To use MethodSource, all we need to do is add the @MethodSource annotation to a JUnit 5 test. This annotation takes the name of a method that will provide the data for the test. The method should return either an Iterable, a Collection or a Stream of Arguments. The Arguments class is a JUnit 5 convenience class that can be used to store the parameters passed to a test. Let’s take a look at an example of using org.junit.jupiter.params.provider.MethodSource in action: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@ParameterizedTest
+@MethodSource("dataProvider")
+public void testData(String data1, int data2) {
+    // Test code here
+}
+
+private static Stream<Arguments> dataProvider() {
+    return Stream.of(
+        Arguments.of("data1", 1), // Data set 1
+        Arguments.of("data2", 2)  // Data set 2
+    );
+}
+
+          </xmp></code></pre> In this example, we have created a parameterized test that uses the dataProvider method as a data source. The dataProvider method returns a Stream of Arguments, which contains the data that will be used in the test. The first argument in the Arguments object is the data1 parameter, while the second argument is the data2 parameter. When this test is executed, it will run twice – once with data1 set to “data1” and data2 set to 1, and once with data1 set to “data2” and data2 set to 2. 
+        <h2>Using MethodSource for More Complicated Data Sources</h2> The org.junit.jupiter.params.provider.MethodSource class also provides support for more complicated data sources. For example, we can provide an Iterable, a Collection, or even a Stream of data as a data source. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@ParameterizedTest
+@MethodSource("dataProvider")
+public void testData(String data1, int data2) {
+    // Test code here
+}
+
+private static Iterable<Arguments> dataProvider() {
+    List<Arguments> data = new ArrayList<>();
+    data.add(Arguments.of("data1", 1));  // Data set 1
+    data.add(Arguments.of("data2", 2));  // Data set 2
+   
+    return data;
+}
+
+          </xmp></code></pre> In this example, we have used an Iterable as a data source for our parameterized test. We have created a List of Arguments, which contains the data that will be used in the test. The first argument in the Arguments object is the data1 parameter, while the second argument is the data2 parameter. When this test is executed, it will run twice – once with data1 set to “data1” and data2 set to 1, and once with data1 set to “data2” and data2 set to 2. 
+        <h2>Conclusion</h2> In this article, we looked at how to use org.junit.jupiter.params.provider.MethodSource to create parameterized tests in JUnit 5. We saw how to use the @MethodSource annotation to create tests that use a data source from a given method. We also took a look at how to use more complicated data sources, such as an Iterable or a Stream. Parameterized tests are a powerful tool for creating data-driven tests in JUnit 5, and the org.junit.jupiter.params.provider.MethodSource class provides an easy way to create them. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-TreeSet-to-List-(ArrayList-or-LinkedList).html">How to convert TreeSet to List (ArrayList or LinkedList)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipEntry/"> ZipEntry </a> </p> <a href="/articles/Java/Java-Zip/ZipEntry/Determine-if-the-Zip-Entry-Is-Directory-Example.html">Determine if the Zip Entry Is Directory Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Determine-number-of-bytes-written-to-DataOutputStream.html">Determine number of bytes written to DataOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-fix-java.io.FileNotFoundException-(access-is-denied).html">FileNotFoundException (access is denied)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.swing.text.BadLocationException.html">j.s.t.BadLocationException</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.test.web.servlet.request.MockMvcRequestBuilders.html">o.s.t.w.s.r.MockMvcRequestBuilders</a> <h6><i class="fa fa-clock-o"></i> <span>2024-03-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/System/"> System </a> </p> <a href="/articles/Java/Miscellaneous-Classes/System/Run-object-finalization-using-System-class.html">Run object finalization using System class</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-add-key-value-mapping-to-the-TreeMap-(TreeMap-put-method).html">How to add key-value mapping to the TreeMap (TreeMap put method)</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Vector-to-ArrayList-and-ArrayList-to-Vector.html">Convert Vector to ArrayList and ArrayList to Vector</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.apache.commons.lang3.time.StopWatch.html">o.a.c.l.t.StopWatch</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-08 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Abral</h3> <p><a href="#">2024-04-24 08:36</a></p> Thank you very much! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Vartel</h3> <p><a href="#">2024-04-28 17:52</a></p> Interesting, thx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler.html">SimpleUrlAuthenticationFailureHandler</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Set-Background-Color-of-JTextField-Example.html">Set Background Color of JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.hazelcast.core.HazelcastInstance.html">com.hazelcast.core.HazelcastInstance</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-convert-LinkedHashMap-to-List-in-Java.html">How to convert LinkedHashMap to List in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Java-Convert-array-to-TreeSet.html">Java Convert array to TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.intellij.openapi.command.WriteCommandAction.html">c.i.o.c.WriteCommandAction</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Change-Foreground-Color-Of-Label-Example.html">Change Foreground Color Of Label Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Create-Java-Hashtable-from-HashMap-example.html">Create Java Hashtable from HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-insert-an-element-at-the-beginning-of-the-Java-Vector.html">How to insert an element at the beginning of the Java Vector</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Generate-Pyramid-For-a-Given-Number-Example.html">Generate Pyramid For a Given Number Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Java-Short-Example.html">Java Short Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Deselect-Item-From-AWT-List-Example.html">Deselect Item From AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Check-if-a-particular-value-exists-in-Java-TreeMap-example.html">Check if a particular value exists in Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Prime-Numbers-Java-Example.html">Prime Numbers Java Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.google.zxing.BinaryBitmap.html">com.google.zxing.BinaryBitmap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Tail-Map-from-Java-TreeMap-example.html">Get Tail Map from Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.core.env.PropertySource.html">o.s.c.e.PropertySource</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Sort-HashMap-by-keys.html">Sort HashMap by keys</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Java-Float-isNaN-Method-Example.html">Java Float isNaN Method Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.thoughtworks.xstream.io.HierarchicalStreamWriter.html">c.t.x.i.HierarchicalStreamWriter</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

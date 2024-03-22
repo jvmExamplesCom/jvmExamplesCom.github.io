@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javax.crypto.KeyAgreement</title> <!--timestamp=2024-03-22T00:13:08.987118235Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.crypto.KeyAgreement"> 
+  <meta name="keywords" content="javax.crypto.KeyAgreement"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.crypto.KeyAgreement"> 
+  <meta property="og:description" content="javax.crypto.KeyAgreement"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.crypto.KeyAgreement"> 
+  <meta name="twitter:description" content="javax.crypto.KeyAgreement"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-03-21</small>
+        </div> 
+        <h1>javax.crypto.KeyAgreement</h1> 
+        <p>javax.crypto.KeyAgreement is a class in the Java Cryptography Architecture (JCA) that provides a mechanism for two or more parties to agree on a secret key. The parties involved can also use this class to generate and exchange keys that are used for encryption, decryption, and other cryptographic operations.</p> 
+        <h2>Overview of KeyAgreement</h2> 
+        <p>KeyAgreement provides an API for establishing a shared secret between two or more parties using a variety of algorithms. To achieve this, parties must compute their own and each other's public keys. Each party will then transmit their own and the others' public keys to each other, where the algorithm is run with those keys. The resulting shared secret is then used to encrypt data, sign digital signatures, and perform other cryptographic operations.</p> 
+        <p>The API works by taking in a KeyPair generated from a given algorithm and running a KeyAgreement algorithm on it. This generates a shared SecretKey, which is used to encrypt or decrypt data. It is important to note that the KeyPair must be compatible with the chosen algorithm, and the same KeyPair should not be used with multiple algorithms simultaneously.</p> 
+        <h2>Using KeyAgreement</h2> 
+        <p>To use KeyAgreement, an application first needs to create a KeyPair object. This can be done using any of the supported algorithms, such as Diffie-Hellman, EC Diffie-Hellman, and DSA. After the KeyPair is created, the application can then use it to generate a shared secret via the doPhase() method.</p> 
+        <p>The doPhase() method requires two parameters: the KeyPair of the other party and a flag indicating whether or not the KeyAgreement instance is the initiator of the negotiation. Next, the application can use the getSecret() method to retrieve the shared secret. This method requires a byte array, which will be filled with the generated shared secret. Finally, the application can use the key generated to encrypt or decrypt data.</p> 
+        <h2>Example</h2> 
+        <p>The following example demonstrates how to use KeyAgreement to negotiate a shared secret between two parties. First, we create two KeyPair objects, one for each party. Next, we create two KeyAgreement instances and initialize them with each party's KeyPair. Finally, we use the doPhase() method to generate a shared secret.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+KeyPair keyPairA = KeyPairGenerator.getInstance("diffie-hellman").generateKeyPair();
+KeyPair keyPairB = KeyPairGenerator.getInstance("diffie-hellman").generateKeyPair();
+
+KeyAgreement kaA = KeyAgreement.getInstance("diffie-hellman");
+kaA.init(keyPairA);
+
+KeyAgreement kaB = KeyAgreement.getInstance("diffie-hellman");
+kaB.init(keyPairB);
+
+kaA.doPhase(keyPairB, true);
+kaB.doPhase(keyPairA, false);
+
+byte[] sharedSecretA = kaA.generateSecret();
+byte[] sharedSecretB = kaB.generateSecret();
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>javax.crypto.KeyAgreement is a powerful and versatile tool for generating shared secrets between two or more parties. It allows these parties to securely exchange data using symmetric encryption and mutual authentication. In this article, we have discussed what KeyAgreement is, how to use it, and provided an example of its usage.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/File-And-IO/FileOutputStream/"> FileOutputStream </a> </p> <a href="/articles/Java/File-And-IO/FileOutputStream/Write-byte-array-to-a-file-using-FileOutputStream.html">Write byte array to a file using FileOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-Java-Vector-in-descending-order-using-comparator-example.html">Sort Java Vector in descending order using comparator example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/"> Double Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Java-Double-isNaN-method-example.html">Java Double isNaN method example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.content.ContentProvider.html">android.content.ContentProvider</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/JLabel-Disabled-Icon-Example.html">JLabel Disabled Icon Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.util.concurrent.ConcurrentSkipListMap.html">j.u.c.ConcurrentSkipListMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.widget.Checkable.html">android.widget.Checkable</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-convert-ArrayList-to-LinkedHashSet-in-Java.html">How to convert ArrayList to LinkedHashSet in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JTextField/"> JTextField </a> </p> <a href="/articles/Java/Swing/JTextField/Change-Font-of-JTextField-Example.html">Change Font of JTextField Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/"> Searching </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-char-Array-Example.html">Performing Binary Search on Java char Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-16 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Adam</h3> <p><a href="#">2024-05-04 04:09</a></p> Thank you guys for your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Victor</h3> <p><a href="#">2024-05-16 04:26</a></p> Interesting, thx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.log4j.ConsoleAppender.html">org.apache.log4j.ConsoleAppender</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.bumptech.glide.RequestManager.html">com.bumptech.glide.RequestManager</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Replace-an-element-from-ArrayList-using-Java-ListIterator-Example.html">Replace an element from ArrayList using Java ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/JTextField-Show-Hide-Example.html">JTextField Show Hide Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-check-if-LinkedHashSet-is-empty-in-Java.html">How to check if LinkedHashSet is empty in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Append-all-elements-of-other-Collection-to-Java-ArrayList-Example.html">Append all elements of other Collection to Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-an-element-from-specified-index-of-Java-ArrayList-Example.html">Remove an element from specified index of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/java.sql.SQLFeatureNotSupportedException.html">j.s.SQLFeatureNotSupportedException</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/int-to-String-Example.html">int to String Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-float-Array-Example.html">Java Sort float Array Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-double-from-file-using-DataInputStream.html">Read double from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-remove-the-first-element-or-last-element-from-the-Vector.html">How to remove the first element or last element from the Vector</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Java-Convert-TreeSet-to-array.html">Java Convert TreeSet to array</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.springframework.http.RequestEntity.html">o.s.h.RequestEntity</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.web.servlet.config.annotation.WebMvcConfigurer.html">o.s.w.s.c.a.WebMvcConfigurer</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Java-Float-isNaN-Method-Example.html">Java Float isNaN Method Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-elements-to-ArrayList.html">Add elements to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Get-Particular-Item-Of-AWT-Choice-Or-Combobox-Example.html">Get Particular Item Of AWT Choice Or Combobox Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Oval-&-Circle-in-Applet-Window-Example.html">Draw Oval & Circle in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.apache.maven.plugin.MojoFailureException.html">o.a.m.p.MojoFailureException</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
