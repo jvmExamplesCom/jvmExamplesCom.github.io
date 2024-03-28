@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - com.intellij.lang.ASTNode</title> <!--timestamp=2024-03-28T00:13:07.810144566Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="com.intellij.lang.ASTNode"> 
+  <meta name="keywords" content="com.intellij.lang.ASTNode"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - com.intellij.lang.ASTNode"> 
+  <meta property="og:description" content="com.intellij.lang.ASTNode"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - com.intellij.lang.ASTNode"> 
+  <meta name="twitter:description" content="com.intellij.lang.ASTNode"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-03-27</small>
+        </div> 
+        <h1>Introduction to Java ASTNode Class</h1> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+com.intellij.lang.ASTNode
+
+          </xmp></code></pre> class is a fundamental class of the IntelliJ Platform PSI (Program Structure Interface). It represents a single node in an Abstract Syntax Tree (AST) and provides basic APIs for getting and setting the node's types, text, and tree structure. This class is used across the entire IntelliJ Platform and is fundamental to understanding the parsing and manipulation of IntelliJ Platform source code.
+         
+        <h2>Creating and Accessing an ASTNode Object</h2> 
+        <p>An ASTNode object can be created in various ways in the IntelliJ Platform. The simplest way to create one is by calling the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ASTNode.createLeafElement()
+
+          </xmp></code></pre> method. This method takes a 
+        <pre>IElementType</pre> parameter which is used to create the ASTNode object. Here is an example of creating an ASTNode for a Java language identifier:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ASTNode nameNode = ASTNode.createLeafElement(JavaTokenType.IDENTIFIER, "name");
+
+          </xmp></code></pre> 
+        <p>Once an ASTNode is created, it can be accessed in several ways. The most common way of accessing an ASTNode object is through its parent ASTNode. Every ASTNode has exactly one parent ASTNode instance and all ASTNodes are descendants of a root ASTNode.</p> 
+        <h2>Types of ASTNodes</h2> 
+        <p>ASTNode objects can have one of four types: Leaf, Composite, WhiteSpace, and Error. Leaf ASTNodes contain a single token of information, such as a keyword or operator. Composite ASTNodes contain a combination of Leaf ASTNodes, WhiteSpace ASTNodes, and Error ASTNodes. WhiteSpace ASTNodes represent non-tokens such as indentation and newlines. Error ASTNodes represent Lexer errors. Here are examples of each type of ASTNode in the Java language:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Leaf ASTNode
+ASTNode nameNode = ASTNode.createLeafElement(JavaTokenType.IDENTIFIER, "name");
+
+// Composite ASTNode
+ASTNode assignStatement = new ASTNode(JavaElementType.ASSIGNMENT_EXPRESSION);
+assignStatement.addChild(ASTNode.createLeafElement(JavaTokenType.IDENTIFIER, "x"));
+assignStatement.addChild(ASTNode.createLeafElement(JavaTokenType.EQ, "="));
+assignStatement.addChild(ASTNode.createLeafElement(JavaTokenType.INTEGER_LITERAL, "10"));
+
+// WhiteSpace ASTNode
+ASTNode whitespaceNode = ASTNode.createWhiteSpace("\n\t\t");
+
+// Error ASTNode
+ASTNode errorNode = new ASTNode(JavaElementType.ERROR);
+
+          </xmp></code></pre> 
+        <h2>Manipulating ASTNodes</h2> 
+        <p>Once an ASTNode object is created, its contents can be manipulated using the ASTNode API. For example, </p>
+        <pre>getFirstChild()</pre>, 
+        <pre>getLastChild()</pre> and 
+        <pre>findChildByType()</pre> can be used to access the children of an ASTNode. To add or remove children, 
+        <pre>addChild()</pre>, 
+        <pre>removeChild()</pre>, and 
+        <pre>replaceChild()</pre> can be used. Here is an example of modifying an ASTNode:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ASTNode assignStatement = new ASTNode(JavaElementType.ASSIGNMENT_EXPRESSION);
+assignStatement.addChild(ASTNode.createLeafElement(JavaTokenType.IDENTIFIER, "x"));
+assignStatement.addChild(ASTNode.createLeafElement(JavaTokenType.EQ, "="));
+assignStatement.addChild(ASTNode.createLeafElement(JavaTokenType.INTEGER_LITERAL, "10"));
+
+// Replace integer literal with a string literal
+assignStatement.replaceChild(assignStatement.findChildByType(JavaTokenType.INTEGER_LITERAL), ASTNode.createLeafElement(JavaTokenType.STRING_LITERAL, "\"hello\""));
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>The ASTNode class is a fundamental element of the IntelliJ Platform PSI. Understanding how to create and manipulate ASTNode objects is essential to understanding how the IntelliJ Platform parses and manipulates source code.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.content.BroadcastReceiver.html">android.content.BroadcastReceiver</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-add-array-example.html">Java LinkedList add array example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Check-if-ArrayList-contains-element.html">Check if ArrayList contains element</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Set-Background-Color-of-JLabel-Example.html">Set Background Color of JLabel Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-find-element-index-in-LinkedHashSet.html">How to find element index in LinkedHashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/java.awt.event.MouseMotionListener.html">java.awt.event.MouseMotionListener</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Remove-An-Item-From-a-List-Example.html">Remove An Item From a List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Replace-an-Element-of-LinkedList-Java-example.html">Replace an Element of LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/io.vertx.core.http.HttpServerOptions.html">io.vertx.core.http.HttpServerOptions</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Iterate-ArrayList-using-ListIterator.html">Iterate ArrayList using ListIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-10 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Convert-ArrayList-to-LinkedHashMap-in-Java.html">Convert ArrayList to LinkedHashMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Create-Custom-Color-Using-RGB-Example.html">Create Custom Color Using RGB Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Basic-Java-Applet-Example.html">Basic Java Applet Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Generate-random-numbers-using-Math.random.html">G.random</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-absolute-value-of-float,-int,-double-and-long-using-Math.abs.html">F.abs</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/javax.swing.border.EtchedBorder.html">javax.swing.border.EtchedBorder</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-String-as-bytes-to-a-file-using-DataOutputStream.html">Write String as bytes to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.jayway.jsonpath.Configuration.html">com.jayway.jsonpath.Configuration</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/javafx.beans.Observable.html">javafx.beans.Observable</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Swap-elements-of-Java-ArrayList-example.html">Swap elements of Java ArrayList example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/System/Get-file-separator-using-System-class.html">Get file separator using System class</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.powermock.api.mockito.PowerMockito.html">o.p.a.m.PowerMockito</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Tail-Map-from-Java-TreeMap-example.html">Get Tail Map from Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Simple-Java-LinkedHashMap-example.html">Simple Java LinkedHashMap example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/retrofit.http.POST.html">retrofit.http.POST</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Delete-file-or-directory.html">Delete file or directory</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Set-view-of-Keys-from-Java-TreeMap-example.html">Get Set view of Keys from Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-iterate-LinkedHashSet-elements.html">How to iterate LinkedHashSet elements</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Fill-Rectangle-&-Square-in-Applet-Window-Example.html">Fill Rectangle & Square in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.codehaus.jackson.type.TypeReference.html">o.c.j.t.TypeReference</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

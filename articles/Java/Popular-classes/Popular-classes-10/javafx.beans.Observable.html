@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javafx.beans.Observable</title> <!--timestamp=2024-03-28T00:13:02.404725680Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javafx.beans.Observable"> 
+  <meta name="keywords" content="javafx.beans.Observable"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javafx.beans.Observable"> 
+  <meta property="og:description" content="javafx.beans.Observable"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javafx.beans.Observable"> 
+  <meta name="twitter:description" content="javafx.beans.Observable"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-03-27</small>
+        </div> 
+        <h1>JavaFx Beans Observable</h1> JavaFX beans provides a library of classes and interfaces that enable you to implement the Observer and Observable patterns. The observer pattern is used in an application when there is a one-to-many relationship between objects such as when one object is modified, its dependents are notified automatically. The observable interface defines methods for adding or removing observers and for notifying observers, as well as the state change. 
+        <h2>Observable Interface</h2> The Observable interface is part of the javafx.beans package and belongs to the JavaFX Beans Framework. The interface provides methods for registering and unregistering observers, as well as notifying them of state changes in the observed object. The implementation of an Observable class must notify observers when its state has changed, otherwise the observers will not see the change. The following code example shows the Observable interface: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public interface Observable {
+    public void addListener(InvalidationListener listener);
+    public void removeListener(InvalidationListener listener);
+    public void addListener(ChangeListener<?> listener);
+    public void removeListener(ChangeListener<?> listener);
+    public void notifyListeners();
+}
+
+          </xmp></code></pre> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+addListener()
+
+          </xmp></code></pre> method is used to register an observer. It takes an invalidation listener object and adds it to list of observers. When state changes occur, the observer will be notified via the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+notifyListeners()
+
+          </xmp></code></pre> method. The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+removeListener()
+
+          </xmp></code></pre> method removes an observer from the list of observers. 
+        <h2>Observer Interface</h2> The Observer interface is also part of the javafx.beans package and is the counterpart to the Observable interface. It provides methods to observe changes in an observable object. The Observer interface consists of the following methods: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public void invalidated(Observable observable);
+public void changed(ObservableValue<?> observable, Object oldValue, Object newValue);
+
+          </xmp></code></pre> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+invalidated()
+
+          </xmp></code></pre> method is called when an observable object is invalidated, meaning that its state has changed. The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+changed()
+
+          </xmp></code></pre> method is called when an observable object changes its value. 
+        <h2>Example</h2> Let's take a look at a practical example of how we can use the observer pattern in a JavaFX application. In this example, we will create an observable object and an observer to watch for changes in the object’s state. First, we create a simple class called MyObservable which implements the Observable interface: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyObservable implements Observable {
+
+    private int value;
+    private List<InvalidationListener> listeners;
+
+    public MyObservable() {
+        this.listeners = new ArrayList<>();
+    }
+
+    @Override
+    public void addListener(InvalidationListener listener) {
+        this.listeners.add(listener);
+    }
+
+    @Override
+    public void removeListener(InvalidationListener listener) {
+        this.listeners.remove(listener);
+    }
+
+    @Override
+    public void notifyListeners() {
+        for (InvalidationListener listener : listeners) {
+            listener.invalidated(this);
+        }
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+        notifyListeners();
+    }
+}
+
+          </xmp></code></pre> In this class, we create a private field called 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+value
+
+          </xmp></code></pre>, which represents the state of our observable object. We also create a list of invalidation listeners and create methods for adding/removing observers and for notifying observers when the state has changed. Next, we create an observer to watch for changes in our observable object: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyObserver implements InvalidationListener {
+
+    @Override
+    public void invalidated(Observable observable) {
+        if (observable instanceof MyObservable) {
+            MyObservable myObservableObject = (MyObservable) observable;
+            System.out.println("Value has changed to: " + myObservableObject.getValue());
+        }
+    }
+}
+
+          </xmp></code></pre> Finally, we create a main method to test out our application: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public static void main(String[] args) {
+    MyObserver observer = new MyObserver();
+    MyObservable observable = new MyObservable();
+    observable.addListener(observer);
+    observable.setValue(10);
+}
+
+          </xmp></code></pre> When we run this program, the output will be: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Value has changed to: 10
+
+          </xmp></code></pre> This demonstrates the observer pattern and shows how we can use the javafx.beans package to create observable objects and observers in our applications. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-String-or-String-array-to-HashMap.html">Convert String or String array to HashMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/List-Odd-Numbers-Java-Example.html">List Odd Numbers Java Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipFile/"> ZipFile </a> </p> <a href="/articles/Java/Java-Zip/ZipFile/Get-Number-Of-Entries-In-Zip-File-Example.html">Get Number Of Entries In Zip File Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Vector-to-ArrayList-and-ArrayList-to-Vector.html">Convert Vector to ArrayList and ArrayList to Vector</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/javafx.scene.control.ToggleButton.html">javafx.scene.control.ToggleButton</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-insert-an-element-at-the-beginning-of-the-Java-Vector.html">How to insert an element at the beginning of the Java Vector</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.time.LocalDate.html">java.time.LocalDate</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipFile/"> ZipFile </a> </p> <a href="/articles/Java/Java-Zip/ZipFile/Find-File-in-a-Zip-File-Example.html">Find File in a Zip File Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.eclipse.jface.window.Window.html">org.eclipse.jface.window.Window</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Rename-file-or-directory.html">Rename file or directory</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-27 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Adam</h3> <p><a href="#">2024-05-09 15:49</a></p> Interesting, thx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Vartel</h3> <p><a href="#">2024-05-16 16:26</a></p> <p>These Programs Are Very Useful For Java Beginners!... Thanks! ...</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-Byte-object-to-String-object.html">Convert Byte object to String object</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-List-to-Map-(Convert-List-to-HashMap).html">Convert List to Map (Convert List to HashMap)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-double-Arrays-Example.html">Compare Two Java double Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-All-Elements-Of-Java-ArrayList-Example.html">Replace All Elements Of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Convert-short-primitive-to-Short-object-Example.html">Convert short primitive to Short object Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/com.fasterxml.jackson.core.type.TypeReference.html">c.f.j.c.t.TypeReference</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-floor-or-ceiling-values-from-Java-TreeSet.html">How to get floor or ceiling values from Java TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.nio.channels.FileChannel.html">java.nio.channels.FileChannel</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Print-ArrayList-example.html">Print ArrayList example</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/How-to-check-if-String-ends-with-another-String-or-substring.html">How to check if String ends with another String or substring</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-Java-Vector-using-Comparable.html">Sort Java Vector using Comparable</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-all-elements-from-Java-ArrayList-Example.html">Remove all elements from Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.xml.transform.stream.StreamResult.html">j.x.t.s.StreamResult</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/javafx.beans.Observable.html">javafx.beans.Observable</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-byte-to-String.html">Convert byte to String</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-value-from-TreeMap-using-the-key-(TreeMap-get-method).html">How to get value from TreeMap using the key (TreeMap get method)</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-char-to-a-file-using-DataOutputStream.html">Write char to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Java-Boolean-Example.html">Java Boolean Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-List-to-String.html">Convert List to String</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/android.service.notification.StatusBarNotification.html">a.s.n.StatusBarNotification</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
