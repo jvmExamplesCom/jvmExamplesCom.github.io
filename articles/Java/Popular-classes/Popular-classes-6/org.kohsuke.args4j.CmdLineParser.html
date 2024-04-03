@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.kohsuke.args4j.CmdLineParser</title> <!--timestamp=2024-04-03T00:12:27.867516055Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.kohsuke.args4j.CmdLineParser"> 
+  <meta name="keywords" content="org.kohsuke.args4j.CmdLineParser"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.kohsuke.args4j.CmdLineParser"> 
+  <meta property="og:description" content="org.kohsuke.args4j.CmdLineParser"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.kohsuke.args4j.CmdLineParser"> 
+  <meta name="twitter:description" content="org.kohsuke.args4j.CmdLineParser"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-04-02</small>
+        </div> 
+        <h1>Introduction to org.kohsuke.args4j.CmdLineParser</h1> Orgs.kohsuke.args4j.CmdLineParser is a class from the args4j library which allows users to create command lines for Java applications. This class provides methods which parse command line arguments and bind them to fields and methods in a class. It is designed to be used with POJOs (plain old Java objects) to help make the coding process easier. The class gives developers the ability to quickly and easily implement their own command-line parsers. In this article, we will explain why org.kohsuke.args4j.CmdLineParser is a useful tool for developers, and provide examples of how it can be used. 
+        <h1>Advantages of org.kohsuke.args4j.CmdLineParser</h1> Using org.kohsuke.args4j.CmdLineParser has several advantages over other ways of creating command line parsers. First, it provides an easy way to create parser classes without writing any code. It is easy to set up, as all you need to do is annotate your class with @Option and @Argument annotations. Second, it allows users to define default values for the parameters that they are parsing. This is particularly useful when dealing with large amounts of data or complicated input. If a particular value is not specified, then the default value will be used. Third, org.kohsuke.args4j.CmdLineParser helps to prevent errors. It checks the command line arguments to make sure that they are valid. If any of the arguments are invalid, then it will throw an error. This helps to ensure that the program only runs correctly when the correct parameters have been specified. 
+        <h1>Using org.kohsuke.args4j.CmdLineParser</h1> To use org.kohsuke.args4j.CmdLineParser, there are a few basic steps to follow. First, you need to create a POJO class that contains the fields and methods which you want to use to parse the command line arguments. You then need to annotate the class with @Option and @Argument annotations to indicate which fields and methods should be parsed. Finally, you can use the CmdLineParser class to parse the command line arguments and bind them to the fields and methods you have defined. The following example shows how to create a class and use org.kohsuke.args4j.CmdLineParser to parse command line arguments: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyClass {
+    
+    @Option(name="-i")
+    int input;
+    
+    @Argument
+    String[] arguments;
+    
+    public static void main(String[] args) {
+        MyClass myClass = new MyClass();
+        CmdLineParser parser = new CmdLineParser(myClass);
+        try {
+            parser.parseArgument(args);
+            // use myClass.input and myClass.arguments
+        } catch(CmdLineException e) {
+            System.err.println(e.getMessage());
+            parser.printUsage(System.err);
+        }
+    }
+}
+
+          </xmp></code></pre> In this example, we have created a class called MyClass with two fields, -i and the array of arguments. We have then annotated the fields with @Option and @Argument annotations respectively. In the main method, we create an instance of our class and use the CmdLineParser to parse the command line arguments, binding them to our fields. 
+        <h1>Conclusion</h1> org.kohsuke.args4j.CmdLineParser is an easy to use and powerful tool for creating command line parsers for Java applications. It provides a simple way to define default values for parameters, and also helps to prevent errors by checking for invalid arguments. With a few simple steps, developers can quickly create their own parsers and start using them in their applications. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.springframework.data.redis.core.RedisTemplate.html">o.s.d.r.c.RedisTemplate</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/List/"> List </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-Map-to-List.html">Convert Map to List</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/"> ListIterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/ArrayList-ListIterator-example.html">ArrayList ListIterator example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Determine-if-File-or-Directory-is-hidden.html">Determine if File or Directory is hidden</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipEntry/"> ZipEntry </a> </p> <a href="/articles/Java/Java-Zip/ZipEntry/List-Contents-Of-Zip-File-Example.html">List Contents Of Zip File Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.text.ParsePosition.html">java.text.ParsePosition</a> <h6><i class="fa fa-clock-o"></i> <span>2024-01-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/JLabel-Disabled-Icon-Example.html">JLabel Disabled Icon Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-long-Arrays-Example.html">Compare Two Java long Arrays Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/java.util.function.IntUnaryOperator.html">java.util.function.IntUnaryOperator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-TreeSet-to-List-(ArrayList-or-LinkedList).html">Convert TreeSet to List (ArrayList or LinkedList)</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-10 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.springframework.web.context.support.WebApplicationContextUtils.html">o.s.w.c.s.WebApplicationContextUtils</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-float-Array-Example.html">Java Sort float Array Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.thrift.TException.html">org.apache.thrift.TException</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Set-Background-Color-of-JTextField-Example.html">Set Background Color of JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Convert-array-to-LinkedList-in-Java.html">Convert array to LinkedList in Java</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/If-Else-If-statement-Example.html">If Else-If statement Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.Random.html">java.util.Random</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Create-JLabel-With-Text-Example.html">Create JLabel With Text Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Determine-if-a-file-can-be-read.html">Determine if a file can be read</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-fix-java.io.FileNotFoundException-(access-is-denied).html">FileNotFoundException (access is denied)</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/If-Else-statement-Example.html">If Else statement Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.os.Vibrator.html">android.os.Vibrator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Vector-to-an-array.html">Convert Vector to an array</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-directory.html">Create directory</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Map-from-Java-HashMap-example.html">Get Synchronized Map from Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-float-Array-Example.html">Java Sort float Array Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-short.html">Convert String to short</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-ArrayList-to-LinkedHashMap.html">Convert ArrayList to LinkedHashMap</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.intellij.openapi.fileTypes.FileType.html">c.i.o.f.FileType</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.xmlpull.v1.XmlPullParserException.html">o.x.v.XmlPullParserException</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
