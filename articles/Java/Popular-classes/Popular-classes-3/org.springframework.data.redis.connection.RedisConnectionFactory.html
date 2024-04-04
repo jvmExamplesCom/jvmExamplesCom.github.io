@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.springframework.data.redis.connection.RedisConnectionFactory</title> <!--timestamp=2024-04-04T00:13:41.488951654Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.springframework.data.redis.connection.RedisConnectionFactory"> 
+  <meta name="keywords" content="org.springframework.data.redis.connection.RedisConnectionFactory"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.springframework.data.redis.connection.RedisConnectionFactory"> 
+  <meta property="og:description" content="org.springframework.data.redis.connection.RedisConnectionFactory"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.springframework.data.redis.connection.RedisConnectionFactory"> 
+  <meta name="twitter:description" content="org.springframework.data.redis.connection.RedisConnectionFactory"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-04-03</small>
+        </div> 
+        <h1> Introduction to org.springframework.data.redis.connection.RedisConnectionFactory </h1> 
+        <p>The RedisConnectionFactory is a core component of the Java-based application framework Spring Data Redis which provides the ability to connect to Redis databases, the key-value store used for caching and other applications. The RedisConnectionFactory serves as the base interface for all Redis operations, providing an abstraction around the native Redis library. This allows developers to integrate Redis into their applications in an efficient and extensible way.</p> 
+        <h2> Creating A Connection With RedisConnectionFactory </h2> 
+        <p>In order to create a connection with RedisConnectionFactory you need a few things. First, you need to add the Spring Data Redis dependency to your project:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+dependencies {
+  implementation 'org.springframework.data:spring-data-redis:2.3.2.RELEASE'
+}
+
+          </xmp></code></pre> 
+        <p>After adding the dependency, you can create a RedisConnectionFactory instance:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+RedisConnectionFactory connectionFactory = new RedisConnectionFactory();
+
+          </xmp></code></pre> 
+        <p>You can then set the connection parameters like the hostname and port, as well as the connection timeout:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+connectionFactory.setHostName("example.com");
+connectionFactory.setPort(6379);
+connectionFactory.setTimeout(1000);
+
+          </xmp></code></pre> 
+        <p>Once you have configured the connection factory, you can create a Redis connection and start using it.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+RedisConnection connection = connectionFactory.getConnection();
+
+          </xmp></code></pre> 
+        <h2> Using The RedisConnection </h2> 
+        <p>The RedisConnection created by the RedisConnectionFactory provides a set of methods for interacting with the Redis database. These include methods for getting, setting, and deleting keys, as well as running Redis commands directly.</p> 
+        <p>To get a value from the Redis database, you can use the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+get()
+
+          </xmp></code></pre> method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String value = (String) connection.get("key");
+
+          </xmp></code></pre> 
+        <p>To set a value in the Redis database, you can use the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+set()
+
+          </xmp></code></pre> method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+connection.set("key", "value");
+
+          </xmp></code></pre> 
+        <p>In addition to these basic operations, RedisConnection also provides methods for running direct Redis commands, like the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+execute()
+
+          </xmp></code></pre> method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+List<Object> result = connection.execute("GET", "key");
+
+          </xmp></code></pre> 
+        This will execute the Redis
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+GET
+
+          </xmp></code></pre> command and return the result as a List of Objects. You can also use the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+executeScript()
+
+          </xmp></code></pre> method to run a Lua script: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+List<Object> result = connection.executeScript("return redis.call('GET', 'key')");
+
+          </xmp></code></pre> 
+        <h2> Closing The Connection </h2> 
+        <p>Once you are done using the Redis connection, you should close it to release resources:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+connection.close();
+
+          </xmp></code></pre> 
+        <p>You should also close the connection when your application shuts down, to ensure that all pending operations are committed. To do this, you can register a </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+shutdownHook
+
+          </xmp></code></pre> to call the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+close()
+
+          </xmp></code></pre> method on the connection: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Runtime.getRuntime().addShutdownHook(new Thread(() -> connection.close()));
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>The RedisConnectionFactory is a powerful component of Spring Data Redis which provides the ability to connect to a Redis database and use it for various operations. By configuring a RedisConnectionFactory you can easily create a RedisConnection which can be used to get, set, delete keys and execute Redis commands. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-5-Example.html">Java Pyramid 5 Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Remove-all-elements-from-Java-TreeSet-example.html">Remove all elements from Java TreeSet example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/javafx.beans.property.SimpleObjectProperty.html">j.b.p.SimpleObjectProperty</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Hide-Checkbox-Example.html">Hide Checkbox Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-last-key,-last-value,-or-last-entry-from-the-Java-TreeMap.html">How to get last key, last value, or last entry from the Java TreeMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/How-to-sort-LinkedList-in-Java-example.html">How to sort LinkedList in Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.google.android.gms.auth.api.signin.GoogleSignInAccount.html">c.g.a.g.a.a.s.GoogleSignInAccount</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/androidx.core.app.NotificationCompat.html">androidx.core.app.NotificationCompat</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Sorting-Algorithms/"> Sorting Algorithms </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Sorting-Algorithms/Java-Bubble-Sort-Descending-Order-Example.html">Java Bubble Sort Descending Order Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Wrappers/"> Wrappers </a> </p> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Float-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Float object to byte, short, int, long, float and double</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-28 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Martin</h3> <p><a href="#">2024-05-18 12:33</a></p> Grt ;-) <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Vartel</h3> <p><a href="#">2024-05-30 17:52</a></p> Thank you very much! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/ByteArrayInputStream/Read-partial-byte-array-using-ByteArrayInputStream-Example.html">Read partial byte array using ByteArrayInputStream Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.codehaus.plexus.util.xml.Xpp3Dom.html">org.codehaus.plexus.util.xml.Xpp3Dom</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Copy-all-elements-of-Java-HashSet-to-an-Object-Array-Example.html">Copy all elements of Java HashSet to an Object Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-insert-an-element-at-the-beginning-of-the-Java-Vector.html">How to insert an element at the beginning of the Java Vector</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/StringTokenizer/Java-StringTokenizer-–-Specify-Delimiter-example.html">Java StringTokenizer – Specify Delimiter example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Hide-Button-Example.html">Hide Button Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Remove-all-elements-from-Java-TreeSet-example.html">Remove all elements from Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler.html">o.s.s.c.ThreadPoolTaskScheduler</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-replace-elements.html">Java LinkedList replace elements</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-String-to-int-Example.html">Convert String to int Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/com.fasterxml.jackson.core.Version.html">com.fasterxml.jackson.core.Version</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-TreeMap-key,-value-or-entry-greater-than-or-less-than-the-specified-key.html">How to get TreeMap key, value or entry greater than or less than the specified key</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Determine-if-file-or-directory-exists.html">Determine if file or directory exists</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Iterate-through-elements-of-Java-LinkedList-using-Iterator-example.html">Iterate through elements of Java LinkedList using Iterator example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-ArrayList-elements-using-Comparator.html">Sort ArrayList elements using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Check-if-a-particular-element-exists-in-Java-LinkedHashSet-Example.html">Check if a particular element exists in Java LinkedHashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Get-or-Set-Gap-Between-JLabel’s-Icon-and-Text-Example.html">Get or Set Gap Between JLabel’s Icon and Text Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.amazonaws.services.s3.model.PutObjectRequest.html">c.a.s.s.m.PutObjectRequest</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/StringBuffer/Java-StringBuffer-append-method-Example.html">Java StringBuffer append method Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Java-Factorial-Example.html">Java Factorial Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
