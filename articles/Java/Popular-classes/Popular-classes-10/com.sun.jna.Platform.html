@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - com.sun.jna.Platform</title> <!--timestamp=2024-04-07T00:14:58.039381053Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="com.sun.jna.Platform"> 
+  <meta name="keywords" content="com.sun.jna.Platform"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - com.sun.jna.Platform"> 
+  <meta property="og:description" content="com.sun.jna.Platform"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - com.sun.jna.Platform"> 
+  <meta name="twitter:description" content="com.sun.jna.Platform"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-04-06</small>
+        </div> 
+        <h1>com.sun.jna.Platform Overview</h1> 
+        <p>The com.sun.jna.Platform class provides features for identifying the underlying operating system and architecture of the platform it is currently running on. It can be used to provide information about current system status, such as whether a 64-bit JVM is available, as well as to provide access to native system libraries.</p> 
+        <p>In addition, it is also possible to detect the given platform's current language, timezone, and environment settings. This can be useful when developing applications that need to respect user preferences and regional nuances.</p> 
+        <h2>Getting the Platform Instance</h2> 
+        <p>The first step to using the Platform class is to get the instance. This can be done by calling </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Platform.getPlatform()
+
+          </xmp></code></pre> as follows:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Platform platform = Platform.getPlatform();
+
+          </xmp></code></pre> 
+        <h2>Operating System and Architecture Detection</h2> 
+        <p>The Platform class can be used to detect the underlying operating system, as well as the processor architecture the JVM is running on. The </p>
+        <pre>os</pre> and 
+        <pre>arch</pre> methods will return an enum value representing the OS and CPU architecture respectively.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+OperatingSystem os = Platform.os();
+Architecture arch = Platform.arch();
+
+          </xmp></code></pre> 
+        The returned
+        <pre>OperatingSystem</pre> enum has the following values: Linux, MacOS, Windows, Solaris, AIX, Free BSD, HP-UX, and Unknown. The 
+        <pre>Architecture</pre> enum has the following values: x86, x86_64, PPC, PPC64, ARM, and Unknown.
+         
+        <h2>JVM Bits Detection</h2> 
+        <p>The Platform class can also be used to detect the bit size of the JVM. The </p>
+        <pre>is64Bit()</pre> method returns true or false depending on the JVM running in either 64-bit or 32-bit mode.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+boolean is64Bit = Platform.is64Bit();
+
+          </xmp></code></pre> 
+        <h2>Language, Timezone, and Environment Detection</h2> 
+        <p>The Platform class also provides methods for detecting the current language, timezone, and environment settings configured for the current platform. The </p>
+        <pre>language()</pre> method returns an ISO 639 language code as a string, while the 
+        <pre>timezone()</pre> method returns a timezone ID string, and the 
+        <pre>env()</pre> method returns a map containing all of the environment variables as key-value pairs. 
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String language = Platform.language();
+String timezone = Platform.timezone();
+Map<String, String> env = Platform.env();
+
+          </xmp></code></pre> 
+        <h2>Native Library Access</h2> 
+        <p>Finally, the Platform class provides access to native libraries through the </p>
+        <pre>nativeLibraryPath()</pre> method. This method returns a string containing the absolute path to the directory that contains the native libraries associated with the current platform. This can then be used to load the library at runtime.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String nativeLibPath = Platform.nativeLibraryPath();
+
+          </xmp></code></pre> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Write-HashMap-to-a-text-file-in-Java.html">Write HashMap to a text file in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Get-name-of-parent-directory.html">Get name of parent directory</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/"> Long Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-String-to-long-Example.html">Convert String to long Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.http.conn.socket.ConnectionSocketFactory.html">o.a.h.c.s.ConnectionSocketFactory</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Java-LinkedHashMap-forEach-example.html">Java LinkedHashMap forEach example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.persistence.MappedSuperclass.html">javax.persistence.MappedSuperclass</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-keys-using-Comparator-interface.html">Sort LinkedHashMap by keys using Comparator interface</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-iterate-TreeMap-in-Java.html">How to iterate TreeMap in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Generate-Pyramid-For-a-Given-Number-Example.html">Generate Pyramid For a Given Number Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.google.inject.Provider.html">com.google.inject.Provider</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-27 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.fasterxml.jackson.databind.ser.std.StdSerializer.html">c.f.j.d.s.s.StdSerializer</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Copy-all-elements-of-Java-LinkedHashSet-to-an-Object-Array-Example.html">Copy all elements of Java LinkedHashSet to an Object Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Hashset-to-comma-separated-string-in-Java.html">Convert Hashset to comma separated string in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/java.awt.LayoutManager.html">java.awt.LayoutManager</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Remove-Particular-Item-From-AWT-Choice-Or-Combobox-Example.html">Remove Particular Item From AWT Choice Or Combobox Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-print-elements-example.html">Java LinkedList print elements example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/javax.xml.bind.annotation.XmlSchema.html">javax.xml.bind.annotation.XmlSchema</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Get-JLabel’s-Text-Example.html">Get JLabel’s Text Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-print-TreeMap-in-Java.html">How to print TreeMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-All-Items-From-AWT-List-Example.html">Get All Items From AWT List Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-Minimum-element-of-Java-ArrayList-Example.html">Find Minimum element of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-square-root-of-a-number-using-Math.sqrt.html">F.sqrt</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.apache.commons.dbcp.BasicDataSource.html">o.a.c.d.BasicDataSource</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.springframework.util.ResourceUtils.html">o.s.u.ResourceUtils</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/java.awt.Label.html">java.awt.Label</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/CheckedInputStream/Extract-File-With-CRC32-Checksum-Example.html">Extract File With CRC32 Checksum Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-String-array-using-Arrays-class.html">Sort String array using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-byte-to-String.html">Convert byte to String</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-List-to-array.html">Convert List to array</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Create-JLabel-With-Image-Icon-and-Text-Example.html">Create JLabel With Image Icon and Text Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
