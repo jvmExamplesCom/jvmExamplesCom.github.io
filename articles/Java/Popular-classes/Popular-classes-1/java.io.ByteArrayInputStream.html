@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.io.ByteArrayInputStream</title> <!--timestamp=2024-04-13T00:11:39.337557840Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.io.ByteArrayInputStream"> 
+  <meta name="keywords" content="java.io.ByteArrayInputStream"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.io.ByteArrayInputStream"> 
+  <meta property="og:description" content="java.io.ByteArrayInputStream"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.io.ByteArrayInputStream"> 
+  <meta name="twitter:description" content="java.io.ByteArrayInputStream"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-04-12</small>
+        </div> 
+        <h1>java.io.ByteArrayInputStream</h1> 
+        <p>java.io.ByteArrayInputStream class implements an input stream that uses a byte array as the source of data. It is mostly used to read data from a byte array or to write data to a byte array.</p> 
+        <h2>Creating a ByteArrayInputStream</h2> 
+        <p>A ByteArrayInputStream can be created using the following constructor:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public ByteArrayInputStream(byte[] buf)
+
+          </xmp></code></pre> 
+        <p>where <i>buf</i> is the byte array which will be used as the source of input. Here is an example:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+byte[] b = {1, 2, 3, 4, 5};
+ByteArrayInputStream bais = new ByteArrayInputStream(b);
+
+          </xmp></code></pre> 
+        <h2>Reading Data from a ByteArrayInputStream</h2> 
+        <p>A ByteArrayInputStream can be read using the <i>read()</i> method. The read() method returns one byte at a time from the underlying byte array. Here is an example that reads three bytes from the ByteArrayInputStream:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+int read1 = bais.read();
+int read2 = bais.read();
+int read3 = bais.read();
+
+          </xmp></code></pre> 
+        <p>The read() method can also be used to read a subset of the underlying byte array into a specified byte array:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+byte[] b = new byte[5];
+bais.read(b, 0, 5);
+
+          </xmp></code></pre> 
+        <p>The above example will read five bytes from the underlying array and store them in the byte array <i>b</i>.</p> 
+        <h2>Writing Data to a ByteArrayInputStream</h2> 
+        <p>Data can be written to a ByteArrayInputStream using the <i>write()</i> method. This method takes one byte at a time and adds it to the end of the underlying byte array. Here is an example that adds two bytes to the underlying array:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+bais.write(10);
+bais.write(20);
+
+          </xmp></code></pre> 
+        <p>The write() method can also be used to write a subset of the underlying byte array. Here is an example that writes a five-byte array to the end of the underlying array:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+byte[] b = {1, 2, 3, 4, 5};
+bais.write(b, 0, 5);
+
+          </xmp></code></pre> 
+        <h2>Closing a ByteArrayInputStream</h2> 
+        <p>A ByteArrayInputStream should be closed when it is no longer needed. It can be closed using the <i>close()</i> method:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+bais.close();
+
+          </xmp></code></pre> 
+        <p>Closing a ByteArrayInputStream will not close the underlying byte array, so it is important to make sure that any references to it are removed when the ByteArrayInputStream is no longer needed.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.validation.constraints.Min.html">javax.validation.constraints.Min</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-directory-along-with-required-nonexistent-parent-directories.html">Create directory along with required nonexistent parent directories</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.graphics.PorterDuff.html">android.graphics.PorterDuff</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-List-using-Iterator.html">Iterate through List using Iterator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/"> AWT Label </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Create-AWT-Label-With-Text-Alignment-Example.html">Create AWT Label With Text Alignment Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Wrappers/"> Wrappers </a> </p> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-String-to-wrapper-objects.html">Convert String to wrapper objects</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/"> Float Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Convert-Java-Float-to-Numeric-Primitive-Data-Types-Example.html">Convert Java Float to Numeric Primitive Data Types Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.java-websocket.handshake.ServerHandshake.html">o.j.h.ServerHandshake</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/"> Basic Java Examples </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Find-Largest-and-Smallest-Number-in-an-Array-Example.html">Find Largest and Smallest Number in an Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/"> Long Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-long-primitive-to-Long-object-Example.html">Convert long primitive to Long object Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-08 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Convert-primitive-boolean-to-String-object.html">Convert primitive boolean to String object</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-check-if-LinkedHashSet-is-empty-in-Java.html">How to check if LinkedHashSet is empty in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-over-Vector-elements.html">Iterate over Vector elements</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Java-ArrayList-Iterator-example.html">Java ArrayList Iterator example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Determine-if-File-or-Directory-is-hidden.html">Determine if File or Directory is hidden</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Get-first-key-or-first-value-of-Java-HashMap-example.html">Get first key or first value of Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/javax.management.NotificationEmitter.html">javax.management.NotificationEmitter</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.springframework.context.annotation.ImportBeanDefinitionRegistrar.html">ImportBeanDefinitionRegistrar</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Double-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Double object to byte, short, int, long, float and double</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-maintain-insertion-order-of-elements-of-HashMap-using-LinkedHashMap.html">How to maintain insertion order of elements of HashMap using LinkedHashMap</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.xml.sax.XMLReader.html">org.xml.sax.XMLReader</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet’s-Document-URL-or-Directory-Base-Example.html">Get Applet’s Document URL or Directory Base Example</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Get-Java-Runtime-Example.html">Get Java Runtime Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javafx.scene.layout.GridPane.html">javafx.scene.layout.GridPane</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Java-Double-isNaN-method-example.html">Java Double isNaN method example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/android.text.method.PasswordTransformationMethod.html">a.t.m.PasswordTransformationMethod</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipFile/Find-File-in-a-Zip-File-Example.html">Find File in a Zip File Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Select-Item-From-AWT-List-Example.html">Select Item From AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Uncompressed-Size-of-Zip-Entry-Example.html">Get Uncompressed Size of Zip Entry Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Convert-java-Double-to-numeric-primitive-data-types-example.html">Convert java Double to numeric primitive data types example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

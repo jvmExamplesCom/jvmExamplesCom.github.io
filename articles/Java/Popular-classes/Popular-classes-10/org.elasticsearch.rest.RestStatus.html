@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.elasticsearch.rest.RestStatus</title> <!--timestamp=2024-04-13T00:11:15.756908382Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.elasticsearch.rest.RestStatus"> 
+  <meta name="keywords" content="org.elasticsearch.rest.RestStatus"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.elasticsearch.rest.RestStatus"> 
+  <meta property="og:description" content="org.elasticsearch.rest.RestStatus"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.elasticsearch.rest.RestStatus"> 
+  <meta name="twitter:description" content="org.elasticsearch.rest.RestStatus"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-04-12</small>
+        </div> 
+        <h1>Introduction to org.elasticsearch.rest.RestStatus</h1> 
+        <p>org.elasticsearch.rest.RestStatus is a Java class that provides a set of HTTP status codes which can be used when responding from a REST service. These codes are made up of a 3 digit number and a textual description, and provide a consistent way to inform clients of the success of an operation.</p> 
+        <h2>Usage of RestStatus</h2> 
+        <p>A RestStatus instance is created by providing a valid HTTP status code and optionally an additional detail message. This instance can then be used to respond to clients by returning the corresponding HTTP status code and the optional detail message. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+RestStatus status = new RestStatus(404, "Not Found");
+
+// Send a response including the status code and message
+response.setStatus(status.value());
+response.getWriter().println("Error:" + status.getMessage());
+
+          </xmp></code></pre> 
+        <h2>Common Usage</h2> 
+        <p>RestStatus contains some pre-defined constants for commonly used HTTP status codes, such as </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+RestStatus.OK
+
+          </xmp></code></pre> (200 OK) and 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+RestStatus.BAD_REQUEST
+
+          </xmp></code></pre> (400 Bad Request). It is recommended to use these pre-defined constants instead of manually constructing a RestStatus instance with the associated HTTP status code. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Recommended usage
+response.setStatus(RestStatus.OK.value());
+
+// Alternative - not recommended
+response.setStatus(200);
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>In conclusion, org.elasticsearch.rest.RestStatus provides a consistent way to return HTTP status codes in Java services responding to REST requests. Using the pre-defined constants it is easy to quickly handle common status codes without having to manually construct instances of RestStatus.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/How-to-sort-LinkedList-in-Java-example.html">How to sort LinkedList in Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.springframework.messaging.simp.SimpMessagingTemplate.html">o.s.m.s.SimpMessagingTemplate</a> <h6><i class="fa fa-clock-o"></i> <span>2024-01-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-short-to-a-file-using-DataOutputStream.html">Write short to a file using DataOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.commons.httpclient.HttpException.html">o.a.c.h.HttpException</a> <h6><i class="fa fa-clock-o"></i> <span>2024-03-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Static/"> Static </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Static/Java-static-member-variable-example.html">Java static member variable example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Shuffle-elements-of-Java-ArrayList-example.html">Shuffle elements of Java ArrayList example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/"> Float Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Java-Float-Wrapper-Class-Example.html">Java Float Wrapper Class Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.kohsuke.args4j.CmdLineParser.html">org.kohsuke.args4j.CmdLineParser</a> <h6><i class="fa fa-clock-o"></i> <span>2024-04-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Index-From-Single-Select-AWT-List-Example.html">Get Selected Index From Single Select AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Print-ArrayList-example.html">Print ArrayList example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-10 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-byte-to-a-file-using-DataOutputStream.html">Write byte to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-clear-or-remove-all-elements-from-HashSet.html">How to clear or remove all elements from HashSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-convert-Java-TreeMap-to-an-ArrayList-(List).html">How to convert Java TreeMap to an ArrayList (List)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/com.google.gson.annotations.SerializedName.html">c.g.g.a.SerializedName</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/io.dropwizard.Application.html">io.dropwizard.Application</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Traverse-through-ArrayList-in-forward-direction-using-Java-ListIterator-Example.html">Traverse through ArrayList in forward direction using Java ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-all-values-of-LinkedHashMap-in-Java.html">How to get all values of LinkedHashMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Insert-all-elements-of-other-Collection-to-Specified-Index-of-Java-Vector-Example.html">Insert all elements of other Collection to Specified Index of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/javax.ws.rs.Priorities.html">javax.ws.rs.Priorities</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Convert-java-Double-to-numeric-primitive-data-types-example.html">Convert java Double to numeric primitive data types example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Generate-Pyramid-For-a-Given-Number-Example.html">Generate Pyramid For a Given Number Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Sorting-Algorithms/Java-Bubble-Sort-Descending-Order-Example.html">Java Bubble Sort Descending Order Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.script.ScriptEngine.html">javax.script.ScriptEngine</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.springframework.lang.Nullable.html">org.springframework.lang.Nullable</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-contains-a-key-(indexOf).html">How to check if LinkedHashMap contains a key (indexOf)</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Get-Checkbox-State-Example.html">Get Checkbox State Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Create-JLabel-With-Image-Icon-and-Text-Example.html">Create JLabel With Image Icon and Text Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Find-element-in-ArrayList-using-indexOf-and-lastIndexOf-methods.html">Find element in ArrayList using indexOf and lastIndexOf methods</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-long.html">Convert String long</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.http.HttpRequestInterceptor.html">o.a.h.HttpRequestInterceptor</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
