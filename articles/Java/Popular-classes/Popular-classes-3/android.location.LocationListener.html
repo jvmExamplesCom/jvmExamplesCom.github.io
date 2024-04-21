@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - android.location.LocationListener</title> <!--timestamp=2024-04-21T00:14:29.968700134Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="android.location.LocationListener"> 
+  <meta name="keywords" content="android.location.LocationListener"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - android.location.LocationListener"> 
+  <meta property="og:description" content="android.location.LocationListener"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - android.location.LocationListener"> 
+  <meta name="twitter:description" content="android.location.LocationListener"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-04-20</small>
+        </div> 
+        <h1>Overview of Android.location.LocationListener</h1> 
+        <p>Android.location.LocationListener is an interface in the global namespace of the Android SDK that's part of the Location package. The interface is used to receive updates on the user's location based on the provider. It can provide information on the user's speed, altitude, and bearing as well as their longitude and latitude. </p> 
+        <h2>Implementing Android.location.LocationListener </h2> 
+        <p>To implement Android.location.LocationListener you will need to implement the following methods: </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+onLocationChanged(Location location)
+onStatusChanged(String provider, int status, Bundle extras)
+onProviderEnabled(String provider)
+onProviderDisabled(String provider)
+
+          </xmp></code></pre> 
+        <p>In order to use the LocationListener, first you will need to get a handle to the <i>LocationManager</i>:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+          </xmp></code></pre> 
+        <p>Once you have the LocationManager, you can use it to request regular updates on your current location. You will need to provide a <i>Criteria</i> object to define what criteria must be met to receive the updates. For example, you may only want GPS updates, or you may want all sources of location information. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+LocationProvider provider = locationManager.getBestProvider(criteria, true);
+locationManager.requestLocationUpdates(provider, 60000, 1000, locationListener);
+
+          </xmp></code></pre> 
+        <p>This will cause the LocationListener's <i>onLocationChanged()</i> method to be called whenever the user's location changes by more than 1000 meters every 60 seconds. </p> 
+        <h2>Example Implementation of Android.location.LocationListener</h2> 
+        <p>Here is an example of how you might implement a LocationListener for your application. In this example, the listener will print out the user's updated location to the console.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyLocationListener implements LocationListener {
+
+    @Override
+    public void onLocationChanged(Location location) {
+        System.out.println("My location is " + location);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+
+}
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>Android.location.LocationListener is an important interface in the Location package of the Android SDK. By implementing the interface and using it with the LocationManager, you can easily receive updates on the user's current location. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-first-or-last-entry-from-Java-LinkedHashMap.html">How to get first or last entry from Java LinkedHashMap</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/Convert-char-to-String.html">Convert char to String</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.google.testing.compile.JavaFileObjects.html">c.g.t.c.JavaFileObjects</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Operators/"> Operators </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Operators/Arithmetic-Assignment-Operators-Example.html">Arithmetic Assignment Operators Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-String-array-containing-numbers-using-Arrays.html">Sort String array containing numbers using Arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Flush-output-stream.html">Flush output stream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Reverse-order-of-all-elements-of-Java-Vector-Example.html">Reverse order of all elements of Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/"> AWT Color </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Colored-Hello-World-Applet-Example.html">Colored Hello World Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/javax.ws.rs.ext.MessageBodyReader.html">javax.ws.rs.ext.MessageBodyReader</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JTextField/"> JTextField </a> </p> <a href="/articles/Java/Swing/JTextField/Change-Font-of-JTextField-Example.html">Change Font of JTextField Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-07 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Continue-Statement/Java-continue-statement-example.html">Java continue statement example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.glassfish.jersey.server.ResourceConfig.html">o.g.j.s.ResourceConfig</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet’s-Document-URL-or-Directory-Base-Example.html">Get Applet’s Document URL or Directory Base Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/hudson.model.Run.html">hudson.model.Run</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Iterate-through-elements-Java-Vector-using-ListIterator-Example.html">Iterate through elements Java Vector using ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Background-Color-Of-an-Applet-Window-Example.html">Get Background Color Of an Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-add-mappings-to-LinkedHashMap-in-Java.html">How to add mappings to LinkedHashMap in Java</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Determine-number-of-bytes-written-to-DataOutputStream.html">Determine number of bytes written to DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/io.prometheus.client.Counter.html">io.prometheus.client.Counter</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-String-array-to-List-(Convert-String-array-to-ArrayList,-LinkedList).html">Convert String array to List (Convert String array to ArrayList, LinkedList)</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.eclipse.aether.resolution.ArtifactResult.html">o.e.a.r.ArtifactResult</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Insert-Item-At-Specified-Index-In-AWT-Choice-Or-Combobox-Example.html">Insert Item At Specified Index In AWT Choice Or Combobox Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-convert-ArrayList-to-LinkedHashSet-in-Java.html">How to convert ArrayList to LinkedHashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.hadoop.hdfs.MiniDFSCluster.html">o.a.h.h.MiniDFSCluster</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Java-String-Array-To-List-Example.html">Java String Array To List Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Get-Brighter-Version-Of-Current-Color-Example.html">Get Brighter Version Of Current Color Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-random-elements-from-ArrayList.html">Get random elements from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-add-elements-to-LinkedHashSet-object.html">How to add elements to LinkedHashSet object</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Set-Icon-for-JLabel-Example.html">Set Icon for JLabel Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Convert-Short-object-to-String-object.html">Convert Short object to String object</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
