@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - io.netty.channel.epoll.Epoll</title> <!--timestamp=2024-04-29T00:12:53.045193605Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.netty.channel.epoll.Epoll"> 
+  <meta name="keywords" content="io.netty.channel.epoll.Epoll"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.netty.channel.epoll.Epoll"> 
+  <meta property="og:description" content="io.netty.channel.epoll.Epoll"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.netty.channel.epoll.Epoll"> 
+  <meta name="twitter:description" content="io.netty.channel.epoll.Epoll"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-04-28</small>
+        </div> 
+        <h1>Introduction to Netty’s Epoll</h1> Netty’s Epoll is a high-performance, efficient package for network communication. Epoll is an I/O event notification facility provided by the Linux kernel and works greatly with Java applications. This package supports non-blocking transfers of data on sockets, including both TCP and UDP. It is more versatile than other methods of handling non-blocking I/O connections, and can often produce better performance results. In this article, we’ll go over the basics of using Epoll with Netty, as well as provide some code examples. 
+        <h2>Getting Started with Netty’s Epoll</h2> To get started using Epoll with Netty, you must first have a working knowledge of how to use the Netty library for network communication in Java. Once you familiarize yourself with the basics of setting up a Netty server and client, as well as creating your own custom handlers, you’re ready to start using Epoll. First, you will want to add the netty-epoll dependency to your project. This can be done easily with Maven or Gradle, or by manually downloading the libraries. Afterwards, you will need to set up a few parameters, depending on your needs. For example, if you plan on using Epoll for high-performance applications, you may need to set up the number of threads that will be used for your Netty server and client. Once all of this is set up, you are ready to create your Epoll instance. You can do this by instantiating a new EpollEventLoopGroup, like this: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EpollEventLoopGroup group = new EpollEventLoopGroup();
+
+          </xmp></code></pre> This creates a new EpollEventLoopGroup, which will allow us to bind our socket to an Epoll instance. From there, you can create a Netty server or client and bind it to the Epoll instance, like this: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ServerBootstrap bootstrap = new ServerBootstrap();
+bootstrap.group(group);
+bootstrap.channel(EpollServerSocketChannel.class);
+...
+bootstrap.bind(8080).sync().channel().closeFuture().sync();
+
+          </xmp></code></pre> With this set up, you are now ready to use your Netty server or client with Epoll. 
+        <h2>Using Epoll for High-Performance Applications</h2> Epoll is commonly used in high-performance applications that require non-blocking I/O operations. This can include things like real-time data streaming, where it is important to have low latency and high throughput. Epoll works great for these types of applications because it can handle large numbers of concurrent events at once. When using Epoll, it’s important to keep in mind the number of threads that you use and how they can affect performance. Epoll is designed to scale well with many concurrent threads, so a good rule of thumb is to use as many threads as you need to handle the load that your application requires. For example, if you are dealing with a high volume of requests, it may be beneficial to increase the number of threads that you are using. In addition to the number of threads, there are a few other important considerations when using Epoll. For example, it can be beneficial to set up a thread pool of dedicated workers that can handle the traffic coming into the application. This can help improve efficiency and reduce latency, as each thread can handle a specific type of incoming request. 
+        <h2>Conclusion</h2> Netty’s Epoll is a powerful and efficient package for network communication in Java. It is useful for high-performance applications, as it can handle large numbers of concurrent events. It’s important to keep in mind the number of threads that you use, as well as create a thread pool of dedicated workers, in order to optimize the performance of your application. By following the steps outlined in this article, you should now be able to use Epoll with Netty to set up efficient and high-performance applications. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.springframework.validation.Errors.html">o.s.v.Errors</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/"> AWT Choice </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Select-Particular-Item-Of-AWT-Choice-Or-Combobox-Example.html">Select Particular Item Of AWT Choice Or Combobox Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Math-Class/"> Math Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-minimum-of-two-numbers-using-Math.min.html">F.min</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Check-if-key-exists-in-HashMap-Java-example.html">Check if key exists in HashMap Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.security.PublicKey.html">java.security.PublicKey</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-replace-a-value-for-the-given-key-in-the-TreeMap-(TreeMap-replace-method).html">How to replace a value for the given key in the TreeMap (TreeMap replace method)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.alibaba.druid.support.http.WebStatFilter.html">c.a.d.s.h.WebStatFilter</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/"> Sorting </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-float-Array-Example.html">Java Sort float Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Set-Status-Message-in-Applet-Window-Example.html">Set Status Message in Applet Window Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Remove-value-from-Java-HashMap-example.html">Remove value from Java HashMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-01 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.openjdk.jmh.annotations.TearDown.html">org.openjdk.jmh.annotations.TearDown</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Copy-Elements-of-One-Java-Vector-to-Another-Java-Vector-Example.html">Copy Elements of One Java Vector to Another Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-shuffle-Vector-elements-in-Java.html">How to shuffle Vector elements in Java</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Java-Float-Compare-Example.html">Java Float Compare Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.jboss.arquillian.test.api.ArquillianResource.html">o.j.a.t.a.ArquillianResource</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-all-values-from-the-TreeMap.html">How to get all values from the TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.bukkit.event.Cancellable.html">org.bukkit.event.Cancellable</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Static/Java-static-method-example.html">Java static method example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-Minimum-element-of-Java-ArrayList-Example.html">Find Minimum element of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Set-last-modified-time-of-a-file-or-directory.html">Set last modified time of a file or directory</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-Vector-using-the-ListIterator.html">How to iterate Vector using the ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-create-new-objects-of-LinkedHashSet-class-(LinkedHashSet-constructors).html">How to create new objects of LinkedHashSet class (LinkedHashSet constructors)</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Determine-If-The-Label-Is-Enabled-Example.html">Determine If The Label Is Enabled Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Get-Checkbox-State-Example.html">Get Checkbox State Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/ch.qos.logback.classic.encoder.PatternLayoutEncoder.html">c.q.l.c.e.PatternLayoutEncoder</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Find-Largest-and-Smallest-Number-in-an-Array-Example.html">Find Largest and Smallest Number in an Array Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Java-Double-isNaN-method-example.html">Java Double isNaN method example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.swing.JSlider.html">javax.swing.JSlider</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Create-AWT-List-Example.html">Create AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.apache.avro.generic.GenericRecord.html">o.a.a.g.GenericRecord</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
