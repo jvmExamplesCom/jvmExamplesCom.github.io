@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javax.json.JsonReader</title> <!--timestamp=2024-05-17T00:14:00.176201481Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.json.JsonReader"> 
+  <meta name="keywords" content="javax.json.JsonReader"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.json.JsonReader"> 
+  <meta property="og:description" content="javax.json.JsonReader"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.json.JsonReader"> 
+  <meta name="twitter:description" content="javax.json.JsonReader"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-05-16</small>
+        </div> 
+        <h1>javax.json.JsonReader Overview</h1> 
+        <p>Javax.json.JsonReader allows for the creation and manipulation of JSON data in Java applications. It allows for reading and writing of JSON documents from sources such as files, strings, and URL locations. This article will provide an overview of how to create and use a JsonReader in a Java application.</p> 
+        <h2>Creating a JsonReader Object</h2> 
+        <p>A JsonReader object can be created by passing in a Reader object:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String jsonString = "{\"name\": \"John\", \"age\": 20}";
+
+StringReader reader = new StringReader(jsonString);
+JsonReader jsonReader = Json.createReader(reader);
+
+          </xmp></code></pre> 
+        It can also be created from an InputStream: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+InputStream inputStream = ...;
+JsonReader jsonReader = Json.createReader(inputStream);
+
+          </xmp></code></pre> Or from a URL: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+URL url = new URL("http://example.com/data.json");
+JsonReader jsonReader = Json.createReader(url.openStream());
+
+          </xmp></code></pre> 
+        <h2>Reading JSON Data</h2> 
+        <p>Once a JsonReader is created, it can be used to read in JSON data. The JsonReader.readObject() method returns a JsonObject, which can then be used to access the data:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+JsonObject jsonObject = jsonReader.readObject();
+String name = jsonObject.getString("name");
+int age = jsonObject.getInt("age");
+
+          </xmp></code></pre> 
+        <p>The JsonObject can also be converted back into a string by using the JsonObject.toString() method:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String jsonString = jsonObject.toString();
+
+          </xmp></code></pre> 
+        <h2>Writing JSON Data</h2> 
+        <p>The JsonReader.writeObject() method can be used to write JSON data to a stream:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+StringWriter writer = new StringWriter();
+JsonWriter jsonWriter = Json.createWriter(writer);
+
+JsonObject jsonObject = Json.createObjectBuilder().add("name", "John").add("age", 20).build();
+
+jsonWriter.writeObject(jsonObject);
+String jsonString = writer.toString();
+
+          </xmp></code></pre> 
+        The resulting string will contain the JSON data: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+{"name":"John","age":20}
+
+          </xmp></code></pre> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Sort-elements-of-Java-Vector-Example.html">Sort elements of Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.view.MenuInflater.html">android.view.MenuInflater</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.openqa.selenium.WebDriver.html">org.openqa.selenium.WebDriver</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Print-ArrayList-elements-using-Arrays.html">Print ArrayList elements using Arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-byte-to-a-file-using-DataOutputStream.html">Write byte to a file using DataOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-sort-LinkedHashSet-elements-using-Comparable.html">How to sort LinkedHashSet elements using Comparable</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Copy-ArrayList-elements-to-other-ArrayList.html">Copy ArrayList elements to other ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.xml.sax.SAXParseException.html">org.xml.sax.SAXParseException</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-a-union-or-intersection-of-two-TreeSet-objects.html">How to get a union or intersection of two TreeSet objects</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/"> AWT Color </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Convert-HSB-To-RGB-Color-Example.html">Convert HSB To RGB Color Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-28 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Grigorii</h3> <p><a href="#">2024-06-27 08:36</a></p> <p>These Programs Are Very Useful For Java Beginners!... Thanks! ...</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Vartel</h3> <p><a href="#">2024-06-28 11:20</a></p> thanks <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-all-occurrences-of-specified-element-of-Java-ArrayList-Example.html">Replace all occurrences of specified element of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.nio.file.FileSystems.html">java.nio.file.FileSystems</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/javax.management.DynamicMBean.html">javax.management.DynamicMBean</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-directory-along-with-required-nonexistent-parent-directories.html">Create directory along with required nonexistent parent directories</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-byte-array-from-file-using-DataInputStream.html">Read byte array from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.junit.runners.Suite.html">org.junit.runners.Suite</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-convert-an-array-to-LinkedHashSet-in-Java.html">How to convert an array to LinkedHashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-compare-two-TreeMap-objects-in-Java.html">How to compare two TreeMap objects in Java</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Suggest-JVM-to-Run-Object-Finalization-Example.html">Suggest JVM to Run Object Finalization Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-byte-from-file-using-DataInputStream.html">Read byte from file using DataInputStream</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Set-from-Java-TreeSet-example.html">Get Synchronized Set from Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Remove-value-from-Java-Hashtable-example.html">Remove value from Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Operators/Modulus-Operator-Example.html">Modulus Operator Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.eclipse.swt.widgets.MenuItem.html">org.eclipse.swt.widgets.MenuItem</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-print-LinkedHashMap.html">How to print LinkedHashMap</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.hadoop.hbase.util.Bytes.html">org.apache.hadoop.hbase.util.Bytes</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Compressed-Size-of-Zip-Entry-Example.html">Get Compressed Size of Zip Entry Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/JTextField-Show-Hide-Example.html">JTextField Show Hide Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Check-if-a-particular-key-exists-in-Java-HashMap-example.html">Check if a particular key exists in Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.google.api.client.http.HttpResponse.html">c.g.a.c.h.HttpResponse</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
