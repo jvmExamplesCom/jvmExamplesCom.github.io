@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - io.netty.handler.codec.MessageToMessageEncoder</title> <!--timestamp=2024-05-18T00:13:33.868077511Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.netty.handler.codec.MessageToMessageEncoder"> 
+  <meta name="keywords" content="io.netty.handler.codec.MessageToMessageEncoder"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.netty.handler.codec.MessageToMessageEncoder"> 
+  <meta property="og:description" content="io.netty.handler.codec.MessageToMessageEncoder"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.netty.handler.codec.MessageToMessageEncoder"> 
+  <meta name="twitter:description" content="io.netty.handler.codec.MessageToMessageEncoder"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-05-17</small>
+        </div> 
+        <h1>Netty MessageToMessageEncoder</h1> 
+        <p>Netty MessageToMessageEncoder is a special type of message handler/codec that allows for easy communication and transmission of data over a network. This class is designed to handle encoding and decoding of messages into a format that can be understood by the remote peer. It can take in any type of message, including plain text, binary, or any other serialized data and encode it into the appropriate format before being sent across the wire. It can also decode the messages coming from the remote peer and convert them into a type that is easier to process.</p> 
+        <h2>Using Netty MessageToMessageEncoder</h2> 
+        <p>Using the Netty MessageToMessageEncoder is relatively straightforward. It can be used in any project that needs the ability to encode and decode messages. To use it, you must first create an instance of MessageToMessageEncoder and then register it in the pipeline. This can be done as follows:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MessageToMessageEncoder messageEncoder = new MessageToMessageEncoder();
+  channelPipeline.addLast("encoder", messageEncoder);
+
+          </xmp></code></pre> 
+        <p>Once the MessageToMessageEncoder has been registered, it will automatically encode and decode any messages that are sent through the pipeline. The encoder can also be configured with certain options, such as compression or encryption, to further customize the way it works. Additionally, the encoder can be customized by providing specialized encoding and decoding logic.</p> 
+        <h2>Example of Encoding a Message</h2> 
+        <p>The following example illustrates how a message can be encoded using the MessageToMessageEncoder. In this example, the message is an instance of a Customer class that contains name and address information:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+//Create a Customer instance
+  Customer customer = new Customer("John Doe", "123 Main Street");
+
+  //Create a MessageToMessageEncoder
+  MessageToMessageEncoder messageEncoder = new MessageToMessageEncoder();
+
+  //Encode the Customer instance into a byte array
+  byte[] encodedData = messageEncoder.encode(customer);
+
+          </xmp></code></pre> 
+        <p>The encodedData byte array can then be sent to the remote peer where it can be decoded back into the original Customer instance. Note that the encoding process may vary depending on the type of message that is being sent.</p> 
+        <h2>Example of Decoding a Message</h2> 
+        <p>The following example illustrates how a message can be decoded using the MessageToMessageEncoder. In this example, the message is an instance of a Customer class that contains name and address information:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+//Receive a byte array containing the encoded Customer data
+  byte[] encodedData = ...;
+
+  //Create a MessageToMessageEncoder
+  MessageToMessageEncoder messageEncoder = new MessageToMessageEncoder();
+
+  //Decode the byte array into a Customer instance
+  Customer customer = (Customer)messageEncoder.decode(encodedData);
+
+          </xmp></code></pre> 
+        <p>Once the message has been decoded, the Customer instance contains all of the information from the original Customer instance. This data can then be used to complete whatever task is required.</p> 
+        <h2>Conclusion</h2> 
+        <p>Netty MessageToMessageEncoder is an invaluable tool for sending and receiving data over a network. It allows for easy encoding and decoding of messages into a format that is understood by the remote peer. Additionally, it can be customized to provide additional features such as compression or encryption. With its powerful features, it is an indispensable part of any application that needs to communicate over a network.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.data.mongodb.core.mapping.Document.html">o.s.d.m.c.m.Document</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Vector-to-an-array.html">Convert Vector to an array</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Iterate-LinkedList-in-reverse-order.html">Iterate LinkedList in reverse order</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Foreground-Color-Of-an-Applet-Window-Example.html">Get Foreground Color Of an Applet Window Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/BufferedInputStream/"> BufferedInputStream </a> </p> <a href="/articles/Java/File-And-IO/BufferedInputStream/Read-File-Using-Java-BufferedInputStream-Example.html">Read File Using Java BufferedInputStream Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Java-ArrayList-Iterator-example.html">Java ArrayList Iterator example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.http.HttpRequestInterceptor.html">o.a.h.HttpRequestInterceptor</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.io.NotSerializableException.html">java.io.NotSerializableException</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-get-elements-from-Vector-(Vector-get-method).html">How to get elements from Vector (Vector get method)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-iterate-over-elements-of-TreeSet-in-Java.html">How to iterate over elements of TreeSet in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-02 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Zip/ZipFile/Get-Number-Of-Entries-In-Zip-File-Example.html">Get Number Of Entries In Zip File Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/android.support.v7.widget.OrientationHelper.html">a.s.v.w.OrientationHelper</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-All-Elements-Of-Java-Vector-Example.html">Replace All Elements Of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-font/Create-Bold-and-Italic-Font-Example.html">Create Bold and Italic Font Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.SortedSet.html">java.util.SortedSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.testng.SkipException.html">org.testng.SkipException</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-convert-LinkedHashMap-to-List-in-Java.html">How to convert LinkedHashMap to List in Java</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Threads/Create-New-Thread-Using-Runnable-Example.html">Create New Thread Using Runnable Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-contains-a-key-(indexOf).html">How to check if LinkedHashMap contains a key (indexOf)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Sort-LinkedHashMap-by-keys.html">Sort LinkedHashMap by keys</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Reverse-order-of-all-elements-of-Java-ArrayList-Example.html">Reverse order of all elements of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.nio.file.PathMatcher.html">java.nio.file.PathMatcher</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Convert-ArrayList-to-LinkedHashMap-in-Java.html">Convert ArrayList to LinkedHashMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-all-elements-from-Java-ArrayList-Example.html">Remove all elements from Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Remove-specified-element-from-Java-TreeSet-example.html">Remove specified element from Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.bukkit.event.EventPriority.html">org.bukkit.event.EventPriority</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-create-TreeMap-objects-using-Comparable-interface.html">How to create TreeMap objects using Comparable interface</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.alibaba.fastjson.TypeReference.html">com.alibaba.fastjson.TypeReference</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/System/Determine-operating-system-using-System-class.html">Determine operating system using System class</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-List-to-Map-(Convert-List-to-HashMap).html">Convert List to Map (Convert List to HashMap)</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
