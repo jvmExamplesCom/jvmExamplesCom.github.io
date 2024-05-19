@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javax.swing.InputMap</title> <!--timestamp=2024-05-19T00:14:20.157566206Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.swing.InputMap"> 
+  <meta name="keywords" content="javax.swing.InputMap"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.swing.InputMap"> 
+  <meta property="og:description" content="javax.swing.InputMap"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.swing.InputMap"> 
+  <meta name="twitter:description" content="javax.swing.InputMap"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-05-18</small>
+        </div> 
+        <h1>Introduction to javax.swing.InputMap</h1> 
+        <p>The javax.swing.InputMap class is a specialized data structure for mapping user input (like keystrokes) to components within a Swing user interface. It is used in conjunction with an associated ActionMap and provides an effective way to configure user mappings. This article will explore how to use the InputMap to manage user input, and how to use it in combination with an ActionMap.</p> 
+        <h2>Using an InputMap</h2> 
+        <p>Creating an InputMap is fairly straightforward; simply create an instance of InputMap and then add the key/input pairs that you want to map. For example:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+InputMap inputMap = new InputMap();  
+inputMap.put("Ctrl+X", "cut");  
+inputMap.put("Ctrl+C", "copy");  
+inputMap.put("Ctrl+V", "paste");
+
+          </xmp></code></pre> 
+        <p>In this example, we are mapping the keyboard shortcuts for cut, copy and paste to the corresponding String values. Once the InputMap has been populated with the desired key/value pairs, it can be used with an associated ActionMap to configure user input.</p> 
+        <h2>Using an InputMap with an ActionMap</h2> 
+        <p>An ActionMap is a specialized data structure for mapping user actions (like button clicks) to components within a Swing user interface. When used with an associated InputMap, it provides an effective way to configure user mappings. The following example code shows how to use an InputMap with an ActionMap:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ActionMap actionMap = new ActionMap();  
+actionMap.put("copy", new CopyAction());  
+actionMap.put("cut", new CutAction());  
+actionMap.put("paste", new PasteAction());
+
+InputMap inputMap = new InputMap();  
+inputMap.setActionMap(actionMap);  
+inputMap.put("Ctrl+X", "cut");  
+inputMap.put("Ctrl+C", "copy");  
+inputMap.put("Ctrl+V", "paste");
+
+          </xmp></code></pre> 
+        <p>In this example, we are creating an ActionMap and two InputMaps. The first InputMap is using the setActionMap() method to associate the ActionMap with it, and the second InputMap is adding the key/value pairs to the ActionMap. With these two data structures in place, you can now configure your user interface to respond to these keyboard events and execute the appropriate actions.</p> 
+        <h2>Conclusion</h2> 
+        <p>The javax.swing.InputMap class is a powerful and versatile data structure for mapping user input to components within a Swing user interface. It is an essential tool for any Swing developer, and when used in combination with an associated ActionMap, it provides an effective way to configure user mappings and behaviors. By following the examples in this article, you should now have a better understanding of how to use the InputMap and ActionMap classes to configure user input in your Swing applications. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-all-keys-of-LinkedHashMap-in-Java-(keySet-method).html">How to get all keys of LinkedHashMap in Java (keySet method)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JTextField/"> JTextField </a> </p> <a href="/articles/Java/Swing/JTextField/Create-Read-Only-JTextField-Example.html">Create Read Only JTextField Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/javax.lang.model.element.AnnotationValue.html">j.l.m.e.AnnotationValue</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.bouncycastle.cert.jcajce.JcaX509CertificateConverter.html">o.b.c.j.JcaX509CertificateConverter</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/java.awt.font.TextAttribute.html">java.awt.font.TextAttribute</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Java-HashMap-put-method-example.html">Java HashMap put method example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-convert-comma-separated-string-to-Java-HashSet.html">How to convert comma separated string to Java HashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/"> AWT Button </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Change-Button-Background-Color-Example.html">Change Button Background Color Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-print-LinkedHashSet-elements-(display-LinkedHashSet-elements).html">How to print LinkedHashSet elements (display LinkedHashSet elements)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-lowest-and-highest-key-stored-in-Java-TreeMap-example.html">Get lowest and highest key stored in Java TreeMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-22 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Determine-If-The-Checkbox-Is-Enabled-Example.html">Determine If The Checkbox Is Enabled Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.hadoop.io.compress.CompressionCodec.html">o.a.h.i.c.CompressionCodec</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Simple-Java-LinkedHashSet-example.html">Simple Java LinkedHashSet example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.reflections.util.ClasspathHelper.html">org.reflections.util.ClasspathHelper</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/android.app.AppOpsManager.html">android.app.AppOpsManager</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-char-Array-Example.html">Java Sort char Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Check-if-a-particular-element-exists-in-Java-LinkedHashSet-Example.html">Check if a particular element exists in Java LinkedHashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-array-to-LinkedHashSet.html">Convert array to LinkedHashSet</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Determine-If-The-Label-Is-Enabled-Example.html">Determine If The Label Is Enabled Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Change-Font-of-JTextField-Example.html">Change Font of JTextField Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-String-array-using-Comparator.html">Sort String array using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.validation.Validation.html">javax.validation.Validation</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/org.springframework.stereotype.Service.html">o.s.s.Service</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Determine-If-The-Button-Is-Enabled-Example.html">Determine If The Button Is Enabled Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedList-using-Comparable.html">Sort LinkedList using Comparable</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Convert-String-to-short-primitive-Example.html">Convert String to short primitive Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-array-to-ArrayList.html">Convert array to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.ibatis.session.RowBounds.html">org.apache.ibatis.session.RowBounds</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-double-from-file-using-DataInputStream.html">Read double from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-remove-duplicate-elements.html">Java LinkedList remove duplicate elements</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
