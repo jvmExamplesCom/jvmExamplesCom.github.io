@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.springframework.context.event.EventListener</title> <!--timestamp=2024-06-01T00:14:23.335896282Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.springframework.context.event.EventListener"> 
+  <meta name="keywords" content="org.springframework.context.event.EventListener"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.springframework.context.event.EventListener"> 
+  <meta property="og:description" content="org.springframework.context.event.EventListener"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.springframework.context.event.EventListener"> 
+  <meta name="twitter:description" content="org.springframework.context.event.EventListener"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-05-31</small>
+        </div> 
+        <h1>org.springframework.context.event.EventListener</h1> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+org.springframework.context.event.EventListener
+
+          </xmp></code></pre> annotation is a powerful tool that enables developers to subscribe to application events using event listener methods. This annotation can be used to define methods that should be invoked when an application event occurs. In addition, the annotation provides support for implementing asynchronous event processing, such as scheduling of the event and preparation of a message. 
+        <h2>Usage</h2> To properly use the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EventListener
+
+          </xmp></code></pre> annotation, an interface must be defined and then implemented by the listening object. The interface should define all the parameters expected by the event listener method. This includes the type of event, the condition that must be met in order for the listener method to be invoked, and any additional parameters required by the implementation. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public interface MyEventListener {
+  void onMyEvent(MyEvent event, Object data);
+}
+
+public class MyEventHandler implements MyEventListener {
+  @Override
+  public void onMyEvent(MyEvent event, Object data) {
+    // Handle event logic here
+  }
+}
+
+@Component
+public class MyEventListenerImpl implements MyEventListener {
+
+  @EventListener
+  public void onMyEvent(MyEvent event, Object data) {
+    // Handle event logic here
+  }
+}
+
+          </xmp></code></pre> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@EventListener
+
+          </xmp></code></pre> annotation is used to mark the methods that should receive the event notification when an event occurs. Event listeners registered this way can be triggered by any application that supports Spring's event framework. In the example above, 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MyEventListenerImpl
+
+          </xmp></code></pre> will be notified whenever the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MyEvent
+
+          </xmp></code></pre> event occurs. 
+        <h2>Asynchronous Event Processing</h2> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EventListener
+
+          </xmp></code></pre> annotation also supports asynchronous event processing. This allows the listening object to perform tasks that may take a long time to complete without blocking the execution of the program. The task to be performed can be defined in the annotation itself. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@EventListener(asynchronous = true)
+public void onMyEvent(MyEvent event, Object data) {
+  // Handle event logic here
+}
+
+          </xmp></code></pre> In this example, the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+onMyEvent
+
+          </xmp></code></pre> method will be triggered in a separate thread after the main program's flow has completed. This allows the listening object to perform complex calculations or operations that may be blocking the main flow of the program. 
+        <h2>Conditional Event Processing</h2> One of the most useful features provided by the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EventListener
+
+          </xmp></code></pre> annotation is the ability to specify conditions that must be met for the event listener to be invoked. For instance, the following code will only invoke the event listener if the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MyEvent
+
+          </xmp></code></pre> event has a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+state
+
+          </xmp></code></pre> property with a value of 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+1
+
+          </xmp></code></pre>. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@EventListener(condition = "state == 1")
+public void onMyEvent(MyEvent event, Object data) {
+  // Handle event logic here
+}
+
+          </xmp></code></pre> This feature is especially useful when working with application events that contain a lot of data. It allows developers to filter out events that don't meet the required criteria before handling them. 
+        <h2>Conclusion</h2> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EventListener
+
+          </xmp></code></pre> annotation is an extremely powerful tool that allows developers to easily create applications that respond to changes in the state of the application. It provides support for asynchronous event processing, as well as conditional event processing, allowing developers to create more sophisticated event-driven applications. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/io.reactivex.ObservableSource.html">io.reactivex.ObservableSource</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-print-LinkedHashSet-elements-(display-LinkedHashSet-elements).html">How to print LinkedHashSet elements (display LinkedHashSet elements)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.swing.JComponent.html">javax.swing.JComponent</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/"> Float Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Convert-Java-float-Primitive-Value-to-Float-Object-Example.html">Convert Java float Primitive Value to Float Object Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-compare-two-TreeSet-objects-using-the-equals-method.html">How to compare two TreeSet objects using the equals method</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/"> AWT Label </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Hide-Label-Example.html">Hide Label Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-sublist-from-ArrayList.html">Get sublist from ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-font/"> AWT font </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-font/Get-Available-Font-Family-Names-Example.html">Get Available Font Family Names Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-check-if-element-exists-in-Java-HashSet.html">How to check if element exists in Java HashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.amazonaws.auth.AWSCredentials.html">com.amazonaws.auth.AWSCredentials</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-04 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Search-an-element-of-Java-Vector-from-specific-index-Example.html">Search an element of Java Vector from specific index Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-short-to-a-file-using-DataOutputStream.html">Write short to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Suggest-JVM-to-Run-Object-Finalization-Example.html">Suggest JVM to Run Object Finalization Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-long-primitive-to-Long-object-Example.html">Convert long primitive to Long object Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/CheckedOutputStream/Create-Zip-File-With-Adler32-Checksum-Example.html">Create Zip File With Adler32 Checksum Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-Map-to-List.html">Convert Map to List</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/android.media.MediaMuxer.html">android.media.MediaMuxer</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Find-elemnet-index-in-Java-TreeSet.html">Find elemnet index in Java TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.persistence.OneToMany.html">javax.persistence.OneToMany</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.EnumMap.html">java.util.EnumMap</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.nio.channels.ReadableByteChannel.html">j.n.c.ReadableByteChannel</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.commons.lang3.time.DateUtils.html">o.a.c.l.t.DateUtils</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.microedition.khronos.egl.EGL10.html">javax.microedition.khronos.egl.EGL10</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-array-to-LinkedHashSet.html">Convert array to LinkedHashSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Append-all-elements-of-other-Collection-to-Java-ArrayList-Example.html">Append all elements of other Collection to Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Threads/Create-New-Thread-Using-Runnable-Example.html">Create New Thread Using Runnable Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-a-Collection-using-Java-Iterator-Example.html">Iterate through a Collection using Java Iterator Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/Determine-if-the-Zip-Entry-Is-Directory-Example.html">Determine if the Zip Entry Is Directory Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-int.html">Convert String to int</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Items-From-Multi-Select-AWT-List-Example.html">Get Selected Items From Multi Select AWT List Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
