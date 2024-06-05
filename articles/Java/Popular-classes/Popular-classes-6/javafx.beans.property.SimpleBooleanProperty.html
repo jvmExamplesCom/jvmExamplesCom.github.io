@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javafx.beans.property.SimpleBooleanProperty</title> <!--timestamp=2024-06-05T00:14:08.957762326Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javafx.beans.property.SimpleBooleanProperty"> 
+  <meta name="keywords" content="javafx.beans.property.SimpleBooleanProperty"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javafx.beans.property.SimpleBooleanProperty"> 
+  <meta property="og:description" content="javafx.beans.property.SimpleBooleanProperty"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javafx.beans.property.SimpleBooleanProperty"> 
+  <meta name="twitter:description" content="javafx.beans.property.SimpleBooleanProperty"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-06-04</small>
+        </div> 
+        <h1>Introduction to JavaFX's SimpleBooleanProperty</h1> JavaFX provides a number of Beans for working with data, among them the SimpleBooleanProperty. This class provides a specialized property for boolean values that can be observed and bound to other properties. In this article, we'll look at how to use the SimpleBooleanProperty in JavaFX applications. 
+        <h2>Creating a SimpleBooleanProperty</h2> The most basic way to create a SimpleBooleanProperty is to simply call its constructor without any arguments: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+SimpleBooleanProperty simpleProp = new SimpleBooleanProperty();
+
+          </xmp></code></pre> This creates a boolean property with an initial value of false. If you want to set the initial value to true, you can pass a boolean argument to the constructor: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+SimpleBooleanProperty simpleProp = new SimpleBooleanProperty(true);
+
+          </xmp></code></pre> You can also create a SimpleBooleanProperty that's bound to another property, in which case the initial value of the SimpleBooleanProperty will be the same as the value of the bound property. To do this, you need to pass a reference to the property to the SimpleBooleanProperty constructor: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+SimpleBooleanProperty boundProp = 
+    new SimpleBooleanProperty(otherProp);
+
+          </xmp></code></pre> 
+        <h2>Observing Values</h2> You can observe changes to a SimpleBooleanProperty by adding a ChangeListener to the property. The listener will be notified whenever the value of the property changes. Here's an example of creating a listener and adding it to a SimpleBooleanProperty: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ChangeListener<Boolean> listener = (observable, oldVal, newVal) -> 
+    System.out.println("Value changed from " + oldVal + " to " + newVal);
+    
+simpleProp.addListener(listener);
+
+          </xmp></code></pre> You can also add a listener that will only be notified when the value of the property changes from true to false, or vice versa: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+simpleProp.addListener((observable, oldVal, newVal) -> {
+    if (oldVal != newVal) {
+        System.out.println("Value changed from " + oldVal + " to " + newVal);
+    }
+});
+
+          </xmp></code></pre> 
+        <h2>Binding Values</h2> Using the SimpleBooleanProperty class, you can also bind the value of one property to another. This is done by calling the bind() method on the property you want to bind: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+simpleProp.bind(otherProp);
+
+          </xmp></code></pre> This binds the value of simpleProp to the value of otherProp. Whenever the value of otherProp changes, the value of simpleProp will also be updated. 
+        <h2>Unbinding Values</h2> If you need to unbind two properties, you can call the unbind() method on the bound property: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+simpleProp.unbind();
+
+          </xmp></code></pre> This will unbind the property from any other properties that it is bound to and restore its own internal value. 
+        <h2>Conclusion</h2> In this article, we've looked at how to use the SimpleBooleanProperty in JavaFX applications. We've seen how to create properties, observe values, and bind and unbind values. With this knowledge, you should be able to use SimpleBooleanProperties effectively in your own applications. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-insert-an-element-at-the-beginning-of-the-Java-Vector.html">How to insert an element at the beginning of the Java Vector</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Get-first-and-last-elements-of-LinkedList-in-Java.html">Get first and last elements of LinkedList in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-TreeMap-key-using-the-value-in-Java.html">How to get TreeMap key using the value in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipEntry/"> ZipEntry </a> </p> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Compressed-Size-of-Zip-Entry-Example.html">Get Compressed Size of Zip Entry Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/"> AWT Label </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Hide-Label-Example.html">Hide Label Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.hibernate.HibernateException.html">org.hibernate.HibernateException</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.io.Console.html">java.io.Console</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.hardware.camera2.CameraDevice.html">a.h.c.CameraDevice</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Remove-An-Item-From-a-List-Example.html">Remove An Item From a List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/"> Hashtable </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Remove-value-from-Java-Hashtable-example.html">Remove value from Java Hashtable example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-20 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/android.view.FocusFinder.html">android.view.FocusFinder</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Get-X-and-Y-Coordinates-of-JTextField-Example.html">Get X and Y Coordinates of JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Java-Convert-array-to-TreeSet.html">Java Convert array to TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Compression-Method-of-Zip-Entry-Example.html">Get Compression Method of Zip Entry Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.concurrent.Callable.html">java.util.concurrent.Callable</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Find-array-element-index-using-Arrays-class.html">Find array element index using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Replace-an-Element-of-LinkedList-Java-example.html">Replace an Element of LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-short-Array-Example.html">Java Sort short Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-elements-from-ArrayList.html">Get elements from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.maven.plugins.annotations.Component.html">o.a.m.p.a.Component</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-2-Example.html">Java Pyramid 2 Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Remove-value-from-Java-Hashtable-example.html">Remove value from Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Terminate-Java-Virtual-Machine-(JVM)-Example.html">Terminate Java Virtual Machine (JVM) Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-an-element-from-specified-index-of-Java-ArrayList-Example.html">Remove an element from specified index of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream.html">GzipCompressorInputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/hudson.util.FormValidation.html">hudson.util.FormValidation</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Tail-Map-from-Java-TreeMap-example.html">Get Tail Map from Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.springframework.boot.autoconfigure.AutoConfigureAfter.html">o.s.b.a.AutoConfigureAfter</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Items-From-Multi-Select-AWT-List-Example.html">Get Selected Items From Multi Select AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-iterate-LinkedHashSet-elements.html">How to iterate LinkedHashSet elements</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
