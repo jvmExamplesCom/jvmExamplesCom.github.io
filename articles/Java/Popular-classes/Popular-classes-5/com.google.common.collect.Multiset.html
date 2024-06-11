@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - com.google.common.collect.Multiset</title> <!--timestamp=2024-06-11T00:13:42.973492538Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="com.google.common.collect.Multiset"> 
+  <meta name="keywords" content="com.google.common.collect.Multiset"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - com.google.common.collect.Multiset"> 
+  <meta property="og:description" content="com.google.common.collect.Multiset"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - com.google.common.collect.Multiset"> 
+  <meta name="twitter:description" content="com.google.common.collect.Multiset"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-06-10</small>
+        </div> 
+        <h1>Introduction to Java com.google.common.collect.Multiset</h1> 
+        <p>Java com.google.common.collect.Multiset is a collection that allows duplicate elements. It’s an extension of the Java Set interface and can contain multiple copies of the same element in a single collection.</p> 
+        <h2>Overview of Multiset</h2> 
+        <p>Multiset is a powerful class for representing groupings of objects with varying numbers of occurrences of those objects. It is able to keep track of the number of times an element occurs in the set, providing a convenient way of storing collections of elements in which count or frequency of occurrence is important.</p> 
+        <h2>Creating and Adding Elements to a Multiset</h2> 
+        <p>Multiset can be created in two ways. It can either be created using the constructor of the </p>
+        <pre>Multiset</pre> class, or it can be created using an existing collection of elements.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Creating an empty multiset
+Multiset<Integer> multiset = new Multiset<>();
+
+// Creating a multiset from existing collection
+List<Integer> list = Arrays.asList(1, 2, 3);
+Multiset<Integer> multiset = new Multiset<>(list);
+
+          </xmp></code></pre> 
+        <p>Once the multiset has been created, elements can be added to it using the </p>
+        <pre>add</pre>, 
+        <pre>addAll</pre> and 
+        <pre>Set</pre> methods. The 
+        <pre>add</pre> method adds a single element to the multiset, while the 
+        <pre>addAll</pre> method adds all the elements of an existing collection. The 
+        <pre>Set</pre> method replaces all the elements of the multiset with the elements of the specified collection.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Adding a single element to multiset
+multiset.add(4);
+ 
+// Adding all elements of a list
+List<Integer> list = Arrays.asList(5, 6, 7);
+multiset.addAll(list);
+ 
+// Replacing all elements of the multiset with the elements of a list
+list = Arrays.asList(8, 9, 10);
+multiset.set(list);
+
+          </xmp></code></pre> 
+        <h2>Accessing Elements of a Multiset</h2> 
+        <p>Elements of a multiset can be accessed using the get and remove methods. The get method returns the specified element if it exists in the multiset, and the remove method removes all instances of the specified element from the multiset.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Getting an element from the multiset
+int element = multiset.get(3);
+ 
+// Removing an element from the multiset
+multiset.remove(4);
+
+          </xmp></code></pre> 
+        <h2>Iterating over a Multiset</h2> 
+        <p>A multiset can be iterated over using the forEach method. The forEach method takes a functional interface and uses it to process each element in the multiset.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+multiset.forEach(e -> System.out.println(e));
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>In this article, we have seen how to use the Java com.google.common.collect.Multiset class to store collections of elements with varying numbers of occurrences of those elements. We have seen how to create and add elements to a multiset, how to access its elements, and how to iterate over it. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/"> Long Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-Java-String-to-Long-example.html">Convert Java String to Long example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/"> ListIterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-ArrayList-in-reverse-direction-using-ListIterator.html">How to iterate ArrayList in reverse direction using ListIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer.html">AuthorizationServerEndpointsConfigure</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.web.bind.WebDataBinder.html">o.s.w.b.WebDataBinder</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-floor-or-ceiling-values-from-Java-TreeSet.html">How to get floor or ceiling values from Java TreeSet</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-ArrayList-to-comma-separated-String.html">Convert ArrayList to comma separated String</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/"> Byte Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Java-Byte-Example.html">Java Byte Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.eclipse.swt.layout.GridData.html">org.eclipse.swt.layout.GridData</a> <h6><i class="fa fa-clock-o"></i> <span>2024-01-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/"> Basic Java Examples </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Rectangle-Perimeter-using-Java-Example.html">Calculate Rectangle Perimeter using Java Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Disable-Checkbox-Example.html">Disable Checkbox Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-21 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-Java-String-to-Integer-object-Example.html">Convert Java String to Integer object Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Find-element-in-ArrayList-using-indexOf-and-lastIndexOf-methods.html">Find element in ArrayList using indexOf and lastIndexOf methods</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.net.ssl.SSLSocket.html">javax.net.ssl.SSLSocket</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-ArrayList<String>-to-String[]-array.html">Convert ArrayList<String> to String[] array</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/FileOutputStream/Write-byte-array-to-a-file-using-FileOutputStream.html">Write byte array to a file using FileOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-all-keys-of-LinkedHashMap-in-Java.html">How to get all keys of LinkedHashMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Determine-If-The-Button-Is-Visible-Example.html">Determine If The Button Is Visible Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-exponential-value-of-a-number-using-Math.exp.html">F.exp</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/com.netflix.zuul.ZuulFilter.html">com.netflix.zuul.ZuulFilter</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/com.fasterxml.jackson.databind.annotation.JsonSerialize.html">c.f.j.d.a.JsonSerialize</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.TreeSet.html">java.util.TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/com.google.gson.JsonArray.html">com.google.gson.JsonArray</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Search-an-element-of-Java-ArrayList-Example.html">Search an element of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipFile/Open-Zip-File-Using-ZipFile-Class-Example.html">Open Zip File Using ZipFile Class Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-ceiling-value-of-a-number-using-Math.ceil.html">F.ceil</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-convert-HashSet-to-ArrayList.html">How to convert HashSet to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Get-Size-of-Java-HashMap-Example.html">Get Size of Java HashMap Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.lang.management.RuntimeMXBean.html">java.lang.management.RuntimeMXBean</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Number-Of-Visible-Rows-Of-AWT-List-Example.html">Get Number Of Visible Rows Of AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-List-using-ListIterator.html">Iterate List using ListIterator</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
