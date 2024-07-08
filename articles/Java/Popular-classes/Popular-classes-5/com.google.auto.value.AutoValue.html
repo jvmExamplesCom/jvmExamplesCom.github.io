@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - com.google.auto.value.AutoValue</title> <!--timestamp=2024-07-08T00:15:01.716234950Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="com.google.auto.value.AutoValue"> 
+  <meta name="keywords" content="com.google.auto.value.AutoValue"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - com.google.auto.value.AutoValue"> 
+  <meta property="og:description" content="com.google.auto.value.AutoValue"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - com.google.auto.value.AutoValue"> 
+  <meta name="twitter:description" content="com.google.auto.value.AutoValue"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-07-07</small>
+        </div> 
+        <h1>Overview of com.google.auto.value.AutoValue</h1> 
+        <p>com.google.auto.value.AutoValue is an open source library for creating immutable value classes in Java. It enables developers to easily create classes that can be used as immutable, thread-safe data containers. By using @AutoValue on a class, AutoValue will generate implementation methods and other boilerplate code necessary for the class to function properly.</p> 
+        <h2>Creating a Simple AutoValue Class</h2> 
+        <p>To get started, let's create a simple class using the @AutoValue annotation. We'll use the following class:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@AutoValue
+public abstract class Person {
+  public abstract String name();
+  public abstract int age();
+
+  public static Person create(String name, int age) {
+    return new AutoValue_Person(name, age);
+  }
+}
+
+          </xmp></code></pre> 
+        <p>By annotating this class with @AutoValue, AutoValue will generate the implementation for us. Note that we need to provide an abstract method for each field that we want to expose, as well as a static factory method for creating an instance of the class. Once we compile this class, AutoValue will generate a class named AutoValue_Person which will contain the implementation code.</p> 
+        <h2>Accessing Values from an AutoValue Class</h2> 
+        <p>Once we have an instance of an AutoValue class, we can access its values by calling the corresponding methods. For example, for our Person class we can do the following:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Person person = Person.create("Bob", 42);
+String name = person.name(); // returns "Bob"
+int age = person.age(); // returns 42
+
+          </xmp></code></pre> 
+        <h2>Equals and HashCode Implementation</h2> 
+        <p>One of the advantages of using AutoValue is that it will generate an implementation of the equals() and hashCode() methods for us. This means that two instances of the same AutoValue class can be compared by using the equals() method and will return true only if they have the same values. This is useful for quickly determining if two objects are equal without having to manually implement the equals() and hashCode() methods.</p> 
+        <h2>Conclusion</h2> 
+        <p>Using AutoValue can save developers time by generating needed implementation code for their classes. This makes it faster and easier to create classes that are easy to use and are thread-safe and immutable. AutoValue is an open source library and is available for anyone to use in their projects.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-fix-java.io.FileNotFoundException-(access-is-denied).html">FileNotFoundException (access is denied)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Frame/"> AWT Frame </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Frame/Create-Frame-Window-Example.html">Create Frame Window Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Swap-elements-of-Java-ArrayList-example.html">Swap elements of Java ArrayList example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType.html">o.s.j.d.e.EmbeddedDatabaseType</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.Vector.html">java.util.Vector</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Find-element-in-ArrayList-using-indexOf-and-lastIndexOf-methods.html">Find element in ArrayList using indexOf and lastIndexOf methods</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/"> Short Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Convert-String-to-short-primitive-Example.html">Convert String to short primitive Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.google.inject.TypeLiteral.html">com.google.inject.TypeLiteral</a> <h6><i class="fa fa-clock-o"></i> <span>2024-04-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/"> Integer Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-binary-number-to-decimal-number-example.html">Convert binary number to decimal number example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-replace-a-value-for-the-given-key-in-the-TreeMap-(TreeMap-replace-method).html">How to replace a value for the given key in the TreeMap (TreeMap replace method)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-09 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Simple-Java-Integer-Example.html">Simple Java Integer Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipInputStream/Extract-File-From-Zip-File-Using-Command-Line-Arguments-Example.html">Extract File From Zip File Using Command Line Arguments Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-3D-Rectangle-&-Square-in-Applet-Window-Example.html">Draw 3D Rectangle & Square in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-first-or-last-entry-from-Java-LinkedHashMap.html">How to get first or last entry from Java LinkedHashMap</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Basic-Java-Applet-Example.html">Basic Java Applet Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.google.android.gms.tasks.OnSuccessListener.html">c.g.a.g.t.OnSuccessListener</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.springframework.transaction.annotation.Isolation.html">o.s.t.a.Isolation</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.elasticsearch.search.SearchHits.html">org.elasticsearch.search.SearchHits</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/ByteArrayInputStream/Read-partial-byte-array-using-ByteArrayInputStream-Example.html">Read partial byte array using ByteArrayInputStream Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-short-Array-Example.html">Performing Binary Search on Java short Array Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.lang.model.type.TypeMirror.html">javax.lang.model.type.TypeMirror</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.testng.annotations.BeforeMethod.html">org.testng.annotations.BeforeMethod</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-find-the-minimum-or-maximum-value-from-Java-HashSet.html">How to find the minimum or maximum value from Java HashSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.json.simple.JSONArray.html">org.json.simple.JSONArray</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Set-last-modified-time-of-a-file-or-directory.html">Set last modified time of a file or directory</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Get-first-and-last-elements-from-LinkedList-Java-example.html">Get first and last elements from LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Determine-File-or-Directory.html">Determine File or Directory</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Print-ArrayList-example.html">Print ArrayList example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Calculate-Average-value-of-Array-elements-using-Java-Example.html">Calculate Average value of Array elements using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Java-Double-Example.html">Java Double Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

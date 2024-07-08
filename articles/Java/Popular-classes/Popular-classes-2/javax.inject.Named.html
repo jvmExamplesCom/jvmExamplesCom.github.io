@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javax.inject.Named</title> <!--timestamp=2024-07-08T00:14:17.159789593Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.inject.Named"> 
+  <meta name="keywords" content="javax.inject.Named"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.inject.Named"> 
+  <meta property="og:description" content="javax.inject.Named"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.inject.Named"> 
+  <meta name="twitter:description" content="javax.inject.Named"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-07-07</small>
+        </div> 
+        <h1>An Introduction to Javax.inject.Named</h1> Java provides a javax.inject.Named annotation which is used for dependency injection. It allows classes and objects to be injected as parameters, fields, method return values, or constructor arguments. By using this annotation, we can specify a name for the injected objects, allowing us to have different instances of the same type injected with different names. This makes the code more maintainable and easier to read. 
+        <h2>How to Use Javax.inject.Named</h2> Let's take a look at a simple example of how to use javax.inject.Named. First, we need to create a class that will be injected into another class. We'll call it MyClass: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyClass {
+    // Some code here 
+}
+
+          </xmp></code></pre> Now, we'll create the class that will be injecting the MyClass object. We'll call this InjectingClass: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class InjectingClass {
+
+    @Inject
+    @Named("myObject")
+    private MyClass myObject;
+    
+    // Some code here 
+}
+
+          </xmp></code></pre> Here, we've used the @Named annotation to specify a name for the injected object. This name can be anything you want, but it should be descriptive and unique. Finally, we need to create the ObjectFactory that we'll use to get the injected objects. This is a simple class that will take in a name and return the associated object. Let's call it MyObjectFactory: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyObjectFactory {
+
+    public static Object getObject(String name) {
+        switch (name) {
+            case "myObject":
+                return new MyClass();
+            default:
+                throw new IllegalArgumentException("Unknown name: " + name);
+        }
+    }
+}
+
+          </xmp></code></pre> Now that we have our ObjectFactory, we can use it to get the injected objects. All we need to do is pass in the name that we specified in our annotations. So if we want to get the MyClass object, we can just do this: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MyClass myObject = (MyClass) MyObjectFactory.getObject("myObject");
+
+          </xmp></code></pre> And that's all there is to using javax.inject.Named! It's a simple but powerful tool for dependency injection that can make your code more readable and maintainable. 
+        <h2>Conclusion</h2> javax.inject.Named can be a useful tool for dependency injection in Java projects. It allows us to specify a name for each injected object, which can improve code readability and maintainability. We can also use an ObjectFactory to get the injected objects, which makes the process even simpler. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Rectangle-&-Square-in-Applet-Window-Example.html">Draw Rectangle & Square in Applet Window Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-font/"> AWT font </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-font/Get-Available-Font-Objects-Example.html">Get Available Font Objects Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Iterate-through-elements-Java-ArrayList-using-ListIterator-Example.html">Iterate through elements Java ArrayList using ListIterator Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/"> Hashtable </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Create-Java-Hashtable-from-HashMap-example.html">Create Java Hashtable from HashMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.imageio.ImageIO.html">javax.imageio.ImageIO</a> <h6><i class="fa fa-clock-o"></i> <span>2024-06-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/Java-Date-Formatting/"> Java Date Formatting </a> </p> <a href="/articles/Java/Popular-Java-Classes/Java-Date-Formatting/Formatting-TimeZone-using-SimpleDateFormat.html">Formatting TimeZone using SimpleDateFormat</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/"> Basic Java Examples </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Java-Interface-Example.html">Java Interface Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-over-Vector-elements-in-reverse-or-backward-direction.html">Iterate over Vector elements in reverse or backward direction</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/"> Sorting </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-short-Array-Example.html">Java Sort short Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.ResourceBundle.html">java.util.ResourceBundle</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-18 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Array-to-LinkedList.html">Convert Array to LinkedList</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-char-Arrays-Example.html">Compare Two Java char Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.jdom.Document.html">org.jdom.Document</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Get-Current-Caret-Position-in-JTextField-Example.html">Get Current Caret Position in JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Print-Hello-World-in-an-Applet-in-different-Colors-Example.html">Print Hello World in an Applet in different Colors Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Get-Size-of-Java-TreeSet-Example.html">Get Size of Java TreeSet Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/retrofit2.http.Query.html">retrofit2.http.Query</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-int-Array-Example.html">Java Sort int Array Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Convert-String-to-short-primitive-Example.html">Convert String to short primitive Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.shiro.authz.SimpleAuthorizationInfo.html">o.a.s.a.SimpleAuthorizationInfo</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-char-from-file-using-DataInputStream.html">Read char from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Shuffle-elements-of-ArrayList.html">Shuffle elements of ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/com.google.common.collect.Iterators.html">com.google.common.collect.Iterators</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-int-to-a-file-using-DataOutputStream.html">Write int to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Declare-multiple-variables-in-for-loop-Example.html">Declare multiple variables in for loop Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Get-Set-view-of-Keys-from-Java-Hashtable-example.html">Get Set view of Keys from Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/io.netty.channel.ChannelHandler.Sharable.html">i.n.c.C.Sharable</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-char-to-a-file-using-DataOutputStream.html">Write char to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/android.support.v4.view.accessibility.AccessibilityNodeInfoCompat.html">AccessibilityNodeInfoCompat</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-value-from-TreeMap-using-the-key-(TreeMap-get-method).html">How to get value from TreeMap using the key (TreeMap get method)</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
