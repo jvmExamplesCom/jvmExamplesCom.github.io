@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - android.media.MediaMetadataRetriever</title> <!--timestamp=2024-07-16T00:14:43.157252623Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="android.media.MediaMetadataRetriever"> 
+  <meta name="keywords" content="android.media.MediaMetadataRetriever"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - android.media.MediaMetadataRetriever"> 
+  <meta property="og:description" content="android.media.MediaMetadataRetriever"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - android.media.MediaMetadataRetriever"> 
+  <meta name="twitter:description" content="android.media.MediaMetadataRetriever"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-07-15</small>
+        </div> 
+        <h1>Introduction to Android MediaMetadataRetriever</h1> 
+        <p>The Android MediaMetadataRetriever class provides a unified interface for retrieving frame and meta data from an input media file. It is designed to provide a convenient way to extract meta data from media files, including duration, width and height resolution, title, album, artist and other information.</p> 
+        <p>The MediaMetadataRetriever class can be used to retrieve frames from audio and video files, extract text from images, retrieve meta data from media resources such as ìD3 tags, and much more. In this article, we will explore how to use the MediaMetadataRetriever class and explore some of its powerful features.</p> 
+        <h2>Getting Started with MediaMetadataRetriever</h2> 
+        <p>Using the MediaMetadataRetriever class is simple. First, we need to initialize it by calling the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+
+          </xmp></code></pre> method. Once initialized, the class's functionality can be accessed by passing a valid URI or File Descriptors of the media resource to the setDataSource() method. For example, we can pass a URL pointing to a streaming media resource or a local file on the device to the setDataSource() method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+mmr.setDataSource("http://example.com/file.mp3");
+
+          </xmp></code></pre> 
+        <p>Once the data source is set, MediaMetadataRetriever can be used to retrieve frames from the resource, extract text from images, and of course extract meta data such as title, album, artist, etc. </p> 
+        <h2>Retrieving Metadata with MediaMetadataRetriever</h2> 
+        <p>MediaMetadataRetriever provides several methods for retrieving meta data from the media resource. The simplest of these is the getEmbeddedPicture() method, which can be used to retrieve the embedded album art from the media resource: </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+byte[] albumArt = mmr.getEmbeddedPicture();
+
+          </xmp></code></pre> 
+        <p>The getEmbeddedPicture() method returns a byte array containing the album art; however, it can also accept a second optional parameter, which can be used to specify the size and format of the album art image. </p> 
+        <p>The getMetadata() method can also be used to retrieve various kinds of meta data from the media resource. The getMetadata() method accepts a String key as a parameter and will return the corresponding value of the meta data specified by that key. For example, to retrieve the title of the media resource: </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String title = mmr.getMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+
+          </xmp></code></pre> 
+        <p>Similarly, the following code can be used to retrieve the artist of the resource: </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String artist = mmr.getMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+
+          </xmp></code></pre> 
+        <h2>Extracting Frames with MediaMetadataRetriever</h2> 
+        <p>One of the more powerful features of the MediaMetadataRetriever is its ability to extract frames from audio and video files. The extract() method can be used to extract a frame at a given time index from a media resource. For example, to extract a frame from a video file at the 10 second mark: </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Bitmap frameAt10Seconds = mmr.extract(10000);
+
+          </xmp></code></pre> 
+        <p>The extract() method can also accept a third optional parameter, which can be used to specify the size and format of the extracted frame. </p> 
+        <p>The getFrameAtIndex() method can also be used to extract frames from the media resource at specific indices. For example, to extract the first frame from a video file, the following code can be used: </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Bitmap firstFrame = mmr.getFrameAtIndex(0);
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>In this article, we have explored the basics of using the MediaMetadataRetriever class in Android. We have seen how to use the MediaMetadataRetriever class to retrieve information from media resources such as album art, title, artist and other meta data. We have also explored how to use the extract() and getFrameAtIndex() methods to extract frames from audio and video files. </p> 
+        <p>Using the MediaMetadataRetriever class is an effective way to extract information from media resources. Its simple API makes it straightforward and easy to use, and its powerful features provide a lot of flexibility for extracting meta data and frames from media files.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Create-AWT-Checkbox-Example.html">Create AWT Checkbox Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-TreeMap-key-using-the-value-in-Java.html">How to get TreeMap key using the value in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.junit.jupiter.api.extension.ExtensionContext.html">o.j.j.a.e.ExtensionContext</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Get-elements-from-LinkedList-Java-example.html">Get elements from LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-LinkedList-to-Array.html">Convert LinkedList to Array</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/"> Byte Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-Java-String-to-Byte-example.html">Convert Java String to Byte example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/androidx.recyclerview.widget.DiffUtil.html">a.r.w.DiffUtil</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.springframework.cloud.stream.annotation.StreamListener.html">o.s.c.s.a.StreamListener</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-get-random-elements-from-LinkedHashSet.html">How to get random elements from LinkedHashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Check-if-a-particular-key-exists-in-Java-TreeMap-example.html">Check if a particular key exists in Java TreeMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-17 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>JavaFan</h3> <p><a href="#">2024-08-31 12:08</a></p> Appreciate your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Mark</h3> <p><a href="#">2024-08-21 08:26</a></p> its very helpful programs to all Thanks...... <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Swing/JTextField/JTextField-Disable-Enable-Example.html">JTextField Disable Enable Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.eclipse.jetty.server.handler.ResourceHandler.html">o.e.j.s.h.ResourceHandler</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.eclipse.jface.viewers.ISelection.html">org.eclipse.jface.viewers.ISelection</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-TreeSet-to-List-(ArrayList-or-LinkedList).html">How to convert TreeSet to List (ArrayList or LinkedList)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.amazonaws.regions.Region.html">com.amazonaws.regions.Region</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Get-Horizontal-Alignment-of-JLabel-Example.html">Get Horizontal Alignment of JLabel Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Delete-file-or-directory-when-virtual-machine-terminates.html">Delete file or directory when virtual machine terminates</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-add-key-value-mapping-to-the-TreeMap-(TreeMap-put-method).html">How to add key-value mapping to the TreeMap (TreeMap put method)</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Oval-&-Circle-in-Applet-Window-Example.html">Draw Oval & Circle in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-array-to-ArrayList.html">Add array to ArrayList</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/List-Even-Numbers-Java-Example.html">List Even Numbers Java Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/android.view.View.MeasureSpec.html">android.view.View.MeasureSpec</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-a-Collection-using-Java-Iterator-Example.html">Iterate through a Collection using Java Iterator Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-ceiling-value-of-a-number-using-Math.ceil.html">F.ceil</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.eclipse.jetty.server.handler.ResourceHandler.html">o.e.j.s.h.ResourceHandler</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Check-if-a-particular-value-exists-in-Java-TreeMap-example.html">Check if a particular value exists in Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Item-From-Single-Select-AWT-List-Example.html">Get Selected Item From Single Select AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.naming.Context.html">javax.naming.Context</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-temporary-file.html">Create temporary file</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Check-if-ArrayList-contains-element.html">Check if ArrayList contains element</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
