@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.util.stream.IntStream</title> <!--timestamp=2024-07-22T00:15:16.534190328Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.util.stream.IntStream"> 
+  <meta name="keywords" content="java.util.stream.IntStream"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.util.stream.IntStream"> 
+  <meta property="og:description" content="java.util.stream.IntStream"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.util.stream.IntStream"> 
+  <meta name="twitter:description" content="java.util.stream.IntStream"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-07-21</small>
+        </div> 
+        <h1>Java.Util.Stream.IntStream</h1> 
+        <p>Java.util.stream.IntStream is a powerful utility for performing operations on sequences of primitive int-valued elements. It provides a rich and flexible set of intermediate and terminal operations such as mapping, filtering, reducing, sorting and many more. IntStream is a subclass of Stream, so all the operations that apply to Stream also apply to IntStream.</p> 
+        <h2>Creating IntStreams</h2> 
+        <p>There are several ways to create IntStreams. One way is by using static methods of IntStream class:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+IntStream emptyStream = IntStream.empty(); 
+IntStream oneElementStream = IntStream.of(10); 
+IntStream tenElementsStream = IntStream.range(0, 10); 
+IntStream betweenElementsStream = IntStream.rangeClosed(0, 10);
+
+          </xmp></code></pre> 
+        <p>Another way to create IntStreams is from existing arrays or collections:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+int[] array = {1, 2, 3}; 
+IntStream streamOfArray = Arrays.stream(array); 
+
+List<Integer> list = Arrays.asList(4, 5, 6); 
+IntStream streamOfList = list.stream().mapToInt(x -> x);
+
+          </xmp></code></pre> 
+        <h2>Intermediate Operations</h2> 
+        <p>Intermediate operations are operations that return the same type of IntStream they are called on. Here are some examples of available intermediate operations:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+IntStream mapStream = streamOfArray.map(x -> x * x); 
+IntStream filterStream = streamOfArray.filter(x -> x % 2 == 0); 
+IntStream distinctStream = streamOfArray.distinct(); 
+IntStream sortedStream = streamOfArray.sorted(); 
+IntStream skipStream = streamOfArray.skip(2); 
+IntStream limitStream = streamOfArray.limit(2);
+
+          </xmp></code></pre> 
+        <h2>Terminal Operations</h2> 
+        <p>Terminal operations are operations that return a result or perform side-effect operations such as writing to a stream. Here are some examples of available terminal operations:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+int sum = streamOfArray.sum(); 
+int count = streamOfArray.count(); 
+OptionalInt max = streamOfArray.max(); 
+OptionalInt min = streamOfArray.min(); 
+OptionalDouble average = streamOfArray.average();
+
+          </xmp></code></pre> 
+        <p>IntStream can also be used to write elements to another stream:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+IntStream.range(0, 10).forEach(System.out::println);
+IntStream.range(0, 10).forEachOrdered(System.out::println);
+IntStream.range(0, 10).mapToObj(String::valueOf).forEach(System.out::println);
+
+          </xmp></code></pre> 
+        <h2>Parallel Streams</h2> 
+        <p>Parallel streams are streams that use multiple threads for execution of operations. Creating a parallel stream is easy:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+IntStream parallelStream = streamOfArray.parallel();
+
+          </xmp></code></pre> 
+        <p>Using parallel streams may improve performance but it can also introduce race conditions into the code. It is recommended to use them with caution.</p> 
+        <h2>Conclusion</h2> 
+        <p>IntStream is a powerful tool for performing operations on sequences of primitive int-valued elements. It allows performing any number of intermediate and terminal operations on the data in a concise and elegant way. Parallel streams can also be used to improve performance but they should be used with caution due to potential race conditions.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.widget.RadioButton.html">android.widget.RadioButton</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-get-random-elements-from-LinkedHashSet.html">How to get random elements from LinkedHashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/CheckedInputStream/"> CheckedInputStream </a> </p> <a href="/articles/Java/Java-Zip/CheckedInputStream/Extract-File-With-CRC32-Checksum-Example.html">Extract File With CRC32 Checksum Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-Java-TreeMap-using-an-iterator.html">Iterate through Java TreeMap using an iterator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/java.awt.color.ColorSpace.html">java.awt.color.ColorSpace</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Replace-an-element-at-specified-index-of-Java-ArrayList-Example.html">Replace an element at specified index of Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Copy-all-elements-of-Java-TreeSet-to-an-Object-Array-Example.html">Copy all elements of Java TreeSet to an Object Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.eclipse.jetty.server.ServerConnector.html">o.e.j.s.ServerConnector</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-create-a-new-TreeMap-object-using-the-Comparator-interface.html">How to create a new TreeMap object using the Comparator interface</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/"> ListIterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-LinkedHashMap-in-reverse-order-using-ListIterator.html">How to iterate LinkedHashMap in reverse order using ListIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-27 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Create-List-containing-n-Copies-of-Specified-Object-Example.html">Create List containing n Copies of Specified Object Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Convert-java-double-to-Double-object-Example.html">Convert java double to Double object Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/int-to-String-Example.html">int to String Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Check-if-a-particular-element-exists-in-Java-HashSet-Example.html">Check if a particular element exists in Java HashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/com.fasterxml.jackson.annotation.JsonFormat.html">c.f.j.a.JsonFormat</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.servlet.http.HttpServlet.html">javax.servlet.http.HttpServlet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/java.util.concurrent.ConcurrentNavigableMap.html">j.u.c.ConcurrentNavigableMap</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Convert-java-Double-to-numeric-primitive-data-types-example.html">Convert java Double to numeric primitive data types example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-elements-to-ArrayList.html">Add elements to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-3-Example.html">Java Pyramid 3 Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Zip/ZipOutputStream/Create-Zip-File-From-Multiple-Files-using-ZipOutputStream-Example.html">Create Zip File From Multiple Files using ZipOutputStream Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.servlet.ServletRequest.html">javax.servlet.ServletRequest</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Get-Brighter-Version-Of-Current-Color-Example.html">Get Brighter Version Of Current Color Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.io.ByteArrayOutputStream.html">java.io.ByteArrayOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-replace-a-value-for-key-in-Java-HashMap-example.html">How to replace a value for key in Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Java-LinkedHashMap-forEach-example.html">Java LinkedHashMap forEach example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-sort-HashSet-elements-using-Comparable.html">How to sort HashSet elements using Comparable</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-make-file-hidden-in-Java.html">How to make file hidden in Java</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/If-Else-If-statement-Example.html">If Else-If statement Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/com.google.common.hash.HashCode.html">com.google.common.hash.HashCode</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
