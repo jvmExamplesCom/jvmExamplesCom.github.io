@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.springframework.context.ApplicationContextAware</title> <!--timestamp=2024-07-24T00:15:37.890830743Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.springframework.context.ApplicationContextAware"> 
+  <meta name="keywords" content="org.springframework.context.ApplicationContextAware"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.springframework.context.ApplicationContextAware"> 
+  <meta property="og:description" content="org.springframework.context.ApplicationContextAware"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.springframework.context.ApplicationContextAware"> 
+  <meta name="twitter:description" content="org.springframework.context.ApplicationContextAware"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-07-23</small>
+        </div> 
+        <h1>Introduction to org.springframework.context.ApplicationContextAware</h1> 
+        <p>org.springframework.context.ApplicationContextAware is an interface from the Spring Framework that is used for supplying an ApplicationContext object to classes that implement it. The purpose of this interface is to allow developers to access resources and services that are provided in the Spring context within their own application code. This provides a convenient way for developers to access these resources without having to manually provide explicit object references for each one.</p> 
+        <p>In this article, we will discuss how to use the ApplicationContextAware interface in your own code, how to set up a Spring context, and various use cases and code examples.</p> 
+        <h2>Using ApplicationContextAware</h2> 
+        <p>To use the ApplicationContextAware interface in your own code, you need to implement it on a class that you will create. This class should have a method signature similar to the following:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyClass implements ApplicationContextAware {
+  public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    // do something with the applicationContext
+  }
+}
+
+          </xmp></code></pre> 
+        <p>In this example, you will notice that the class implements the ApplicationContextAware interface, and that it has a method called setApplicationContext() which takes an ApplicationContext object as its parameter. This method is responsible for setting the applicationContext instance variable, which can then be accessed from any other methods in the class.</p> 
+        <p>Once you have created this class, you will need to create a Spring context file that contains a <bean>
+           element for the class. This will tell the Spring container to instantiate your class and call its setApplicationContext() method. The bean element for the class should look like this:
+         </bean></p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+<bean class="MyClass"></bean>
+
+          </xmp></code></pre> 
+        <p>Now that the class has been setup to use the ApplicationContextAware interface, you can now use it to access resources and services provided by Spring. This can be done by calling the getBean() method on the applicationContext instance variable:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// get a bean from the Spring context
+MyBean myBean = (MyBean) applicationContext.getBean("myBean");
+
+// use the bean
+myBean.doSomething();
+
+          </xmp></code></pre> 
+        <h2>Creating a Spring Context</h2> 
+        <p>In order to use the ApplicationContextAware interface, you must first create a Spring context file. This file is used to configure the Spring container and tells it which beans need to be instantiated and how they should be configured. The Spring context file should be placed in the src/main/resources folder and should have a .xml extension. An example of a Spring context file is shown below:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <bean class="MyClass"></bean>
+</beans>
+
+          </xmp></code></pre> 
+        <p>Once the Spring context file has been created, you can then use it to configure the Spring container. To do this, you will need to add the following line of code to your application's main class:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath*:myContext.xml");
+
+          </xmp></code></pre> 
+        <p>This will instruct the Spring container to read in the Spring context file and configure the beans accordingly. At this point, the ApplicationContextAware interface will be ready to use.</p> 
+        <h2>Use Cases and Code Examples</h2> 
+        <p>One of the most common uses of the ApplicationContextAware interface is to provide access to the Spring Environment object. This object can be used to access system properties and environment variables that have been configured in the Spring context file:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyClass implements ApplicationContextAware {
+  private static ApplicationContext applicationContext;
+
+  public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    this.applicationContext = applicationContext;
+  }
+
+  public void doSomething() {
+    Environment environment = applicationContext.getEnvironment();
+    String property1 = environment.getProperty("property1");
+  }
+}
+
+          </xmp></code></pre> 
+        <p>Another use case for the ApplicationContextAware interface is to access beans that have been defined in the Spring context file. This can be done using the getBean() method on the applicationContext instance variable:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyClass implements ApplicationContextAware {
+  private static ApplicationContext applicationContext;
+
+  public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    this.applicationContext = applicationContext;
+  }
+
+  public void doSomething() {
+    MyBean myBean = (MyBean) applicationContext.getBean("myBean");
+    myBean.doSomething();
+  }
+}
+
+          </xmp></code></pre> 
+        <p>Finally, you can also use the ApplicationContextAware interface to access services and resources provided by the Spring container. For example, the applicationContext instance variable can be used to access the message source, which allows you to access localized messages in your application:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyClass implements ApplicationContextAware {
+  private static ApplicationContext applicationContext;
+
+  public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    this.applicationContext = applicationContext;
+  }
+
+  public void doSomething() {
+    MessageSource messageSource = applicationContext.getMessageSource();
+    String localizedMessage = messageSource.getMessage("messageKey", null, Locale.getDefault());
+  }
+}
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>In this article, we discussed how to use the ApplicationContextAware interface in your own code, how to set up a Spring context, and provided various use cases and code examples. We hope that this article has been helpful and that you are now more familiar with the ApplicationContextAware interface.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.lang.reflect.InvocationHandler.html">java.lang.reflect.InvocationHandler</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/"> Runtime </a> </p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Terminate-Java-Virtual-Machine-(JVM)-Example.html">Terminate Java Virtual Machine (JVM) Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/"> Sorting </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-long-Array-Example.html">Java Sort long Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/"> AWT Choice </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Remove-Particular-Item-From-AWT-Choice-Or-Combobox-Example.html">Remove Particular Item From AWT Choice Or Combobox Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.swing.JButton.html">javax.swing.JButton</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/"> Sorting </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-double-Array-Example.html">Java Sort double Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.mail.Authenticator.html">javax.mail.Authenticator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/"> Hashtable </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Check-if-a-particular-key-exists-in-Java-Hashtable-example.html">Check if a particular key exists in Java Hashtable example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Index-From-Single-Select-AWT-List-Example.html">Get Selected Index From Single Select AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Copy-all-elements-of-Java-ArrayList-to-an-Object-Array-Example.html">Copy all elements of Java ArrayList to an Object Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-22 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>JavaFan</h3> <p><a href="#">2024-08-24 16:07</a></p> Great example! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Daniel</h3> <p><a href="#">2024-08-24 00:28</a></p> Appreciate your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Indexes-From-Multi-Select-AWT-List-Example.html">Get Selected Indexes From Multi Select AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Applet-Life-Cycle-Example.html">Applet Life Cycle Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/net.minecraft.item.ItemStack.html">net.minecraft.item.ItemStack</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/io.realm.RealmResults.html">io.realm.RealmResults</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-make-file-hidden-in-Java.html">How to make file hidden in Java</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Insert-Item-To-a-List-At-Specified-Index-Example.html">Insert Item To a List At Specified Index Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.apache.spark.api.java.JavaRDD.html">org.apache.spark.api.java.JavaRDD</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-all-elements-of-an-array-to-ArrayList-using-Arrays.html">Add all elements of an array to ArrayList using Arrays</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Create-DataOutputStream-from-FileOutputStream.html">Create DataOutputStream from FileOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-HashSet-to-ArrayList-in-Java.html">Convert HashSet to ArrayList in Java</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-remove-an-element-from-LinkedHashSet-in-Java.html">How to remove an element from LinkedHashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-decimal-integer-to-hexadecimal-number-example.html">Convert decimal integer to hexadecimal number example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/io.vertx.core.http.HttpServerRequest.html">io.vertx.core.http.HttpServerRequest</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.apache.solr.common.SolrDocument.html">org.apache.solr.common.SolrDocument</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-ArrayList-to-LinkedHashSet.html">Convert ArrayList to LinkedHashSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.springframework.http.HttpInputMessage.html">o.s.h.HttpInputMessage</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-List-to-array.html">Convert List to array</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-array-to-ArrayList.html">Add array to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Background-Color-Of-an-Applet-Window-Example.html">Get Background Color Of an Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-boolean-from-file-using-DataInputStream.html">Read boolean from file using DataInputStream</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
