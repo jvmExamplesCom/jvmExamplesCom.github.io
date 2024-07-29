@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate</title> <!--timestamp=2024-07-29T00:15:19.642546959Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate"> 
+  <meta name="keywords" content="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate"> 
+  <meta property="og:description" content="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate"> 
+  <meta name="twitter:description" content="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-07-28</small>
+        </div> 
+        <h1>Overview of NamedParameterJdbcTemplate</h1> 
+        <p>org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate is a great tool to help Java developers work with structured query language (SQL) statements when interacting with relational databases. This class simplifies the writing and execution of SQL statements, particularly if many parameters are needed in the query. It also helps to prevent potential SQL injections. </p> 
+        <h2>Creating a NamedParameterJdbcTemplate Object</h2> 
+        <p>The first step when using org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate is to create a new object. To do so, you need a DataSource instance that provides access to the database. The constructor for this class looks like this: </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public NamedParameterJdbcTemplate(DataSource dataSource)
+
+          </xmp></code></pre> 
+        <p>For example, you might create a NamedParameterJdbcTemplate object like this:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+DataSource dataSource = ...;
+NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(dataSource);
+
+          </xmp></code></pre> 
+        <h2>Using Named Parameters</h2> 
+        <p>The main benefit of NamedParameterJdbcTemplate is that it allows you to use named parameters in your SQL statements. These names correspond to properties in your Java beans. For example, if you have a table with columns named "first_name" and "last_name", and a corresponding Java bean with properties named firstName and lastName, you can define a query like this:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String sql = "SELECT * FROM my_table WHERE first_name = :firstName AND last_name = :lastName";
+
+          </xmp></code></pre> 
+        <p>This makes it much easier to parameterize your queries, since you don't have to keep track of the order of the parameters.</p> 
+        <h2>Executing Queries</h2> 
+        <p>Once you have constructed your query with named parameters, you can execute it using one of the </p>
+        <pre>query()</pre> methods provided by the NamedParameterJdbcTemplate. These methods all take a SQL statement and a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Map<String, Object>
+
+          </xmp></code></pre> parameter, which contains the values for the named parameters. For example:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String sql = "SELECT * FROM my_table WHERE first_name = :firstName AND last_name = :lastName";
+Map<String, Object> params = new HashMap<>();
+params.put("firstName", "John");
+params.put("lastName", "Smith");
+List<MyBean> results = template.query(sql, params, new MyBeanRowMapper());
+
+          </xmp></code></pre> 
+        <p>This example executes a SELECT query and maps the results to a list of MyBean objects. The </p>
+        <pre>MyBeanRowMapper</pre> class is a custom RowMapper object that knows how to map rows in the result set to MyBean instances.
+         
+        <h2>Updating Records</h2> 
+        <p>The NamedParameterJdbcTemplate also provides methods for executing UPDATE and DELETE statements, as well as INSERT statements that return the generated ID. For example, to execute an UPDATE statement:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String sql = "UPDATE my_table SET first_name = :firstName, last_name = :lastName";
+Map<String, Object> params = new HashMap<>();
+params.put("firstName", "John");
+params.put("lastName", "Smith");
+int rowsUpdated = template.update(sql, params);
+
+          </xmp></code></pre> 
+        <p>This example will update any records in the table where first_name and last_name are both equal to the given values. The method will return the number of rows that were updated.</p> 
+        <h2>Conclusion</h2> 
+        <p>The NamedParameterJdbcTemplate is a powerful tool for simplifying the writing and execution of SQL statements in Java. It allows you to use named parameters instead of the standard JDBC placeholder syntax, which can make your code easier to read and less error-prone. In addition, it provides methods for both querying and updating the database, eliminating the need to write separate code for each. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.view.ScaleGestureDetector.html">android.view.ScaleGestureDetector</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JTextField/"> JTextField </a> </p> <a href="/articles/Java/Swing/JTextField/JTextField-Horizontal-Alignment-Example.html">JTextField Horizontal Alignment Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-LinkedHashSet-to-ArrayList.html">Convert LinkedHashSet to ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-ArrayList<String>-to-String[]-array.html">Convert ArrayList<String> to String[] array</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-String-array-to-List-(Convert-String-array-to-ArrayList,-LinkedList).html">Convert String array to List (Convert String array to ArrayList, LinkedList)</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Get-Last-modification-time-of-a-file-or-directory.html">Get Last modification time of a file or directory</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-comma-separated-String-to-ArrayList.html">Convert comma separated String to ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.commons.httpclient.HttpClient.html">o.a.c.h.HttpClient</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.crypto.CipherInputStream.html">javax.crypto.CipherInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/"> Hashtable </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Iterate-through-keys-of-Java-Hashtable-example.html">Iterate through keys of Java Hashtable example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-24 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Ojas</h3> <p><a href="#">2024-09-06 09:33</a></p> <p>thanks. This is the first sample project I checked so far</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Gabriel</h3> <p><a href="#">2024-09-22 10:51</a></p> Nice <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Remove-An-Item-From-a-List-Example.html">Remove An Item From a List Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-find-element-index-in-LinkedHashSet.html">How to find element index in LinkedHashSet</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Set-Foreground-Color-Of-an-Applet-Window-Example.html">Set Foreground Color Of an Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Remove-an-element-from-specified-index-of-Java-Vector-Example.html">Remove an element from specified index of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.springframework.security.access.AccessDeniedException.html">o.s.s.a.AccessDeniedException</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Convert-short-primitive-to-Short-object-Example.html">Convert short primitive to Short object Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.commons.lang.SystemUtils.html">org.apache.commons.lang.SystemUtils</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/io.realm.RealmConfiguration.html">io.realm.RealmConfiguration</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-check-if-file-exists-in-Java.html">How to check if file exists in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Read-text-file-to-Java-HashMap-example.html">Read text file to Java HashMap example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-long-from-file-using-DataInputStream.html">Read long from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Iterate-through-elements-Java-ArrayList-using-ListIterator-Example.html">Iterate through elements Java ArrayList using ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-long.html">Convert String long</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-All-Elements-Of-Java-Vector-Example.html">Replace All Elements Of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-ArrayList-elements-using-ListIterator.html">Iterate ArrayList elements using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-array-to-LinkedHashSet.html">Convert array to LinkedHashSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.net.ssl.SSLHandshakeException.html">javax.net.ssl.SSLHandshakeException</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Sort-HashMap-by-values.html">Sort HashMap by values</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.junit.jupiter.api.io.TempDir.html">org.junit.jupiter.api.io.TempDir</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.graphics.ColorFilter.html">android.graphics.ColorFilter</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
