@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.springframework.format.FormatterRegistry</title> <!--timestamp=2024-07-31T00:12:00.209063893Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.springframework.format.FormatterRegistry"> 
+  <meta name="keywords" content="org.springframework.format.FormatterRegistry"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.springframework.format.FormatterRegistry"> 
+  <meta property="og:description" content="org.springframework.format.FormatterRegistry"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.springframework.format.FormatterRegistry"> 
+  <meta name="twitter:description" content="org.springframework.format.FormatterRegistry"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-07-30</small>
+        </div> 
+        <h1>org.springframework.format.FormatterRegistry</h1> 
+        <p>The <a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/format/FormatterRegistry.html">FormatterRegistry</a> class is a registry of field formatters from the Spring Framework, providing a mechanism for the application to register custom formatters and parse user input. With the help of this registry, developers can create and add formatter beans to their application context.</p> 
+        <h2>Creating Formatter Beans</h2> 
+        <p>Formatter beans are created by subclassing the abstract <a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/format/Formatter.html">Formatter</a> class and overriding the </p>
+        <pre>print</pre> and 
+        <pre>parse</pre> methods. Here's an example of a simple formatter bean that prints and parses strings representing US currency:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class CurrencyFormatter extends Formatter<Number> {
+
+    @Override
+    public String print(Number object, Locale locale) {
+        return String.format("$%.2f", object.doubleValue());
+    }
+
+    @Override
+    public Number parse(String text, Locale locale) throws ParseException {
+        return new BigDecimal(text.substring(1));
+    }
+
+}
+
+          </xmp></code></pre> 
+        <h2>Registering Formatters with the Registry</h2> 
+        <p>Once a formatter bean is created, it must be registered with </p>
+        <pre>FormatterRegistry</pre>. There are several ways to register a formatter:
+         
+        <ul> 
+         <li>Using the <pre>addFormatter</pre> method on <pre>FormatterRegistry</pre>.</li> 
+         <li>Using the <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+addFormatterForFieldType
+
+            </xmp></code></pre> or <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+addFormatterForFieldType
+
+            </xmp></code></pre> methods on <pre>FormatterRegistry</pre>.</li> 
+         <li>Using the <pre>@Formatter</pre> annotation.</li> 
+        </ul> 
+        <h3>Registering Formatters Using the addFormatter Method</h3> 
+        <p>The simplest way to register a formatter is to use the </p>
+        <pre>addFormatter</pre> method on 
+        <pre>FormatterRegistry</pre>. This method takes two parameters: the formatter bean and a 
+        <pre>ConverterFactory</pre>:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+formatterRegistry.addFormatter(currencyFormatter, ConverterFactory.StringToNumber);
+
+          </xmp></code></pre> 
+        <h3>Registering Formatters Using the addFormatterForFieldType Method</h3> 
+        The
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+addFormatterForFieldType
+
+          </xmp></code></pre> method provides a way to register a formatter bean for a specific type. For example, if the formatter above was to be used for all 
+        <pre>Number</pre> fields, you could use the following code:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+formatterRegistry.addFormatterForFieldType(Number.class, currencyFormatter);
+
+          </xmp></code></pre> 
+        <h3>Registering Formatters Using the @Formatter Annotation</h3> 
+        Alternatively, you can use the
+        <pre>@Formatter</pre> annotation to register a formatter bean. This annotation can be applied to the formatter class itself, or to a field in the application context:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@Formatter
+public class CurrencyFormatter extends Formatter<Number> { ... }
+
+...
+
+@Bean
+public CurrencyFormatter currencyFormatter() {
+    return new CurrencyFormatter();
+}
+
+          </xmp></code></pre> 
+        If the
+        <pre>@Formatter</pre> annotation is applied to the formatter class, the formatter will be registered with 
+        <pre>FormatterRegistry</pre> with a 
+        <pre>ConversionService</pre> (or 
+        <pre>ConverterFactory</pre>) that is appropriate for the type of the formatter. If the annotation is applied to a field, the field type is used as the type for the conversion.
+         
+        <h2>Using the Registered Formatters</h2> 
+        <p>Once a formatter has been registered, it can be used anywhere in the application. For example, if a Spring MVC controller has a </p>
+        <pre>Number</pre> parameter, the framework will automatically call the registered formatter to convert the request parameters to the correct type. Similarly, when a model attribute of type 
+        <pre>Number</pre> is rendered in a JSP page, the framework will automatically format the value using the registered formatter.
+         
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Iterate-ArrayList-using-Iterator.html">Iterate ArrayList using Iterator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Rename-file-or-directory.html">Rename file or directory</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Hashset-to-comma-separated-string-in-Java.html">Convert Hashset to comma separated string in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/"> Sorting </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-int-Array-Example.html">Java Sort int Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/com.bumptech.glide.request.RequestOptions.html">c.b.g.r.RequestOptions</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/com.google.gson.JsonDeserializationContext.html">c.g.g.JsonDeserializationContext</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-keys-using-Comparable-interface.html">Sort LinkedHashMap by keys using Comparable interface</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/android.content.ContentProviderOperation.html">a.c.ContentProviderOperation</a> <h6><i class="fa fa-clock-o"></i> <span>2024-05-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Set-Status-Message-in-Applet-Window-Example.html">Set Status Message in Applet Window Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataInputStream/"> DataInputStream </a> </p> <a href="/articles/Java/File-And-IO/DataInputStream/Read-float-from-file-using-DataInputStream.html">Read float from file using DataInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-15 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>JavaFan</h3> <p><a href="#">2024-09-13 14:20</a></p> great examples ... thnx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Uberel</h3> <p><a href="#">2024-09-19 12:25</a></p> <p>thanks. This is the first sample project I checked so far</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/io.netty.util.CharsetUtil.html">io.netty.util.CharsetUtil</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-create-new-HashSet-objects-using-HashSet-constructor.html">How to create new HashSet objects using HashSet constructor</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-maximum-of-two-numbers-using-Math.max.html">F.max</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.stream.Stream.html">java.util.stream.Stream</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Hide-Checkbox-Example.html">Hide Checkbox Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-float-to-String.html">Convert float to String</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Create-AWT-Label-With-Text-Alignment-Example.html">Create AWT Label With Text Alignment Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/CheckedInputStream/Extract-File-With-CRC32-Checksum-Example.html">Extract File With CRC32 Checksum Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Get-Size-of-Java-LinkedHashSet-Example.html">Get Size of Java LinkedHashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.squareup.okhttp.Response.html">com.squareup.okhttp.Response</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-convert-LinkedHashSet-to-ArrayList-in-Java.html">How to convert LinkedHashSet to ArrayList in Java</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Swap-Numbers-Java-Example.html">Swap Numbers Java Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Initialize-ArrayList.html">Initialize ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.springframework.core.env.StandardEnvironment.html">o.s.c.e.StandardEnvironment</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/JTextField-Columns-Example.html">JTextField Columns Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-replace-a-value-for-the-given-key-in-the-TreeMap-(TreeMap-replace-method).html">How to replace a value for the given key in the TreeMap (TreeMap replace method)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/javafx.scene.control.ContextMenu.html">javafx.scene.control.ContextMenu</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-ArrayList-to-HashMap-Java-example.html">Convert ArrayList to HashMap Java example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/javax.activation.MimetypesFileTypeMap.html">j.a.MimetypesFileTypeMap</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Dots-at-Random-Locations-in-an-Applet-Example.html">Draw Dots at Random Locations in an Applet Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
