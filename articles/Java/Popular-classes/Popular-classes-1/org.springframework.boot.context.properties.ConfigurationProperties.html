@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.springframework.boot.context.properties.ConfigurationProperties</title> <!--timestamp=2024-08-06T00:14:27.190220845Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.springframework.boot.context.properties.ConfigurationProperties"> 
+  <meta name="keywords" content="org.springframework.boot.context.properties.ConfigurationProperties"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.springframework.boot.context.properties.ConfigurationProperties"> 
+  <meta property="og:description" content="org.springframework.boot.context.properties.ConfigurationProperties"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.springframework.boot.context.properties.ConfigurationProperties"> 
+  <meta name="twitter:description" content="org.springframework.boot.context.properties.ConfigurationProperties"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-08-05</small>
+        </div> 
+        <h1>Introduction to org.springframework.boot.context.properties.ConfigurationProperties</h1> 
+        <p>The org.springframework.boot.context.properties.ConfigurationProperties annotation is used to bind external application configuration data from property sources such as .properties or .yml files into a Java object. This annotation helps to simplify the development of applications by allowing developers to easily configure external properties in a consistent and organized way, without having to manually read and parse the configuration data.</p> 
+        <h2>Using ConfigurationProperties</h2> 
+        <p>Using ConfigurationProperties is quite simple. First, add the @ConfigurationProperties annotation to the configuration class or Bean that you want to bind external application configuration data to. Set the prefix attribute to the value of the properties key prefix that you would like to be bound to the configured Bean. Then, simply add the configured fields to the class.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@ConfigurationProperties(prefix="app")
+public class AppConfig {
+    private String language;
+    private String country;
+    
+    public String getLanguage() {
+        return language;
+    }
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+    public String getCountry() {
+        return country;
+    }
+    public void setCountry(String country) {
+        this.country = country;
+    }
+}
+
+          </xmp></code></pre> 
+        <p>Finally, add the external configuration data to the property sources. In this example, the external configuration data will be placed in a .properties file with the following content:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+app.language=en
+app.country=US
+
+          </xmp></code></pre> 
+        <p>Now, all you need to do is inject the AppConfig bean into your application and you can access the properties in it.</p> 
+        <h2>Reading Properties Using ConfigurationProperties</h2> 
+        <p>Reading properties using the ConfigurationProperties annotation is quite straightforward. You just need to inject the configured bean into the application and you can access its properties. For example, you can inject and use the AppConfig bean above like this:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@Autowired
+private AppConfig appConfig;
+
+public void printProperties(){
+    System.out.println("Language: " + appConfig.getLanguage());
+    System.out.println("Country: " + appConfig.getCountry());
+}
+
+          </xmp></code></pre> 
+        The output of the above code is: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Language: en
+Country: US
+
+          </xmp></code></pre> 
+        <h2>Accessing Other Property Sources</h2> 
+        <p>By default, the ConfigurationProperties annotation will bind properties from the application.properties file. However, you can specify other property sources to bind from by specifying the locations attribute of the annotation. For example, if you have the following yml file:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+app:
+  language: es
+  country: MX
+
+          </xmp></code></pre> 
+        <p>You can bind properties from that yml file by setting the locations attribute of the ConfigurationProperties annotation like this:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@ConfigurationProperties(prefix="app", locations="classpath:app.yml")
+public class AppConfig {
+    private String language;
+    private String country;
+
+    public String getLanguage() {
+        return language;
+    }
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+    public String getCountry() {
+        return country;
+    }
+    public void setCountry(String country) {
+        this.country = country;
+    }
+}
+
+          </xmp></code></pre> 
+        <p>Now, the values of the properties will be taken from the yml file instead of the application.properties file.</p> 
+        <h2>Conclusion</h2> 
+        <p>The ConfigurationProperties annotation makes it easy to bind external configuration data from multiple property sources into Java objects, simplifying the development of applications. By using this annotation, you can easily configure external properties in a consistent and organized way, without having to manually read and parse the configuration data.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-3D-Rectangle-&-Square-in-Applet-Window-Example.html">Draw 3D Rectangle & Square in Applet Window Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Number-Of-Visible-Rows-Of-AWT-List-Example.html">Get Number Of Visible Rows Of AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-LinkedHashMap-using-an-Iterator.html">Iterate through LinkedHashMap using an Iterator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.servlet.http.HttpSessionEvent.html">javax.servlet.http.HttpSessionEvent</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/"> Short Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Convert-Short-object-to-String-object.html">Convert Short object to String object</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.objectweb.asm.FieldVisitor.html">org.objectweb.asm.FieldVisitor</a> <h6><i class="fa fa-clock-o"></i> <span>2024-01-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-convert-comma-separated-string-to-Java-HashSet.html">How to convert comma separated string to Java HashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-List-in-reverse-order-using-ListIterator.html">Iterate List in reverse order using ListIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Change-Checkbox-Foreground-Color-Example.html">Change Checkbox Foreground Color Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.apache.kafka.clients.CommonClientConfigs.html">o.a.k.c.CommonClientConfigs</a> <h6><i class="fa fa-clock-o"></i> <span>2024-03-08 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-remove-all-entries-or-clear-TreeMap-in-Java.html">How to remove all entries or clear TreeMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-LinkedHashMap-in-reverse-order-using-ListIterator.html">How to iterate LinkedHashMap in reverse order using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-maxmimum-element-of-Java-ArrayList-Example.html">Find maxmimum element of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/List-contents-of-a-directory.html">List contents of a directory</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Create-AWT-Label-With-Text-Alignment-Example.html">Create AWT Label With Text Alignment Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Search-an-element-of-Java-Vector-Example.html">Search an element of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Copy-all-elements-of-Java-Vector-to-an-Object-Array-Example.html">Copy all elements of Java Vector to an Object Array Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.sql.PreparedStatement.html">java.sql.PreparedStatement</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.http.config.SocketConfig.html">org.apache.http.config.SocketConfig</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.gradle.api.tasks.TaskAction.html">org.gradle.api.tasks.TaskAction</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Rename-file-or-directory.html">Rename file or directory</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-print-elements-example.html">Java LinkedList print elements example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Iterate-Over-Unmodifiable-Collection.html">Iterate Over Unmodifiable Collection</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/io.realm.RealmConfiguration.html">io.realm.RealmConfiguration</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet-Info-Example.html">Get Applet Info Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-TreeSet-to-List-(ArrayList-or-LinkedList).html">Convert TreeSet to List (ArrayList or LinkedList)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/io.netty.handler.ssl.SslContext.html">io.netty.handler.ssl.SslContext</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/io.vertx.core.AbstractVerticle.html">io.vertx.core.AbstractVerticle</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-short-Array-Example.html">Performing Binary Search on Java short Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-comma-separated-String-to-ArrayList.html">Convert comma separated String to ArrayList</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

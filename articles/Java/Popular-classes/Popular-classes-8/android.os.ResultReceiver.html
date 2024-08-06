@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - android.os.ResultReceiver</title> <!--timestamp=2024-08-06T00:14:03.809448453Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="android.os.ResultReceiver"> 
+  <meta name="keywords" content="android.os.ResultReceiver"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - android.os.ResultReceiver"> 
+  <meta property="og:description" content="android.os.ResultReceiver"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - android.os.ResultReceiver"> 
+  <meta name="twitter:description" content="android.os.ResultReceiver"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-08-05</small>
+        </div> 
+        <h1>Introduction to android.os.ResultReceiver</h1> 
+        <p>The android.os.ResultReceiver class is part of the Android software development kit (SDK), and provides a means to handle asynchronous results from communication with remote services. It receives data in response to an intent request, and can be used to communicate between activities, services, and other components within an application.</p> 
+        <h2>Basic Usage of ResultReceiver</h2> 
+        <p>The following code shows the basic usage of the ResultReceiver class. Here, we are using an intent to start a service and sending a result back to the activity.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Intent intent = new Intent(this, MyService.class);
+intent.putExtra("resultReceiver", new ResultReceiver(new Handler()) {
+    @Override
+    protected void onReceiveResult(int resultCode, Bundle resultData) {
+        if (resultCode == 1) {
+            String result = resultData.getString("result");
+            // do something with the result
+        }
+    }
+});
+startService(intent);
+
+          </xmp></code></pre> 
+        <p>In the above example, we have defined an instance of ResultReceiver that receives the result code 1 and the associated data. The result code and the data are passed as arguments to the </p>
+        <pre>onReceiveResult()</pre> method.
+         
+        <h2>Example of Using ResultReceiver with AsyncTask</h2> 
+        <p>The following example shows how to use the ResultReceiver class with an AsyncTask. Here, we are using an intent to start a service and sending a result back to the AsyncTask for further processing.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+
+    // ...
+
+    @Override
+    protected Void doInBackground(Void... params) {
+        // Create the ResultReceiver
+        final ResultReceiver resultReceiver = new ResultReceiver(new Handler()) {
+            @Override
+            protected void onReceiveResult(int resultCode, Bundle resultData) {
+                if (resultCode == 1) {
+                    String result = resultData.getString("result");
+                    // do some work here
+                }
+            }
+        };
+
+        // Create the intent
+        Intent intent = new Intent(context, MyService.class);
+        intent.putExtra("resultReceiver", resultReceiver);
+
+        // Start the service
+        context.startService(intent);
+
+        return null;
+    }
+}
+
+          </xmp></code></pre> 
+        <h2>Example of Using ResultReceiver with Broadcast Receiver</h2> 
+        <p>The following example shows how to use the ResultReceiver class with a broadcast receiver. Here, we are waiting for a broadcast from the service and then sending a result back to the broadcast receiver.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyBroadcastReceiver extends BroadcastReceiver {
+  
+    // ...
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        // Create the ResultReceiver
+        final ResultReceiver resultReceiver = new ResultReceiver(new Handler()) {
+            @Override
+            protected void onReceiveResult(int resultCode, Bundle resultData) {
+                if (resultCode == 1) {
+                    String result = resultData.getString("result");
+                    // do some work here
+                }
+            }
+        };
+
+        // Create the intent
+        Intent serviceIntent = new Intent(context, MyService.class);
+        serviceIntent.putExtra("resultReceiver", resultReceiver);
+
+        // Start the service
+        context.startService(serviceIntent);
+    }
+}
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>The android.os.ResultReceiver class provides a convenient way to handle asynchronous communication between activities, services, and other components within an Android application. It can be used to send results back to the original caller, allowing for more complex communication patterns.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Append-all-elements-of-other-Collection-to-Java-ArrayList-Example.html">Append all elements of other Collection to Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.commons.lang3.builder.ToStringStyle.html">o.a.c.l.b.ToStringStyle</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-add-elements-to-LinkedHashSet-object.html">How to add elements to LinkedHashSet object</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/"> If Else Statement </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/If-Else-statement-Example.html">If Else statement Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-temporary-file.html">Create temporary file</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/JLabel-Set-Font-Example.html">JLabel Set Font Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-String-to-character-array,-character-array-to-String.html">Convert String to character array, character array to String</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.web.context.WebApplicationContext.html">o.s.w.c.WebApplicationContext</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-size-of-the-TreeSet-object-(TreeSet-length).html">How to get size of the TreeSet object (TreeSet length)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.slf4j.bridge.SLF4JBridgeHandler.html">org.slf4j.bridge.SLF4JBridgeHandler</a> <h6><i class="fa fa-clock-o"></i> <span>2024-07-07 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-to-ArrayList-using-Arrays.html">Convert String to ArrayList using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-print-LinkedHashSet-elements-(display-LinkedHashSet-elements).html">How to print LinkedHashSet elements (display LinkedHashSet elements)</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-long.html">Convert String long</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-array-to-Set-(Convert-array-to-HashSet).html">Convert array to Set (Convert array to HashSet)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.sun.net.httpserver.HttpExchange.html">com.sun.net.httpserver.HttpExchange</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-byte-Array-Example.html">Java Sort byte Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Replace-an-element-from-ArrayList-using-Java-ListIterator-Example.html">Replace an element from ArrayList using Java ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/com.google.common.base.Objects.html">com.google.common.base.Objects</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-short.html">Convert String to short</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/java.util.concurrent.AbstractExecutorService.html">j.u.c.AbstractExecutorService</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.http.client.methods.RequestBuilder.html">o.a.h.c.m.RequestBuilder</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Convert-Java-Boolean-object-to-boolean-primitive-example.html">Convert Java Boolean object to boolean primitive example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-hexadecimal-number-to-decimal-number-example.html">Convert hexadecimal number to decimal number example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/javax.naming.Name.html">javax.naming.Name</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-make-file-read-only-in-Java.html">How to make file read only in Java</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-power-using-Math.pow.html">Find power using Math.pow</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.springframework.data.domain.PageRequest.html">o.s.d.d.PageRequest</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Java-Double-isNaN-method-example.html">Java Double isNaN method example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/FileOutputStream/Create-FileOutputStream-object-from-String-file-path.html">Create FileOutputStream object from String file path</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Colored-Hello-World-Applet-Example.html">Colored Hello World Applet Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
