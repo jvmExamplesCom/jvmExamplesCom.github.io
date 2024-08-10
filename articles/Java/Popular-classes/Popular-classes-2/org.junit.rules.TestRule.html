@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.junit.rules.TestRule</title> <!--timestamp=2024-08-10T00:14:05.055167874Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.junit.rules.TestRule"> 
+  <meta name="keywords" content="org.junit.rules.TestRule"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.junit.rules.TestRule"> 
+  <meta property="og:description" content="org.junit.rules.TestRule"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.junit.rules.TestRule"> 
+  <meta name="twitter:description" content="org.junit.rules.TestRule"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-08-09</small>
+        </div> 
+        <h1>org.junit.rules.TestRule</h1> 
+        <p>The org.junit.rules.TestRule interface is commonly used in JUnit tests to implement a set of rules that need to be executed before and after all test methods. These rules can be used to perform setup and teardown tasks, modify the execution of test methods, or add additional debugging information to the result output.</p> 
+        <h2>Usage Example</h2> 
+        <p>The following example demonstrates how to use the org.junit.rules.TestRule interface to perform setup and teardown tasks before and after each test method in a given test class.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyTest {
+  @Rule
+  public TestRule myRule = new TestWatcher() {
+    protected void before() {
+      // do setup before each test here
+    }
+
+    protected void after() {
+      // cleanup after each test here
+    }
+  };
+
+  @Test
+  public void testSomething() {
+    // test code here
+  }
+}
+
+          </xmp></code></pre> 
+        <h2>Using Rules with Parameters</h2> 
+        <p>In some cases it may be necessary to pass parameters to the rule. To do this, it's possible to create a custom rule class that extends the TestRule interface and implements the necessary logic to process the parameters.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class CustomTestRule implements TestRule {
+  private final int paramValue;
+
+  public CustomTestRule(int paramValue) {
+    this.paramValue = paramValue;
+  }
+
+  public Statement apply(Statement base, Description description) {
+    return new Statement() {
+      @Override
+      public void evaluate() throws Throwable {
+        // logic before the test
+        try {
+          base.evaluate();
+        } finally {
+          // logic after the test
+        }
+      }
+    };
+  }
+}
+
+          </xmp></code></pre> 
+        <p>The rule can then be used in a test class like this:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyTest {
+  @Rule
+  public TestRule myRule = new CustomTestRule(100);
+
+  @Test
+  public void testSomething() {
+    // test code here
+  }
+}
+
+          </xmp></code></pre> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/File-And-IO/InputStream/"> InputStream </a> </p> <a href="/articles/Java/File-And-IO/InputStream/Read-character-from-console-using-InputStream.html">Read character from console using InputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/"> Data types </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/int-to-String-Example.html">int to String Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/"> Double Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Java-Double-isInfinite-example.html">Java Double isInfinite example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.validation.constraints.NotEmpty.html">j.v.c.NotEmpty</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.objectweb.asm.Label.html">org.objectweb.asm.Label</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipEntry/"> ZipEntry </a> </p> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Zip-Entry-Example.html">Get Zip Entry Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.ws.rs.core.UriInfo.html">javax.ws.rs.core.UriInfo</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-check-if-TreeSet-is-empty-(isEmpty-method).html">How to check if TreeSet is empty (isEmpty method)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/System/"> System </a> </p> <a href="/articles/Java/Miscellaneous-Classes/System/Run-the-garbage-collector-using-System-class.html">Run the garbage collector using System class</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-all-values-from-the-TreeMap.html">How to get all values from the TreeMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-14 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Thomas</h3> <p><a href="#">2024-09-22 18:23</a></p> Thank you guys for your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Nahish</h3> <p><a href="#">2024-09-18 18:10</a></p> Thank you very much! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.google.firebase.database.DataSnapshot.html">c.g.f.d.DataSnapshot</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Change-Checkbox-Foreground-Color-Example.html">Change Checkbox Foreground Color Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-array-to-ArrayList.html">Convert array to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Simple-Java-Integer-Example.html">Simple Java Integer Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.springframework.expression.spel.support.StandardEvaluationContext.html">o.s.e.s.s.StandardEvaluationContext</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-Byte-object-to-String-object.html">Convert Byte object to String object</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Remove-An-Item-From-a-List-Example.html">Remove An Item From a List Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/How-to-clear-Java-LinkedList-(empty-LinkedList).html">How to clear Java LinkedList (empty LinkedList)</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-boolean-from-file-using-DataInputStream.html">Read boolean from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.app.Instrumentation.html">android.app.Instrumentation</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-check-if-the-value-exists-in-the-TreeMap-(TreeMap-contains-a-value).html">How to check if the value exists in the TreeMap (TreeMap contains a value)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Replace-an-element-from-ArrayList-using-Java-ListIterator-Example.html">Replace an element from ArrayList using Java ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Java-Factorial-Using-Recursion-Example.html">Java Factorial Using Recursion Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-comma-separated-string-to-HashSet-in-Java.html">Convert comma separated string to HashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-temporary-file-in-specified-directory.html">Create temporary file in specified directory</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-String-to-wrapper-objects.html">Convert String to wrapper objects</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-remove-duplicate-elements-from-the-Vector.html">How to remove duplicate elements from the Vector</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/java.time.format.TextStyle.html">java.time.format.TextStyle</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.elasticsearch.common.xcontent.XContentBuilder.html">o.e.c.x.XContentBuilder</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/io.netty.buffer.ByteBufUtil.html">io.netty.buffer.ByteBufUtil</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
