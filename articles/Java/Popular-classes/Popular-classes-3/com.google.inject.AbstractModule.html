@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - com.google.inject.AbstractModule</title> <!--timestamp=2024-08-18T00:15:46.308724657Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="com.google.inject.AbstractModule"> 
+  <meta name="keywords" content="com.google.inject.AbstractModule"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - com.google.inject.AbstractModule"> 
+  <meta property="og:description" content="com.google.inject.AbstractModule"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - com.google.inject.AbstractModule"> 
+  <meta name="twitter:description" content="com.google.inject.AbstractModule"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-08-17</small>
+        </div> 
+        <h1>Introduction to com.google.inject.AbstractModule</h1> 
+        <p>com.google.inject.AbstractModule is a public abstract class which provides framework for creating modules that can be used to configure dependency injection. It allows creating objects and binding them together in order to maximize re-use of components, improve readability of code and reduce errors in configuration. This article explains the main features of this class and provides several code examples.</p> 
+        <h2>Binding Objects</h2> 
+        <p>The main purpose of the AbstractModule class is to bind objects together. Objects can be either classes or instances, and they can be bound to each other with the bind() method. For example, in order to bind a ClassA instance to its interface ClassB:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Injector injector = Guice.createInjector(new AbstractModule() {
+     @Override 
+     protected void configure() { 
+         bind(ClassB.class).toInstance(ClassA.instance); 
+     } 
+ });
+
+          </xmp></code></pre> 
+        <p>This will bind the ClassA instance to its interface ClassB, making it possible to use the interface ClassB where a ClassA instance is required.</p> 
+        <h2>Configuration Methods</h2> 
+        <p>The AbstractModule class provides a number of methods which allow to configure dependencies. These methods can be used as an alternative to binding objects. For example, the following code snippet configures the ClassA instance to be created with certain parameters:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Injector injector = Guice.createInjector(new AbstractModule() {
+     @Override 
+     protected void configure() { 
+         bind(ClassB.class).toConstructor(ClassA.class.getConstructor(String.class)); 
+     } 
+ });
+
+          </xmp></code></pre> 
+        <p>This will create a new ClassA instance when the interface ClassB is required. The parameter of the constructor is passed in as an argument to the toConstructor() method.</p> 
+        <h2>Providers</h2> 
+        <p>The AbstractModule class also provides a way to create providers, which can be used to create objects on demand. This is useful for objects which are expensive to create or which need to be lazily initialized. A provider can be created by implementing the Provider interface or by extending the AbstractModule class and overriding the provide() method. For example:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Injector injector = Guice.createInjector(new AbstractModule() {
+     @Override 
+     protected void configure() { 
+         bind(ClassB.class).toProvider(MyProvider.class); 
+     } 
+ 
+     @Override 
+     protected Provider provide() { 
+         return new MyProvider(); 
+     } 
+});
+
+          </xmp></code></pre> 
+        <p>This will cause the MyProvider instance to be used to create a new ClassA instance whenever the interface ClassB is required.</p> 
+        <h2>Conclusion</h2> 
+        <p>com.google.inject.AbstractModule is a powerful class which provides a framework for configuring dependency injection. It allows binding objects together, configuring dependencies and creating providers, all of which can be used to improve readability of code, maximize re-use of components and reduce errors in configuration. This article has explained the main features of this class and provided several code examples.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/"> If Else Statement </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/If-Else-statement-Example.html">If Else statement Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.util.Xml.html">android.util.Xml</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/com.sun.management.OperatingSystemMXBean.html">c.s.m.OperatingSystemMXBean</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JTextField/"> JTextField </a> </p> <a href="/articles/Java/Swing/JTextField/Get-Current-Caret-Position-in-JTextField-Example.html">Get Current Caret Position in JTextField Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Iterate-ArrayList-using-for-loop-or-for-each-loop.html">Iterate ArrayList using for loop or for each loop</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/FileOutputStream/"> FileOutputStream </a> </p> <a href="/articles/Java/File-And-IO/FileOutputStream/Append-output-to-file-using-FileOutputStream.html">Append output to file using FileOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/"> Data types </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/Java-float-Example.html">Java float Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/"> ListIterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-LinkedHashMap-using-an-Iterator.html">How to iterate LinkedHashMap using an Iterator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Iterate-through-elements-of-Java-TreeSet-example.html">Iterate through elements of Java TreeSet example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.apache.commons.configuration.Configuration.html">o.a.c.c.Configuration</a> <h6><i class="fa fa-clock-o"></i> <span>2024-05-28 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.swing.JCheckBoxMenuItem.html">javax.swing.JCheckBoxMenuItem</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.shiro.subject.Subject.html">org.apache.shiro.subject.Subject</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-check-HashSet-size-(size-method).html">How to check HashSet size (size method)</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-All-Items-From-AWT-List-Example.html">Get All Items From AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-double-Arrays-Example.html">Compare Two Java double Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.antlr.v4.runtime.Recognizer.html">org.antlr.v4.runtime.Recognizer</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-maximum-of-two-numbers-using-Math.max.html">F.max</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-long-Array-Example.html">Performing Binary Search on Java long Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-Head-Map-from-Java-TreeMap-example.html">Get Head Map from Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-convert-ArrayList-to-HashSet.html">How to convert ArrayList to HashSet</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Create-Checked-Checkbox-Example.html">Create Checked Checkbox Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-fix-java.io.FileNotFoundException-(access-is-denied).html">FileNotFoundException (access is denied)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/redis.clients.jedis.JedisPool.html">redis.clients.jedis.JedisPool</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-ArrayList-in-reverse-direction-using-ListIterator.html">How to iterate ArrayList in reverse direction using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Continue-Statement/Java-continue-statement-with-label-example.html">Java continue statement with label example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-LinkedHashMap-value-by-index.html">How to get LinkedHashMap value by index</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-String-to-long-Example.html">Convert String to long Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/androidx.annotation.StringRes.html">androidx.annotation.StringRes</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/com.google.gson.JsonPrimitive.html">com.google.gson.JsonPrimitive</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-long-to-a-file-using-DataOutputStream.html">Write long to a file using DataOutputStream</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
