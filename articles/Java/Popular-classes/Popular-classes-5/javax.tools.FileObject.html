@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javax.tools.FileObject</title> <!--timestamp=2024-08-20T00:14:14.109280226Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.tools.FileObject"> 
+  <meta name="keywords" content="javax.tools.FileObject"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.tools.FileObject"> 
+  <meta property="og:description" content="javax.tools.FileObject"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.tools.FileObject"> 
+  <meta name="twitter:description" content="javax.tools.FileObject"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-08-19</small>
+        </div> 
+        <h1> Introduction to javax.tools.FileObject </h1> 
+        <p>The javax.tools.FileObject class is a powerful Java API tool used to represent abstract file and directory objects. FileObjects are part of the Java language Tools Framework, which provides an abstraction for representing files and directories, as well as providing tools for compiling and viewing source code.</p> 
+        <p>The FileObject interface allows for implementing classes to provide a way for tools to access data typically found in file and directory objects (like content or attributes) without having to read from or write to the actual file system. This is useful for tools that want to process structured files without worrying about the underlying file system representation.</p> 
+        <h2>Basic Concepts </h2> 
+        <p>Before diving into the specifics of the FileObject class, it is important to understand some basic concepts related to the Java Language Tools Framework and the FileObject interface. </p> 
+        <p>The Java Language Tools Framework is a set of APIs that provide an abstraction layer on top of the underlying native file system. The purpose of this abstraction layer is to provide a unified way to work with files and directories, regardless of which operating system is being used. Instead of dealing with operating system specific details (like file system type, character encoding, etc.), the tools framework provides unified APIs for dealing with files and directories.</p> 
+        <p>The FileObject interface is the primary interface for working with files and directories within the Java Language Tools Framework. It provides methods for accessing the contents of a file or directory, as well as methods for manipulating the file or directory (such as creating, deleting, copying, moving, etc.).</p> 
+        <h2>Examples of FileObject in Action</h2> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+//Create a FileObject for a given file path
+FileObject myFile = Files.getFileObject("/path/to/my/file.txt");
+
+//Read the contents of the file
+String contents = myFile.getContent();
+
+//Copy the file to a new location
+Path destination = Paths.get("/new/location/file.txt");
+myFile.copy(destination, true /*overwrite existing file*/);
+
+//Delete the file
+myFile.delete();
+
+          </xmp></code></pre> 
+        <p>In the example above, we create a FileObject for a given file path, read the contents of the file, copy it to a different location, and then delete the file. As you can see, the FileObject interface makes it easy to work with files and directories in the native file system, without having to manually handle any operating system specific details.</p> 
+        <h2>Advantages of Using FileObject</h2> 
+        <p>There are several advantages to using the FileObject interface when working with files and directories in the native file system. First and foremost, it provides a unified way to work with files and directories, regardless of the underlying operating system. This makes it easy to develop cross-platform applications that interact with the native file system.</p> 
+        <p>Secondly, the FileObject interface provides access to the file and directory attributes, such as creation date, size, permissions, etc., without having to manually parse the underlying file system structure. This makes it easier to develop applications that need to inspect the file system for certain attributes.</p> 
+        <p>Finally, the FileObject interface provides an abstract layer for dealing with file contents, making it easy to access, manipulate, and analyze the contents of a file without directly interacting with the underlying file system. This can be especially useful for tools that need to parse and analyze the contents of a file without having to worry about the underlying data representation.</p> 
+        <h2>Conclusion</h2> 
+        <p>The javax.tools.FileObject class is a powerful and flexible API for interacting with the native file system. It provides a unified way to work with files and directories, regardless of the underlying operating system, as well as providing convenient access to file and directory attributes, and abstracted access to file contents. By utilizing the FileObject API, developers can quickly and easily build powerful and cross-platform tools for working with files and directories in the native file system.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-Minimum-element-of-Java-HashSet-Example.html">Find Minimum element of Java HashSet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Declare-multiple-variables-in-for-loop-Example.html">Declare multiple variables in for loop Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Create-List-from-Java-Object-Array-Example.html">Create List from Java Object Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/List/"> List </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-List-to-array.html">Convert List to array</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Display-Image-in-an-Applet-Example.html">Display Image in an Applet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-find-the-minimum-or-maximum-value-from-Java-HashSet.html">How to find the minimum or maximum value from Java HashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/Java-String-Array-Example.html">Java String Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/java.lang.Thread.State.html">java.lang.Thread.State</a> <h6><i class="fa fa-clock-o"></i> <span>2024-03-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.util.AntPathMatcher.html">o.s.u.AntPathMatcher</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/InputStream/"> InputStream </a> </p> <a href="/articles/Java/File-And-IO/InputStream/Read-character-from-console-using-InputStream.html">Read character from console using InputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-27 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Check-if-a-particular-value-exists-in-Java-TreeMap-example.html">Check if a particular value exists in Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.shiro.authz.SimpleAuthorizationInfo.html">o.a.s.a.SimpleAuthorizationInfo</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.util.LruCache.html">android.util.LruCache</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Copy-all-elements-of-Java-TreeSet-to-an-Object-Array-Example.html">Copy all elements of Java TreeSet to an Object Array Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-exponential-value-of-a-number-using-Math.exp.html">F.exp</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Get-Set-view-of-Keys-from-Java-LinkedHashMap-example.html">Get Set view of Keys from Java LinkedHashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-HashMap-to-TreeMap.html">Convert HashMap to TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Remove-AWT-Label-From-Applet-or-Window-Frame-Example.html">Remove AWT Label From Applet or Window Frame Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.lucene.index.Term.html">org.apache.lucene.index.Term</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-String-to-primitive-byte-Example.html">Convert String to primitive byte Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-List-in-reverse-order-using-ListIterator.html">Iterate List in reverse order using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Remove-all-elements-from-Java-HashSet-example.html">Remove all elements from Java HashSet example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Iterate-Java-ArrayList.html">Iterate Java ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.test.web.servlet.MvcResult.html">o.s.t.w.s.MvcResult</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.bukkit.entity.EntityType.html">org.bukkit.entity.EntityType</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler.html">o.s.s.c.ThreadPoolTaskScheduler</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Get-Selected-Item-Of-AWT-Choice-Or-Combobox-Example.html">Get Selected Item Of AWT Choice Or Combobox Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Disable-Label-Example.html">Disable Label Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-float-to-String.html">Convert float to String</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Get-Red,-Green,-and-Blue-(RGB)-Components-From-Color-Example.html">Get Red, Green, and Blue (RGB) Components From Color Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

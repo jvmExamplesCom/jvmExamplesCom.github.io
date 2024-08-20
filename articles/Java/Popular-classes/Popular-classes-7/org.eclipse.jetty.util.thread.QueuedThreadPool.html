@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.eclipse.jetty.util.thread.QueuedThreadPool</title> <!--timestamp=2024-08-20T00:14:50.050493258Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.eclipse.jetty.util.thread.QueuedThreadPool"> 
+  <meta name="keywords" content="org.eclipse.jetty.util.thread.QueuedThreadPool"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.eclipse.jetty.util.thread.QueuedThreadPool"> 
+  <meta property="og:description" content="org.eclipse.jetty.util.thread.QueuedThreadPool"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.eclipse.jetty.util.thread.QueuedThreadPool"> 
+  <meta name="twitter:description" content="org.eclipse.jetty.util.thread.QueuedThreadPool"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-08-19</small>
+        </div> 
+        <h1>org.eclipse.jetty.util.thread.QueuedThreadPool</h1> 
+        <p>The org.eclipse.jetty.util.thread.QueuedThreadPool is an implementation of the ThreadPool interface that utilizes a queue for request handling. It is part of the Jetty open source server project. The QueuedThreadPool class provides a way to configure the size of the thread pool, set the maximum number of requests that can be handled concurrently and also set the timeout period for how long requests can remain unserviced.</p> 
+        <h2>Basic Usage</h2> 
+        <p>A QueuedThreadPool can be created with a simple constructor call that takes the maximum pool size and thread timeout parameters.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+QueuedThreadPool qtp = new QueuedThreadPool(5, 2);
+
+          </xmp></code></pre> 
+        <p>This will create a thread pool with a maximum of 5 threads and a timeout of 2 seconds. After this point the thread pool will start to automatically manage the threads to accommodate incoming requests.</p> 
+        <h2>Queueing Requests</h2> 
+        Requests can be queued using the
+        <pre>execute()</pre> method:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+qtp.execute(new Runnable() {
+    public void run() {
+        // do something
+    }
+});
+
+          </xmp></code></pre> 
+        <p>The thread pool will handle the queuing of requests internally, so there is no need to explicitly manage a queue.</p> 
+        <h2>Getting Statistics</h2> 
+        <p>The QueuedThreadPool class provides methods to retrieve recent statistics about request handling. For example, the </p>
+        <pre>getIdleThreads()</pre> method will return the number of currently idle threads:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+int idleThreads = qtp.getIdleThreads();
+
+          </xmp></code></pre> 
+        The
+        <pre>getActiveThreads()</pre> method will return the number of actively processing requests:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+int activeThreads = qtp.getActiveThreads();
+
+          </xmp></code></pre> 
+        <h2>Shutting Down</h2> 
+        <p>When the thread pool is no longer needed it should be shutdown to ensure all resources are released. This can be done by calling the </p>
+        <pre>shutdown()</pre> method:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+qtp.shutdown();
+
+          </xmp></code></pre> 
+        <p>Once the shutdown method has been called no more requests will be accepted and any existing requests in the queue will be discarded.</p> 
+        <h2>Conclusion</h2> 
+        <p>The org.eclipse.jetty.util.thread.QueuedThreadPool provides an easy to use API for creating threads and queuing requests. It also provides useful statistics about the request queue and threads, making it easy to monitor the performance of an application. With its wide range of features it is the ideal choice for applications requiring thread pooling.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-List-to-Map-(Convert-List-to-HashMap).html">Convert List to Map (Convert List to HashMap)</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-contains-a-key-(indexOf).html">How to check if LinkedHashMap contains a key (indexOf)</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/"> AWT Choice </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Disable-AWT-Choice-Or-Combobox-Example.html">Disable AWT Choice Or Combobox Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Infinite-For-loop-Example.html">Infinite For loop Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.support.annotation.IntRange.html">android.support.annotation.IntRange</a> <h6><i class="fa fa-clock-o"></i> <span>2024-02-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.view.WindowManager.html">android.view.WindowManager</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-comma-separated-String-to-ArrayList-using-Arrays.html">Convert comma separated String to ArrayList using Arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/java.util.function.IntFunction.html">java.util.function.IntFunction</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-LinkedHashMap-in-reverse-order-using-ListIterator.html">Iterate through LinkedHashMap in reverse order using ListIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Print-ArrayList-elements-using-Arrays.html">Print ArrayList elements using Arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-11 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Abral</h3> <p><a href="#">2024-10-07 15:10</a></p> thanks <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>JavaFan</h3> <p><a href="#">2024-09-30 00:22</a></p> I do not understand details <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Java-String-endsWith-Example.html">Java String endsWith Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/BufferedInputStream/Read-File-in-String-Using-Java-BufferedInputStream-Example.html">Read File in String Using Java BufferedInputStream Example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/JTextField-Columns-Example.html">JTextField Columns Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Convert-ArrayList-to-LinkedHashMap-in-Java.html">Convert ArrayList to LinkedHashMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.springframework.context.annotation.FilterType.html">o.s.c.a.FilterType</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Continue-Statement/Java-continue-statement-example.html">Java continue statement example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-decimal-integer-to-binary-number-example.html">Convert decimal integer to binary number example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.springframework.core.convert.converter.Converter.html">o.s.c.c.c.Converter</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Convert-Java-Boolean-object-to-boolean-primitive-example.html">Convert Java Boolean object to boolean primitive example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Create-JLabel-With-Text-Example.html">Create JLabel With Text Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-font/Get-Available-Font-Objects-Example.html">Get Available Font Objects Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Change-AWT-Button-Font-Example.html">Change AWT Button Font Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Java-ArrayList-capacity.html">Java ArrayList capacity</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Compare-two-HashMap-objects.html">Compare two HashMap objects</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.avro.io.DecoderFactory.html">org.apache.avro.io.DecoderFactory</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Set-Background-Color-of-JTextField-Example.html">Set Background Color of JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Convert-String-to-byte-array.html">Convert String to byte array</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/ByteArrayInputStream/Read-byte-array-using-ByteArrayInputStream-Example.html">Read byte array using ByteArrayInputStream Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/java.util.function.IntFunction.html">java.util.function.IntFunction</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Java-Long-Example.html">Java Long Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
