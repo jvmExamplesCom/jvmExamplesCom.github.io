@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.easymock.EasyMock</title> <!--timestamp=2024-09-29T00:17:44.930679486Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.easymock.EasyMock"> 
+  <meta name="keywords" content="org.easymock.EasyMock"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.easymock.EasyMock"> 
+  <meta property="og:description" content="org.easymock.EasyMock"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.easymock.EasyMock"> 
+  <meta name="twitter:description" content="org.easymock.EasyMock"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-09-28</small>
+        </div> 
+        <h1>Introduction to org.easymock.EasyMock</h1> 
+        <p>org.easymock.EasyMock is an open source library for simplifying the testing of Java classes. It provides a powerful and easy-to-use way to create mock objects - objects that simulate the behaviour of real objects in controlled ways. Mock objects are typically used in unit testing, but they can also be useful in other scenarios, such as debugging network applications.</p> 
+        <p>EasyMock enables developers to create mocks without having to write Java code. It does this through a simple API that allows developers to specify what methods need to be mocked and what arguments should be used when the methods are called. It takes care of the rest, automatically generating the necessary Java code for the mocks. This makes it ideal for developers who aren't comfortable writing code, or who don't have much experience with Java.</p> 
+        <p>In this article, we'll take a closer look at EasyMock and explore some of its features and benefits.</p> 
+        <h2>Basic Usage of EasyMock</h2> 
+        <p>Creating a mock object with EasyMock is easy. All you need to do is provide a class name and a list of method names that should be mocked:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MockObject mock = EasyMock.createMock(MyClass.class, "method1", "method2");
+
+          </xmp></code></pre> 
+        <p>Once the mock object has been created, you can set up expectations for each mocked method. For example, if you want to expect a call to the <em>method1</em> method with a certain argument, you can use the <em>expect</em> method:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EasyMock.expect(mock.method1("foo")).andReturn(42);
+
+          </xmp></code></pre> 
+        <p>This tells EasyMock that the <em>method1</em> method should be called with the argument "foo" and that it should return the value 42. If the <em>method1</em> method is called with any other argument, EasyMock will throw an exception.</p> 
+        <p>Once you've set up all the expectations, you can then tell EasyMock to start recording. This means that any subsequent calls to the mocked methods will be recorded and can later be verified:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EasyMock.replay(mock);
+
+          </xmp></code></pre> 
+        <p>Once the recording has been started, you can make calls to the mocked methods and verify that the expected behaviour has been observed. For example, you can verify that the <em>method1</em> method was called with the "foo" argument and that it returned the value 42:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+int result = mock.method1("foo");
+assertEquals(42, result);
+EasyMock.verify(mock);
+
+          </xmp></code></pre> 
+        <p>If any of these assertions fail, an exception will be thrown and the test will fail.</p> 
+        <h2>Using EasyMock with Test Frameworks</h2> 
+        <p>EasyMock can be used with any test framework. This makes it easy to write unit tests that use mock objects. For example, if you're using JUnit, you can create and use mock objects in the same way as any other object.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@Test
+public void testMyMethod() {
+    MockObject mock = EasyMock.createMock(MyClass.class, "method1", "method2");
+    EasyMock.expect(mock.method1("foo")).andReturn(42);
+    EasyMock.replay(mock);
+    int result = mock.method1("foo");
+    assertEquals(42, result);
+    EasyMock.verify(mock);
+}
+
+          </xmp></code></pre> 
+        <p>This makes it easy to use mock objects in unit tests without having to write any extra code. This can save a lot of time and effort, as there's no need to write mock classes by hand.</p> 
+        <h2>Conclusion</h2> 
+        <p>EasyMock is a powerful and easy-to-use library for creating and using mock objects in Java applications. It provides a simple API that allows developers to quickly create and use mock objects in their unit tests. It also integrates seamlessly with test frameworks, making it easy to use mock objects in tests without having to write additional code.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Insert-Item-To-a-List-At-Specified-Index-Example.html">Insert Item To a List At Specified Index Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Java-ArrayList-capacity.html">Java ArrayList capacity</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.bouncycastle.util.encoders.Base64.html">o.b.u.e.Base64</a> <h6><i class="fa fa-clock-o"></i> <span>2024-02-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.view.ViewConfiguration.html">android.view.ViewConfiguration</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/javafx.scene.input.ClipboardContent.html">javafx.scene.input.ClipboardContent</a> <h6><i class="fa fa-clock-o"></i> <span>2024-03-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/FileOutputStream/"> FileOutputStream </a> </p> <a href="/articles/Java/File-And-IO/FileOutputStream/Create-FileOutputStream-object-from-File-object.html">Create FileOutputStream object from File object</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Perform-Binary-Search-on-Java-Vector-Example.html">Perform Binary Search on Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipEntry/"> ZipEntry </a> </p> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Zip-Entry-Example.html">Get Zip Entry Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Items-From-Multi-Select-AWT-List-Example.html">Get Selected Items From Multi Select AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-elements-of-HashSet-in-Java-using-an-iterator.html">Iterate through elements of HashSet in Java using an iterator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-14 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Uberel</h3> <p><a href="#">2024-11-03 03:48</a></p> Can somebody elaborate more? <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>JavaFan</h3> <p><a href="#">2024-11-19 01:35</a></p> <p>thanks. This is the first sample project I checked so far</p> <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.provider.MediaStore.html">android.provider.MediaStore</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Java-Float-Wrapper-Class-Example.html">Java Float Wrapper Class Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Check-if-value-exists-in-HashMap-Java-example.html">Check if value exists in HashMap Java example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Map-to-List-(Convert-HashMap-to-ArrayList).html">Convert Map to List (Convert HashMap to ArrayList)</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Java-Class-Example.html">Java Class Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Set-Status-Message-in-Applet-Window-Example.html">Set Status Message in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Iterate-through-elements-of-Java-TreeSet-example.html">Iterate through elements of Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Change-Button-Background-Color-Example.html">Change Button Background Color Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/javax.xml.transform.TransformerFactoryConfigurationError.html">TransformerFactoryConfigurationError</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.servlet.ServletOutputStream.html">javax.servlet.ServletOutputStream</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Uncompressed-Size-of-Zip-Entry-Example.html">Get Uncompressed Size of Zip Entry Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Get-elements-by-index-from-Java-TreeSet.html">Get elements by index from Java TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-ArrayList-using-ListIterator.html">Iterate through ArrayList using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.google.common.collect.ImmutableListMultimap.html">c.g.c.c.ImmutableListMultimap</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipFile/Get-Specified-Entry-From-Zip-File-Example.html">Get Specified Entry From Zip File Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-replace-a-value-for-the-given-key-in-the-TreeMap-(TreeMap-replace-method).html">How to replace a value for the given key in the TreeMap (TreeMap replace method)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.servlet.http.HttpServletResponseWrapper.html">j.s.h.HttpServletResponseWrapper</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-make-file-read-only-in-Java.html">How to make file read only in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/net.minecraft.world.chunk.Chunk.html">net.minecraft.world.chunk.Chunk</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Reverse-array-using-Arrays-class.html">Reverse array using Arrays class</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
