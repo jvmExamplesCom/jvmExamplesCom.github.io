@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.springframework.core.type.AnnotatedTypeMetadata</title> <!--timestamp=2024-10-01T00:17:59.523265699Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.springframework.core.type.AnnotatedTypeMetadata"> 
+  <meta name="keywords" content="org.springframework.core.type.AnnotatedTypeMetadata"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.springframework.core.type.AnnotatedTypeMetadata"> 
+  <meta property="og:description" content="org.springframework.core.type.AnnotatedTypeMetadata"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.springframework.core.type.AnnotatedTypeMetadata"> 
+  <meta name="twitter:description" content="org.springframework.core.type.AnnotatedTypeMetadata"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-09-30</small>
+        </div> 
+        <h1>An Introduction to org.springframework.core.type.AnnotatedTypeMetadata</h1> 
+        <p>org.springframework.core.type.AnnotatedTypeMetadata is an interface implemented by classes providing access to annotations with other qualified type information. It provides annotation-specified attributes and implements the AnnotatedElement interface to expose the annotated element APIs. It also supports a full range of structured annotation query methods, such as ability to search for all meta data associated with a given type or method.</p> 
+        <h2>Using AnnotatedTypeMetadata</h2> 
+        <p>AnnotatedTypeMetadata is often used by Spring’s Context framework to detect which beans are externally configured in the application context. It can also be used to detect which beans have been specifically marked with a specific annotation, like a @Service annotation. Here is an example of using AnnotatedTypeMetadata for bean detection:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@TypeFilter(type = CustomFilterAnnotation.class)
+public class MyBean {
+  // ...
+} 
+
+public class MyBeanFilter implements TypeFilter {
+  @Override
+  public boolean match(AnnotatedTypeMetadata metadata) {
+    if (CustomFilterAnnotation.class.isInstance(metadata)) {
+      CustomFilterAnnotation annotation = (CustomFilterAnnotation) metadata;
+      return annotation.getValue();
+    }
+    return false;
+  }
+}
+
+          </xmp></code></pre> 
+        <p>In this example, the MyBeanFilter class is a custom TypeFilter implementation that will be used by Spring to detect whether the MyBean class is externally configured in the application context. The implementation uses the AnnotatedTypeMetadata instance to obtain information about the @TypeFilter annotation that appears on the MyBean class. It then uses the value of the annotation to determine whether the bean should be included in the application context.</p> 
+        <h2>Example Using Annotations</h2> 
+        <p>Annotations can also be used with AnnotatedTypeMetadata to provide additional meta data about the annotated element. Here is an example that uses annotation to provide property name aliases for a class field:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@AliasFor(value = "name")
+private String myName;
+
+@Observes
+public void getAnnotatedFields(AnnotatedTypeMetadata metadata) {
+  Map<String, Object> map = metadata.getAnnotationsInHierarchy(MyClass.class);
+  if (map != null) {
+    AliasFor alias = (AliasFor) map.get("myName");
+    System.out.println("Alias name is: " + alias.value()); 
+  }
+}
+
+          </xmp></code></pre> 
+        <p>In this example the annotation AliasFor is used to provide the name of the field myName to be used as the alternative name. Then when the getAnnotatedFields() method is invoked, it obtains the annotated type metadata for the MyClass class. It then iterates over the collected annotations, obtaining the AliasFor annotation, and printing out its value.</p> 
+        <h2>Conclusion</h2> 
+        <p>org.springframework.core.type.AnnotatedTypeMetadata provides access to annotations and other qualified type information. It is often used by Spring’s Context framework to detect which beans are externally configured in the application context. It can also be used to obtain annotation meta data about the annotated element. Examples are provided of retrieving both types of meta data from AnnotatedTypeMetadata instances.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Check-if-a-particular-element-exists-in-Java-HashSet-Example.html">Check if a particular element exists in Java HashSet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Convert-ArrayList-to-LinkedHashMap-in-Java.html">Convert ArrayList to LinkedHashMap in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/com.jcraft.jsch.JSchException.html">com.jcraft.jsch.JSchException</a> <h6><i class="fa fa-clock-o"></i> <span>2024-02-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-find-element-index-in-LinkedHashSet.html">How to find element index in LinkedHashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-check-if-element-exists-in-LinkedHashSet.html">How to check if element exists in LinkedHashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/"> Basic Java Examples </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Even-Odd-Number-Example.html">Even Odd Number Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Determine-If-The-Checkbox-Is-Enabled-Example.html">Determine If The Checkbox Is Enabled Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/"> ListIterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-LinkedHashMap-in-reverse-order-using-ListIterator.html">How to iterate LinkedHashMap in reverse order using ListIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/javafx.application.Platform.html">javafx.application.Platform</a> <h6><i class="fa fa-clock-o"></i> <span>2024-07-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.awt.event.WindowListener.html">java.awt.event.WindowListener</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-01 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Remove-all-elements-from-Java-Vector-Example.html">Remove all elements from Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-add-key-value-pairs-to-LinkedHashMap-in-Java.html">How to add key-value pairs to LinkedHashMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.jdbc.core.JdbcTemplate.html">o.s.j.c.JdbcTemplate</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-find-element-index-in-LinkedHashSet.html">How to find element index in LinkedHashSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Insert-an-Element-into-LinkedList-Java-example.html">Insert an Element into LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-remove-elements-from-HashSet.html">How to remove elements from HashSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Get-Size-of-Java-LinkedHashMap-Example.html">Get Size of Java LinkedHashMap Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.opencv.imgproc.Imgproc.html">org.opencv.imgproc.Imgproc</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/CheckedOutputStream/Create-Zip-File-With-Adler32-Checksum-Example.html">Create Zip File With Adler32 Checksum Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/com.facebook.react.bridge.NativeModule.html">c.f.r.b.NativeModule</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Remove-An-Item-From-a-List-Example.html">Remove An Item From a List Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/ByteArrayInputStream/Read-byte-array-using-ByteArrayInputStream-Example.html">Read byte array using ByteArrayInputStream Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-all-keys-of-LinkedHashMap-in-Java-(keySet-method).html">How to get all keys of LinkedHashMap in Java (keySet method)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Simple-Java-LinkedHashSet-example.html">Simple Java LinkedHashSet example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.security.KeyStoreException.html">java.security.KeyStoreException</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-minimum-of-two-numbers-using-Math.min.html">F.min</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-byte-array-from-file-using-DataInputStream.html">Read byte array from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-short-to-a-file-using-DataOutputStream.html">Write short to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/android.bluetooth.BluetoothGattCallback.html">a.b.BluetoothGattCallback</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/java.nio.file.FileStore.html">java.nio.file.FileStore</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
