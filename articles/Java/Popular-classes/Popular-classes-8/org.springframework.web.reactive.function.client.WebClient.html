@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.springframework.web.reactive.function.client.WebClient</title> <!--timestamp=2024-10-06T00:18:02.136583006Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.springframework.web.reactive.function.client.WebClient"> 
+  <meta name="keywords" content="org.springframework.web.reactive.function.client.WebClient"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.springframework.web.reactive.function.client.WebClient"> 
+  <meta property="og:description" content="org.springframework.web.reactive.function.client.WebClient"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.springframework.web.reactive.function.client.WebClient"> 
+  <meta name="twitter:description" content="org.springframework.web.reactive.function.client.WebClient"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-10-05</small>
+        </div> 
+        <h1>org.springframework.web.reactive.function.client.WebClient</h1> 
+        <p>Spring WebFlux provides a reactive and fully asynchronous non-blocking web framework for the server side with support for the WebClient – a component in the spring-webflux module that helps to make requests and process response from a server. It is built using the reactive programming model – meaning that it can handle large number of concurrent connections and scale better than the traditional blocking approach. The WebClient is the Spring equivalent of the RestTemplate with the same purpose – to make remote calls transparently and synchronously.</p> 
+        <h2>Creating a WebClient</h2> 
+        <p>Creating a new WebClient is fairly simple and straightforward. All you need to do is use the static factory methods provided by the WebClient class. For example, to create a new WebClient instance:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+WebClient webClient = WebClient.create();
+
+          </xmp></code></pre> 
+        <p>This will create an instance of a WebClient that can be used to send requests to a server. We can further customize the instance by passing in additional parameters to the create() method call:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+WebClient webClient = WebClient.create("http://example.com");
+
+          </xmp></code></pre> 
+        <p>This will create a new WebClient that is configured to send requests to the given URL. This can be used for convenience if all requests should be sent to the same host. Another set of options is to configure a custom ClientHttpRequestFactory. This can be done with the following code:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ClientHttpRequestFactory requestFactory = ...
+WebClient webClient = WebClient.create(requestFactory);
+
+          </xmp></code></pre> 
+        <p>This will create a new WebClient instance that is configured with the given request factory. This can be used to customize various aspects of the underlying HTTP connection such as authentication, connection pooling, etc. </p> 
+        <h2>Making Requests with the WebClient</h2> 
+        <p>Once the WebClient instance is created, the next step is to make requests. This can be done with the WebClient’s exchange() method. This method accepts a RequestEntity which holds all the necessary information about the request such as the HTTP method, URL, headers, body, etc. For example, to make a GET request to a resource:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+RequestEntity<Void> request = RequestEntity.get(URI.create("http://example.com/resource"))
+    .accept(MediaType.APPLICATION_JSON)
+    .build();
+
+ResponseEntity<String> response = webClient.exchange(request, String.class);
+
+System.out.println(response.getBody());
+
+          </xmp></code></pre> 
+        <p>This will send a GET request to the given URL and print out the response body. We can also make POST requests with the exchange() method. For example, to make a POST request to the same URL with some data:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+RequestEntity<String> request = RequestEntity.post(URI.create("http://example.com/resource"))
+    .contentType(MediaType.APPLICATION_JSON)
+    .body("{\"foo\": \"bar\"}");
+
+ResponseEntity<String> response = webClient.exchange(request, String.class);
+
+System.out.println(response.getBody());
+
+          </xmp></code></pre> 
+        <p>This will send a POST request with the given body to the given URL and print out the response body. We can further customize the request by setting custom HTTP headers, cookies, etc. </p> 
+        <h2>Conclusion</h2> 
+        <p>In this article, we looked at the WebClient from the spring-webflux module. We saw how to create a WebClient and how to make requests with it. The WebClient is a powerful and fully asynchronous non-blocking HTTP client that is ideal for high performance web applications. With support for all popular HTTP methods, custom headers, cookies, and more, it’s the perfect tool for building modern web applications. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataInputStream/"> DataInputStream </a> </p> <a href="/articles/Java/File-And-IO/DataInputStream/Read-unsigned-byte-from-file-using-DataInputStream.html">Read unsigned byte from file using DataInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/"> Byte Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-byte-to-Byte-object-Example.html">Convert byte to Byte object Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Initialize-ArrayList.html">Initialize ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/"> Double Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Java-Double-compare-example.html">Java Double compare example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/java.util.function.ToIntFunction.html">java.util.function.ToIntFunction</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.context.annotation.Primary.html">o.s.c.a.Primary</a> <h6><i class="fa fa-clock-o"></i> <span>2024-01-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-TreeMap-key,-value-or-entry-greater-than-or-less-than-the-specified-key.html">How to get TreeMap key, value or entry greater than or less than the specified key</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Change-Checkbox-Font-Example.html">Change Checkbox Font Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.springframework.boot.autoconfigure.condition.ConditionalOnBean.html">o.s.b.a.c.ConditionalOnBean</a> <h6><i class="fa fa-clock-o"></i> <span>2024-08-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Simple-Java-LinkedHashMap-example.html">Simple Java LinkedHashMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-05 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Get-Size-of-Java-Vector-and-loop-through-the-elements-Example.html">Get Size of Java Vector and loop through the elements Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.bukkit.event.player.PlayerInteractEvent.html">o.b.e.p.PlayerInteractEvent</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-temporary-file.html">Create temporary file</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Search-ArrayList-elements-using-Comparable.html">Search ArrayList elements using Comparable</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-long-Arrays-Example.html">Compare Two Java long Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Java-ArrayList-Iterator-example.html">Java ArrayList Iterator example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Prime-Numbers-Java-Example.html">Prime Numbers Java Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-compare-two-TreeMap-objects-in-Java.html">How to compare two TreeMap objects in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.persistence.JoinTable.html">javax.persistence.JoinTable</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.nio.charset.IllegalCharsetNameException.html">j.n.c.IllegalCharsetNameException</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Convert-Short-to-numeric-primitive-data-types-example.html">Convert Short to numeric primitive data types example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-keys-using-Comparator-interface.html">Sort LinkedHashMap by keys using Comparator interface</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Iterate-through-elements-of-Java-LinkedList-using-Iterator-example.html">Iterate through elements of Java LinkedList using Iterator example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.eclipse.core.commands.ExecutionException.html">o.e.c.c.ExecutionException</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/ArrayList-insert-element-at-the-beginning.html">ArrayList insert element at the beginning</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/android.media.ImageReader.html">android.media.ImageReader</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Remove-range-of-elements-from-LinkedList-Java-example.html">Remove range of elements from LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-array-to-ArrayList-using-Arrays.html">Convert String array to ArrayList using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.security.core.GrantedAuthority.html">o.s.s.c.GrantedAuthority</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Java-Double-compare-example.html">Java Double compare example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
