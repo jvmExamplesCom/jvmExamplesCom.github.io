@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - android.net.wifi.WifiManager</title> <!--timestamp=2024-10-10T00:15:58.626462454Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="android.net.wifi.WifiManager"> 
+  <meta name="keywords" content="android.net.wifi.WifiManager"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - android.net.wifi.WifiManager"> 
+  <meta property="og:description" content="android.net.wifi.WifiManager"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - android.net.wifi.WifiManager"> 
+  <meta name="twitter:description" content="android.net.wifi.WifiManager"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-10-09</small>
+        </div> 
+        <h1>android.net.wifi.WifiManager</h1> 
+        <p>The android.net.wifi.WifiManager class is responsible for managing the Wi-Fi functionality of devices running Android. It provides access to the Wi-Fi hardware, as well as methods for scanning, connecting, and disconnecting from Wi-Fi access points and networks. This article examines the capabilities of the WifiManager and provides code examples demonstrating its use.</p> 
+        <h2>Creating a WifiManager Instance</h2> 
+        <p>A WifiManager instance can be created by using the getSystemService() method on an Activity or using the getApplicationContext() method in an Android Service. Here is an example of creating a WifiManager instance on an Activity:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+//Activity
+WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+
+          </xmp></code></pre> 
+        <h2>Scanning Wi-Fi Networks</h2> 
+        <p>The startScan() method will begin scanning for available Wi-Fi networks. To receive the scan results, you must register a BroadcastReceiver with an intent filter of WifiManager.SCAN_RESULTS_AVAILABLE_ACTION. Here is an example of how to do this:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+//Activity
+BroadcastReceiver wifiBroadcastReceiver = new BroadcastReceiver() {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        //handle the broadcast here
+    }
+};
+
+IntentFilter intentFilter = new IntentFilter();
+intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+registerReceiver(wifiBroadcastReceiver, intentFilter);
+
+//in your activity or service
+if (wifiManager.startScan()) {
+    //scan was successful
+} else {
+    //scan failed
+}
+
+          </xmp></code></pre> 
+        <h2>Retrieving Scan Results</h2> 
+        <p>The getScanResults() method will return a list of ScanResult objects that were discovered during a scan. Each ScanResult represents an access point that was discovered. Here is an example of how to retrieve the scan results after a scan has been performed:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+List<ScanResult> scanResults = wifiManager.getScanResults();
+
+          </xmp></code></pre> 
+        <h2>Connecting to a Network</h2> 
+        <p>The connect() method will attempt to connect to a Wi-Fi network. The network is identified either by a WifiConfiguration object, or by providing the network's SSID and security type. Here is an example of how to connect to an open network:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+//open network
+WifiConfiguration wifiConfig = new WifiConfiguration();
+wifiConfig.SSID = "\"" + ssid + "\"";
+wifiConfig.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+
+int netId = wifiManager.addNetwork(wifiConfig);
+
+if (netId != -1) {
+    if (wifiManager.enableNetwork(netId, true)) {
+        //connection was successful
+    } else {
+        //connection failed
+    }
+}
+
+          </xmp></code></pre> 
+        <h2>Disconnecting From a Network</h2> 
+        <p>The disconnect() method will disconnect from the currently connected network. Here is an example of how to disconnect from a network:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+wifiManager.disconnect();
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>The android.net.wifi.WifiManager class provides a powerful set of tools for managing the Wi-Fi hardware of a device running Android. It provides methods for scanning, connecting, and disconnecting from Wi-Fi networks, as well as retrieving scan results. This article examined the capabilities of the WifiManager and provided code examples demonstrating how to use it.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Set-Multiple-Selection-Mode-For-AWT-List-Example.html">Set Multiple Selection Mode For AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-a-union-or-intersection-of-two-TreeSet-objects.html">How to get a union or intersection of two TreeSet objects</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Check-if-a-particular-key-exists-in-Java-HashMap-example.html">Check if a particular key exists in Java HashMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/de.greenrobot.event.EventBus.html">de.greenrobot.event.EventBus</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet’s-Document-URL-or-Directory-Base-Example.html">Get Applet’s Document URL or Directory Base Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.google.common.base.Suppliers.html">com.google.common.base.Suppliers</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/"> If Else Statement </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/If-Else-statement-Example.html">If Else statement Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.springframework.security.core.userdetails.User.html">o.s.s.c.u.User</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/FileOutputStream/"> FileOutputStream </a> </p> <a href="/articles/Java/File-And-IO/FileOutputStream/Create-FileOutputStream-object-from-File-object.html">Create FileOutputStream object from File object</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Get-Size-of-Java-Vector-and-loop-through-the-elements-Example.html">Get Size of Java Vector and loop through the elements Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-15 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Java-Class-Example.html">Java Class Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Static/Java-static-method-example.html">Java static method example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-check-if-element-exists-in-Java-HashSet.html">How to check if element exists in Java HashSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-an-array-to-Vector.html">Convert an array to Vector</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-iterate-LinkedHashSet-elements.html">How to iterate LinkedHashSet elements</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Create-Read-Only-JTextField-Example.html">Create Read Only JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.support.v4.app.TaskStackBuilder.html">a.s.v.a.TaskStackBuilder</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.Date.html">java.util.Date</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/BufferedOutputStream/Write-byte-to-file-using-BufferedOutputStream.html">Write byte to file using BufferedOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.apache.http.client.ClientProtocolException.html">o.a.h.c.ClientProtocolException</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Iterate-through-elements-Java-Vector-using-Iterator-Example.html">Iterate through elements Java Vector using Iterator Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Check-if-the-LinkedList-is-empty-in-Java.html">Check if the LinkedList is empty in Java</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Item-Count-Of-AWT-List-Example.html">Get Item Count Of AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.springframework.beans.factory.support.BeanDefinitionRegistry.html">o.s.b.f.s.BeanDefinitionRegistry</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Search-elements-of-LinkedList-Java-example.html">Search elements of LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Java-ArrayList-capacity.html">Java ArrayList capacity</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/java.nio.file.attribute.FileAttribute.html">j.n.f.a.FileAttribute</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.http.conn.ConnectTimeoutException.html">o.a.h.c.ConnectTimeoutException</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Traverse-through-ArrayList-in-reverse-direction-using-Java-ListIterator-Example.html">Traverse through ArrayList in reverse direction using Java ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-remove-all-entries-or-clear-TreeMap-in-Java.html">How to remove all entries or clear TreeMap in Java</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
