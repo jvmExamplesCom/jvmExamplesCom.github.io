@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.awt.image.RenderedImage</title> <!--timestamp=2024-10-15T00:16:54.103309224Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.awt.image.RenderedImage"> 
+  <meta name="keywords" content="java.awt.image.RenderedImage"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.awt.image.RenderedImage"> 
+  <meta property="og:description" content="java.awt.image.RenderedImage"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.awt.image.RenderedImage"> 
+  <meta name="twitter:description" content="java.awt.image.RenderedImage"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-10-14</small>
+        </div> 
+        <h1>Java.awt.image.RenderedImage</h1> 
+        <p>Java.awt.image.RenderedImage is an interface from java.awt.image package which provides an image representation created from a rendering (or producing) process. It is a sub-interface of java.awt.image.renderable.RenderableImage, and it extends the interface java.awt.image.BufferedImage. </p> 
+        <p>RenderedImage objects are used to represent images that may be either stored in a file or stored in memory. The RenderedImage class supports a variety of raster data formats. Images are either produced or created by a Rendering Process. This process can be implemented as a program or application written in Java or as a native program written in another language.</p> 
+        <h2>Creating a RenderedImage object </h2> 
+        <p>To create a RenderedImage object, you need to pass in at least two parameters: </p> 
+        <ul> 
+         <li>A DataBuffer object, which contains the raw pixel data </li> 
+         <li>An array of SampleModel objects that specifies how the data is organized </li> 
+        </ul> 
+        <p>This example creates a RenderedImage object, using a single-banded 3x3 matrix.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+DataBuffer dataBuffer = DataBuffer.create(3,3); 
+SampleModel sampleModel = new SinglePixelPackedSampleModel(DataBuffer.TYPE_BYTE, 3, 3, new int[] {1}); 
+Raster raster = Raster.createWritableRaster(sampleModel, dataBuffer, null); 
+RenderedImage renderedImage = new BufferedImage(sampleModel, raster, false, null);
+
+          </xmp></code></pre> 
+        <h2>Using ImageWriteParam object to modify a RenderedImage</h2> 
+        <p>The ImageWriteParam object can be used to modify a RenderedImage. For example, to set the compression type of a RenderedImage, you can use the setCompressionType() method.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ImageWriteParam param = new ImageWriteParam(); 
+param.setCompressionType(ImageWriteParam.JPEG); 
+renderedImage.setImageWriteParam(param);
+
+          </xmp></code></pre> 
+        <h2>Methods of RenderedImage interface</h2> 
+        <p>The RenderedImage interface has several methods, let's look at some of them. </p> 
+        <h3>getTile(int tileX, int tileY)</h3> 
+        <p>This method returns the tile with x and y coordinates, specified by the arguments tileX and tileY. It returns the tile as a Raster, which is an in-memory representation of an image's color and transparency. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Raster tile = renderedImage.getTile(0, 0);
+
+          </xmp></code></pre> 
+        <h3>getTileWidth()</h3> 
+        <p>This method returns the width of each tile in the image. This is typically used when processing very large images, which are organized into smaller tiles.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+int tileWidth = renderedImage.getTileWidth();
+
+          </xmp></code></pre> 
+        <h3>getProperty(String name)</h3> 
+        <p>This method returns a property associated with the RenderedImage. The property name is specified by the argument name. Properties are arbitrary pieces of information associated with the image.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Object prop = renderedImage.getProperty("Description");
+
+          </xmp></code></pre> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/"> Integer Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-Java-String-to-Integer-object-Example.html">Convert Java String to Integer object Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-add-key-value-mapping-to-the-TreeMap-(TreeMap-put-method).html">How to add key-value mapping to the TreeMap (TreeMap put method)</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-an-element-to-specified-index-of-Java-ArrayList-Example.html">Add an element to specified index of Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/javafx.scene.image.ImageView.html">javafx.scene.image.ImageView</a> <h6><i class="fa fa-clock-o"></i> <span>2024-05-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Search-an-element-of-Java-ArrayList-Example.html">Search an element of Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/FileInputStream/"> FileInputStream </a> </p> <a href="/articles/Java/File-And-IO/FileInputStream/Skip-n-bytes-while-reading-the-file-using-FileInputStream.html">Skip n bytes while reading the file using FileInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/android.view.animation.CycleInterpolator.html">a.v.a.CycleInterpolator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Hide-Checkbox-Example.html">Hide Checkbox Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/"> ListIterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/ArrayList-ListIterator-example.html">ArrayList ListIterator example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.apache.logging.log4j.core.LogEvent.html">o.a.l.l.c.LogEvent</a> <h6><i class="fa fa-clock-o"></i> <span>2024-07-26 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Daniel</h3> <p><a href="#">2024-12-05 04:28</a></p> great examples ... thnx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Thomas</h3> <p><a href="#">2024-12-03 14:06</a></p> Thank you guys for your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-floor-or-ceiling-values-from-Java-TreeSet.html">How to get floor or ceiling values from Java TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-keys-using-Comparable-interface.html">Sort LinkedHashMap by keys using Comparable interface</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Mark-file-or-directory-Read-Only.html">Mark file or directory Read Only</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Simple-Java-Hashtable-example.html">Simple Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet-parameter-Example.html">Get Applet parameter Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Iterate-List-in-reverse-order.html">Iterate List in reverse order</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.apache.http.HttpStatus.html">org.apache.http.HttpStatus</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.intellij.psi.PsiReference.html">com.intellij.psi.PsiReference</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.osgi.framework.Constants.html">org.osgi.framework.Constants</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-1-Example.html">Java Pyramid 1 Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Break-Statement/Java-break-statement-example.html">Java break statement example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Static/Java-static-method-example.html">Java static method example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-String-to-character-array,-character-array-to-String.html">Convert String to character array, character array to String</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/javax.ejb.Singleton.html">javax.ejb.Singleton</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.security.auth.login.LoginException.html">j.s.a.l.LoginException</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.test.ApplicationTestCase.html">android.test.ApplicationTestCase</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Get-Head-Set-from-Java-TreeSet-example.html">Get Head Set from Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Create-List-from-Java-Object-Array-Example.html">Create List from Java Object Array Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-any-primitive-type-to-String.html">Convert any primitive type to String</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Display-Image-in-an-Applet-Example.html">Display Image in an Applet Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
