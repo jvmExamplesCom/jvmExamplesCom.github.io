@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.objectweb.asm.AnnotationVisitor</title> <!--timestamp=2024-10-21T00:16:55.561025678Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.objectweb.asm.AnnotationVisitor"> 
+  <meta name="keywords" content="org.objectweb.asm.AnnotationVisitor"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.objectweb.asm.AnnotationVisitor"> 
+  <meta property="og:description" content="org.objectweb.asm.AnnotationVisitor"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.objectweb.asm.AnnotationVisitor"> 
+  <meta name="twitter:description" content="org.objectweb.asm.AnnotationVisitor"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-10-20</small>
+        </div> 
+        <h1>Introduction to org.objectweb.asm.AnnotationVisitor</h1> 
+        <p>The org.objectweb.asm.AnnotationVisitor class is part of the Java Bytecode Engineering Library (ASM), a program used to generate and analyze Java Bytecode. It is designed to help build and query Java class files with the help of annotations. An AnnotationVisitor class provides methods to visit an annotation and its elements and create or modify annotations. In this article, we will explore the features of the AnnotationVisitor class, as well as some code examples.</p> 
+        <h2>Features of org.objectweb.asm.AnnotationVisitor</h2> 
+        <p>The AnnotationVisitor class is abstract and consists of four basic methods: visitAnnotation(String desc, boolean visible), visitEnum(String name, String desc, String value), visitAnnotationEnd(), and visitEnd(). The two main methods of the AnnotationVisitor class are visitAnnotation() and visitAnnotationEnd(), both of which are used to traverse an annotation and its elements. By using these methods, developers are able to create and modify annotations.</p> 
+        <h2>Code Examples</h2> 
+        <p>We will now look at some code examples that demonstrates how to use the AnnotationVisitor class. The first example is a simple usage of the visitAnnotation() method:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+AnnotationVisitor av = new AnnotationVisitor(Opcodes.ASM5);
+av.visitAnnotation("MyAnnotation", false);
+
+          </xmp></code></pre> 
+        <p>The above code declares a new AnnotationVisitor object and calls the visitAnnotation() method on it. The first parameter is the description of the annotation, while the second parameter specifies whether the annotation is visible.</p> 
+        <p>Let's take a look at another example that shows how to create an annotation and add elements to it:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+AnnotationVisitor av = new AnnotationVisitor(Opcodes.ASM5);
+av.visitAnnotation("MyAnnotation", false);
+av.visit("id", 1);
+av.visit("name", "MyObject");
+av.visit("value", "foo");
+av.visitEnd();
+
+          </xmp></code></pre> 
+        <p>In the above example, we've declared a new AnnotationVisitor object and call the visitAnnotation() method on it. This time, however, we have added three elements to the annotation by calling the visit() method. The parameters of the visit() method are the element name and value.</p> 
+        <p>Finally, let's take a look at an example of how to use the visitEnum() method:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+AnnotationVisitor av = new AnnotationVisitor(Opcodes.ASM5);
+av.visitAnnotation("MyAnnotation", false);
+av.visitEnum("type", "SomeType", "SOME_VALUE");
+av.visitEnd();
+
+          </xmp></code></pre> 
+        <p>In this example, we've declared a new AnnotationVisitor object and call the visitAnnotation() method on it. Then, we call the visitEnum() method to add an enum element to the annotation. The parameters of the visitEnum() method are the element name, type, and value.</p> 
+        <h2>Conclusion</h2> 
+        <p>In this article, we explored the features of the org.objectweb.asm.AnnotationVisitor class and looked at some code examples that demonstrate how to use it. We saw how the AnnotationVisitor class can be used to traverse an annotation and its elements, as well as how to create and modify annotations. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/"> Float Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Convert-Java-Float-to-Numeric-Primitive-Data-Types-Example.html">Convert Java Float to Numeric Primitive Data Types Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/"> Short Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Convert-Short-to-numeric-primitive-data-types-example.html">Convert Short to numeric primitive data types example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-remove-elements.html">Java LinkedList remove elements</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.mockito.junit.MockitoJUnit.html">org.mockito.junit.MockitoJUnit</a> <h6><i class="fa fa-clock-o"></i> <span>2024-09-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-iterate-the-Vector-elements-in-the-reverse-order-(backward-direction).html">How to iterate the Vector elements in the reverse order (backward direction)</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Get-Size-of-Java-Vector-and-loop-through-the-elements-Example.html">Get Size of Java Vector and loop through the elements Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.elasticsearch.action.bulk.BulkResponse.html">o.e.a.b.BulkResponse</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Insert-all-elements-of-other-Collection-to-Specified-Index-of-Java-Vector-Example.html">Insert all elements of other Collection to Specified Index of Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-submap,-headmap,-and-tailmap-from-Java-TreeMap.html">How to get submap, headmap, and tailmap from Java TreeMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/io.netty.handler.codec.http.DefaultFullHttpRequest.html">i.n.h.c.h.DefaultFullHttpRequest</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-22 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Gabriel</h3> <p><a href="#">2024-12-09 14:24</a></p> thanks <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Mark</h3> <p><a href="#">2024-12-17 09:01</a></p> Can somebody elaborate more? <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.swing.text.StyleConstants.html">javax.swing.text.StyleConstants</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-ArrayList-example.html">Iterate through ArrayList example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-LinkedHashMap-to-List.html">Convert LinkedHashMap to List</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Colored-Hello-World-Applet-Example.html">Colored Hello World Applet Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Clear-or-empty-ArrayList.html">Clear or empty ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.net.http.SslError.html">android.net.http.SslError</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-array-to-LinkedHashSet-using-Arrays-class.html">Convert array to LinkedHashSet using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Mark-file-or-directory-Read-Only.html">Mark file or directory Read Only</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.springframework.data.jpa.repository.config.EnableJpaRepositories.html">o.s.d.j.r.c.EnableJpaRepositories</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Copy-Elements-of-One-Java-ArrayList-to-Another-Java-ArrayList-Example.html">Copy Elements of One Java ArrayList to Another Java ArrayList Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-String-or-String-array-to-HashMap-(String-to-Map).html">Convert String or String array to HashMap (String to Map)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.swing.border.EmptyBorder.html">javax.swing.border.EmptyBorder</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.apache.ibatis.annotations.Insert.html">org.apache.ibatis.annotations.Insert</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Remove-value-from-Java-TreeMap-example.html">Remove value from Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Java-Factorial-Using-Recursion-Example.html">Java Factorial Using Recursion Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.concurrent.ThreadLocalRandom.html">j.u.c.ThreadLocalRandom</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/Determine-if-the-Zip-Entry-Is-Directory-Example.html">Determine if the Zip Entry Is Directory Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Get-Size-of-Java-HashSet-Example.html">Get Size of Java HashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-maximum-of-two-numbers-using-Math.max.html">F.max</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-new-empty-file.html">Create new empty file</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
