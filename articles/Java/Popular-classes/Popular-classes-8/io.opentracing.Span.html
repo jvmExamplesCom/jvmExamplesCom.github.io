@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - io.opentracing.Span</title> <!--timestamp=2024-10-27T00:17:25.888289996Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.opentracing.Span"> 
+  <meta name="keywords" content="io.opentracing.Span"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.opentracing.Span"> 
+  <meta property="og:description" content="io.opentracing.Span"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.opentracing.Span"> 
+  <meta name="twitter:description" content="io.opentracing.Span"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-10-26</small>
+        </div> 
+        <h1>io.opentracing.Span</h1> 
+        <p>io.opentracing.Span is a Java API, part of the OpenTracing project, which provides an abstraction layer for distributed tracing. It allows developers to instrument their code and trace application activity across a distributed environment. The API supports a wide range of features, such as distributed context propagation, local root span creation, and span API chaining.</p> 
+        <h2>Creating Span with io.opentracing.Tracer</h2> 
+        A Span instance can be created using the
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+io.opentracing.Tracer
+
+          </xmp></code></pre> API by providing the details regarding the span. Below is a sample snippetCode for creating a span:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Tracer tracer = Tracer.getInstance("My-Tracer");
+Map<String, String> tags = Collections.singletonMap("host", "localhost");
+Span span = tracer.buildSpan("span-name").withTag("span-type", "operation")
+                                       .withStartTimestamp(System.currentTimeMillis())
+                                       .withTags(tags)
+                                       .start();
+
+          </xmp></code></pre> 
+        <h2>Adding Logs to Span</h2> 
+        <p>Logs are used to document a span’s progress and add additional context. Logs can be added to a span using the </p>
+        <pre>log()</pre> method. The below example shows can demonstrate how to log a key/value pair:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+span.log("event", "test-event");
+span.log("userId", 12345);
+
+          </xmp></code></pre> 
+        <h2>Closing a Span</h2> 
+        <p>When a span’s operation is complete, it should be closed using the </p>
+        <pre>finish()</pre> method. This will update the span with end time information and send the span data to the tracing system. The below example demonstrates how to use the 
+        <pre>finish()</pre> method:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+span.finish();
+
+          </xmp></code></pre> 
+        <h2>Other Span API Methods</h2> 
+        The
+        <pre>Span</pre> API also provides various other methods that allow developers to further control the behavior of the span. These include methods to set tag values, set operation name, set start and finish timestamps, get the trace id, etc. Some of these methods are listed below:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+setTag(): sets the specified tag with given value.
+setOperationName(): sets the name of the operation associated with the span.
+getTraceId(): returns the trace id of current span.
+setStartTimestamp(): sets the start timestamp of the span.
+setFinishTimestamp(): sets the finish timestamp of the span.
+
+          </xmp></code></pre> 
+        <h2>Related Classes</h2> 
+        In addition to the
+        <pre>Span</pre> API, the OpenTracing project also provides two related helper classes — 
+        <pre>Scope</pre> and 
+        <pre>SpanContext</pre>. The Scope class is used to manage the life cycle of a span while the 
+        <pre>SpanContext</pre> class is used to propagate span context across distributed systems. For more information on these classes, please consult the official OpenTracing documentation.
+         
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Search-an-element-of-Java-Vector-from-specific-index-Example.html">Search an element of Java Vector from specific index Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/ByteArrayInputStream/"> ByteArrayInputStream </a> </p> <a href="/articles/Java/File-And-IO/ByteArrayInputStream/Read-byte-array-using-ByteArrayInputStream-Example.html">Read byte array using ByteArrayInputStream Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipFile/"> ZipFile </a> </p> <a href="/articles/Java/Java-Zip/ZipFile/Get-Number-Of-Entries-In-Zip-File-Example.html">Get Number Of Entries In Zip File Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Reverse-order-of-all-elements-of-Java-Vector-Example.html">Reverse order of all elements of Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.bukkit.entity.EntityType.html">org.bukkit.entity.EntityType</a> <h6><i class="fa fa-clock-o"></i> <span>2024-02-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/"> Integer Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-Integer-to-Java-String-object.html">Convert Integer to Java String object</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.databinding.DataBindingUtil.html">android.databinding.DataBindingUtil</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/java.nio.file.WatchService.html">java.nio.file.WatchService</a> <h6><i class="fa fa-clock-o"></i> <span>2024-02-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Selected-Index-From-Single-Select-AWT-List-Example.html">Get Selected Index From Single Select AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Initialize-ArrayList-with-elements-using-Arrays.html">Initialize ArrayList with elements using Arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-15 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-create-a-directory-in-Java.html">How to create a directory in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.apache.poi.ss.usermodel.WorkbookFactory.html">o.a.p.s.u.WorkbookFactory</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Insert-Item-At-Specified-Index-In-AWT-Choice-Or-Combobox-Example.html">Insert Item At Specified Index In AWT Choice Or Combobox Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Change-Text-Font-Of-Label-Example.html">Change Text Font Of Label Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-ArrayList-using-Comparator.html">Sort ArrayList using Comparator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.security.Permission.html">java.security.Permission</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.os.Message.html">android.os.Message</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Convert-Short-to-numeric-primitive-data-types-example.html">Convert Short to numeric primitive data types example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-List-to-Set-(Convert-ArrayList-to-HashSet,-Convert-ArrayList-to-TreeSet).html">Convert List to Set (Convert ArrayList to HashSet, Convert ArrayList to TreeSet)</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Float-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Float object to byte, short, int, long, float and double</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.springframework.boot.web.servlet.ServletContextInitializer.html">o.s.b.w.s.ServletContextInitializer</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.crypto.SecretKeyFactory.html">javax.crypto.SecretKeyFactory</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Sort-HashMap-by-keys.html">Sort HashMap by keys</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Java-HashMap-put-method-example.html">Java HashMap put method example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-create-new-Vector-objects-in-Java.html">How to create new Vector objects in Java</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipFile/Get-Number-Of-Entries-In-Zip-File-Example.html">Get Number Of Entries In Zip File Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/Determine-If-Year-Is-Leap-Year-Java-Example.html">Determine If Year Is Leap Year Java Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-remove-all-entries-or-clear-TreeMap-in-Java.html">How to remove all entries or clear TreeMap in Java</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Hide-Label-Example.html">Hide Label Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.util.logging.FileHandler.html">java.util.logging.FileHandler</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
