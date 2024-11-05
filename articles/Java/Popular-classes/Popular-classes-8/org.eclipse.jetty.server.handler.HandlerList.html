@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.eclipse.jetty.server.handler.HandlerList</title> <!--timestamp=2024-11-05T00:16:01.847566706Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.eclipse.jetty.server.handler.HandlerList"> 
+  <meta name="keywords" content="org.eclipse.jetty.server.handler.HandlerList"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.eclipse.jetty.server.handler.HandlerList"> 
+  <meta property="og:description" content="org.eclipse.jetty.server.handler.HandlerList"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.eclipse.jetty.server.handler.HandlerList"> 
+  <meta name="twitter:description" content="org.eclipse.jetty.server.handler.HandlerList"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-11-04</small>
+        </div> 
+        <h1>org.eclipse.jetty.server.handler.HandlerList</h1> 
+        <p>The org.eclipse.jetty.server.handler.HandlerList class is a core component of the Jetty servlet container, allowing for specialized and powerful management of multiple handlers within a single request/response cycle. From there, you can configure what should be done with a given request, such as which servlets should be executed, or if access to certain resources should be allowed or denied.</p> 
+        <p>The HandlerList works by combining a list of handlers, each of which is responsible for responding to a request in a different way. The order in which the handler list is configured determines the sequence of execution.</p> 
+        <h2>Getting Started With HandlerList</h2> 
+        <p>Before getting started, you must first create an instance of the HandlerList, either in constructor or in XML configuration. To do this, use the following code:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+HandlerList list = new HandlerList();
+list.setHandlers(new Handler[] { ... });
+
+          </xmp></code></pre> 
+        <p>The Handler array that is passed in contains the set of individual handlers that will be used to respond to the request. The order of the list is the order of execution of the handlers.</p> 
+        <h2>Adding Handlers to the List</h2> 
+        <p>Once the HandlerList has been created, you can add individual handlers to it using the addHandler() method. For example, to add an instance of HttpHandlers:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+HttpHandler handler = new HttpHandler();
+list.addHandler(handler);
+
+          </xmp></code></pre> 
+        <p>You can also add a list of handlers at once by using the addHandlers() method, which takes a variety of different input types:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Array of Handlers
+Handler[] handlers = new Handler[] { ... };
+list.addHandlers(handlers);
+
+// Collection of Handlers
+Collection<Handler> handlers = ... ;
+list.addHandlers(handlers);
+
+// Map of Handlers
+Map<String, Handler> map = ...;
+list.addHandlers(map);
+
+          </xmp></code></pre> 
+        <h2>Executing Handlers</h2> 
+        <p>The HandlerList handles requests by iterating over each handler in the order they were added, until one of them handles the request. This means that it is important to ensure that the most specific handlers are added first, and that each handler is given the opportunity to handle the request before proceeding to the next one.</p> 
+        <p>For example, if you have an authentication handler and a resource handler, you should add the authentication handler first so that it can determine if the request should be allowed before the resource handler attempts to handle it.</p> 
+        <p>The order of execution can also be changed after the HandlerList has been created by using the setHandlers() method. This is useful if you wish to add handlers to the list after its creation.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Set an array of Handlers
+Handler[] handlers = new Handler[] { ... };
+list.setHandlers(handlers);
+
+// Set a Collection of Handlers
+Collection<Handler> handlers = ... ;
+list.setHandlers(handlers);
+
+// Set a Map of Handlers
+Map<String, Handler> map = ...;
+list.setHandlers(map);
+
+          </xmp></code></pre> 
+        <p>It is also possible to specify the chain for a particular handler, which allows for more complex control over the order of execution.</p> 
+        <h2>Conclusion</h2> 
+        <p>The org.eclipse.jetty.server.handler.HandlerList class provides a powerful mechanism for managing multiple handlers in a single request/response cycle. By using it, you can control the order in which handlers are executed, as well as allow for more complex control over the behavior of individual handlers.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Simple-Java-Vector-Example.html">Simple Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.util.AbstractList.html">java.util.AbstractList</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataOutputStream/"> DataOutputStream </a> </p> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-long-to-a-file-using-DataOutputStream.html">Write long to a file using DataOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Get-SubList-from-LinkedList-Java-example.html">Get SubList from LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.xml.parsers.SAXParser.html">javax.xml.parsers.SAXParser</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/How-to-clear-Java-LinkedList-(empty-LinkedList).html">How to clear Java LinkedList (empty LinkedList)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.apache.hadoop.conf.Configuration.html">org.apache.hadoop.conf.Configuration</a> <h6><i class="fa fa-clock-o"></i> <span>2024-02-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/"> Convertion </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-int-to-String.html">Convert int to String</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Check-Whether-JLabel-is-Visible-or-Enabled-Example.html">Check Whether JLabel is Visible or Enabled Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-Map-to-List.html">Convert Map to List</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-30 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.codahale.metrics.Snapshot.html">com.codahale.metrics.Snapshot</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Set-Multiple-Selection-Mode-For-AWT-List-Example.html">Set Multiple Selection Mode For AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.swing.event.ListSelectionEvent.html">javax.swing.event.ListSelectionEvent</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/CRC32/Generate-CRC32-Checksum-For-Byte-Array-Example.html">Generate CRC32 Checksum For Byte Array Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Convert-java-Boolean-object-to-String-object-Example.html">Convert java Boolean object to String object Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.apache.http.protocol.HTTP.html">org.apache.http.protocol.HTTP</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Double-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Double object to byte, short, int, long, float and double</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Java-Long-Example.html">Java Long Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Determine-If-The-Button-Is-Visible-Example.html">Determine If The Button Is Visible Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Remove-All-Items-From-AWT-Choice-Or-Combobox-Example.html">Remove All Items From AWT Choice Or Combobox Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.persistence.NamedQuery.html">javax.persistence.NamedQuery</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Create-Java-ArrayList-From-Enumeration-Example.html">Create Java ArrayList From Enumeration Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-sublist-from-ArrayList.html">Get sublist from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-elements-from-ArrayList.html">Get elements from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Align-Icon-in-JLabel-Example.html">Align Icon in JLabel Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/android.widget.SimpleCursorAdapter.html">android.widget.SimpleCursorAdapter</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-TreeSet-to-List-(ArrayList-or-LinkedList).html">Convert TreeSet to List (ArrayList or LinkedList)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Perform-Binary-Search-on-Java-ArrayList-Example.html">Perform Binary Search on Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Rectangle-Area-using-Java-Example.html">Calculate Rectangle Area using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.support.design.widget.AppBarLayout.html">a.s.d.w.AppBarLayout</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
