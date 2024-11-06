@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.bouncycastle.cert.X509v3CertificateBuilder</title> <!--timestamp=2024-11-06T00:15:45.771200622Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.bouncycastle.cert.X509v3CertificateBuilder"> 
+  <meta name="keywords" content="org.bouncycastle.cert.X509v3CertificateBuilder"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.bouncycastle.cert.X509v3CertificateBuilder"> 
+  <meta property="og:description" content="org.bouncycastle.cert.X509v3CertificateBuilder"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.bouncycastle.cert.X509v3CertificateBuilder"> 
+  <meta name="twitter:description" content="org.bouncycastle.cert.X509v3CertificateBuilder"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-11-05</small>
+        </div> 
+        <h1>org.bouncycastle.cert.X509v3CertificateBuilder</h1> 
+        <p>The org.bouncycastle.cert.X509v3CertificateBuilder class is a utility class that allows for the creation of an X.509 v3 certificate object. It can be used in two ways - either to create a self-signed X.509 v3 certificate or to create a signed X.509 v3 certificate signed by a Certificate Authority (CA). In this tutorial, we will look at how to use the X509v3CertificateBuilder to both create a self-signed X.509 v3 certificate and to generate a signed X.509 v3 certificate.</p> 
+        <h2>Creating a Self-Signed X.509 v3 Certificate</h2> 
+        <p>To create a self-signed X.509 v3 certificate, we first need to get an instance of the X509v3CertificateBuilder class. We then need to set up the principal object, which represents the subject of the certificate:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+X509v3CertificateBuilder builder = new X509v3CertificateBuilder();
+X500Name principal = new X500Name("CN=John Doe");
+builder.setSubject(principal);
+
+          </xmp></code></pre> 
+        <p>Next, we need to set the issuer. Since this is a self-signed certificate, the issuer and subject are the same:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+builder.setIssuer(principal);
+
+          </xmp></code></pre> 
+        <p>Now, we can set the serial number and validity period of the certificate:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+BigInteger serialNumber = BigInteger.valueOf(12345);
+Date notBefore = new Date();
+Date notAfter = new Date(System.currentTimeMillis() + 60000);
+builder.setSerialNumber(serialNumber);
+builder.setNotBefore(notBefore);
+builder.setNotAfter(notAfter);
+
+          </xmp></code></pre> 
+        <p>Finally, we need to add the public key to the certificate. This is done using the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+setPublicKey
+
+          </xmp></code></pre> method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+PublicKey publicKey = ...;
+builder.setPublicKey(publicKey);
+
+          </xmp></code></pre> 
+        <p>At this point, we have all the information necessary to create the self-signed X.509 v3 certificate. We can use the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+build
+
+          </xmp></code></pre> method to generate the certificate: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+X509Certificate x509Certificate = builder.build(null);
+
+          </xmp></code></pre> 
+        <h2>Creating a Signed X.509 v3 Certificate</h2> 
+        <p>In order to create a signed X.509 v3 certificate, we need to obtain a certificate signing request (CSR) from the certificate subject. This CSR contains the subject's public key, which we can use to create a signed X.509 v3 certificate. First, we need to get an instance of the X509v3CertificateBuilder class and set the subject and issuer objects:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+X509v3CertificateBuilder builder = new X509v3CertificateBuilder();
+X500Name principal = new X500Name("CN=John Doe");
+builder.setSubject(principal);
+X500Name issuer = new X500Name("CN=My CA");
+builder.setIssuer(issuer);
+
+          </xmp></code></pre> 
+        <p>Next, we need to set the serial number and validity period of the certificate:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+BigInteger serialNumber = BigInteger.valueOf(12345);
+Date notBefore = new Date();
+Date notAfter = new Date(System.currentTimeMillis() + 60000);
+builder.setSerialNumber(serialNumber);
+builder.setNotBefore(notBefore);
+builder.setNotAfter(notAfter);
+
+          </xmp></code></pre> 
+        <p>Now, we can extract the public key from the CSR and add it to the certificate. This is done using the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+setPublicKey
+
+          </xmp></code></pre> method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+PublicKey publicKey = ...;
+builder.setPublicKey(publicKey);
+
+          </xmp></code></pre> 
+        <p>Finally, we need to add the signature algorithm to the certificate. This is done using the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+setSignatureAlgorithm
+
+          </xmp></code></pre> method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+String signatureAlgorithm = "SHA256withRSA";
+builder.setSignatureAlgorithm(signatureAlgorithm);
+
+          </xmp></code></pre> 
+        <p>At this point, we have all the information necessary to create the signed X.509 v3 certificate. We can use the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+build
+
+          </xmp></code></pre> method to generate the certificate: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+X509Certificate x509Certificate = builder.build(signature);
+
+          </xmp></code></pre> Where
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+signature
+
+          </xmp></code></pre> is a Signature object initialized with the private key of the issuer. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Declare-multiple-variables-in-for-loop-Example.html">Declare multiple variables in for loop Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Initialize-ArrayList.html">Initialize ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-check-if-LinkedHashSet-is-empty-in-Java.html">How to check if LinkedHashSet is empty in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-reverse-order-of-the-TreeSet-elements-(iterate-TreeSet-in-reverse-order).html">How to reverse order of the TreeSet elements (iterate TreeSet in reverse order)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Item-Count-Of-AWT-List-Example.html">Get Item Count Of AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Copy-Elements-of-One-Java-Vector-to-Another-Java-Vector-Example.html">Copy Elements of One Java Vector to Another Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.codehaus.plexus.util.FileUtils.html">org.codehaus.plexus.util.FileUtils</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/android.opengl.EGLDisplay.html">android.opengl.EGLDisplay</a> <h6><i class="fa fa-clock-o"></i> <span>2024-08-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/System/"> System </a> </p> <a href="/articles/Java/Miscellaneous-Classes/System/Run-object-finalization-using-System-class.html">Run object finalization using System class</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/Convert-String-to-Character-Array-Example.html">Convert String to Character Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-06 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Mark</h3> <p><a href="#">2024-12-17 05:16</a></p> I do not understand details <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Victor</h3> <p><a href="#">2024-12-20 10:30</a></p> Thank you guys for your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-submap,-headmap,-and-tailmap-from-Java-TreeMap.html">How to get submap, headmap, and tailmap from Java TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Copy-Elements-of-One-Java-Vector-to-Another-Java-Vector-Example.html">Copy Elements of One Java Vector to Another Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-remove-the-first-element-or-last-element-from-the-Vector.html">How to remove the first element or last element from the Vector</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Check-if-a-particular-key-exists-in-Java-LinkedHashMap-example.html">Check if a particular key exists in Java LinkedHashMap example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/java.awt.event.HierarchyEvent.html">java.awt.event.HierarchyEvent</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Append-all-elements-of-other-Collection-to-Java-Vector-Example.html">Append all elements of other Collection to Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Java-Reverse-String-Array-Example.html">Java Reverse String Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Check-if-a-particular-element-exists-in-Java-HashSet-Example.html">Check if a particular element exists in Java HashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/javax.management.openmbean.TabularData.html">j.m.o.TabularData</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-primitive-to-wrapper-objects.html">Convert primitive to wrapper objects</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Round-Java-float-and-double-numbers-using-Math.round.html">R.round</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Convert-array-to-LinkedList-in-Java.html">Convert array to LinkedList in Java</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-short-to-a-file-using-DataOutputStream.html">Write short to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-clear-or-remove-all-mappings-from-LinkedHashMap.html">How to clear or remove all mappings from LinkedHashMap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Copy-Elements-of-One-Java-ArrayList-to-Another-Java-ArrayList-Example.html">Copy Elements of One Java ArrayList to Another Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.util.DisplayMetrics.html">android.util.DisplayMetrics</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-an-element-to-specified-index-of-Java-ArrayList-Example.html">Add an element to specified index of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.commons.lang.ObjectUtils.html">org.apache.commons.lang.ObjectUtils</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Mark-file-or-directory-Read-Only.html">Mark file or directory Read Only</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.junit.runners.Parameterized.Parameter.html">o.j.r.P.Parameter</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
