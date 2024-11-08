@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.robolectric.Robolectric</title> <!--timestamp=2024-11-08T00:16:02.447212208Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.robolectric.Robolectric"> 
+  <meta name="keywords" content="org.robolectric.Robolectric"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.robolectric.Robolectric"> 
+  <meta property="og:description" content="org.robolectric.Robolectric"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.robolectric.Robolectric"> 
+  <meta name="twitter:description" content="org.robolectric.Robolectric"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-11-07</small>
+        </div> 
+        <h1>Introduction to org.robolectric.Robolectric</h1> 
+        <p>Robolectric is a testing framework for Android that allows for unit tests to run on a local JVM. It uses the SDK and establishes its own bridge between the app and the SDK so that unit tests can be written relatively quickly and without having to set up a test device or emulator. In this tutorial, we'll explore how to use Robolectric to make unit testing in Android easier and more efficient.</p> 
+        <h2>Setting up Robolectric</h2> 
+        <p>Before running Robolectric tests, make sure you have the necessary libraries and dependencies installed. Depending on your build system, you may need to modify your project in order to include the Robolectric JAR and other resources. Fortunately, the Robolectric Wiki contains detailed instructions for several popular IDEs and build tools. Once everything is installed and configured, you're ready to start writing Robolectric tests!</p> 
+        <h2>Writing Roblectric Tests</h2> 
+        <p>Robolectric tests are written just like any other JUnit test. First, you must create a class that extends the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+RobolectricTestRunner
+
+          </xmp></code></pre> class: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class MyTest extends RobolectricTestRunner { 
+  // Test methods go here
+}
+
+          </xmp></code></pre> 
+        <p>Now you can write your test methods. Each method should start with the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@Test
+
+          </xmp></code></pre> annotation, which tells JUnit that this is a test method that should be run. The code inside each test method will vary depending on what you're testing. For example, if you're verifying that a resource was properly loaded, you might include something like this: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@Test
+public void testResourceLoading() {
+    // Verify that resource was loaded correctly
+    assertTrue(MyResource.isLoaded());
+}
+
+          </xmp></code></pre> 
+        <p>Robolectric provides several utility classes for creating test objects and validating results. You can find a full list of these classes in the <a href="http://robolectric.org/api/">Robolectric API docs</a>. With a combination of these helper classes and your own custom code, you can create powerful Robolectric tests that cover a wide range of conditions.</p> 
+        <h2>Conclusion</h2> 
+        <p>Robolectric is an invaluable tool for Android developers. It makes testing faster and easier by eliminating the need for a test device or emulator. With its powerful test APIs, you can quickly and easily create comprehensive tests that accurately emulate real-world app usage. We hope this tutorial has given you a better understanding of how to use Robolectric to create efficient and effective unit tests.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.support.v7.graphics.Palette.html">android.support.v7.graphics.Palette</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-sublist-from-ArrayList.html">Get sublist from ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.aspectj.lang.annotation.Around.html">org.aspectj.lang.annotation.Around</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-directory.html">Create directory</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/ArrayList-reverse-example.html">ArrayList reverse example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-List-using-Iterator.html">Iterate through List using Iterator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Math-Class/"> Math Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-natural-logarithm-value-of-a-number-using-Math.log.html">F.log</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/"> Byte Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Byte-Wrapper-Class/Convert-Java-String-to-Byte-example.html">Convert Java String to Byte example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-add-array-example.html">Java LinkedList add array example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/com.fasterxml.jackson.databind.node.JsonNodeFactory.html">c.f.j.d.n.JsonNodeFactory</a> <h6><i class="fa fa-clock-o"></i> <span>2024-07-28 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Check-if-element-exists-in-Java-LinkedList-(LinkedList-contains-element).html">Check if element exists in Java LinkedList (LinkedList contains element)</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/FileOutputStream/Copy-binary-file-using-Streams.html">Copy binary file using Streams</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.xml.parsers.ParserConfigurationException.html">j.x.p.ParserConfigurationException</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-comma-separated-string-to-HashSet-in-Java.html">Convert comma separated string to HashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/net.minecraft.client.Minecraft.html">net.minecraft.client.Minecraft</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/lombok.experimental.UtilityClass.html">lombok.experimental.UtilityClass</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Integer-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Integer object to byte, short, int, long, float and double</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-minimum-of-two-numbers-using-Math.min.html">F.min</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-Java-LinkedList-to-Array.html">Convert Java LinkedList to Array</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Set-Graphics-Color-Example.html">Set Graphics Color Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Get-parent-directory-as-a-File-object.html">Get parent directory as a File object</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Get-name-of-parent-directory.html">Get name of parent directory</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-remove-the-first-entry-or-last-entry-from-the-Java-TreeMap.html">How to remove the first entry or last entry from the Java TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/android.widget.SectionIndexer.html">android.widget.SectionIndexer</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Get-lowest-and-highest-value-stored-in-Java-TreeSet-example.html">Get lowest and highest value stored in Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.net.URI.html">java.net.URI</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.net.Socket.html">java.net.Socket</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-remove-elements-from-HashSet.html">How to remove elements from HashSet</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/FileOutputStream/Write-file-using-FileOutputStream.html">Write file using FileOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-absolute-value-of-float,-int,-double-and-long-using-Math.abs.html">F.abs</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
