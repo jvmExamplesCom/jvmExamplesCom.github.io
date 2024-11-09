@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.springframework.amqp.core.Message</title> <!--timestamp=2024-11-09T00:16:28.684128118Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.springframework.amqp.core.Message"> 
+  <meta name="keywords" content="org.springframework.amqp.core.Message"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.springframework.amqp.core.Message"> 
+  <meta property="og:description" content="org.springframework.amqp.core.Message"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.springframework.amqp.core.Message"> 
+  <meta name="twitter:description" content="org.springframework.amqp.core.Message"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-11-08</small>
+        </div> 
+        <h1>Introduction to org.springframework.amqp.core.Message</h1> 
+        <p>The org.springframework.amqp.core.Message is the message object used in the Spring framework for Advanced Message Queuing Protocol (AMQP). It allows developers to send and receive messages and use them as a communication protocol between different components in distributed applications. This message object is created with a payload, which is the main data structure containing data to be exchanged between components of the application. This payload can be set by setting the message body or by providing a Byte array, which is then wrapped inside the message. </p> 
+        <h2>Creating Messages With org.springframework.amqp.core.Message</h2> 
+        <p>Creating a message with this class can be done in several ways. One way to do it is by using a MessageBuilder class, which provides an abstraction for constructing messages. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Message m = MessageBuilder.withBody("Hello World".getBytes())
+                .setContentType(MessageProperties.CONTENT_TYPE_TEXT_PLAIN)
+                .build();
+
+          </xmp></code></pre> 
+        <p>Another way to create a message is to provide the payload directly: </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Message m = new Message("Hello World".getBytes(), new MessageProperties());
+
+          </xmp></code></pre> 
+        <p>In this case, no content type is specified, so the message will be sent with a default content type.</p> 
+        <h2>Accessing Properties of org.springframework.amqp.core.Message</h2> 
+        <p>The properties of the Message object can be accessed in a variety of ways. For instance, the MessageProperties object can be retrieved from the Message object, which contains information such as the content type. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MessageProperties props = m.getMessageProperties();
+String contentType = props.getContentType();
+
+          </xmp></code></pre> 
+        <p>The body of the message can be accessed with the getBody() method. This returns a Byte array, so we need to convert it into a String if that's what we need. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+byte[] body = m.getBody();
+String payload = new String(body);
+
+          </xmp></code></pre> 
+        <h2>Adding Headers to org.springframework.amqp.core.Message</h2> 
+        <p>The Message object can also have custom headers added to it while being created. This is done by passing additional parameters to the MessageBuilder. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Map<String, Object> headers = new HashMap<String, Object>();
+headers.put("correlationId", "xyz-123");
+
+Message m = MessageBuilder.withBody("Hello World".getBytes())
+                .setContentType(MessageProperties.CONTENT_TYPE_TEXT_PLAIN)
+                .copyHeaders(headers)
+                .build();
+
+          </xmp></code></pre> 
+        <p>The headers can then be accessed by calling the getHeaders() method. This returns a MessageHeaders object from which specific headers can be retrieved. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MessageHeaders headers = m.getHeaders();
+String correlationId = (String) headers.get("correlationId");
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>By using the org.springframework.amqp.core.Message class, developers can easily create message objects for use with the Advanced Message Queuing Protocol and access the contained message properties and headers. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Remove-value-from-Java-TreeMap-example.html">Remove value from Java TreeMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.cloud.client.ServiceInstance.html">o.s.c.c.ServiceInstance</a> <h6><i class="fa fa-clock-o"></i> <span>2024-02-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-last-key,-last-value,-or-last-entry-from-the-Java-TreeMap.html">How to get last key, last value, or last entry from the Java TreeMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-array-to-Set-(Convert-array-to-HashSet).html">Convert array to Set (Convert array to HashSet)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-all-occurrences-of-specified-element-of-Java-ArrayList-Example.html">Replace all occurrences of specified element of Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/"> Searching </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-float-Array-Example.html">Performing Binary Search on Java float Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.swing.event.ListSelectionEvent.html">javax.swing.event.ListSelectionEvent</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Simple-Java-LinkedHashMap-example.html">Simple Java LinkedHashMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Mark-file-or-directory-Read-Only.html">Mark file or directory Read Only</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.eclipse.jface.wizard.Wizard.html">org.eclipse.jface.wizard.Wizard</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-06 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Ojas</h3> <p><a href="#">2025-01-03 16:56</a></p> Thank you very much! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Daniel</h3> <p><a href="#">2024-12-20 08:21</a></p> Appreciate your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Enumeration-over-Java-Vector-Example.html">Get Enumeration over Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/FileOutputStream/Copy-binary-file-using-Streams.html">Copy binary file using Streams</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/io.netty.handler.codec.http.QueryStringDecoder.html">i.n.h.c.h.QueryStringDecoder</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-to-ArrayList-using-Arrays.html">Convert String to ArrayList using Arrays</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/FileInputStream/Read-file-using-FileInputStream.html">Read file using FileInputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-maintain-insertion-order-of-elements-of-HashMap-using-LinkedHashMap.html">How to maintain insertion order of elements of HashMap using LinkedHashMap</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Set-JLabel-Border-Example.html">Set JLabel Border Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/com.google.common.collect.Multimap.html">com.google.common.collect.Multimap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-Sub-List-of-Java-ArrayList-Example.html">Get Sub List of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.springframework.jdbc.support.GeneratedKeyHolder.html">o.s.j.s.GeneratedKeyHolder</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-String-array-to-List-(Convert-String-array-to-ArrayList,-LinkedList).html">Convert String array to List (Convert String array to ArrayList, LinkedList)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-floor-or-ceiling-values-from-Java-TreeSet.html">How to get floor or ceiling values from Java TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.greenrobot.eventbus.ThreadMode.html">org.greenrobot.eventbus.ThreadMode</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipFile/Get-Specified-Entry-From-Zip-File-Example.html">Get Specified Entry From Zip File Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.thrift.transport.TTransportException.html">o.a.t.t.TTransportException</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-ArrayList-to-HashMap-Java-example.html">Convert ArrayList to HashMap Java example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Enumeration-over-Java-HashSet-Example.html">Get Enumeration over Java HashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Change-Checkbox-Font-Example.html">Change Checkbox Font Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.apache.catalina.connector.Connector.html">o.a.c.c.Connector</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Create-Number-counter-in-an-Applet-using-Thread-Example.html">Create Number counter in an Applet using Thread Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
