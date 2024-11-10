@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javax.persistence.CascadeType</title> <!--timestamp=2024-11-10T00:17:46.714508100Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.persistence.CascadeType"> 
+  <meta name="keywords" content="javax.persistence.CascadeType"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.persistence.CascadeType"> 
+  <meta property="og:description" content="javax.persistence.CascadeType"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.persistence.CascadeType"> 
+  <meta name="twitter:description" content="javax.persistence.CascadeType"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-11-09</small>
+        </div> 
+        <h1>What is javax.persistence.CascadeType?</h1> javax.persistence.CascadeType is an enum type used to specify the cascading behavior of entity associations. It is part of the Java Persistence API (JPA) which provides a way to map Java objects to relational databases. CascadeType is used to specify how the persistence provider should manage the state of associated entities when the parent object undergoes certain operations such as create, update, delete, or refresh. 
+        <h2>Understanding CascadeType</h2> Each CascadeType specifies a different action, but all are related to maintaining the state of associated entities. The various actions can be summarized as follows: 
+        <ul> 
+         <li><strong>PERSIST:</strong> This type of cascade operation specifies that an operation performed on the parent entity will also be performed on its associated entities. For example, if a new record is inserted in the database, any associated entities will also be inserted.</li> 
+         <li><strong>REMOVE:</strong> A remove type CascadeType indicates that when the parent entity is removed from the database, the associated entities will also be removed.</li> 
+         <li><strong>REFRESH:</strong> A refresh type CascadeType indicates that if an operation is performed on the parent entity, this will also trigger an operation on its associated entities.</li> 
+         <li><strong>MERGE:</strong> Using this type of CascadeType, changes made to the parent entity will be propagated to the associated entities.</li> 
+         <li><strong>DETACH:</strong> A detach type CascadeType indicates that changes made to the parent entity will not be propagated to the associated entities.</li> 
+         <li><strong>ALL:</strong> An "all" type CascadeType will cause all of the above types of operations to be cascaded to the associated entities.</li> 
+        </ul> 
+        <h2>Using CascadeType with JPA</h2> When working with JPA, CascadeType is used to specify the cascading behavior of the parent entity's state. To use CascadeType to apply a cascade operation, it must be set in the @ManyToOne or @OneToOne annotation of the parent entity's field. For example, the following code uses CascadeType.PERSIST to cascade the persist operation to the associated entity: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+@ManyToOne(cascade=CascadeType.PERSIST)
+private Customer customer;
+
+          </xmp></code></pre> The above code specifies that when an operation is performed on the Customer entity, it will also be cascaded to the associated entity. In addition to CascadeType.PERSIST, there are several other types of CascadeType which can be used to cascade operations to the associated entities. These are listed below: 
+        <ul> 
+         <li><strong>CascadeType.REMOVE:</strong> When the parent entity is removed from the database, the associated entities will also be removed.</li> 
+         <li><strong>CascadeType.REFRESH:</strong> refresh cascades the refresh operation to the associated entities.</li> 
+         <li><strong>CascadeType.MERGE:</strong> Merges the changes made to the parent entity with the associated entities.</li> 
+         <li><strong>CascadeType.DETACH:</strong> Detaches the changes made to the parent entity from the associated entities.</li> 
+         <li><strong>CascadeType.ALL:</strong> Cascades all operations to the associated entities.</li> 
+        </ul> 
+        <h2>Conclusion</h2> CascadeType is an important concept when working with JPA, as it allows you to specify how the database should manage the state of associated entities. By using CascadeType, you can ensure that any operation performed on the parent entity is also cascaded to its associated entities, thus saving time and effort. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/"> Long Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-String-to-long-Example.html">Convert String to long Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-3D-Rectangle-&-Square-in-Applet-Window-Example.html">Draw 3D Rectangle & Square in Applet Window Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.eclipse.swt.widgets.Composite.html">org.eclipse.swt.widgets.Composite</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/"> Searching </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-byte-Array-Example.html">Performing Binary Search on Java byte Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-All-Items-From-AWT-List-Example.html">Get All Items From AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.intellij.openapi.fileEditor.FileDocumentManager.html">c.i.o.f.FileDocumentManager</a> <h6><i class="fa fa-clock-o"></i> <span>2024-06-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Shuffle-elements-of-ArrayList.html">Shuffle elements of ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Iterate-through-the-values-of-Java-HashMap-example.html">Iterate through the values of Java HashMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/com.squareup.leakcanary.LeakCanary.html">com.squareup.leakcanary.LeakCanary</a> <h6><i class="fa fa-clock-o"></i> <span>2024-10-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-check-If-HashMap-is-empty-example.html">How to check If HashMap is empty example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-19 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Adam</h3> <p><a href="#">2025-01-03 10:29</a></p> Thank you guys for your work <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Martin</h3> <p><a href="#">2024-12-16 13:44</a></p> Grt ;-) <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Remove-value-from-Java-Hashtable-example.html">Remove value from Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Check-Whether-JLabel-is-Visible-or-Enabled-Example.html">Check Whether JLabel is Visible or Enabled Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/Get-lowest-and-highest-key-stored-in-Java-TreeMap-example.html">Get lowest and highest key stored in Java TreeMap example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.websocket.server.ServerEndpoint.html">j.w.s.ServerEndpoint</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Remove-first-and-last-elements-of-LinkedList-Java-example.html">Remove first and last elements of LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Convert-java-Boolean-object-to-String-object-Example.html">Convert java Boolean object to String object Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-iterate-Java-TreeMap-in-reverse-order.html">How to iterate Java TreeMap in reverse order</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.servlet.Servlet.html">javax.servlet.Servlet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/androidx.core.app.NotificationCompat.html">androidx.core.app.NotificationCompat</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Frame/Mouse-Event-Handling-in-a-Frame-Window-Example.html">Mouse Event Handling in a Frame Window Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Set-last-modified-time-of-a-file-or-directory.html">Set last modified time of a file or directory</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.awt.HeadlessException.html">java.awt.HeadlessException</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.widget.SpinnerAdapter.html">android.widget.SpinnerAdapter</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-elements-of-LinkedHashSet-in-Java.html">Iterate through elements of LinkedHashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipFile/Get-Number-Of-Entries-In-Zip-File-Example.html">Get Number Of Entries In Zip File Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Hashset-to-comma-separated-string-in-Java.html">Convert Hashset to comma separated string in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-check-if-element-exists-in-Java-HashSet.html">How to check if element exists in Java HashSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-float-Arrays-Example.html">Compare Two Java float Arrays Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-check-if-element-exists-in-TreeSet-(TreeSet-contains-element).html">How to check if element exists in TreeSet (TreeSet contains element)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.graphics.drawable.GradientDrawable.html">a.g.d.GradientDrawable</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

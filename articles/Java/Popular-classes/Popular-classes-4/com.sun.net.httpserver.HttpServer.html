@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - com.sun.net.httpserver.HttpServer</title> <!--timestamp=2024-11-10T00:17:40.675239291Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="com.sun.net.httpserver.HttpServer"> 
+  <meta name="keywords" content="com.sun.net.httpserver.HttpServer"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - com.sun.net.httpserver.HttpServer"> 
+  <meta property="og:description" content="com.sun.net.httpserver.HttpServer"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - com.sun.net.httpserver.HttpServer"> 
+  <meta name="twitter:description" content="com.sun.net.httpserver.HttpServer"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-11-09</small>
+        </div> 
+        <h1>Introduction to com.sun.net.httpserver.HttpServer in Java</h1> Java developers use the class 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+com.sun.net.httpserver.HttpServer
+
+          </xmp></code></pre> when creating a simple lightweight HTTP server. It can be used for testing web applications and services that are implemented using Java technology, as well as for serving application data over the web. This tutorial will explain how to set up and use com.sun.net.httpserver.HttpServer. 
+        <h2>Installing and Setting Up HttpServer</h2> To utilize com.sun.net.httpserver.HttpServer, you must have the Java Development Kit (JDK) installed on your machine. In many cases, downloading and installing the JDK is necessary. The namespace to import for the HttpServer class is 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+java.net.*
+
+          </xmp></code></pre>. An example of how to import this is: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+import java.net.*;
+
+          </xmp></code></pre> 
+        <h2>Using HttpServer in Code</h2> To create an instance of the HttpServer class, you must specify the port and host address. You can also assign a server name to the instance. An example of creating an instance of HttpServer is 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+HttpServer server = HttpServer.create(new InetSocketAddress("127.0.0.1", 8888), 0);
+
+          </xmp></code></pre> You can add handlers to your server to handle requests and responses. To add a handler, use the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+server.createContext(String path, HttpHandler handler)
+
+          </xmp></code></pre> method. The first parameter is the URL path to call the handler, and the second parameter is the handler instance. An example of adding a handler is: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+server.createContext("/", new TestHandler());
+
+          </xmp></code></pre> The final step is to start the server: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+server.start();
+
+          </xmp></code></pre> 
+        <h2>Example of a Simple HttpServer With a Handler</h2> Below is an example of a simple program that creates a server and will respond to requests with a "Hello World" message. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+import java.io.*;
+import java.net.*;
+import com.sun.net.httpserver.*;  
+
+public class HttpServerExample {
+  public static void main(String[] args) throws IOException {
+
+    // Create an HttpServer and set the port to 8888
+    HttpServer server = HttpServer.create(new InetSocketAddress(8888), 0);
+
+    // Create a context for the server on "/"
+    server.createContext("/", new TestHandler());
+
+    // Start listening to requests
+    server.start();
+    System.out.println("Server started on port 8888.");
+  }
+}
+
+class TestHandler implements HttpHandler {
+  @Override
+  public void handle(HttpExchange exchange) throws IOException {
+
+    // Set response header
+    Headers responseHeaders = exchange.getResponseHeaders();
+    responseHeaders.set("Content-Type", "text/plain");
+
+    // Write response to the client
+    exchange.sendResponseHeaders(200, 0);
+    OutputStream response = exchange.getResponseBody();
+    response.write("Hello World!".getBytes());
+
+    // Close the connection
+    response.close();
+  }
+}
+
+          </xmp></code></pre> When you run this code, it will start a server on port 8888 and any request made to that port will result in a response of “Hello World!”. 
+        <h2>Conclusion</h2> The HttpServer class provides a simple way to create an HTTP server in Java. It is a lightweight, performance-oriented server that can be used for testing web applications, as well as for serving application data over the web. With just a few lines of code, you can create an instance of the HttpServer class and set up the server to handle requests and responses. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/"> ListIterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/ArrayList-ListIterator-example.html">ArrayList ListIterator example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Operators/"> Operators </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Operators/Modulus-Operator-Example.html">Modulus Operator Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Check-if-array-contains-value-using-Arrays-class.html">Check if array contains value using Arrays class</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Foreground-Color-Of-an-Applet-Window-Example.html">Get Foreground Color Of an Applet Window Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.eclipse.swt.widgets.TableItem.html">org.eclipse.swt.widgets.TableItem</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Set-last-modified-time-of-a-file-or-directory.html">Set last modified time of a file or directory</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.eclipse.osgi.util.NLS.html">org.eclipse.osgi.util.NLS</a> <h6><i class="fa fa-clock-o"></i> <span>2024-08-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-check-if-element-exists-in-TreeSet-(TreeSet-contains-element).html">How to check if element exists in TreeSet (TreeSet contains element)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/BigInteger/"> BigInteger </a> </p> <a href="/articles/Java/Wrapper-Classes/BigInteger/Find-Square-Root-of-BigInteger-Example.html">Find Square Root of BigInteger Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.springframework.context.annotation.Profile.html">o.s.c.a.Profile</a> <h6><i class="fa fa-clock-o"></i> <span>2024-04-09 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Robert</h3> <p><a href="#">2024-12-22 17:43</a></p> its very helpful programs to all Thanks...... <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Nahish</h3> <p><a href="#">2025-01-03 13:16</a></p> Grt ;-) <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.provider.MediaStore.html">android.provider.MediaStore</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-ArrayList-to-HashMap-Java-example.html">Convert ArrayList to HashMap Java example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Background-Color-Of-an-Applet-Window-Example.html">Get Background Color Of an Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/javafx.scene.Parent.html">javafx.scene.Parent</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipInputStream/Extract-Zip-File-With-Subdirectories-Using-Command-Line-Argument-Example.html">Extract Zip File With Subdirectories Using Command Line Argument Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Convert-HSB-To-RGB-Color-Example.html">Convert HSB To RGB Color Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.view.ScaleGestureDetector.html">android.view.ScaleGestureDetector</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Copy-all-elements-of-Java-LinkedHashSet-to-an-Object-Array-Example.html">Copy all elements of Java LinkedHashSet to an Object Array Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-All-Elements-Of-Java-Vector-Example.html">Replace All Elements Of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-natural-logarithm-value-of-a-number-using-Math.log.html">F.log</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/String/Java-String-Trim-Example.html">Java String Trim Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Convert-RGB-To-HSB-Color-Example.html">Convert RGB To HSB Color Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Shuffle-elements-of-Java-Vector-example.html">Shuffle elements of Java Vector example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Set-Background-Color-Of-an-Applet-Window-Example.html">Set Background Color Of an Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.apache.hadoop.io.Text.html">org.apache.hadoop.io.Text</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/StringBuffer/Java-StringBuffer-delete-remove-character-or-clear-content-Example.html">Java StringBuffer delete remove character or clear content Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Java-LinkedHashMap-forEach-example.html">Java LinkedHashMap forEach example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Sort-LinkedHashMap-by-values.html">Sort LinkedHashMap by values</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-hexadecimal-number-to-decimal-number-example.html">Convert hexadecimal number to decimal number example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Get-Darker-Version-Of-Current-Color-Example.html">Get Darker Version Of Current Color Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

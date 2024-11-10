@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - io.netty.channel.epoll.EpollServerSocketChannel</title> <!--timestamp=2024-11-10T00:17:30.930946310Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.netty.channel.epoll.EpollServerSocketChannel"> 
+  <meta name="keywords" content="io.netty.channel.epoll.EpollServerSocketChannel"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.netty.channel.epoll.EpollServerSocketChannel"> 
+  <meta property="og:description" content="io.netty.channel.epoll.EpollServerSocketChannel"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.netty.channel.epoll.EpollServerSocketChannel"> 
+  <meta name="twitter:description" content="io.netty.channel.epoll.EpollServerSocketChannel"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-11-09</small>
+        </div> 
+        <h1>Introduction to io.netty.channel.epoll.EpollServerSocketChannel</h1> Java's io.netty.channel.epoll.EpollServerSocketChannel class is a low-level network communication channel used for communication between applications. It provides a high-performance, reliable, and flexible means of establishing a server-side socket. This article aims to provide an overview of the underlying concepts and give an example of how to leverage the EpollServerSocketChannel class. 
+        <h2>Understanding How EpollServerSocketChannel Works</h2> The EpollServerSocketChannel is part of the Netty framework, which is an asynchronous event-driven network application framework for rapid development. Netty provides a unified API for handling multiple transport types such as TCP, UDP, SCTP, and others. The EpollServerSocketChannel uses the epoll IO multiplexer to handle incoming connections from clients. It works by creating a single thread that listens for new connections and then delegates the connection to an I/O event loop for handling. When a connection is accepted, the EpollServerSocketChannel creates a new instance of the SocketChannel which is used for all further communications. The EpollServerSocketChannel is designed to provide high-performance and scalability. It supports high-concurrency with multiple connections and can scale to millions of requests per second. Additionally, the EpollServerSocketChannel is non-blocking, meaning that it will not block while waiting for incoming connections. Instead, any I/O operation is immediately delegated to the I/O EventLoop. 
+        <h2>Creating an EpollServerSocketChannel</h2> To create an instance of the EpollServerSocketChannel in Java, use the following code snippet: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+EventLoopGroup bossGroup = new EpollEventLoopGroup();
+EventLoopGroup workGroup = new EpollEventLoopGroup();
+
+ServerBootstrap bootstrap = new ServerBootstrap();
+bootstrap.group(bossGroup, workGroup)
+    .channel(EpollServerSocketChannel.class)
+    .childHandler(new MyChannelInitializer());
+
+ChannelFuture f = bootstrap.bind(8080).sync();
+f.channel().closeFuture().sync();
+
+          </xmp></code></pre> This code snippet creates an instance of the EventLoopGroup called the bossGroup, which is responsible for accepting incoming connections. The workGroup is responsible for the processing and handling of each connection. Once the EventLoopGroups are initialized, the ServerBootstrap is used to configure the EpollServerSocketChannel. The MyChannelInitializer class is responsible for configuring the SocketChannel as well as creating any necessary pipelines. Finally, the bind() method is used to bind the EpollServerSocketChannel to a port and then the closeFuture() is used to wait for the server to terminate before closing the ChannelFuture. 
+        <h2>Example Program of EpollServerSocketChannel</h2> The following is an example program demonstrating the usage of the EpollServerSocketChannel. This program binds the server to port 8080 and returns a “Hello world” message when a client connects. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class EchoServer {
+    public static void main(String[] args) throws Exception {
+        EventLoopGroup bossGroup = new EpollEventLoopGroup();
+        EventLoopGroup workGroup = new EpollEventLoopGroup();
+        try {
+            ServerBootstrap b = new ServerBootstrap();
+            b.group(bossGroup, workGroup)
+                    .channel(EpollServerSocketChannel.class)
+                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                        @Override
+                        public void initChannel(SocketChannel ch) throws Exception {
+                            ChannelPipeline p = ch.pipeline();
+                            p.addLast(new EchoServerHandler());
+                        }
+                    });
+            
+            ChannelFuture f = b.bind(8080).sync();
+            
+            f.channel().closeFuture().sync();
+        } finally {
+            workGroup.shutdownGracefully();
+            bossGroup.shutdownGracefully();
+        }  
+    }
+}
+
+          </xmp></code></pre> In this example the EchoServerHandler is responsible for returning the “Hello world” message. This is done using the following code snippet: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class EchoServerHandler extends SimpleChannelInboundHandler<ByteBuf> {
+    
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        ctx.writeAndFlush(Unpooled.copiedBuffer("Hello world".getBytes()));
+    }
+
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, ByteBuf in) throws Exception {
+       // no op
+    }
+}
+
+          </xmp></code></pre> That is all there is to setting up an EpollServerSocketChannel for use in Java. By leveraging the power of the Netty framework and the performance of the Epoll IO multiplexer, developers can quickly build applications that scale to millions of requests per second. 
+        <h2>Conclusion</h2> The EpollServerSocketChannel is a powerful tool for quickly building high-performance network applications. This article provided an overview of the underlying concepts and an example program demonstrating its usage. Hopefully, this article has helped further your understanding of the EpollServerSocketChannel and its usage in Java. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Get-first-key-or-first-value-of-Java-HashMap-example.html">Get first key or first value of Java HashMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-convert-Vector-to-an-array.html">How to convert Vector to an array</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Get-Item-From-AWT-List-Example.html">Get Item From AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-get-floor-or-ceiling-values-from-Java-TreeSet.html">How to get floor or ceiling values from Java TreeSet</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.graphics.drawable.BitmapDrawable.html">a.g.d.BitmapDrawable</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Set-Foreground-Color-of-JLabel-Example.html">Set Foreground Color of JLabel Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.security.core.userdetails.UserDetails.html">o.s.s.c.u.UserDetails</a> <h6><i class="fa fa-clock-o"></i> <span>2024-05-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/"> Basic Java Examples </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Circle-Area-using-Java-Example.html">Calculate Circle Area using Java Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/"> Float Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Java-Float-isNaN-Method-Example.html">Java Float isNaN Method Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/android.hardware.usb.UsbDevice.html">android.hardware.usb.UsbDevice</a> <h6><i class="fa fa-clock-o"></i> <span>2024-08-06 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Vartel</h3> <p><a href="#">2024-12-14 16:42</a></p> great examples ... thnx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Mark</h3> <p><a href="#">2025-01-03 15:19</a></p> thanks <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Remove-all-values-from-Java-Hashtable-example.html">Remove all values from Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Create-Multi-Select-AWT-List-Example.html">Create Multi Select AWT List Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Convert-HashMap-to-LinkedList.html">Convert HashMap to LinkedList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.sun.jersey.api.client.ClientResponse.html">c.s.j.a.c.ClientResponse</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-long-Array-Example.html">Performing Binary Search on Java long Array Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.commons.beanutils.PropertyUtils.html">o.a.c.b.PropertyUtils</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-the-size-of-the-TreeMap.html">How to get the size of the TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Remove-an-element-from-ArrayList-using-Java-ListIterator-Example.html">Remove an element from ArrayList using Java ListIterator Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/PushbackInputStream/Java-PushbackInputStream-Example.html">Java PushbackInputStream Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.xml.parsers.SAXParserFactory.html">javax.xml.parsers.SAXParserFactory</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/com.google.gson.JsonSyntaxException.html">com.google.gson.JsonSyntaxException</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Check-if-ArrayList-is-empty.html">Check if ArrayList is empty</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-convert-LinkedHashMap-to-List-in-Java.html">How to convert LinkedHashMap to List in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.google.common.io.ByteSource.html">com.google.common.io.ByteSource</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-ArrayList-to-HashMap-Java-example.html">Convert ArrayList to HashMap Java example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.widget.TableRow.html">android.widget.TableRow</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Iterate-ArrayList-using-ListIterator.html">Iterate ArrayList using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-convert-comma-separated-string-to-Java-HashSet.html">How to convert comma separated string to Java HashSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Check-if-a-particular-key-exists-in-Java-HashMap-example.html">Check if a particular key exists in Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Operators/Increment-and-Decrement-Operators-Example.html">Increment and Decrement Operators Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
