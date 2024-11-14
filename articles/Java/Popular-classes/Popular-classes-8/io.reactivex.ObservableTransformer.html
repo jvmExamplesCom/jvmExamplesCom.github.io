@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - io.reactivex.ObservableTransformer</title> <!--timestamp=2024-11-14T00:15:58.912291036Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.reactivex.ObservableTransformer"> 
+  <meta name="keywords" content="io.reactivex.ObservableTransformer"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.reactivex.ObservableTransformer"> 
+  <meta property="og:description" content="io.reactivex.ObservableTransformer"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.reactivex.ObservableTransformer"> 
+  <meta name="twitter:description" content="io.reactivex.ObservableTransformer"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-11-13</small>
+        </div> 
+        <h1>Overview of io.reactivex.ObservableTransformer</h1> The io.reactivex.ObservableTransformer interface is an operator that accepts an Observable source and returns another Observable result, allowing for the transformation and manipulation of an Observable’s data. The interface has two major components, the first being the Observable Transformer and the second being an implementation. In this article, both components will be discussed to illustrate how this interface can be used to manipulate observable data. 
+        <h2>Observable Transformer</h2> The Observable Transformer is the interface class that provides the methods necessary to transform an Observable source. It contains two methods: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public <T, R> ObservableTransformer<T, R> apply(ObservableFunc1<T, R> func)
+
+public <T, U, R> ObservableTransformer<T, R> lift(ObservableFunc2<U, T, R> func)
+
+          </xmp></code></pre> The first method, 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+apply
+
+          </xmp></code></pre>, will take an ObservableFunc1 as an argument and return an ObservableTransformer. This means that the observer can define a function and use it as an argument for the apply method. The second method, 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+lift
+
+          </xmp></code></pre>, will take an ObservableFunc2 as an argument and return an ObservableTransformer. This method works similarly to the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+apply
+
+          </xmp></code></pre> method but allows for the manipulation of more than one Observable at a time. Both methods allow for the transformation of the Observable and its data. 
+        <h2>Implementation</h2> An implementation of the ObservableTransformer interface is required to implement the two methods. This can be done by extending the class, overriding the methods, and defining the behavior of the transformation. For example, the following implementation extends the ObservableTransformer class and overrides the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+apply
+
+          </xmp></code></pre> method to transform an Observable of type int into a string. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class IntToStringTransformer extends 
+ObservableTransformer<Integer, String> {
+
+    @Override
+    public ObservableSource<String> 
+    apply(Observable<Integer> upstream) {
+        return upstream.map(i -> 
+        Integer.toString(i));
+    }
+}
+
+          </xmp></code></pre> This implementation can then be used as follows: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Observable<Integer> integerObservable = ...;
+
+Observable<String> stringObservable = 
+integerObservable.compose(new 
+IntToStringTransformer());
+
+          </xmp></code></pre> The output of this code would be an Observable of type String, with its data transformed from integers to strings. 
+        <h2>Conclusion</h2> The io.reactivex.ObservableTransformer is a powerful tool for transforming and manipulating Observable data. It provides the methods necessary to make a transformation, allowing for extensive manipulation of an Observable’s data. Implementing the interface requires defining the behavior of the transformations, making it easy to control how the data is manipulated. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Check-if-the-LinkedList-is-empty-in-Java.html">Check if the LinkedList is empty in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-5-Example.html">Java Pyramid 5 Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Get-Size-of-Java-Vector-and-loop-through-the-elements-Example.html">Get Size of Java Vector and loop through the elements Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Iterate-through-the-values-of-Java-LinkedHashMap-example.html">Iterate through the values of Java LinkedHashMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Arc-in-Applet-Window-Example.html">Draw Arc in Applet Window Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-fix-java.io.FileNotFoundException-(access-is-denied).html">FileNotFoundException (access is denied)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.crypto.SecretKey.html">javax.crypto.SecretKey</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-List-to-Set-(Convert-ArrayList-to-HashSet,-Convert-ArrayList-to-TreeSet).html">Convert List to Set (Convert ArrayList to HashSet, Convert ArrayList to TreeSet)</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/java.awt.image.Kernel.html">java.awt.image.Kernel</a> <h6><i class="fa fa-clock-o"></i> <span>2024-08-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.springframework.security.web.authentication.AuthenticationSuccessHandler.html">AuthenticationSuccessHandler</a> <h6><i class="fa fa-clock-o"></i> <span>2024-06-07 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Simple-Java-Vector-Example.html">Simple Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Palindrome-Number-Example.html">Java Palindrome Number Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-convert-Vector-to-ArrayList-and-ArrayList-to-Vector-in-Java.html">How to convert Vector to ArrayList and ArrayList to Vector in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/android.nfc.NfcAdapter.html">android.nfc.NfcAdapter</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Get-Size-of-Java-Hashtable-Example.html">Get Size of Java Hashtable Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-get-random-elements-from-LinkedHashSet.html">How to get random elements from LinkedHashSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-List-to-Set.html">Convert List to Set</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-convert-Java-TreeMap-to-an-ArrayList-(List).html">How to convert Java TreeMap to an ArrayList (List)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/javafx.fxml.FXMLLoader.html">javafx.fxml.FXMLLoader</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/io.netty.channel.epoll.EpollServerSocketChannel.html">i.n.c.e.EpollServerSocketChannel</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Hashset-to-comma-separated-string-in-Java.html">Convert Hashset to comma separated string in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Remove-specified-element-from-Java-LinkedHashSet-example.html">Remove specified element from Java LinkedHashSet example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Create-List-containing-n-Copies-of-Specified-Object-Example.html">Create List containing n Copies of Specified Object Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/com.google.common.collect.ListMultimap.html">c.g.c.c.ListMultimap</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Convert-short-primitive-to-Short-object-Example.html">Convert short primitive to Short object Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.springframework.util.CollectionUtils.html">o.s.u.CollectionUtils</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Delete-file-or-directory-when-virtual-machine-terminates.html">Delete file or directory when virtual machine terminates</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-get-file-extension-in-Java.html">How to get file extension in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-random-elements-from-ArrayList.html">Get random elements from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.nio.file.FileAlreadyExistsException.html">j.n.f.FileAlreadyExistsException</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
