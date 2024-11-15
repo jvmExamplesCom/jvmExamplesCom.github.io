@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.apache.lucene.util.BytesRef</title> <!--timestamp=2024-11-15T00:17:18.708859079Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.apache.lucene.util.BytesRef"> 
+  <meta name="keywords" content="org.apache.lucene.util.BytesRef"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.apache.lucene.util.BytesRef"> 
+  <meta property="og:description" content="org.apache.lucene.util.BytesRef"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.apache.lucene.util.BytesRef"> 
+  <meta name="twitter:description" content="org.apache.lucene.util.BytesRef"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-11-14</small>
+        </div> 
+        <h1>Introduction to org.apache.lucene.util.BytesRef</h1> 
+        <p>org.apache.lucene.util.BytesRef is a utility class which provides functions for dealing with raw byte arrays, which are often used to store data for Lucene's inverted index. This tutorial will guide you through all the features of org.apache.lucene.util.BytesRef, and provide code examples to illustrate how these features can be used.</p> 
+        <h1>BytesRef Basics</h1> 
+        <p>The simplest usage of BytesRef is as a wrapper for a raw byte array. The following example shows how to create a new instance of BytesRef and assign a value to it:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+byte[] data = {1, 2, 3, 4};
+BytesRef bytesRef = new BytesRef(data);
+
+          </xmp></code></pre> 
+        <p>This example creates a new BytesRef object and assigns it a byte array containing the values 1, 2, 3 and 4. The BytesRef object now contains a reference to this byte array and allows access to it through various methods.</p> 
+        <h2>BytesRef Length</h2> 
+        <p>BytesRef provides a method for getting the length of the underlying byte array. The following example demonstrates how to use this method:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+System.out.println(bytesRef.length()); // prints 4
+
+          </xmp></code></pre> 
+        <h2>BytesRef Copy</h2> 
+        <p>BytesRef also provides methods for copying the contents of the underlying byte array. The following example demonstrates how to use this method:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+byte[] dest = new byte[4];
+bytesRef.copyTo(dest);
+// dest now contains {1, 2, 3, 4}
+
+          </xmp></code></pre> 
+        <h2>BytesRef Equals</h2> 
+        <p>BytesRef provides a method for comparing two instances of BytesRef. The following example demonstrates how to use this method:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+byte[] data2 = {1, 2, 3, 4};
+BytesRef bytesRef2 = new BytesRef(data2);
+
+System.out.println(bytesRef.equals(bytesRef2)); // prints true
+
+          </xmp></code></pre> 
+        <h2>BytesRef CompareTo</h2> 
+        <p>BytesRef provides a method for comparing two instances of BytesRef, and returning an integer indicating the relative order of the two instances. The following example demonstrates how to use this method:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+byte[] data3 = {4, 3, 2, 1};
+BytesRef bytesRef3 = new BytesRef(data3);
+
+System.out.println(bytesRef.compareTo(bytesRef3)); // prints -1
+
+          </xmp></code></pre> 
+        <h2>BytesRef Append</h2> 
+        <p>BytesRef also provides a method for appending the contents of one BytesRef instance to another. The following example demonstrates how to use this method:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+byte[] data4 = {5, 6};
+BytesRef bytesRef4 = new BytesRef(data4);
+
+bytesRef.append(bytesRef4);
+// bytesRef now contains {1, 2, 3, 4, 5, 6}
+
+          </xmp></code></pre> 
+        <h2>Final Thoughts</h2> 
+        <p>This tutorial has provided an introduction to the features of org.apache.lucene.util.BytesRef, and how to use them. Remember that BytesRef can be used as a wrapper for a raw byte array, and provides methods for accessing and manipulating the contents of the array.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-ArrayList-elements-using-ListIterator.html">Iterate ArrayList elements using ListIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Create-AWT-Checkbox-Example.html">Create AWT Checkbox Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/"> AWT Choice </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Insert-Item-At-Specified-Index-In-AWT-Choice-Or-Combobox-Example.html">Insert Item At Specified Index In AWT Choice Or Combobox Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-List-using-Iterator.html">Iterate through List using Iterator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.awt.Dimension.html">java.awt.Dimension</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/org.springframework.web.bind.annotation.RequestBody.html">o.s.w.b.a.RequestBody</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-float-Arrays-Example.html">Compare Two Java float Arrays Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Convert-HashMap-to-TreeMap-using-Comparator.html">Convert HashMap to TreeMap using Comparator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Find-element-in-ArrayList-using-indexOf-and-lastIndexOf-methods.html">Find element in ArrayList using indexOf and lastIndexOf methods</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/okhttp3.mockwebserver.MockWebServer.html">okhttp3.mockwebserver.MockWebServer</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-05 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Nahish</h3> <p><a href="#">2025-01-04 02:27</a></p> thanks <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Gabriel</h3> <p><a href="#">2025-01-02 02:20</a></p> great examples ... thnx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-Java-String-to-Integer-object-Example.html">Convert Java String to Integer object Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Find-elemnet-index-in-Java-TreeSet.html">Find elemnet index in Java TreeSet</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Iterate-through-elements-of-Java-LinkedList-using-Iterator-example.html">Iterate through elements of Java LinkedList using Iterator example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor.html">AuthorizationAttributeSourceAdvisor</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Remove-range-of-elements-from-LinkedList-Java-example.html">Remove range of elements from LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.junit.runner.notification.RunNotifier.html">o.j.r.n.RunNotifier</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Iterate-through-elements-of-Java-TreeSet-example.html">Iterate through elements of Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.apache.http.Header.html">org.apache.http.Header</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-all-occurrences-of-specified-element-of-Java-ArrayList-Example.html">Replace all occurrences of specified element of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/Traverse-through-ArrayList-in-forward-direction-using-Java-ListIterator-Example.html">Traverse through ArrayList in forward direction using Java ListIterator Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Simple-Java-LinkedHashSet-example.html">Simple Java LinkedHashSet example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.nio.file.Path.html">java.nio.file.Path</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Iterate-HashMap.html">Iterate HashMap</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Infinite-For-loop-Example.html">Infinite For loop Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.net.URI.html">java.net.URI</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Shuffle-elements-of-Java-Vector-example.html">Shuffle elements of Java Vector example</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/JLabel-Get-Tooltip-Example.html">JLabel Get Tooltip Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Create-an-object-array-from-elements-of-LinkedList-Java-example.html">Create an object array from elements of LinkedList Java example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.jms.MessageProducer.html">javax.jms.MessageProducer</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Short-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Short object to byte, short, int, long, float and double</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
