@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javax.naming.NamingEnumeration</title> <!--timestamp=2024-11-25T00:17:49.322246113Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.naming.NamingEnumeration"> 
+  <meta name="keywords" content="javax.naming.NamingEnumeration"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.naming.NamingEnumeration"> 
+  <meta property="og:description" content="javax.naming.NamingEnumeration"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.naming.NamingEnumeration"> 
+  <meta name="twitter:description" content="javax.naming.NamingEnumeration"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-11-24</small>
+        </div> 
+        <h1>javax.naming.NamingEnumeration</h1> Java naming services provide access to the naming and directory functionality of the underlying platform. The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+javax.naming.NamingEnumeration
+
+          </xmp></code></pre> interface provides the ability to enumerate over the bindings returned in response to a context operation. It is used by many methods in the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+javax.naming.Context
+
+          </xmp></code></pre> class, such as 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+listBindings()
+
+          </xmp></code></pre>, 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+list()
+
+          </xmp></code></pre>, and 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+search()
+
+          </xmp></code></pre>. 
+        <h2>Basic Methods</h2> The 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+NamingEnumeration
+
+          </xmp></code></pre> class provides two methods to check whether it has any elements: 
+        <ul> 
+         <li><pre>hasMoreElements()</pre></li> 
+         <li><pre>hasMore()</pre></li> 
+        </ul> The method 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+hasMoreElements()
+
+          </xmp></code></pre> returns true if the enumeration contains more elements and false otherwise. The method 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+hasMore()
+
+          </xmp></code></pre> is equivalent to 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+hasMoreElements()
+
+          </xmp></code></pre>. The class also provides two methods to get the next element from the enumeration. These are: 
+        <ul> 
+         <li><pre>nextElement()</pre></li> 
+         <li><pre>next()</pre></li> 
+        </ul> The method 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+nextElement()
+
+          </xmp></code></pre> returns the next element from the enumeration. The method 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+next()
+
+          </xmp></code></pre> is equivalent to 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+nextElement()
+
+          </xmp></code></pre>. 
+        <h2>Example</h2> Let's take a look at a simple example that demonstrates how to use the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+NamingEnumeration
+
+          </xmp></code></pre> interface. This example uses a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Hashtable
+
+          </xmp></code></pre> to create a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Context
+
+          </xmp></code></pre> object. Then, it uses this context to list the bindings in the context. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+// Create a Hashtable to store the data
+Hashtable<String, String> env = new Hashtable<String, String>();
+env.put("java.naming.factory.initial", "com.sun.jndi.rmi.registry.RegistryContextFactory");
+
+// Create a Context object
+Context ctx = new InitialContext(env);
+
+// List the bindings in the context
+NamingEnumeration<NameClassPair> ncps = ctx.list("/");
+while (ncps.hasMore()) {
+    NameClassPair ncp = ncps.next();
+    System.out.println(ncp.getName() + ": " + ncp.getClassName());
+}
+
+          </xmp></code></pre> In this example, we first create a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Hashtable
+
+          </xmp></code></pre> to store the data. Then, we create a 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Context
+
+          </xmp></code></pre> object using this data. Finally, we use the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+list()
+
+          </xmp></code></pre> method to list the bindings in the context. We loop over the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+NamingEnumeration
+
+          </xmp></code></pre> object returned by the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+list()
+
+          </xmp></code></pre> method and print the name and class name of each element in the enumeration. 
+        <h2>Conclusion</h2> In this article, we have discussed the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+NamingEnumeration
+
+          </xmp></code></pre> interface provided by Java naming services. We have seen how it can be used to enumerate over the bindings returned by the methods of the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Context
+
+          </xmp></code></pre> class. We have also seen an example which illustrates how to use this interface in practice. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Initialize-ArrayList.html">Initialize ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-03-01 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Set-JLabel-Border-Example.html">Set JLabel Border Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Check-if-a-particular-value-exists-in-Java-LinkedHashMap-example.html">Check if a particular value exists in Java LinkedHashMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Determine-If-The-Checkbox-Is-Visible-Example.html">Determine If The Checkbox Is Visible Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/"> Runtime </a> </p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Suggest-JVM-to-Run-Object-Finalization-Example.html">Suggest JVM to Run Object Finalization Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.core.env.PropertySource.html">o.s.c.e.PropertySource</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.eclipse.swt.widgets.TableColumn.html">org.eclipse.swt.widgets.TableColumn</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/"> Sorting </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-char-Array-Example.html">Java Sort char Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.view.SurfaceHolder.html">android.view.SurfaceHolder</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-HashMap-to-TreeMap.html">Convert HashMap to TreeMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-29 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Martin</h3> <p><a href="#">2024-12-25 20:01</a></p> Can somebody elaborate more? <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Abral</h3> <p><a href="#">2025-01-11 03:22</a></p> Great example! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Zip/ZipOutputStream/Create-Zip-File-using-ZipOutputStream-Example.html">Create Zip File using ZipOutputStream Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-binary-number-to-decimal-number-example.html">Convert binary number to decimal number example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-array-to-LinkedHashSet-using-Arrays-class.html">Convert array to LinkedHashSet using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Get-Checkbox-State-Example.html">Get Checkbox State Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-convert-LinkedHashSet-to-array-in-Java.html">How to convert LinkedHashSet to array in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/javax.transaction.xa.XAResource.html">javax.transaction.xa.XAResource</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.junit.runners.Suite.html">org.junit.runners.Suite</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/Java-Date-Class/Create-java-Date-from-specific-time-example.html">Create java Date from specific time example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-maxmimum-element-of-Java-ArrayList-Example.html">Find maxmimum element of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Sorting-Algorithms/Java-Bubble-Sort-Example.html">Java Bubble Sort Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-shuffle-Vector-elements-in-Java.html">How to shuffle Vector elements in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-all-occurrences-of-specified-element-of-Java-Vector-Example.html">Replace all occurrences of specified element of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Read-text-file-to-Java-HashMap-example.html">Read text file to Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Determine-File-or-Directory.html">Determine File or Directory</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/javafx.event.EventHandler.html">javafx.event.EventHandler</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/com.android.volley.ParseError.html">com.android.volley.ParseError</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Terminate-Java-Virtual-Machine-(JVM)-Example.html">Terminate Java Virtual Machine (JVM) Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Check-if-element-exists-in-Java-LinkedList-(LinkedList-contains-element).html">Check if element exists in Java LinkedList (LinkedList contains element)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-create-TreeMap-objects-using-Comparable-interface.html">How to create TreeMap objects using Comparable interface</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.lang.annotation.Annotation.html">java.lang.annotation.Annotation</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
