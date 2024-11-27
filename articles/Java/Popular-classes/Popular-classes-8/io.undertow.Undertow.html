@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - io.undertow.Undertow</title> <!--timestamp=2024-11-27T00:17:11.361254622Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.undertow.Undertow"> 
+  <meta name="keywords" content="io.undertow.Undertow"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.undertow.Undertow"> 
+  <meta property="og:description" content="io.undertow.Undertow"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.undertow.Undertow"> 
+  <meta name="twitter:description" content="io.undertow.Undertow"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-11-26</small>
+        </div> 
+        <h1> Introduction to io.undertow.Undertow</h1> 
+        <p>io.undertow.Undertow is a lightweight web server and a Java servlet container. It's designed to be fast, flexible, secure, and easy to use. Undertow can be used for a wide variety of tasks ranging from traditional web applications to RESTful web services, microservices, and much more. It also provides support for many programming languages and technologies, such as Java EE, JAX-RS, JAX-WS, and many others.</p> 
+        <h2> Setting Up an Undertow Server</h2> 
+        <p>Setting up an Undertow server is relatively straightforward. The first step is to add the Undertow dependency to your project. This can be done in Maven by adding the following snippet to your pom.xml file:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+<dependency>
+    <groupId>org.wildfly.undertow</groupId>
+    <artifactId>undertow-servlet</artifactId>
+    <version>2.0.14.Final</version>
+</dependency>
+
+          </xmp></code></pre> 
+        <p>To start the server, add the following code snippet to your application:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Undertow server = Undertow.builder()
+        .addHttpListener(8080, "localhost")
+        .setHandler(exchange -> {
+            exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
+            exchange.getResponseSender().send("Hello World!");
+        })
+        .build();
+server.start();
+
+          </xmp></code></pre> 
+        <p>This code will start an Undertow server on port 8080 and serve a simple “Hello World!” response. You can now access the server at http://localhost:8080.</p> 
+        <h2>Writing an Undertow Handler</h2> 
+        <p>Undertow uses a handler-based architecture. To write a custom handler, you will need to implement the </p>
+        <pre>HttpHandler</pre> interface. For example, the following handler logs all incoming requests:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class LoggingHandler implements HttpHandler {
+
+    @Override
+    public void handleRequest(HttpServerExchange exchange) throws Exception {
+        System.out.println("Received request from " + exchange.getSourceAddress());
+        exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
+        exchange.getResponseSender().send("This is the response!");
+    }
+}
+
+          </xmp></code></pre> 
+        <p>Once the handler is defined, it can be added to the server using the following code:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Undertow server = Undertow.builder()
+        .addHttpListener(8080, "localhost")
+        .setHandler(new LoggingHandler())
+        .build();
+server.start();
+
+          </xmp></code></pre> 
+        <p>Now every time someone makes a request to the server, it will be logged to the console.</p> 
+        <h2>Servlet Support</h2> 
+        <p>Undertow also supports the Java Servlet API, which makes it easy to deploy existing web applications or create new ones using the standard servlet APIs. To enable servlet support, add the undertow-servlet dependency to the project:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+<dependency>
+    <groupId>org.wildfly.undertow</groupId>
+    <artifactId>undertow-servlet</artifactId>
+    <version>2.0.14.Final</version>
+</dependency>
+
+          </xmp></code></pre> 
+        <p>This allows you to deploy servlets using the standard deployment descriptor (</p>
+        <pre>web.xml</pre>) and register servlet mappings. For example, this web.xml file registers a Hello World servlet:
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <servlet>
+        <servlet-name>HelloWorldServlet</servlet-name>
+        <servlet-class>com.example.HelloWorldServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HelloWorldServlet</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+</web-app>
+
+          </xmp></code></pre> 
+        <p>This servlet can then be deployed using the following code:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+DeploymentInfo servletBuilder = deployment()
+        .setClassLoader(MyApplication.class.getClassLoader())
+        .setContextPath("/")
+        .setDeploymentName("myapp.war")
+        .addServlets(
+                servlet("HelloWorldServlet", com.example.HelloWorldServlet.class)
+                        .addMapping("/hello"));
+
+DeploymentManager manager = defaultContainer()
+        .addDeployment(servletBuilder);
+manager.deploy();
+
+HttpHandler servletHandler = manager.start();
+
+Undertow server = Undertow.builder()
+        .addHttpListener(8080, "localhost")
+        .setHandler(servletHandler)
+        .build();
+server.start();
+
+          </xmp></code></pre> 
+        <p>Now when a request is made to http://localhost:8080/hello, the request will be routed to the </p>
+        <pre>HelloWorldServlet</pre>.
+         
+        <h2>Conclusion</h2> 
+        <p>Undertow is a powerful, lightweight web server and servlet container that is easy to use and highly configurable. It provides support for many different programming languages and technologies and makes it easy to deploy existing web applications. With its handler-based architecture and servlet support, Undertow is a great choice for any web application.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipEntry/"> ZipEntry </a> </p> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Modification-Time-of-Zip-Entry-Example.html">Get Modification Time of Zip Entry Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/System/"> System </a> </p> <a href="/articles/Java/Miscellaneous-Classes/System/Get-system-properties-using-System-class.html">Get system properties using System class</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/How-to-get-substring-from-String.html">How to get substring from String</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/"> Basic Java Examples </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Rectangle-Area-using-Java-Example.html">Calculate Rectangle Area using Java Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/"> AWT Color </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Convert-RGB-To-HSB-Color-Example.html">Convert RGB To HSB Color Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-7/"> Popular classes 7 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.sun.jersey.api.client.Client.html">com.sun.jersey.api.client.Client</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/javax.annotation.PostConstruct.html">javax.annotation.PostConstruct</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/"> AWT Color </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Set-Graphics-Color-Example.html">Set Graphics Color Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/"> Integer Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-decimal-integer-to-binary-number-example.html">Convert decimal integer to binary number example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-get-HashMap-size-example.html">How to get HashMap size example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-10 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.concurrent.ThreadLocalRandom.html">j.u.c.ThreadLocalRandom</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Sorting/Java-Sort-double-Array-Example.html">Java Sort double Array Example</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/System/Run-object-finalization-using-System-class.html">Run object finalization using System class</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Infinite-For-loop-Example.html">Infinite For loop Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.nio.file.FileSystems.html">java.nio.file.FileSystems</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Sort-LinkedHashMap-by-values.html">Sort LinkedHashMap by values</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-String-to-short.html">Convert String to short</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-String-as-characters-to-a-file-using-DataOutputStream.html">Write String as characters to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-double-to-a-file-using-DataOutputStream.html">Write double to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.content.res.Resources.html">android.content.res.Resources</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/com.google.common.net.HostAndPort.html">com.google.common.net.HostAndPort</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/PushbackInputStream/Java-PushbackInputStream-Example.html">Java PushbackInputStream Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Write-char-to-a-file-using-DataOutputStream.html">Write char to a file using DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-Integer-to-Java-String-object.html">Convert Integer to Java String object</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-clear-TreeSet-(remove-all-elements).html">How to clear TreeSet (remove all elements)</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-decimal-integer-to-octal-number-example.html">Convert decimal integer to octal number example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.springframework.util.AntPathMatcher.html">o.s.u.AntPathMatcher</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Java-Float-isNaN-Method-Example.html">Java Float isNaN Method Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.support.annotation.DrawableRes.html">a.s.a.DrawableRes</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Replace-an-element-at-specified-index-of-Java-ArrayList-Example.html">Replace an element at specified index of Java ArrayList Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
