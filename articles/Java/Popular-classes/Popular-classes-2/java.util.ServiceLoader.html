@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.util.ServiceLoader</title> <!--timestamp=2024-12-02T00:18:28.829925219Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.util.ServiceLoader"> 
+  <meta name="keywords" content="java.util.ServiceLoader"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.util.ServiceLoader"> 
+  <meta property="og:description" content="java.util.ServiceLoader"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.util.ServiceLoader"> 
+  <meta name="twitter:description" content="java.util.ServiceLoader"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-12-01</small>
+        </div> 
+        <h1>java.util.ServiceLoader</h1> Java provides a built-in mechanism for discovering and loading services, called ServiceLoader. This class is part of the Java SE platform, which means it is available in versions of Java from 5 to 9. 
+        <h2>What is ServiceLoader?</h2> In simple terms, ServiceLoader is a way of discovering and loading services at runtime. It looks for files in the META-INF/services/ directory of a JAR file, which specifies which services are available. The name of the file should be the fully-qualified name of the service interface class (e.g. java.sql.Driver), and the contents of the file should be a list of fully-qualified service implementation classes (e.g. com.mysql.jdbc.Driver). ServiceLoader implements the Iterable interface, so the easiest way to get a list of services is to use the for-each loop construct: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ServiceLoader<MyService> loader = ServiceLoader.load(MyService.class);
+
+for (MyService service : loader) {
+    service.doSomething();
+}
+
+          </xmp></code></pre> You can also call the iterator() method to get an iterator over the list of services, or use the stream() method to get a stream of services. 
+        <h2>Example</h2> Let's say you have an interface called MyService, with two implementations called MyServiceImpl1 and MyServiceImpl2. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public interface MyService {
+    void doSomething();
+}
+
+public class MyServiceImpl1 implements MyService {
+    public void doSomething() {
+        System.out.println("doing something 1");
+    }
+}
+
+public class MyServiceImpl2 implements MyService {
+    public void doSomething() {
+        System.out.println("doing something 2");
+    }
+}
+
+          </xmp></code></pre> The classes can be compiled into a JAR file, and the META-INF/services/ directory can then be created with a file called "MyService". The contents of this file would be: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+com.example.MyServiceImpl1
+com.example.MyServiceImpl2
+
+          </xmp></code></pre> Finally, the JAR file can be added to the classpath. When the code is run, the following will be output: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+doing something 1
+doing something 2
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> ServiceLoader is a great way to discover and load services at runtime. It is easy to use, and is part of the standard API so it is widely available. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.SortedMap.html">java.util.SortedMap</a> <h6><i class="fa fa-clock-o"></i> <span>2024-02-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Get-JLabel’s-Text-Example.html">Get JLabel’s Text Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.apache.commons.lang.NotImplementedException.html">o.a.c.l.NotImplementedException</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Remove-specified-element-from-Java-HashSet-example.html">Remove specified element from Java HashSet example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.preference.PreferenceFragment.html">a.p.PreferenceFragment</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/"> AWT Button </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Set-Action-Command-For-AWT-Button-Example.html">Set Action Command For AWT Button Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Search-ArrayList-element-using-binary-search.html">Search ArrayList element using binary search</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/"> Hashtable </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Simple-Java-Hashtable-example.html">Simple Java Hashtable example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/"> Float Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Convert-Java-Float-to-Numeric-Primitive-Data-Types-Example.html">Convert Java Float to Numeric Primitive Data Types Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/"> Basic Java Examples </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Hello-World-example.html">Hello World example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-30 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.w3c.dom.DOMImplementation.html">org.w3c.dom.DOMImplementation</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Remove-all-values-from-Java-Hashtable-example.html">Remove all values from Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-List-in-reverse-order-using-ListIterator.html">Iterate List in reverse order using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-2-Example.html">Java Pyramid 2 Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-shuffle-Vector-elements-in-Java.html">How to shuffle Vector elements in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.concurrent.ThreadFactory.html">java.util.concurrent.ThreadFactory</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.apache.commons.lang.ArrayUtils.html">org.apache.commons.lang.ArrayUtils</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-find-the-minimum-or-maximum-element-from-the-Vector.html">How to find the minimum or maximum element from the Vector</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Using-Applet-dimension-to-print-center-aligned-text-Example.html">Using Applet dimension to print center aligned text Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Determine-if-File-or-Directory-is-hidden.html">Determine if File or Directory is hidden</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/android.support.v7.preference.Preference.html">a.s.v.p.Preference</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Get-Collection-of-Values-from-Java-Hashtable-example.html">Get Collection of Values from Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-the-size-of-the-TreeMap.html">How to get the size of the TreeMap</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Draw-Line-in-Applet-Window-Example.html">Draw Line in Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-replace-an-element-at-a-specific-index-of-the-Vector.html">How to replace an element at a specific index of the Vector</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipEntry/Get-Zip-Entry-Example.html">Get Zip Entry Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.validation.Validator.html">javax.validation.Validator</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.view.ViewTreeObserver.OnGlobalLayoutListener.html">a.v.V.OnGlobalLayoutListener</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-TreeMap-key-using-the-value-in-Java.html">How to get TreeMap key using the value in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Iterate-through-elements-of-Java-LinkedList-using-Iterator-example.html">Iterate through elements of Java LinkedList using Iterator example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
