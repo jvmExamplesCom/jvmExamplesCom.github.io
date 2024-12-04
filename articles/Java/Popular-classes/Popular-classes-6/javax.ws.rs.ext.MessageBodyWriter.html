@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - javax.ws.rs.ext.MessageBodyWriter</title> <!--timestamp=2024-12-04T00:18:11.836481233Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="javax.ws.rs.ext.MessageBodyWriter"> 
+  <meta name="keywords" content="javax.ws.rs.ext.MessageBodyWriter"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - javax.ws.rs.ext.MessageBodyWriter"> 
+  <meta property="og:description" content="javax.ws.rs.ext.MessageBodyWriter"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - javax.ws.rs.ext.MessageBodyWriter"> 
+  <meta name="twitter:description" content="javax.ws.rs.ext.MessageBodyWriter"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-12-03</small>
+        </div> 
+        <h1>javax.ws.rs.ext.MessageBodyWriter</h1> 
+        <h2>Overview of javax.ws.rs.ext.MessageBodyWriter</h2> 
+        <p>The javax.ws.rs.ext.MessageBodyWriter class is a Java API that allows developers to write specific types of message body writers. It is used in conjunction with the Java API for RESTful Web Services (JAX-RS) and enables developers to write custom representations of a given resource.</p> 
+        <p>The MessageBodyWriter class provides methods for writing out a response representation of the resource, as well as a method for determining if a particular type can be written. The class implements the javax.ws.rs.ext.Provider interface which allows custom implementations to be specified in the JAX-RS application.</p> 
+        <h2>Example Usage of javax.ws.rs.ext.MessageBodyWriter</h2> 
+        <p>In this example, we are going to create a custom implementation of the MessageBodyWriter interface in order to write a JSON representation of a Resource object.</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+import javax.ws.rs.ext.MessageBodyWriter;
+
+public class CustomJSONWriter implements MessageBodyWriter<Resource> {
+    @Override
+    public boolean isWriteable(Class<?> type) {
+        // Check if the given type is Resource
+        return type == Resource.class;
+    }
+
+    @Override
+    public long getSize(Resource resource, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
+        // Return the size of the Resource object
+        return resource.toJSON().length();
+    }
+
+    @Override
+    public void writeTo(Resource resource, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException {
+        // Write the JSON representation of the Resource object
+        entityStream.write(resource.toJSON().getBytes());
+    }
+}
+
+          </xmp></code></pre> 
+        <p>Once the custom MessageBodyWriter has been created, it can be registered in the JAX-RS application by adding it to the Set of providers returned by the Application.getSingletons() method.</p> 
+        <h2>Conclusion</h2> 
+        <p>The javax.ws.rs.ext.MessageBodyWriter class provides developers with the ability to create custom implementations for writing out a response representation of a resource. Using this class can make it easier for developers to customize the output of their JAX-RS applications.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.lang.management.GarbageCollectorMXBean.html">j.l.m.GarbageCollectorMXBean</a> <h6><i class="fa fa-clock-o"></i> <span>2024-11-26 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-list/"> AWT list </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-list/Create-AWT-List-Example.html">Create AWT List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/"> Data types </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Data-types/Java-short-Example.html">Java short Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Copy-all-elements-of-Java-ArrayList-to-an-Object-Array-Example.html">Copy all elements of Java ArrayList to an Object Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-iterate-Java-TreeMap-in-reverse-order.html">How to iterate Java TreeMap in reverse order</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-3/"> Popular classes 3 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-3/java.util.AbstractCollection.html">java.util.AbstractCollection</a> <h6><i class="fa fa-clock-o"></i> <span>2024-05-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.awt.Component.html">java.awt.Component</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-20 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Get-elements-from-LinkedList-Java-example.html">Get elements from LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/"> Searching </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Searching/Performing-Binary-Search-on-Java-char-Array-Example.html">Performing Binary Search on Java char Array Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/"> Runtime </a> </p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Terminate-Java-Virtual-Machine-(JVM)-Example.html">Terminate Java Virtual Machine (JVM) Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-03 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Martin</h3> <p><a href="#">2025-01-24 00:38</a></p> Thank you very much! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Adam</h3> <p><a href="#">2025-01-13 06:01</a></p> great examples ... thnx <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Set-Graphics-Color-Example.html">Set Graphics Color Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/org.springframework.http.ResponseEntity.html">o.s.h.ResponseEntity</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-replace-elements.html">Java LinkedList replace elements</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.w3c.dom.DOMException.html">org.w3c.dom.DOMException</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-get-first-or-last-elements-from-Java-HashSet.html">How to get first or last elements from Java HashSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.mail.internet.InternetAddress.html">javax.mail.internet.InternetAddress</a> </li> 
+         <li> <a href="/articles/Java/Swing/JTextField/Get-X-and-Y-Coordinates-of-JTextField-Example.html">Get X and Y Coordinates of JTextField Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Java-ArrayList-Iterator-example.html">Java ArrayList Iterator example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Convert-ArrayList-to-HashMap-Java-example.html">Convert ArrayList to HashMap Java example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Convert-array-to-LinkedList-in-Java.html">Convert array to LinkedList in Java</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Select-Particular-Item-Of-AWT-Choice-Or-Combobox-Example.html">Select Particular Item Of AWT Choice Or Combobox Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-contains-a-value.html">How to check if LinkedHashMap contains a value</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Create-AWT-Checkbox-Example.html">Create AWT Checkbox Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/android.widget.AdapterView.html">android.widget.AdapterView</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Simple-For-loop-Example.html">Simple For loop Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.w3c.dom.DOMException.html">org.w3c.dom.DOMException</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Circle-Perimeter-using-Java-Example.html">Calculate Circle Perimeter using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Copy-all-elements-of-Java-LinkedHashSet-to-an-Object-Array-Example.html">Copy all elements of Java LinkedHashSet to an Object Array Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/java.awt.Stroke.html">java.awt.Stroke</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Create-JLabel-With-Image-Icon-and-Text-Example.html">Create JLabel With Image Icon and Text Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>

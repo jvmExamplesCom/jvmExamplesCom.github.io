@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.elasticsearch.index.query.BoolQueryBuilder</title> <!--timestamp=2024-12-04T00:18:12.111051048Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.elasticsearch.index.query.BoolQueryBuilder"> 
+  <meta name="keywords" content="org.elasticsearch.index.query.BoolQueryBuilder"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.elasticsearch.index.query.BoolQueryBuilder"> 
+  <meta property="og:description" content="org.elasticsearch.index.query.BoolQueryBuilder"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.elasticsearch.index.query.BoolQueryBuilder"> 
+  <meta name="twitter:description" content="org.elasticsearch.index.query.BoolQueryBuilder"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-12-03</small>
+        </div> 
+        <h1>Introduction to org.elasticsearch.index.query.BoolQueryBuilder</h1> The org.elasticsearch.index.query.BoolQueryBuilder class is a powerful tool when it comes to building complex queries. It provides an efficient way to match documents with multiple conditions, making it particularly useful for search applications. Through this article, we'll explore how to use the BoolQueryBuilder class and how it can be used to build more advanced queries. 
+        <h2>Creating a BoolQueryBuilder Instance</h2> A BoolQueryBuilder can be instantiated using the following syntax: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+BoolQueryBuilder queryBuilder = new BoolQueryBuilder();
+
+          </xmp></code></pre> This creates an empty Query Builder instance that will be used to construct a query. 
+        <h2>Adding Clauses</h2> The most important part of using the BoolQueryBuilder is adding clauses to it. This is done using the must(), should(), and mustNot() methods. The must() method adds a clause which must match for the query to return a document. The should() method adds a clause which should match if possible, but isn't required. And the mustNot() method adds a clause which must not match for the query to return a document. The following code shows how to add a clause to the BoolQueryBuilder: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+QueryBuilder clause = QueryBuilders.termQuery("field", "value");
+queryBuilder.must(clause);
+
+          </xmp></code></pre> In this example, we are using the termQuery() method from the QueryBuilders class to create a clause. This clause will match documents where the field's value equals "value". The clause is then added to the BoolQueryBuilder instance using the must() method. 
+        <h2>Combining Clauses</h2> Once you have added all of your clauses to the BoolQueryBuilder instance, they can be combined in various ways. The following methods can be used to combine clauses: 
+        <ul> 
+         <li>must(): This combines two clauses by adding them as separate must clauses. Documents will only be returned if both clauses match.</li> 
+         <li>should(): This combines two clauses by adding them as separate should clauses. Documents returned may match either of the clauses, or both.</li> 
+         <li>mustNot(): This combines two clauses by adding them as separate must not clauses. Documents will only be returned if none of the clauses match.</li> 
+         <li>boost(): This combines two clauses by adding them as separate clauses with different boost values. Documents returned may match either of the clauses, and the one with the higher boost value will be given more relevance.</li> 
+        </ul> The following code shows how to combine two clauses using the must() method: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+QueryBuilder clause1 = QueryBuilders.termQuery("field1", "value1");
+QueryBuilder clause2 = QueryBuilders.termQuery("field2", "value2");
+queryBuilder.must(clause1).must(clause2);
+
+          </xmp></code></pre> In this example, we are combining two clauses so that documents will only be returned if both clauses match. 
+        <h2>Executing the Query</h2> Once you have created and combined your clauses, the query can be executed using the execute() method. This will return a list of documents that match the query criteria. The following code shows how to execute a query using the BoolQueryBuilder: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+SearchResponse response = queryBuilder.execute();
+List<Document> documents = response.getDocuments();
+
+          </xmp></code></pre> This will execute the query and return a list of documents that match the query criteria. 
+        <h2>Conclusion</h2> The BoolQueryBuilder class is a powerful tool when it comes to building complex queries. Through this article, we've explored how to use the BoolQueryBuilder class and how it can be used to build more advanced queries. We've also seen how to add clauses and combine them in various ways, and how to execute the query. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.swing.JButton.html">javax.swing.JButton</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/android.view.animation.Animation.AnimationListener.html">a.v.a.A.AnimationListener</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Get-Size-of-Java-Vector-and-loop-through-the-elements-Example.html">Get Size of Java Vector and loop through the elements Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.springframework.web.servlet.view.RedirectView.html">o.s.w.s.v.RedirectView</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/"> Float Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Convert-Java-Float-to-Numeric-Primitive-Data-Types-Example.html">Convert Java Float to Numeric Primitive Data Types Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Check-if-a-particular-element-exists-in-Java-HashSet-Example.html">Check if a particular element exists in Java HashSet Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/"> Comparator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-HashMap-by-values-using-Comparator.html">Sort HashMap by values using Comparator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-convert-ArrayList-to-TreeSet.html">How to convert ArrayList to TreeSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-remove-elements-from-HashSet.html">How to remove elements from HashSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-value-from-TreeMap-using-the-key-(TreeMap-get-method).html">How to get value from TreeMap using the key (TreeMap get method)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-10 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Fibonacci-Series-Java-Example.html">Fibonacci Series Java Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-LinkedHashMap-by-values-using-Comparator-interface.html">Sort LinkedHashMap by values using Comparator interface</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-ArrayList-length.html">Get ArrayList length</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.springframework.http.converter.HttpMessageNotWritableException.html">HttpMessageNotWritableException</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-font/Create-Bold-Font-Example.html">Create Bold Font Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Foreground-Color-Of-an-Applet-Window-Example.html">Get Foreground Color Of an Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/List-Filesystem-roots.html">List Filesystem roots</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.eclipse.jetty.servlet.ServletHolder.html">o.e.j.s.ServletHolder</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/ByteArrayInputStream/Read-byte-array-using-ByteArrayInputStream-Example.html">Read byte array using ByteArrayInputStream Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/android.widget.RelativeLayout.LayoutParams.html">a.w.R.LayoutParams</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Simple-Java-LinkedList-example.html">Simple Java LinkedList example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Applet-Info-Example.html">Get Applet Info Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/java.nio.BufferUnderflowException.html">java.nio.BufferUnderflowException</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-convert-InputStream-to-String.html">How to convert InputStream to String</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-get-elements-from-Vector-(Vector-get-method).html">How to get elements from Vector (Vector get method)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/groovy.lang.Binding.html">groovy.lang.Binding</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/Deflater/Compress-Byte-Array-Using-Deflater-Example.html">Compress Byte Array Using Deflater Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.xml.XMLConstants.html">javax.xml.XMLConstants</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-check-if-file-exists-in-Java.html">How to check if file exists in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-check-if-the-key-exists-in-the-TreeMap-(TreeMap-contains-a-key).html">How to check if the key exists in the TreeMap (TreeMap contains a key)</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
