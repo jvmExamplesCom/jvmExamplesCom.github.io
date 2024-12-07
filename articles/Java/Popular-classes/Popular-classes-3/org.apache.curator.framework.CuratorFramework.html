@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.apache.curator.framework.CuratorFramework</title> <!--timestamp=2024-12-07T00:17:43.249684594Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.apache.curator.framework.CuratorFramework"> 
+  <meta name="keywords" content="org.apache.curator.framework.CuratorFramework"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.apache.curator.framework.CuratorFramework"> 
+  <meta property="og:description" content="org.apache.curator.framework.CuratorFramework"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.apache.curator.framework.CuratorFramework"> 
+  <meta name="twitter:description" content="org.apache.curator.framework.CuratorFramework"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-12-06</small>
+        </div> 
+        <h1>Introduction To org.apache.curator.framework.CuratorFramework</h1> 
+        <p> Apache Curator is an open-source library for Java that builds upon the ZooKeeper distributed application service to provide higher-level primitives for distributed coordination and synchronization. It is an easy to use, reliable, and well-maintained library with a robust suite of features and APIs. The Curator Framework simplifies many aspects of distributed programming, such as leader election, distributed locking, configuration storage and synchronization, service discovery, and more. </p> 
+        <h2>Creating a CuratorFramework Instance</h2> 
+        <p> Before using the Apache Curator library, we first need to create an instance of the CuratorFramework. This is done by calling the CuratorFrameworkFactory class's builder method, which requires the ZooKeeper connection string as the parameter. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+CuratorFramework client = CuratorFrameworkFactory.builder()
+   .connectString("127.0.0.1:2181")
+   .build();
+client.start();
+
+          </xmp></code></pre> 
+        <p> The example above creates an instance of the CuratorFramework with the given ZooKeeper connection string. Once created, we can call the client's start() method to actually connect to the server. </p> 
+        <h2>Creating Nodes</h2> 
+        <p> We can create nodes in ZooKeeper by using the create() method on the CuratorFramework instance. The create() method takes three parameters: the node path, byte array of the data to store in the node, and the ACL permissions for the node. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+client.create().forPath("/root/node1", "some data".getBytes());
+
+          </xmp></code></pre> 
+        <p> In the example, we create a new node at "/root/node1" with the data "some data" and default ACL permissions. </p> 
+        <h2>Writing Data to Nodes with the setData() Method</h2> 
+        <p> We can use the setData() method to update the data stored in a node. The setData() method takes two parameters: the node path, and the new data to store in the node. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+client.setData().forPath("/root/node1", "new data".getBytes());
+
+          </xmp></code></pre> 
+        <p> In the example above, we update the data stored in the node "/root/node1" with the data "new data". </p> 
+        <h2>Reading Data from Nodes with the getData() Method</h2> 
+        <p> We can use the getData() method to read the data stored in a node. The getData() method takes one parameter: the node path. </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+byte[] data = client.getData().forPath("/root/node1");
+
+          </xmp></code></pre> 
+        <p> The example above reads the data stored in the node "/root/node1" and stores it in the variable data. </p> 
+        <h2>Deleting Nodes with the delete() Method</h2> 
+        <p> We can use the delete() method to delete a node from ZooKeeper. The delete() method takes two parameters: the node path, and the version of the node (which is used for optimistic locking). </p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+client.delete().forPath("/root/node1", 0);
+
+          </xmp></code></pre> 
+        <p> The example above deletes the node "/root/node1" with the version 0. </p> 
+        <h2>Conclusion</h2> 
+        <p> In this article, we have discussed how to use the Apache Curator Framework to create, write, read, and delete nodes in ZooKeeper. The Apache Curator Framework provides an easy-to-use and reliable library with a robust suite of features and APIs that make distributed programming simpler. </p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Static/"> Static </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Static/Java-static-method-example.html">Java static method example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-06 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JLabel/"> JLabel </a> </p> <a href="/articles/Java/Swing/JLabel/Get-X-and-Y-Coordinates-of-JLabel-Example.html">Get X and Y Coordinates of JLabel Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/FileOutputStream/"> FileOutputStream </a> </p> <a href="/articles/Java/File-And-IO/FileOutputStream/Append-output-to-file-using-FileOutputStream.html">Append output to file using FileOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-19 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/How-to-split-String-into-equal-length-substrings.html">How to split String into equal length substrings</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/"> TreeSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-add-elements-to-TreeSet.html">How to add elements to TreeSet</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-17 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-LinkedHashMap-in-reverse-order-using-ListIterator.html">Iterate through LinkedHashMap in reverse order using ListIterator</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-6/"> Popular classes 6 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.apache.hadoop.mapred.JobConf.html">org.apache.hadoop.mapred.JobConf</a> <h6><i class="fa fa-clock-o"></i> <span>2024-05-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/Applet/"> Applet </a> </p> <a href="/articles/Java/Applets-And-AWT/Applet/Get-Background-Color-Of-an-Applet-Window-Example.html">Get Background Color Of an Applet Window Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Iterate-LinkedList-in-reverse-order.html">Iterate LinkedList in reverse order</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-Java-Classes/String/"> String </a> </p> <a href="/articles/Java/Popular-Java-Classes/String/Java-String-Array-To-List-Example.html">Java String Array To List Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-25 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-insert-an-element-at-the-beginning-of-the-Java-Vector.html">How to insert an element at the beginning of the Java Vector</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Hello-World-Applet-Example.html">Hello World Applet Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.osgi.framework.Constants.html">org.osgi.framework.Constants</a> </li> 
+         <li> <a href="/articles/Java/Swing/JLabel/Set-Foreground-Color-of-JLabel-Example.html">Set Foreground Color of JLabel Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/uk.co.senab.photoview.PhotoViewAttacher.html">u.c.s.p.PhotoViewAttacher</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Get-Tail-Set-from-Java-TreeSet-example.html">Get Tail Set from Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.hadoop.fs.LocatedFileStatus.html">o.a.h.f.LocatedFileStatus</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-delete-a-file-or-delete-a-directory-in-Java.html">How to delete a file or delete a directory in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-comma-separated-String-to-ArrayList.html">Convert comma separated String to ArrayList</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-directory-along-with-required-nonexistent-parent-directories.html">Create directory along with required nonexistent parent directories</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/How-to-check-If-HashMap-is-empty-example.html">How to check If HashMap is empty example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Remove-specified-element-from-Java-Vector-Example.html">Remove specified element from Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-ceiling-value-of-a-number-using-Math.ceil.html">F.ceil</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-get-random-elements-from-the-Vector.html">How to get random elements from the Vector</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Basic-Java-Applet-Example.html">Basic Java Applet Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/javax.management.Attribute.html">javax.management.Attribute</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.media.Ringtone.html">android.media.Ringtone</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Label/Remove-AWT-Label-From-Applet-or-Window-Frame-Example.html">Remove AWT Label From Applet or Window Frame Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.xml.xpath.XPath.html">javax.xml.xpath.XPath</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-HashSet-to-TreeSet-in-Java.html">Convert HashSet to TreeSet in Java</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
