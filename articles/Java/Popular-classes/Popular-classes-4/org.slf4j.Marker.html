@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - org.slf4j.Marker</title> <!--timestamp=2024-12-08T00:19:25.697174327Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="org.slf4j.Marker"> 
+  <meta name="keywords" content="org.slf4j.Marker"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - org.slf4j.Marker"> 
+  <meta property="og:description" content="org.slf4j.Marker"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - org.slf4j.Marker"> 
+  <meta name="twitter:description" content="org.slf4j.Marker"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-12-07</small>
+        </div> 
+        <h1>Introduction to org.slf4j.Marker</h1> The org.slf4j.Marker interface provides an abstraction layer for the programming language Java to mark logging events. This is done by providing a unique identifier for each event that can be used by the logging framework to help filter logs. It also helps to add additional information to the log, such as the source code location of the log event or the user who triggered the logging event. This article will provide an overview of the org.slf4j.Marker interface, how it works and different types of Markers that can be used in Java. 
+        <h2>What is org.slf4j.Marker?</h2> The org.slf4j.Marker interface is a part of the SLF4J (Simple Logging Facade for Java) library. The purpose of the org.slf4j.Marker interface is to offer a way to identify particular logging events. A marker is an object that can be used to provide additional information about the logging event such as its originator, the time of the event, or other relevant data. Markers are typically used with loggers and appenders to filter out messages that are irrelevant to a particular application. For example, one can set a marker for a particular type of error or warning and filter out all of that type of log message from being logged. 
+        <h2>How Does org.slf4j.Marker Work?</h2> When a logging event occurs, the logger calls the org.slf4j.Marker.mark method with a marker as a parameter. When the logger receives the marker, it will associate the marker with the log message. The marker can then be used by log appenders to decide whether or not to log the message. For example, if a logger calls the mark method with a marker of "ERROR", the log appender can then filter out all log messages that aren't marked ERROR. This is useful for applications where specific categories need to be easily filtered out of log files. 
+        <h2>Types of org.slf4j.Marker</h2> There are several different types of markers available for use in Java. Some of the most commonly used types include: 
+        <ul> 
+         <li>Marker Interface - This is the simplest type of marker and is simply an interface that can be extended to create different types of markers. </li> 
+         <li>Annotation Marker - This is a type of marker that is written using annotations. Annotations allow for more complicated functionality and are often used for filtering messages in complex logs.</li> 
+         <li>MDC Marker (Mapped Diagnostic Context Marker) - This is a type of marker that is used to store contextual information such as user IDs, request IDs, and other data related to the event.</li> 
+        </ul> 
+        <h2>Example Code Using org.slf4j.Marker</h2> Below is an example of code using the org.slf4j.Marker interface: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+import org.slf4j.Logger;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
+
+public class Slf4jMarkerExample {
+  public static void main(String[] args) {
+    Logger logger = Logger.getLogger("MyLogger");
+    Marker marker = MarkerFactory.getMarker("ERROR");
+    logger.error(marker, "This is an example error message.");
+  }
+}
+
+          </xmp></code></pre> In this example, we are creating a Marker with the name "ERROR" and then using that Marker as a parameter for the logger's error method. This will allow the log appenders to filter out all log messages that aren't marked as "ERROR". 
+        <h2>Conclusion</h2> The org.slf4j.Marker interface provides a useful way to mark logging events in Java. It helps to provide additional context and enables log appenders to easily filter out messages that are irrelevant to the application. There are several different types of markers available for use in Java, including the Marker interface, Annotation Marker, and MDC Marker. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/"> Runtime </a> </p> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Suggest-JVM-to-Run-Garbage-Collector-Example.html">Suggest JVM to Run Garbage Collector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/android.arch.persistence.room.Entity.html">android.arch.persistence.room.Entity</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/"> HashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Remove-all-values-from-Java-HashMap-example.html">Remove all values from Java HashMap example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-07-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-is-empty.html">How to check if LinkedHashMap is empty</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-28 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/BufferedOutputStream/"> BufferedOutputStream </a> </p> <a href="/articles/Java/File-And-IO/BufferedOutputStream/Write-byte-to-file-using-BufferedOutputStream.html">Write byte to file using BufferedOutputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2023-11-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/javax.swing.event.TableModelListener.html">javax.swing.event.TableModelListener</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-all-keys-from-the-TreeMap.html">How to get all keys from the TreeMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-11 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-4/"> Popular classes 4 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-4/io.netty.util.CharsetUtil.html">io.netty.util.CharsetUtil</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Set-size-of-Java-Vector-Example.html">Set size of Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Miscellaneous-Classes/System/"> System </a> </p> <a href="/articles/Java/Miscellaneous-Classes/System/Terminate-virtual-machine-using-System-class.html">Terminate virtual machine using System class</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-17 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-All-Elements-Of-Java-Vector-Example.html">Replace All Elements Of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-delete-a-file-or-delete-a-directory-in-Java.html">How to delete a file or delete a directory in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/javax.ws.rs.container.Suspended.html">javax.ws.rs.container.Suspended</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Check-if-a-particular-value-exists-in-Java-HashMap-example.html">Check if a particular value exists in Java HashMap example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Print-ArrayList-example.html">Print ArrayList example</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Create-directory.html">Create directory</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashMap/Write-HashMap-to-a-text-file-in-Java.html">Write HashMap to a text file in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/com.alibaba.fastjson.JSONArray.html">com.alibaba.fastjson.JSONArray</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/Applet/Resize-Applet-Window-Example.html">Resize Applet Window Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.commons.exec.DefaultExecutor.html">o.a.c.e.DefaultExecutor</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/Convert-HashSet-to-array.html">Convert HashSet to array</a> </li> 
+         <li> <a href="/articles/Java/Popular-Java-Classes/StringBuffer/Java-StringBuffer-SubString-Example.html">Java StringBuffer SubString Example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipFile/Open-Zip-File-Using-ZipFile-Class-Example.html">Open Zip File Using ZipFile Class Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-element-from-ArrayList.html">Remove element from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/org.hamcrest.Description.html">org.hamcrest.Description</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-check-if-LinkedHashMap-contains-a-value.html">How to check if LinkedHashMap contains a value</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Replace-All-Elements-Of-Java-ArrayList-Example.html">Replace All Elements Of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-create-a-new-TreeMap-object-using-the-Comparator-interface.html">How to create a new TreeMap object using the Comparator interface</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.xml.bind.JAXBElement.html">javax.xml.bind.JAXBElement</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Button/Change-Button-Background-Color-Example.html">Change Button Background Color Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
