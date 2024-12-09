@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - com.mongodb.client.MongoDatabase</title> <!--timestamp=2024-12-09T00:18:23.861964652Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="com.mongodb.client.MongoDatabase"> 
+  <meta name="keywords" content="com.mongodb.client.MongoDatabase"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - com.mongodb.client.MongoDatabase"> 
+  <meta property="og:description" content="com.mongodb.client.MongoDatabase"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - com.mongodb.client.MongoDatabase"> 
+  <meta name="twitter:description" content="com.mongodb.client.MongoDatabase"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-12-08</small>
+        </div> 
+        <h1>Overview of MongoDatabase</h1> MongoDatabase is an interface in the Java driver for MongoDB that provides access to a database. It allows you to write and execute MongoDB operations. This article will provide an overview of the functions and features of MongoDatabase and provide some example code snippets. 
+        <h2>Creating a MongoDatabase</h2> To create a MongoDatabase instance, you need to specify a MongoClient. Here is an example of how to do this: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MongoClient mongoClient = new MongoClient("localhost", 27017); 
+MongoDatabase db = mongoClient.getDatabase("mydb");
+
+          </xmp></code></pre> This creates an instance of a MongoDatabase with the name "mydb". You can also use this constructor to create a MongoDatabase without specifying a client: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MongoDatabase db = new MongoDatabase("mydb");
+
+          </xmp></code></pre> 
+        <h2>Accessing a Collection</h2> Once you have created a MongoDatabase, you can access collections in it by calling the getCollection() method. This takes the name of the collection to get as an argument. Here is an example of how to do this: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+MongoCollection<Document> collection = db.getCollection("mycollection");
+
+          </xmp></code></pre> This will return an instance of a MongoCollection with the name "mycollection". 
+        <h2>Inserting a Document</h2> To insert a Document into a MongoCollection, you can use the insertOne() method. This takes a Document as an argument. Here is an example of how to do this: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Document doc = new Document("name", "John")
+                         .append("age", 30);
+collection.insertOne(doc);
+
+          </xmp></code></pre> This will insert a Document with the fields "name" and "age" into the MongoCollection. 
+        <h2>Updating a Document</h2> To update a Document in a MongoCollection, you can use the updateOne() method. This takes an argument of type UpdateDefinition, which is an interface that defines the type of update to perform. Here is an example of how to do this: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+UpdateDefinition update = Updates.set("name", "Dave")
+                                      .min("age", 18);
+collection.updateOne(Filters.eq("name", "John"), update);
+
+          </xmp></code></pre> This will update the Document with the field "name" set to "John" to have the field "name" set to "Dave" and the field "age" set to be greater than or equal to 18. 
+        <h2>Deleting a Document</h2> To delete a Document from a MongoCollection, you can use the deleteOne() method. This takes an argument of type Bson, which is an interface that defines the filter to use when deleting documents. Here is an example of how to do this: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+collection.deleteOne(Filters.eq("name", "Dave"));
+
+          </xmp></code></pre> This will delete the Document with the field "name" set to "Dave". 
+        <h2>Conclusion</h2> MongoDatabase is a powerful interface in the Java driver for MongoDB that provides access to a database. It allows you to write and execute MongoDB operations. This article provided an overview of the functions and features of MongoDatabase and some example code snippets. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Set-size-of-Java-Vector-Example.html">Set size of Java Vector Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.intellij.notification.Notifications.html">c.i.n.Notifications</a> <h6><i class="fa fa-clock-o"></i> <span>2024-07-27 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-font/"> AWT font </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-font/Get-Available-Font-Objects-Example.html">Get Available Font Objects Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/"> Long Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Long-Wrapper-Class/Convert-Long-object-to-String-object.html">Convert Long object to String object</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.apache.http.params.HttpProtocolParams.html">o.a.h.p.HttpProtocolParams</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-30 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/"> AWT Checkbox </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Disable-Checkbox-Example.html">Disable Checkbox Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/"> HashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-preserve-insertion-order-of-Java-HashSet-elements.html">How to preserve insertion order of Java HashSet elements</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.apache.maven.plugins.annotations.ResolutionScope.html">o.a.m.p.a.ResolutionScope</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Swing/JTextField/"> JTextField </a> </p> <a href="/articles/Java/Swing/JTextField/Change-Font-of-JTextField-Example.html">Change Font of JTextField Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/"> Vector </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-get-elements-from-Vector-(Vector-get-method).html">How to get elements from Vector (Vector get method)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-24 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Boolean-Wrapper-Class/Java-Boolean-Example.html">Java Boolean Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Simple-Java-Hashtable-example.html">Simple Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-sort-LinkedHashSet-in-Java.html">How to sort LinkedHashSet in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-Hashset-to-comma-separated-string-in-Java.html">Convert Hashset to comma separated string in Java</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-delete-a-file-or-delete-a-directory-in-Java.html">How to delete a file or delete a directory in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Iterate-through-elements-Java-Vector-using-Iterator-Example.html">Iterate through elements Java Vector using Iterator Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/java.security.NoSuchProviderException.html">j.s.NoSuchProviderException</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/org.apache.commons.fileupload.FileItem.html">o.a.c.f.FileItem</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Set-Graphics-Color-Example.html">Set Graphics Color Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-2/android.net.wifi.WifiManager.html">android.net.wifi.WifiManager</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Hashtable/Check-if-a-particular-key-exists-in-Java-Hashtable-example.html">Check if a particular key exists in Java Hashtable example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/Set-size-of-Java-Vector-Example.html">Set size of Java Vector Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-convert-LinkedHashSet-to-array-in-Java.html">How to convert LinkedHashSet to array in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/javax.swing.plaf.ColorUIResource.html">javax.swing.plaf.ColorUIResource</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-list/Insert-Item-To-a-List-At-Specified-Index-Example.html">Insert Item To a List At Specified Index Example</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Checkbox/Remove-AWT-Checkbox-From-Applet-or-Window-Frame-Example.html">Remove AWT Checkbox From Applet or Window Frame Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.commons.httpclient.params.HttpMethodParams.html">o.a.c.h.p.HttpMethodParams</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/com.squareup.leakcanary.RefWatcher.html">com.squareup.leakcanary.RefWatcher</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Sort-elements-of-Java-ArrayList-Example.html">Sort elements of Java ArrayList Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-ArrayList-to-comma-separated-String.html">Convert ArrayList to comma separated String</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
