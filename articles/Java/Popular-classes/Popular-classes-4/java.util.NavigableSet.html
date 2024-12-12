@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.util.NavigableSet</title> <!--timestamp=2024-12-12T00:17:52.158895400Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.util.NavigableSet"> 
+  <meta name="keywords" content="java.util.NavigableSet"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.util.NavigableSet"> 
+  <meta property="og:description" content="java.util.NavigableSet"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.util.NavigableSet"> 
+  <meta name="twitter:description" content="java.util.NavigableSet"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-12-11</small>
+        </div> 
+        <h1>java.util.NavigableSet</h1> 
+        <p>Java provides the NavigableSet interface to represent ordered sets, which is a subtype of the Set interface. NavigableSet extends SortedSet with methods for efficiently navigating elements within a sorted set structure. In this article, we will explore the usage of the NavigableSet API and delve into its implementation details.</p> 
+        <h2>Creating a NavigableSet Instance</h2> 
+        <p>NavigableSet is an interface, so it provides factory methods to create new instances. These factory methods are provided by the TreeSet class, which implements NavigableSet and uses a red-black tree to maintain elements in sorted order. The following code creates a new TreeSet instance:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+TreeSet<Integer> set = new TreeSet<>();
+
+          </xmp></code></pre> 
+        <p>We can also provide a comparator for elements that do not implement Comparable:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+Comparator<Integer> comparator = (x, y) -> Integer.compare(x, y);
+TreeSet<Integer> set = new TreeSet<>(comparator);
+
+          </xmp></code></pre> 
+        <h2>Navigation Methods</h2> 
+        <p>The NavigableSet interface provides several methods for navigating elements in the sorted set. The simplest of these methods are <strong>first</strong> and <strong>last</strong>, which return the smallest and largest element in the set respectively. The following example demonstrates their usage:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+TreeSet<Integer> set = new TreeSet<>();
+set.add(3);
+set.add(1);
+set.add(4);
+
+// Smallest element in the set
+System.out.println(set.first()); // 1
+
+// Largest element in the set
+System.out.println(set.last()); // 4
+
+          </xmp></code></pre> 
+        <p>The <strong>higher</strong> and <strong>lower</strong> methods return the smallest element greater than or equal to a given element, and the largest element less than or equal to a given element, respectively. The following example demonstrates their usage:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+TreeSet<Integer> set = new TreeSet<>();
+set.add(3);
+set.add(1);
+set.add(4);
+
+// Returns 4
+System.out.println(set.higher(3));
+
+// Returns 3
+System.out.println(set.lower(4));
+
+          </xmp></code></pre> 
+        <p>The <strong>ceiling</strong> and <strong>floor</strong> methods are similar to the <strong>higher</strong> and <strong>lower</strong> methods but they return the given element if it exists in the set. The following example demonstrates their usage:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+TreeSet<Integer> set = new TreeSet<>();
+set.add(3);
+set.add(1);
+set.add(4);
+
+// Returns 3
+System.out.println(set.ceiling(3));
+
+// Returns 4
+System.out.println(set.floor(4));
+
+          </xmp></code></pre> 
+        <p>The <strong>pollFirst</strong> and <strong>pollLast</strong> methods are similar to the <strong>first</strong> and <strong>last</strong> methods but they also remove the returned element from the set. The following example demonstrates their usage:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+TreeSet<Integer> set = new TreeSet<>();
+set.add(3);
+set.add(1);
+set.add(4);
+
+// Smallest element in the set
+System.out.println(set.pollFirst()); // 1
+
+// Remaining elements in the set
+System.out.println(set); // [3, 4]
+
+// Largest element in the set
+System.out.println(set.pollLast()); // 4
+
+// Remaining elements in the set
+System.out.println(set); // [3]
+
+          </xmp></code></pre> 
+        <p>Finally, the <strong>descendingSet</strong> method returns a NavigableSet instance with the elements in reverse order. The following example demonstrates its usage:</p> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+TreeSet<Integer> set = new TreeSet<>();
+set.add(3);
+set.add(1);
+set.add(4);
+
+// Reverse order NavigableSet
+NavigableSet<Integer> reversedSet = set.descendingSet();
+
+// Elements in reversed order
+System.out.println(reversedSet); // [4, 3, 1]
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>In this article, we discussed the usage of the NavigableSet interface and explored its implementation details. We demonstrated how to create a NavigableSet instance and then used several of its navigation methods to traverse the set. NavigableSet is a useful addition to the core Java library, and its navigation methods offer a powerful way to quickly traverse sorted sets.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-TreeMap-key,-value-or-entry-greater-than-or-less-than-the-specified-key.html">How to get TreeMap key, value or entry greater than or less than the specified key</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-9/"> Popular classes 9 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-9/androidx.appcompat.widget.AppCompatEditText.html">a.a.w.AppCompatEditText</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Java-LinkedList-add-an-element-at-the-beginning-(at-the-front).html">Java LinkedList add an element at the beginning (at the front)</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/"> TreeMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-all-values-from-the-TreeMap.html">How to get all values from the TreeMap</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-to-ArrayList.html">Convert String to ArrayList</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/ZipInputStream/"> ZipInputStream </a> </p> <a href="/articles/Java/Java-Zip/ZipInputStream/Extract-First-File-From-Zip-File-Example.html">Extract First File From Zip File Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-04-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/"> Double Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Double-Wrapper-Class/Convert-java-Double-to-numeric-primitive-data-types-example.html">Convert java Double to numeric primitive data types example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-05-13 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-5/"> Popular classes 5 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-5/android.renderscript.RenderScript.html">android.renderscript.RenderScript</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/javax.swing.tree.TreeCellRenderer.html">javax.swing.tree.TreeCellRenderer</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-14 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/Get-name-of-specified-file-or-directory.html">Get name of specified file or directory</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-30 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Vartel</h3> <p><a href="#">2025-01-30 00:31</a></p> Can somebody elaborate more? <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Victor</h3> <p><a href="#">2025-02-02 10:46</a></p> thanks <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.imageio.ImageWriteParam.html">javax.imageio.ImageWriteParam</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Find-the-minimum-or-maximum-value-in-ArrayList.html">Find the minimum or maximum value in ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-get-value-from-TreeMap-using-the-key-(TreeMap-get-method).html">How to get value from TreeMap using the key (TreeMap get method)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ListIterator/How-to-iterate-LinkedHashMap-using-an-Iterator.html">How to iterate LinkedHashMap using an Iterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-add-elements-to-Java-HashSet-(add,-addAll-method).html">How to add elements to Java HashSet (add, addAll method)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.function.BiFunction.html">java.util.function.BiFunction</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-get-all-keys-of-LinkedHashMap-in-Java-(keySet-method).html">How to get all keys of LinkedHashMap in Java (keySet method)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/javax.ws.rs.PUT.html">javax.ws.rs.PUT</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-get-size-of-file-in-Java.html">How to get size of file in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/How-to-sort-TreeSet-elements-using-Comparable-interface.html">How to sort TreeSet elements using Comparable interface</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/android.widget.Filter.html">android.widget.Filter</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Comparator/Sort-Java-Vector-in-descending-order-using-comparator-example.html">Sort Java Vector in descending order using comparator example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-String-array-to-String-using-Arrays.html">Convert String array to String using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/org.apache.commons.io.filefilter.TrueFileFilter.html">o.a.c.i.f.TrueFileFilter</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Operators/Increment-and-Decrement-Operators-Example.html">Increment and Decrement Operators Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/org.joda.time.format.ISODateTimeFormat.html">o.j.t.f.ISODateTimeFormat</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-String-or-String-array-to-HashMap-(String-to-Map).html">Convert String or String array to HashMap (String to Map)</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-List-using-ListIterator.html">Iterate List using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Find-Minimum-element-of-Java-HashSet-Example.html">Find Minimum element of Java HashSet Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-print-LinkedHashMap.html">How to print LinkedHashMap</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
