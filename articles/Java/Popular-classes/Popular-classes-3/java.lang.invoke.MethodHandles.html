@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - java.lang.invoke.MethodHandles</title> <!--timestamp=2024-12-17T00:17:27.063419325Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="java.lang.invoke.MethodHandles"> 
+  <meta name="keywords" content="java.lang.invoke.MethodHandles"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - java.lang.invoke.MethodHandles"> 
+  <meta property="og:description" content="java.lang.invoke.MethodHandles"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - java.lang.invoke.MethodHandles"> 
+  <meta name="twitter:description" content="java.lang.invoke.MethodHandles"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-12-16</small>
+        </div> 
+        <h1>Java.lang.invoke.MethodHandles</h1> 
+        <p>Java.lang.invoke.MethodHandles is a package in Java which provides access to the runtime method handles of the class, including constructors, fields and methods. It also allows for more performant dynamic language runtimes. It is part of the java.lang package, so can be imported into applications without the need for any extra packages.</p> 
+        <p>A method handle is the fundamental object for performing dynamic invocation, that can be used to access, construct and create method handles to be used by applications. A method handle is analogous to a pointer to a method. It can be used to call a method with a specific set of arguments, or to get and bind to a specific method within a class.</p> 
+        <h2>Creating a Method Handle</h2> 
+        <p>To create a method handle, it needs to be created by the </p>
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+java.lang.invoke.MethodHandles.Lookup
+
+          </xmp></code></pre> class. This class contains the lookup method which returns a 
+        <pre>MethodHandle</pre> object. The Lookup class also contains a 
+        <pre>unreflect</pre> method which returns MethodHandle for a given class method.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public static MethodHandle lookup(Class<!--?--> clazz) throws IllegalAccessException {
+    return MethodHandles.lookup().unreflect(clazz);
+}
+
+          </xmp></code></pre> 
+        <p>The lookup method is used to obtain a MethodHandle for the given class instance. The unreflect method takes in a Class instance and returns a MethodHandle for the given method. Additionally, the </p>
+        <pre>findConstructor</pre> method can be used to look up the constructor of a class and the 
+        <pre>findStatic</pre> method can be used to look up static methods.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public static MethodHandle findStatic(Class<!--?--> clazz, String name, Class<!--?-->... parameterTypes)
+        throws NoSuchMethodException, IllegalAccessException {
+    return MethodHandles.lookup().findStatic(clazz, name, parameterTypes);
+}
+
+          </xmp></code></pre> 
+        <h2>Using Method Handles</h2> 
+        <p>Once a MethodHandle is obtained, it can be used to invoke a particular method. The </p>
+        <pre>invoke</pre> method takes in a set of arguments and invokes the method with the given set of arguments. It returns an Object of type Object.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public static Object invoke(MethodHandle methodHandle, Object... args) 
+        throws Throwable {
+    return methodHandle.invoke(args);
+}
+
+          </xmp></code></pre> 
+        A method handle can also be used to create a
+        <pre>CallSite</pre> object, that can be used to dynamically call a method at runtime. The CallSite class contains the invoke method, which takes in a set of arguments and returns an Object. Additionally, it also contains the getTarget method which returns the current target of the CallSite.
+         
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public static Object invoke(CallSite callSite, Object... args) 
+        throws Throwable {
+    return callSite.getTarget().invoke(args);
+}
+
+          </xmp></code></pre> 
+        <h2>Conclusion</h2> 
+        <p>Java.lang.invoke.MethodHandles is a powerful package that provides access to the runtime method handles of the class, including constructors, fields and methods. It enables applications to perform dynamic invocation, and allows for more performant dynamic language runtimes. By creating a MethodHandle through the Lookup class and using it to invoke a method or create a CallSite object, applications can take advantage of this powerful package.</p> 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/"> Short Wrapper Class </a> </p> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Convert-Java-String-to-Short-example.html">Convert Java String to Short example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-22 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-Java-TreeMap-using-an-iterator.html">Iterate through Java TreeMap using an iterator</a> <h6><i class="fa fa-clock-o"></i> <span>2022-09-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.junit.jupiter.api.extension.BeforeAllCallback.html">o.j.j.a.e.BeforeAllCallback</a> <h6><i class="fa fa-clock-o"></i> <span>2023-01-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/"> LinkedHashMap </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/Java-LinkedHashMap-forEach-example.html">Java LinkedHashMap forEach example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-05-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/"> Arrays </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Compare-Two-Java-char-Arrays-Example.html">Compare Two Java char Arrays Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-04-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Add-all-elements-of-an-array-to-ArrayList-using-Arrays.html">Add all elements of an array to ArrayList using Arrays</a> <h6><i class="fa fa-clock-o"></i> <span>2022-08-12 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/javax.naming.ldap.LdapContext.html">javax.naming.ldap.LdapContext</a> <h6><i class="fa fa-clock-o"></i> <span>2024-12-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-10/"> Popular classes 10 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.apache.http.impl.nio.client.HttpAsyncClientBuilder.html">o.a.h.i.n.c.HttpAsyncClientBuilder</a> <h6><i class="fa fa-clock-o"></i> <span>2024-01-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/File-And-Directory/"> File And Directory </a> </p> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-get-size-of-file-in-Java.html">How to get size of file in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2023-10-09 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Remove-duplicate-elements-from-String-array-using-Arrays-class.html">Remove duplicate elements from String array using Arrays class</a> <h6><i class="fa fa-clock-o"></i> <span>2023-02-26 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Find-index-of-LinkedList-elements-using-indexOf-and-lastIndexOf-methods.html">Find index of LinkedList elements using indexOf and lastIndexOf methods</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-check-if-the-TreeMap-is-empty.html">How to check if the TreeMap is empty</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-float-from-file-using-DataInputStream.html">Read float from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Basic-Java-Examples/Calculate-Rectangle-Perimeter-using-Java-Example.html">Calculate Rectangle Perimeter using Java Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Vector/How-to-get-random-elements-from-the-Vector.html">How to get random elements from the Vector</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-CheckboxGroup/Create-AWT-Radio-Buttons-Using-CheckboxGroup-Example.html">Create AWT Radio Buttons Using CheckboxGroup Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/org.openjdk.jmh.runner.Runner.html">org.openjdk.jmh.runner.Runner</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-4/javax.xml.stream.XMLOutputFactory.html">javax.xml.stream.XMLOutputFactory</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Set-from-Java-HashSet-example.html">Get Synchronized Set from Java HashSet example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-10/org.apache.hadoop.hbase.client.Delete.html">o.a.h.h.c.Delete</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Find-array-element-index-using-Arrays-class.html">Find array element index using Arrays class</a> </li> 
+         <li> <a href="/articles/Java/Applets-And-AWT/AWT-Color/Set-Drawing-Mode-To-XOR-Example.html">Set Drawing Mode To XOR Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-convert-LinkedHashSet-to-array-in-Java.html">How to convert LinkedHashSet to array in Java</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Copy-ArrayList-elements-to-other-ArrayList.html">Copy ArrayList elements to other ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-List-to-array.html">Convert List to array</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataOutputStream/Determine-number-of-bytes-written-to-DataOutputStream.html">Determine number of bytes written to DataOutputStream</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/Remove-all-elements-from-Java-TreeSet-example.html">Remove all elements from Java TreeSet example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.logging.Logger.html">java.util.logging.Logger</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-1/org.apache.commons.logging.LogFactory.html">o.a.c.l.LogFactory</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-3/org.bouncycastle.jce.provider.BouncyCastleProvider.html">o.b.j.p.BouncyCastleProvider</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
