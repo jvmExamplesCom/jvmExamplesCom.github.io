@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - io.netty.channel.socket.SocketChannel</title> <!--timestamp=2024-12-19T00:17:01.553844984Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="io.netty.channel.socket.SocketChannel"> 
+  <meta name="keywords" content="io.netty.channel.socket.SocketChannel"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - io.netty.channel.socket.SocketChannel"> 
+  <meta property="og:description" content="io.netty.channel.socket.SocketChannel"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - io.netty.channel.socket.SocketChannel"> 
+  <meta name="twitter:description" content="io.netty.channel.socket.SocketChannel"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-12-18</small>
+        </div> 
+        <h1>io.netty.channel.socket.SocketChannel</h1> 
+        <h2>Introduction</h2> io.netty.channel.socket.SocketChannel is a class for implementing the socket channel for Netty, which provides the abstraction for packet-oriented network communication. It is the cornerstone of the network programming in the Java platform. SocketChannel provides an interface for reading and writing from a socket. It supports both non-blocking and blocking operations. 
+        <h2>Implementation</h2> 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+public class SocketChannel extends AbstractNioChannel {
+    private static final InternalLogger logger =
+        InternalLoggerFactory.getInstance(SocketChannel.class);
+
+    public SocketChannel() {
+        super(null);
+    }
+    
+    protected SocketChannel(Channel parent, SelectableChannel ch) {
+        super(parent, ch, SelectionKey.OP_READ);
+    }
+// more code
+}
+
+          </xmp></code></pre> SocketChannel is implemented using the AbstractNioChannel abstract class and provides methods to read and write from a socket. It also provides methods for setting the non-blocking mode and the TCP no delay option. 
+        <h2>Usage</h2> To use a SocketChannel, you first need to instantiate a new instance and set the non-blocking mode. 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+SocketChannel socketChannel = new SocketChannel(); 
+socketChannel.configureBlocking(false);
+
+          </xmp></code></pre> Once configured, you can use it to read data from a socket using the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+read()
+
+          </xmp></code></pre> method and write data to it using the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+write()
+
+          </xmp></code></pre> method. To read data, you can call the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+read()
+
+          </xmp></code></pre> method with a ByteBuffer as parameter: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ByteBuffer buffer = ByteBuffer.allocate(1024); 
+int numBytesRead = socketChannel.read(buffer);
+
+          </xmp></code></pre> This will read up to 1024 bytes from the socket into the given ByteBuffer and returns the number of bytes read. To write data, you can call the 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+write()
+
+          </xmp></code></pre> method with a ByteBuffer as parameter: 
+        <pre><code class="language-clike language-java line-numbers normalize-whitespace">
+          <xmp>
+           
+ByteBuffer buffer = ByteBuffer.wrap("Hello, world!".getBytes()); 
+int numBytesWritten = socketChannel.write(buffer);
+
+          </xmp></code></pre> This will write the contents of the given ByteBuffer to the socket and will return the number of bytes written. 
+        <h2>Conclusion</h2> SocketChannel is a powerful tool for working with sockets in the Java platform. It provides an abstraction layer that makes reading and writing from sockets easier. It also allows for setting the non-blocking mode and the TCP no delay option. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/"> Convertion </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-byte-to-String.html">Convert byte to String</a> <h6><i class="fa fa-clock-o"></i> <span>2023-09-08 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Zip/CheckedInputStream/"> CheckedInputStream </a> </p> <a href="/articles/Java/Java-Zip/CheckedInputStream/Extract-File-With-CRC32-Checksum-Example.html">Extract File With CRC32 Checksum Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-01-07 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/org.mockito.Mock.html">org.mockito.Mock</a> <h6><i class="fa fa-clock-o"></i> <span>2022-11-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/"> AWT Choice </a> </p> <a href="/articles/Java/Applets-And-AWT/AWT-Choice/Insert-Item-At-Specified-Index-In-AWT-Choice-Or-Combobox-Example.html">Insert Item At Specified Index In AWT Choice Or Combobox Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-31 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.regex.Pattern.html">java.util.regex.Pattern</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Add-elements-at-beginning-and-end-of-LinkedList-Java-example.html">Add elements at beginning and end of LinkedList Java example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-23 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-8/"> Popular classes 8 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-8/javax.script.CompiledScript.html">javax.script.CompiledScript</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-16 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Enumeration-over-Java-ArrayList-Example.html">Get Enumeration over Java ArrayList Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-06-03 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/"> LinkedList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedList/Convert-Java-LinkedList-to-Array.html">Convert Java LinkedList to Array</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-05 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/"> For Loop </a> </p> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Generate-Pyramid-For-a-Given-Number-Example.html">Generate Pyramid For a Given Number Example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-04 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <div class="comment_section"> 
+        <ul> 
+         <li class="comment_img"><img src="/img/093.jpg"></li> 
+         <li class="comment_desc"> <h3>Vartel</h3> <p><a href="#">2025-02-01 16:23</a></p> Nice <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+        <ul class="comment_reply"> 
+         <li class="comment_img"> <img src="/img/093.jpg"> </li> 
+         <li class="comment_desc"> <h3>Mark</h3> <p><a href="#">2025-02-02 12:09</a></p> Great example! <h5><a href="/index.html">REPLY</a></h5> 
+          <hr> </li> 
+        </ul> 
+       </div> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.gradle.api.DefaultTask.html">org.gradle.api.DefaultTask</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-check-if-element-exists-in-Java-HashSet.html">How to check if element exists in Java HashSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.awt.geom.Line2D.html">java.awt.geom.Line2D</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-compare-two-TreeSet-objects-using-the-equals-method.html">How to compare two TreeSet objects using the equals method</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Arrays/Convert-array-to-LinkedHashSet.html">Convert array to LinkedHashSet</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/javax.swing.UIManager.LookAndFeelInfo.html">j.s.U.LookAndFeelInfo</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/List/Convert-List-to-array.html">Convert List to array</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-List-in-reverse-order-using-ListIterator.html">Iterate List in reverse order using ListIterator</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Math-Class/Find-square-root-of-a-number-using-Math.sqrt.html">F.sqrt</a> </li> 
+         <li> <a href="/articles/Java/Miscellaneous-Classes/Runtime/Get-Total-Memory-of-Java-Virtual-Machine(JVM)-Example.html">Get Total Memory of Java Virtual Machine(JVM) Example</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/io.opentracing.Tracer.html">io.opentracing.Tracer</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-HashMap-using-Iterator.html">Iterate through HashMap using Iterator</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/Determine-if-file-or-directory-exists.html">Determine if file or directory exists</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/File-And-Directory/How-to-get-size-of-file-in-Java.html">How to get size of file in Java</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/org.eclipse.jgit.lib.ObjectId.html">org.eclipse.jgit.lib.ObjectId</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Wrappers/Convert-Float-object-to-byte,-short,-int,-long,-float-and-double.html">Convert Float object to byte, short, int, long, float and double</a> </li> 
+         <li> <a href="/articles/Java/File-And-IO/DataInputStream/Read-short-from-file-using-DataInputStream.html">Read short from file using DataInputStream</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-7/org.dom4j.DocumentHelper.html">org.dom4j.DocumentHelper</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/Simple-Java-LinkedHashSet-example.html">Simple Java LinkedHashSet example</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/If-Else-Statement/If-statement-Example.html">If statement Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
