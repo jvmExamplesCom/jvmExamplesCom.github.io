@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>jvmExamples.com - kafka.producer.ProducerConfig</title> <!--timestamp=2024-12-26T00:15:49.787882610Z--> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"> 
+  <script src="/js/bootstrap.bundle.min.js"></script> 
+  <script src="/js/jquery.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <script src="/js/prism.js"></script> 
+  <link rel="stylesheet" type="text/css" href="/css/prism.css"> 
+  <meta name="description" content="kafka.producer.ProducerConfig"> 
+  <meta name="keywords" content="kafka.producer.ProducerConfig"> 
+  <meta name="robots" content="index, follow"> <!-- facebook --> 
+  <meta property="og:url" content="https://jvmexamples.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="jvmExamples.com - kafka.producer.ProducerConfig"> 
+  <meta property="og:description" content="kafka.producer.ProducerConfig"> 
+  <meta property="og:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="jvmExamples.com"> 
+  <meta name="twitter:title" content="jvmExamples.com - kafka.producer.ProducerConfig"> 
+  <meta name="twitter:description" content="kafka.producer.ProducerConfig"> 
+  <meta name="twitter:image" content="https://jvmexamples.com/img/jvm-examples-com-image.png"> <!-- Google analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKTBKHX64B"></script> 
+  <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EKTBKHX64B');
+    </script> <!-- Google ad sense --> 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1473157258033791" crossorigin="anonymous">
+    </script> 
+  <style>
+        @font-face { font-family: "Roboto";src: url('/font/Roboto.ttf')}
+        @font-face { font-family: "Roboto";
+            src: url('/font/Roboto-Regular.ttf')
+        }
+    </style> 
+ </head> 
+ <body> 
+  <header> 
+   <div class="top_header"> 
+    <nav class="navbar navbar-expand-lg navbar-light "> 
+     <div class="container"> <a href="/" class="navbar_logo"><img src="/img/jvm-examples-com-logo.png" alt="logo" width="170" height="26"></a> <button id="mySidenav" type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> <span class="navbar-toggler-icon"></span> </button> 
+      <div class="collapse navbar-collapse" id="navbarCollapse"> 
+       <div class="navbar-nav"> <a href="/articles/Java/Java-Language-Fundamentals/" class="nav-item nav-link active">Fundamentals</a> <a href="/articles/Java/Collections-And-Data-Structures/" class="nav-item nav-link active">Collections</a> <a href="/articles/Java/Popular-Java-Classes/" class="nav-item nav-link active">Popular</a> <a href="/articles/Java/File-And-IO/" class="nav-item nav-link active">IO</a> <a href="/articles/Java/Java-Zip/" class="nav-item nav-link active">Compression</a> <a href="/articles/Java/Swing/" class="nav-item nav-link active">Swing</a> <a href="/articles/Java/Wrapper-Classes/" class="nav-item nav-link active">Wrappers</a> <a href="/articles/Java/Applets-And-AWT/" class="nav-item nav-link active">AWT</a> <a href="/articles/Java/Miscellaneous-Classes/" class="nav-item nav-link active">Misc</a> <a href="/articles/Java/Popular-classes/" class="nav-item nav-link active">Classes</a> 
+       </div> 
+      </div> 
+      <div class="search_box"> <button onclick="myFunction()" class="dropbtn"><i class="fa fa-search"></i></button> 
+       <div id="myDropdown" class="dropdown-content"> 
+        <input type="text" placeholder="Type here to search..." id="myInput" onkeyup="filterFunction()"> 
+       </div> 
+      </div> 
+     </div> 
+    </nav> 
+   </div> 
+  </header> 
+  <div id="home_page"> 
+   <div class="container"> 
+    <div class="home_contant"> 
+     <div class="row"> 
+      <div class="col-sm-12 col-lg-9 mt-5"> 
+       <div class="applet_cycle_page"> 
+        <div>
+         <small>2024-12-25</small>
+        </div> 
+        <h1>Kafka Producer Config</h1> Kafka producer config is a Java class that enables users to configure how they produce data to a Kafka cluster. It provides a set of properties that can be used to configure the producer, including setting reliability and throughput parameters, setting batching parameters, and configuring compression and serialization settings. This class is an important component of the Kafka API, providing an interface for producers to interact with a Kafka cluster. 
+        <h2>Basic Configuration Properties</h2> Kafka producer config provides a number of basic configuration properties that must be set in order to produce data to a Kafka cluster. These properties include: 
+        <ul> 
+         <li><pre>bootstrap.servers</pre> - A list of host/port pairs to use for establishing the initial connection to the Kafka cluster.</li> 
+         <li><pre>client.id</pre> - An id string to pass to the server when making requests. The purpose of this is to be able to track the source of requests beyond just IP/port by allowing a logical application name to be included.</li> 
+         <li><pre>acks</pre> - The number of acknowledgments the producer requires the leader to have received before considering a request complete. This controls the durability of records that are sent.</li> 
+         <li><pre>retries</pre> - Number of retries (or attempts) to send messages until success or failure.</li> 
+         <li><pre>batch.size</pre> - The producer will attempt to batch records together into fewer requests whenever multiple records are being sent to the same partition.</li> 
+         <li><pre>buffer.memory</pre> - The total bytes of memory the producer can use to buffer records waiting to be sent to the server.</li> 
+         <li><pre>compression.type</pre> - GZIP, SNAPPY, LZ4, NONE.</li> 
+         <li><pre>max.request.size</pre> - The maximum size of a request in bytes.</li> 
+         <li><pre>timeout.ms</pre> - The maximum time the producer will wait for acknowledgments.}</li> 
+        </ul> 
+        <h2>Advanced Configuration Properties</h2> In addition to the basic configuration properties, Kafka producer config provides several advanced configuration options. These include: 
+        <ul> 
+         <li><pre>linger.ms</pre> - A control on how long to wait before sending messages in a batch.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+max.in.flight.requests.per.connection
+
+            </xmp></code></pre> - The maximum number of unacknowledged requests the client will send on a single connection before blocking.</li> 
+         <li><pre>max.block.ms</pre> - The maximum time the producer will wait for buffer memory to be available before it throws an exception.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+receive.buffer.bytes
+
+            </xmp></code></pre> - The size of the TCP receive buffer (SO_RCVBUF) to use when reading data.</li> 
+         <li><pre>send.buffer.bytes</pre> - The size of the TCP send buffer (SO_SNDBUF) to use when sending data.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+max.partition.fetch.bytes
+
+            </xmp></code></pre> - The maximum amount of data per-partition a fetch request can return.</li> 
+         <li><pre>request.timeout.ms</pre> - The configuration controls the maximum amount of time the client will wait for the response of a request.</li> 
+         <li><pre>retry.backoff.ms</pre> - The amount of time in milliseconds to wait before attempting to retry a failed request to a given topic partition.</li> 
+        </ul> 
+        <h2>Producer Performance Configuration</h2> Kafka producer config also provides properties that can be used to improve the performance of the producer. These properties include: 
+        <ul> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+max.in.flight.requests.per.connection
+
+            </xmp></code></pre> - The maximum number of unacknowledged requests the client will send on a single connection before blocking.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+queue.buffering.max.ms
+
+            </xmp></code></pre> - Maximum time, in milliseconds, for buffering data on the producer queue before it is sent to the broker.</li> 
+         <li><pre><code class="language-clike language-java line-numbers normalize-whitespace">
+            <xmp>
+             
+queue.buffering.max.messages
+
+            </xmp></code></pre> - The maximum number of unsent messages that can be queued up the producer before either the producer must be blocked or data must be dropped.</li> 
+         <li><pre>batch.num.messages</pre> - The maximum number of messages allowed in a single batch.</li> 
+         <li><pre>send.buffer.bytes</pre> - The size of the TCP send buffer (SO_SNDBUF) to use when sending data.</li> 
+         <li><pre>linger.ms</pre> - An amount of time to wait before sending messages in a batch after waiting for that amount of time or to fill up the batch.</li> 
+         <li><pre>max.request.size</pre> - The maximum size of a request in bytes.</li> 
+        </ul> 
+        <h2>Conclusion</h2> Kafka producer config is an important part of the Kafka API, providing a way for producers to configure how they produce data to a Kafka cluster. It provides a set of configuration properties, both basic and advanced, that can be used to set reliability and throughput parameters, batching parameters, and configure compression and serialization settings. By using the proper configuration, producers can optimize their production performance and ensure that data is reliably produced to a Kafka cluster. 
+       </div> 
+       <br> 
+       <br> 
+       <br> <!-- You may like --> 
+       <h4>YOU MAY ALSO LIKE</h4> 
+       <hr> 
+       <div class="articles"> 
+        <ul> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-2/"> Popular classes 2 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-2/javax.net.ssl.SSLException.html">javax.net.ssl.SSLException</a> <h6><i class="fa fa-clock-o"></i> <span>2023-12-18 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Swap-elements-of-Java-ArrayList-example.html">Swap elements of Java ArrayList example</a> <h6><i class="fa fa-clock-o"></i> <span>2023-06-15 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/DataInputStream/"> DataInputStream </a> </p> <a href="/articles/Java/File-And-IO/DataInputStream/Read-short-from-file-using-DataInputStream.html">Read short from file using DataInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2022-02-02 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.util.Map.html">java.util.Map</a> <h6><i class="fa fa-clock-o"></i> <span>2023-07-04 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/"> Iterator </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Iterator/Iterate-through-a-Collection-using-Java-Iterator-Example.html">Iterate through a Collection using Java Iterator Example</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-29 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/"> Collections </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Convert-String-or-String-array-to-HashMap-(String-to-Map).html">Convert String or String array to HashMap (String to Map)</a> <h6><i class="fa fa-clock-o"></i> <span>2023-03-24 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Popular-classes/Popular-classes-1/"> Popular classes 1 </a> </p> <a href="/articles/Java/Popular-classes/Popular-classes-1/java.io.UnsupportedEncodingException.html">java.io.UnsupportedEncodingException</a> <h6><i class="fa fa-clock-o"></i> <span>2024-10-25 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/"> ArrayList </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Check-if-ArrayList-is-empty.html">Check if ArrayList is empty</a> <h6><i class="fa fa-clock-o"></i> <span>2022-10-21 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/"> LinkedHashSet </a> </p> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashSet/How-to-check-if-LinkedHashSet-is-empty-in-Java.html">How to check if LinkedHashSet is empty in Java</a> <h6><i class="fa fa-clock-o"></i> <span>2022-12-10 </span> </h6> </li> 
+         <li> <p> <a href="/articles/Java/File-And-IO/FileInputStream/"> FileInputStream </a> </p> <a href="/articles/Java/File-And-IO/FileInputStream/Read-file-using-FileInputStream.html">Read file using FileInputStream</a> <h6><i class="fa fa-clock-o"></i> <span>2023-08-23 </span> </h6> </li> 
+        </ul> 
+       </div> <!-- Email --> 
+       <section> 
+        <div class="email_section"> 
+         <h4>Receive LATEST Jvm Examples In Your Email</h4> 
+         <p>Enter your email address below to join 1000+ fellow learners:</p> 
+         <input type="email" name="email" placeholder="email address"> <a href="/index.html">subscribe</a> 
+        </div> 
+       </section> <!-- Display comments --> 
+       <section> <!-- Add comment --> 
+        <h4>ADD COMMENT</h4> 
+        <hr> 
+        <div class="applet_form"> <label>Comments<span class="required"></span></label> <textarea id="comment" name="comment" cols="45" rows="5" aria-required="true"></textarea> 
+         <br> 
+         <ul> 
+          <li> <label>Name<span class="required"> *</span></label><br> <input type="text" name="name"> </li> 
+          <li> <label>Email<span class="required"> *</span></label> <br> <input type="email" name="email"> </li> 
+         </ul> 
+         <div class="cepcha"> 
+          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"><span>I'm not a robot</span> <a href="#"><img src="/img/cepcha-logo.jpg"></a> 
+         </div> 
+         <br> <a class="form_btn" href="/index.html">Post comment</a> 
+        </div> 
+        <br> 
+       </section> 
+      </div> 
+      <div class="col-sm-12 col-lg-3 mt-5"> 
+       <div class="sidebar"> 
+        <h3 class="mt-5">SEARCH EXAMPLE</h3> 
+        <form>
+         <input name="s" type="text" value="" placeholder="Type here to search..."> <button type="submit"><i class="fa fa-search"></i></button> 
+        </form> 
+        <h3 class="mt-4">POPULAR EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Get-first-and-last-elements-from-ArrayList.html">Get first and last elements from ArrayList</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-convert-comma-separated-string-to-Java-HashSet.html">How to convert comma separated string to Java HashSet</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Float-Wrapper-Class/Convert-Java-Float-to-Numeric-Primitive-Data-Types-Example.html">Convert Java Float to Numeric Primitive Data Types Example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/javax.ws.rs.ext.ContextResolver.html">javax.ws.rs.ext.ContextResolver</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/ArrayList/Convert-array-to-Set-using-Arrays.html">Convert array to Set using Arrays</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/com.bumptech.glide.request.transition.Transition.html">c.b.g.r.t.Transition</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeMap/How-to-check-if-the-TreeMap-is-empty.html">How to check if the TreeMap is empty</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/Convertion/Convert-double-to-String.html">Convert double to String</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Integer-Wrapper-Class/Convert-decimal-integer-to-hexadecimal-number-example.html">Convert decimal integer to hexadecimal number example</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-8/javax.xml.stream.events.StartElement.html">javax.xml.stream.events.StartElement</a> </li> 
+        </ul> 
+        <h3 class="mt-5">FACEBOOK FANS</h3> 
+        <div id="fb-root"></div> 
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v15.0&appId=101341636586609&autoLogAppEvents=1" nonce="2hjA2MLA"></script> 
+        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100089200964004" data-tabs="timeline" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"> 
+         <blockquote cite="https://www.facebook.com/profile.php?id=100089200964004" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/profile.php?id=100089200964004">Jvmexamples.com</a> 
+         </blockquote> 
+        </div> 
+        <h3 class="mt-5">RECENTLY COMMENTED EXAMPLES</h3> 
+        <ul> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-5/java.util.Dictionary.html">java.util.Dictionary</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/TreeSet/How-to-check-if-TreeSet-is-empty-(isEmpty-method).html">How to check if TreeSet is empty (isEmpty method)</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-6/android.media.Image.html">android.media.Image</a> </li> 
+         <li> <a href="/articles/Java/Popular-classes/Popular-classes-9/android.widget.ViewFlipper.html">android.widget.ViewFlipper</a> </li> 
+         <li> <a href="/articles/Java/Wrapper-Classes/Short-Wrapper-Class/Convert-Short-to-numeric-primitive-data-types-example.html">Convert Short to numeric primitive data types example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/HashSet/How-to-print-Java-HashSet-elements.html">How to print Java HashSet elements</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/LinkedHashMap/How-to-create-LinkedHashMap-in-Java-(LinkedHashMap-constructors).html">How to create LinkedHashMap in Java (LinkedHashMap constructors)</a> </li> 
+         <li> <a href="/articles/Java/Java-Language-Fundamentals/For-Loop/Java-Pyramid-4-Example.html">Java Pyramid 4 Example</a> </li> 
+         <li> <a href="/articles/Java/Collections-And-Data-Structures/Collections/Get-Synchronized-Set-from-Java-HashSet-example.html">Get Synchronized Set from Java HashSet example</a> </li> 
+         <li> <a href="/articles/Java/Java-Zip/ZipOutputStream/Create-Zip-File-using-ZipOutputStream-Example.html">Create Zip File using ZipOutputStream Example</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <footer class="footer"> 
+   <div class="container"> 
+    <p> <a href="/">Copyright © 2022. Jvm Examples</a> <a href="/privacy-policy.html">Privacy Policy</a> <a href="/terms-of-use.html">Terms of use</a> <a href="/sitemap.html">Sitemap</a> <a href="/contact.html">Contact</a> </p> 
+   </div> 
+  </footer>  
+ 
+</body></html>
